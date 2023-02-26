@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_bark_angel"
+  },
+  "result": "unusualfishmod:cooked_bark_angel",
+  "experience": 0.35,
+  "cookingtime": 75
+}

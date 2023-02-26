@@ -1,0 +1,21 @@
+{
+  "parent":"forge:item/default",
+  "loader":"forge:separate-perspective",
+  "base": {
+    "parent": "unusualfishmod:item/scythe_in_hand"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "unusualfishmod:item/scythe_inventory"
+      }
+    },
+    "ground": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "unusualfishmod:item/scythe_inventory"
+      }
+    }
+  }
+}

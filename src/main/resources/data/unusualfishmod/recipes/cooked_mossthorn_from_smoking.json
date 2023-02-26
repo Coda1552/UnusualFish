@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_mossthorn"
+  },
+  "result": "unusualfishmod:cooked_mossthorn",
+  "experience": 0.35,
+  "cookingtime": 75
+}

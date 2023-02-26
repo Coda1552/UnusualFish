@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_bumpface"
+  },
+  "result": "unusualfishmod:cooked_bumpface",
+  "experience": 0.35,
+  "cookingtime": 100
+}

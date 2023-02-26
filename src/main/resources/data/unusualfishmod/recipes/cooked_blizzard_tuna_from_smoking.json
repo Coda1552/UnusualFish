@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_blizzard_tuna"
+  },
+  "result": "unusualfishmod:cooked_blizzard_tuna",
+  "experience": 0.35,
+  "cookingtime": 100
+}

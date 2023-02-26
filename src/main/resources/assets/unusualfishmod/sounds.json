@@ -1,0 +1,179 @@
+{
+  "crab_chatter": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:crab_chatter_0"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.crab_chatter"
+  },
+  "crab_scuttling": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:crab_scuttling_0"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.crab_scuttling"
+  },
+  "deep_water": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:deep_water_idle_0"
+      },
+      {
+        "name": "unusualfishmod:deep_water_idle_1"
+      },
+      {
+        "name": "unusualfishmod:deep_water_idle_2"
+      },
+      {
+        "name": "unusualfishmod:deep_water_idle_3"
+      },
+      {
+        "name": "unusualfishmod:deep_water_idle_4"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.deep_water"
+  },
+  "gnasher_idle": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:gnasher_idle_0"
+      },
+      {
+        "name": "unusualfishmod:gnasher_idle_1"
+      },
+      {
+        "name": "unusualfishmod:gnasher_idle_2"
+      },
+      {
+        "name": "unusualfishmod:gnasher_idle_3"
+      },
+      {
+        "name": "unusualfishmod:gnasher_idle_4"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.gnasher_idle"
+  },
+  "large_fish": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:large_fish_0"
+      },
+      {
+        "name": "unusualfishmod:large_fish_1"
+      },
+      {
+        "name": "unusualfishmod:large_fish_2"
+      },
+      {
+        "name": "unusualfishmod:large_fish_3"
+      },
+      {
+        "name": "unusualfishmod:large_fish_4"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.large_fish"
+  },
+  "medium_fish": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:medium_fish_0"
+      },
+      {
+        "name": "unusualfishmod:medium_fish_1"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.medium_fish"
+  },
+  "evil_chattering": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:prawn_chatter_0"
+      },
+      {
+        "name": "unusualfishmod:prawn_chatter_1"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.evil_chattering"
+  },
+  "evil_scuttling": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:evil_scuttling_0"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.evil_scuttling"
+  },
+  "small_enemy": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:small_enemy_0"
+      },
+      {
+        "name": "unusualfishmod:small_enemy_1"
+      },
+      {
+        "name": "unusualfishmod:small_enemy_2"
+      },
+      {
+        "name": "unusualfishmod:small_enemy_3"
+      },
+      {
+        "name": "unusualfishmod:small_enemy_4"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.small_enemy"
+  },
+  "small_fish": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:small_fish_0"
+      },
+      {
+        "name": "unusualfishmod:small_fish_1"
+      },
+      {
+        "name": "unusualfishmod:small_fish_2"
+      },
+      {
+        "name": "unusualfishmod:small_fish_3"
+      },
+      {
+        "name": "unusualfishmod:small_fish_4"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.small_fish"
+  },
+  "whip_crack": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:whip_crack_0"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.whip_crack"
+  },
+  "abyssal_blast": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:abyssal_fury_0"
+      },
+      {
+        "name": "unusualfishmod:abyssal_fury_1"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.abyssal_blast"
+  }
+}

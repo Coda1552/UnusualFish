@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_lobster"
+  },
+  "result": "unusualfishmod:cooked_lobster",
+  "experience": 0.35,
+  "cookingtime": 100
+}

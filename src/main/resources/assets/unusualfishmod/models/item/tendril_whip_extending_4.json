@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "unusualfishmod:item/tendril_whip_extending_4"
+  }
+}

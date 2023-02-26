@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "unusualfishmod:raw_bark_angel"
+  },
+  "result": "unusualfishmod:cooked_bark_angel",
+  "experience": 0.1,
+  "cookingtime": 150
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "unusualfishmod:raw_aero_mono_stick"
+  },
+  "result": "unusualfishmod:cooked_aero_mono_stick",
+  "experience": 0.1,
+  "cookingtime": 150
+}
