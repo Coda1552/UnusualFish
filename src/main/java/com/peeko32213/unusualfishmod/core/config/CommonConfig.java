@@ -41,9 +41,6 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue deepCrawlerSpawnHeight;
     public final ForgeConfigSpec.IntValue demonHerringSpawnWeight;
     public final ForgeConfigSpec.IntValue demonHerringSpawnRolls;
-    public final ForgeConfigSpec.IntValue prawnSpawnWeight;
-    public final ForgeConfigSpec.IntValue prawnSpawnRolls;
-    public final ForgeConfigSpec.IntValue prawnSpawnHeight;
     public final ForgeConfigSpec.IntValue dragonBichirSpawnWeight;
     public final ForgeConfigSpec.IntValue dragonBichirSpawnRolls;
     public final ForgeConfigSpec.IntValue dualityDamselfishSpawnWeight;
@@ -55,8 +52,6 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue forkFishSpawnRolls;
     public final ForgeConfigSpec.IntValue freshwaterMantisSpawnWeight;
     public final ForgeConfigSpec.IntValue freshwaterMantisSpawnRolls;
-    public final ForgeConfigSpec.IntValue gnasherSpawnWeight;
-    public final ForgeConfigSpec.IntValue gnasherSpawnRolls;
     public final ForgeConfigSpec.IntValue gravelFlounderSpawnWeight;
     public final ForgeConfigSpec.IntValue gravelFlounderSpawnRolls;
     public final ForgeConfigSpec.IntValue handyGouramiSpawnWeight;
@@ -85,10 +80,6 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue redGiantSeaStarSpawnRolls;
     public final ForgeConfigSpec.IntValue rhinoTetraSpawnWeight;
     public final ForgeConfigSpec.IntValue rhinoTetraSpawnRolls;
-    public final ForgeConfigSpec.IntValue ripperSpawnWeight;
-    public final ForgeConfigSpec.IntValue ripperSpawnRolls;
-    public final ForgeConfigSpec.IntValue rootballSpawnWeight;
-    public final ForgeConfigSpec.IntValue rootballSpawnRolls;
     public final ForgeConfigSpec.IntValue sailorBarbSpawnWeight;
     public final ForgeConfigSpec.IntValue sailorBarbSpawnRolls;
     public final ForgeConfigSpec.IntValue seaMosquitoSpawnWeight;
@@ -133,7 +124,6 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue snowflakeFishSpawnRolls;
     public final ForgeConfigSpec.IntValue eyelashFishSpawnWeight;
     public final ForgeConfigSpec.IntValue eyelashFishSpawnRolls;
-
     public final ForgeConfigSpec.IntValue crimsonshellSpawnWeight;
     public final ForgeConfigSpec.IntValue crimsonshellSpawnRolls;
     public final ForgeConfigSpec.IntValue greenglowSpawnWeight;
@@ -141,19 +131,11 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue voltSpawnWeight;
     public final ForgeConfigSpec.IntValue voltSpawnRolls;
 
-    public final ForgeConfigSpec.IntValue tribbleSpawnWeight;
-    public final ForgeConfigSpec.IntValue tribbleSpawnRolls;
-    public final ForgeConfigSpec.IntValue trobSpawnWeight;
-    public final ForgeConfigSpec.IntValue trobSpawnRolls;
-    public final ForgeConfigSpec.IntValue triteSpawnWeight;
-    public final ForgeConfigSpec.IntValue triteSpawnRolls;
     public CommonConfig(final ForgeConfigSpec.Builder builder) {
         builder.push("general");
         caveloachSpawnHeight = buildInt(builder, "caveloachSpawnHeight", "all", UnusualFishConfig.caveloachSpawnHeight, -64, 320, "Maximum world y-level that cave loaches can spawn at");
 
         deepCrawlerSpawnHeight = buildInt(builder, "deepCrawlerSpawnHeight", "all", UnusualFishConfig.deepCrawlerSpawnHeight, -64, 320, "Maximum world y-level that deep crawlers can spawn at");
-
-        prawnSpawnHeight = buildInt(builder, "prawnSpawnHeight", "all", UnusualFishConfig.prawnSpawnHeight, -64, 320, "Maximum world y-level that prawns can spawn at");
 
         falseSwordfishSpawnHeight = buildInt(builder, "falseSwordfishSpawnHeight", "all", UnusualFishConfig.falseSwordfishSpawnHeight, -64, 320, "Maximum world y-level that false swordfish can spawn at");
 
@@ -220,9 +202,6 @@ public class CommonConfig {
         demonHerringSpawnWeight = buildInt(builder, "demonHerringSpawnWeight", "spawns", UnusualFishConfig.demonHerringSpawnWeight, 0, 1000, "Change the spawn weight for Demon Herring. Higher number = higher chance of spawning. 0 = disable spawn");
         demonHerringSpawnRolls = buildInt(builder, "demonHerringSpawnRolls", "spawns", UnusualFishConfig.demonHerringSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Demon Herring. Higher number = lower chance of spawning");
 
-        prawnSpawnWeight = buildInt(builder, "prawnSpawnWeight", "spawns", UnusualFishConfig.prawnSpawnWeight, 0, 1000, "Change the spawn weight for Prawns. Higher number = higher chance of spawning. 0 = disable spawn");
-        prawnSpawnRolls = buildInt(builder, "caveloachSpawnRolls", "spawns", UnusualFishConfig.prawnSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Prawns. Higher number = lower chance of spawning");
-
         dragonBichirSpawnWeight = buildInt(builder, "dragonBichirSpawnWeight", "spawns", UnusualFishConfig.dragonBichirSpawnWeight, 0, 1000, "Change the spawn weight for Dragon Bichir. Higher number = higher chance of spawning. 0 = disable spawn");
         dragonBichirSpawnRolls = buildInt(builder, "dragonBichirSpawnRolls", "spawns", UnusualFishConfig.dragonBichirSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Dragon Bichir. Higher number = lower chance of spawning");
 
@@ -237,9 +216,6 @@ public class CommonConfig {
 
         freshwaterMantisSpawnWeight = buildInt(builder, "freshwaterMantisSpawnWeight", "spawns", UnusualFishConfig.freshwaterMantisSpawnWeight, 0, 1000, "Change the spawn weight for Freshwater Mantis. Higher number = higher chance of spawning. 0 = disable spawn");
         freshwaterMantisSpawnRolls = buildInt(builder, "freshwaterMantisSpawnRolls", "spawns", UnusualFishConfig.freshwaterMantisSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Freshwater Mantis. Higher number = lower chance of spawning");
-
-        gnasherSpawnWeight = buildInt(builder, "gnasherSpawnWeight", "spawns", UnusualFishConfig.gnasherSpawnWeight, 0, 1000, "Change the spawn weight for Gnashers. Higher number = higher chance of spawning. 0 = disable spawn");
-        gnasherSpawnRolls = buildInt(builder, "gnasherSpawnRolls", "spawns", UnusualFishConfig.gnasherSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Gnashers. Higher number = lower chance of spawning");
 
         gravelFlounderSpawnWeight = buildInt(builder, "gravelFlounderSpawnWeight", "spawns", UnusualFishConfig.gravelFlounderSpawnWeight, 0, 1000, "Change the spawn weight for Gravel Flounders. Higher number = higher chance of spawning. 0 = disable spawn");
         gravelFlounderSpawnRolls = buildInt(builder, "gravelFlounderSpawnRolls", "spawns", UnusualFishConfig.gravelFlounderSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Gravel Flounders. Higher number = lower chance of spawning");
@@ -279,12 +255,6 @@ public class CommonConfig {
 
         rhinoTetraSpawnWeight = buildInt(builder, "rhinoTetraSpawnWeight", "spawns", UnusualFishConfig.rhinoTetraSpawnWeight, 0, 1000, "Change the spawn weight for Rhino Tetra. Higher number = higher chance of spawning. 0 = disable spawn");
         rhinoTetraSpawnRolls = buildInt(builder, "rhinoTetraSpawnRolls", "spawns", UnusualFishConfig.rhinoTetraSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Rhino Tetra. Higher number = lower chance of spawning");
-
-        ripperSpawnWeight = buildInt(builder, "ripperSpawnWeight", "spawns", UnusualFishConfig.ripperSpawnWeight, 0, 1000, "Change the spawn weight for Rippers. Higher number = higher chance of spawning. 0 = disable spawn");
-        ripperSpawnRolls = buildInt(builder, "ripperSpawnRolls", "spawns", UnusualFishConfig.ripperSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Rippers. Higher number = lower chance of spawning");
-
-        rootballSpawnWeight = buildInt(builder, "rootballSpawnWeight", "spawns", UnusualFishConfig.rootballSpawnWeight, 0, 1000, "Change the spawn weight for Rootballs. Higher number = higher chance of spawning. 0 = disable spawn");
-        rootballSpawnRolls = buildInt(builder, "rootballSpawnRolls", "spawns", UnusualFishConfig.rootballSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Rootballs. Higher number = lower chance of spawning");
 
         sailorBarbSpawnWeight = buildInt(builder, "sailorBarbSpawnWeight", "spawns", UnusualFishConfig.sailorBarbSpawnWeight, 0, 1000, "Change the spawn weight for Sailor Barbs. Higher number = higher chance of spawning. 0 = disable spawn");
         sailorBarbSpawnRolls = buildInt(builder, "sailorBarbSpawnRolls", "spawns", UnusualFishConfig.sailorBarbSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Sailor Barbs. Higher number = lower chance of spawning");
@@ -357,15 +327,6 @@ public class CommonConfig {
 
         voltSpawnWeight = buildInt(builder, "voltSpawnWeight", "spawns", UnusualFishConfig.voltSpawnWeight, 0, 1000, "Change the spawn weight for Volt Anglerfish. Higher number = higher chance of spawning. 0 = disable spawn");
         voltSpawnRolls = buildInt(builder, "voltSpawnRolls", "spawns", UnusualFishConfig.voltSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Volt Anglerfish. Higher number = lower chance of spawning");
-
-        tribbleSpawnWeight = buildInt(builder, "tribbleSpawnWeight", "spawns", UnusualFishConfig.tribbleSpawnWeight, 0, 1000, "Change the spawn weight for Tribbles. Higher number = higher chance of spawning. 0 = disable spawn");
-        tribbleSpawnRolls = buildInt(builder, "tribbleSpawnRolls", "spawns", UnusualFishConfig.tribbleSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Tribbles. Higher number = lower chance of spawning");
-
-        trobSpawnWeight = buildInt(builder, "trobSpawnWeight", "spawns", UnusualFishConfig.trobSpawnWeight, 0, 1000, "Change the spawn weight for Trobs. Higher number = higher chance of spawning. 0 = disable spawn");
-        trobSpawnRolls = buildInt(builder, "trobSpawnRolls", "spawns", UnusualFishConfig.trobSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Trobs. Higher number = lower chance of spawning");
-
-        triteSpawnWeight = buildInt(builder, "triteSpawnWeight", "spawns", UnusualFishConfig.triteSpawnWeight, 0, 1000, "Change the spawn weight for Trites. Higher number = higher chance of spawning. 0 = disable spawn");
-        triteSpawnRolls = buildInt(builder, "triteSpawnRolls", "spawns", UnusualFishConfig.triteSpawnRolls, 0, Integer.MAX_VALUE, "Change the roll chance for Trites. Higher number = lower chance of spawning");
 
     }
 

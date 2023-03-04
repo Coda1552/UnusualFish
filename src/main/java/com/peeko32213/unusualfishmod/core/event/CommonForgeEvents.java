@@ -95,10 +95,6 @@ public class CommonForgeEvents {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.DEMON_HERRING.get(), UnusualFishConfig.demonHerringSpawnWeight, 1, 8));
         }
 
-        if (testBiome(BiomeConfig.prawn, event.getCategory(), event.getName()) && UnusualFishConfig.prawnSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.PRAWN.get(), UnusualFishConfig.prawnSpawnWeight, 1, 2));
-        }
-
         if (testBiome(BiomeConfig.dragon_bichir, event.getCategory(), event.getName()) && UnusualFishConfig.dragonBichirSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.STOUT_BICHIR.get(), UnusualFishConfig.dragonBichirSpawnWeight, 1, 2));
         }
@@ -117,10 +113,6 @@ public class CommonForgeEvents {
 
         if (testBiome(BiomeConfig.freshwater_mantis, event.getCategory(), event.getName()) && UnusualFishConfig.freshwaterMantisSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.FRESHWATER_MANTIS.get(), UnusualFishConfig.freshwaterMantisSpawnWeight, 1, 2));
-        }
-
-        if (testBiome(BiomeConfig.gnasher, event.getCategory(), event.getName()) && UnusualFishConfig.gnasherSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.GNASHER.get(), UnusualFishConfig.gnasherSpawnWeight, 1, 2));
         }
 
         if (testBiome(BiomeConfig.gravel_flounder, event.getCategory(), event.getName()) && UnusualFishConfig.gravelFlounderSpawnWeight > 0) {
@@ -173,14 +165,6 @@ public class CommonForgeEvents {
 
         if (testBiome(BiomeConfig.rhino_tetra, event.getCategory(), event.getName()) && UnusualFishConfig.rhinoTetraSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.RHINO_TETRA.get(), UnusualFishConfig.rhinoTetraSpawnWeight, 3, 5));
-        }
-
-        if (testBiome(BiomeConfig.ripper, event.getCategory(), event.getName()) && UnusualFishConfig.ripperSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.RIPPER.get(), UnusualFishConfig.ripperSpawnWeight, 1, 5));
-        }
-
-        if (testBiome(BiomeConfig.rootball, event.getCategory(), event.getName()) && UnusualFishConfig.rootballSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.MONSTER).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.ROOTBALL.get(), UnusualFishConfig.rootballSpawnWeight, 1, 2));
         }
 
         if (testBiome(BiomeConfig.sailor_barb, event.getCategory(), event.getName()) && UnusualFishConfig.sailorBarbSpawnWeight > 0) {
@@ -270,15 +254,6 @@ public class CommonForgeEvents {
         }
         if (testBiome(BiomeConfig.volt, event.getCategory(), event.getName()) && UnusualFishConfig.voltSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.VOLT.get(), UnusualFishConfig.voltSpawnWeight, 1, 2));
-        }
-        if (testBiome(BiomeConfig.tribble, event.getCategory(), event.getName()) && UnusualFishConfig.tribbleSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TRIBLE.get(), UnusualFishConfig.tribbleSpawnWeight, 3, 6));
-        }
-        if (testBiome(BiomeConfig.trob, event.getCategory(), event.getName()) && UnusualFishConfig.trobSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TROB.get(), UnusualFishConfig.trobSpawnWeight, 2, 4));
-        }
-        if (testBiome(BiomeConfig.trite, event.getCategory(), event.getName()) && UnusualFishConfig.triteSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TRITE.get(), UnusualFishConfig.triteSpawnWeight, 1, 2));
         }
     }
 

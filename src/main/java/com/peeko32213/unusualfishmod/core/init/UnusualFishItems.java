@@ -1,15 +1,11 @@
 package com.peeko32213.unusualfishmod.core.init;
 
 import com.peeko32213.unusualfishmod.UnusualFishMod;
-import com.peeko32213.unusualfishmod.common.item.tools.AbyssalFuryItem;
-import com.peeko32213.unusualfishmod.common.item.tools.DepthScytheItem;
 import com.peeko32213.unusualfishmod.common.item.ItemModFishBucket;
 
 import com.peeko32213.unusualfishmod.common.item.ItemModFoods;
-import com.peeko32213.unusualfishmod.common.item.tools.whips.UnusualFishWhipItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -107,29 +103,8 @@ public final class UnusualFishItems {
 
 	//Drops
 
-	public static final RegistryObject<Item> GNASHER_ORGAN = ITEMS.register("gnasher_organ",
-			() -> new Item(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
 	public static final RegistryObject<Item> GLO_GEL = ITEMS.register("glo_gel",
 			() -> new Item(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<Item> SHOCKCAT_TENDRIL = ITEMS.register("tendril",
-			() -> new Item(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<Item> DEEP_CHITIN = ITEMS.register("deep_chitin",
-			() -> new Item(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	//Tools & Weapons
-
-	public static final RegistryObject<UnusualFishWhipItem> TENDRIL_WHIP = ITEMS.register("tendril_whip",
-			() -> new UnusualFishWhipItem(Tiers.IRON, 1.0F, -3.4F, new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).durability(450)));
-
-
-	public static final RegistryObject<Item> DEPTH_SCYTHE = ITEMS.register("scythe",
-			() -> new DepthScytheItem(Tiers.DIAMOND, 2, -3.4F, new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).durability(600)));
-
-
-	public static final RegistryObject<Item> ABYSSAL_FURY = ITEMS.register("abyssal_fury",
-			() -> new AbyssalFuryItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).durability(500)));
 
 	//Spawn Eggs
 
@@ -171,10 +146,6 @@ public final class UnusualFishItems {
 
 	public static final RegistryObject<ForgeSpawnEggItem> RHINO_TETRA_SPAWN_EGG = ITEMS.register("rhino_tetra_spawn_egg",
 			() -> new ForgeSpawnEggItem(UnusualFishEntities.RHINO_TETRA , 0x50b9ad, 0x216687,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<ForgeSpawnEggItem> RIPPER_SPAWN_EGG = ITEMS.register("ripper_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.RIPPER , 0x98aa58, 0x746825,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
 
 	public static final RegistryObject<ForgeSpawnEggItem> SAILOR_SPAWN_EGG = ITEMS.register("sailor_spawn_egg",
@@ -301,20 +272,8 @@ public final class UnusualFishItems {
 			() -> new ForgeSpawnEggItem(UnusualFishEntities.COMET_FISH , 0x12183b, 0xdfb220,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
 
-	public static final RegistryObject<ForgeSpawnEggItem> ROOTBALL_EGG = ITEMS.register("root_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.ROOTBALL , 0x4c6e11, 0xd8d524,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
 	public static final RegistryObject<ForgeSpawnEggItem> CELESTIAL_EGG = ITEMS.register("celestial_spawn_egg",
 			() -> new ForgeSpawnEggItem(UnusualFishEntities.CELESTIAL_FISH , 0x060e26, 0xece651,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<ForgeSpawnEggItem> GNASHER_EGG = ITEMS.register("gnasher_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.GNASHER , 0x050510, 0x6e60c9,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<ForgeSpawnEggItem> DEPTH_EGG = ITEMS.register("prawn_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.PRAWN , 0x0a081f, 0x253048,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
 
 	public static final RegistryObject<ForgeSpawnEggItem> SQUODDLE_EGG = ITEMS.register("squoddle_spawn_egg",
@@ -389,18 +348,6 @@ public final class UnusualFishItems {
 			() -> new ForgeSpawnEggItem(UnusualFishEntities.VOLT , 0x0e011e, 0xffea14,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
 
-	public static final RegistryObject<ForgeSpawnEggItem> TRIBBLE_EGG = ITEMS.register("tribble_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.TRIBLE , 0x0e011e, 0x5e1c68,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<ForgeSpawnEggItem> TROB_EGG = ITEMS.register("trob_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.TROB , 0x0e011e, 0x5e1c68,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
-	public static final RegistryObject<ForgeSpawnEggItem> TRITE_EGG = ITEMS.register("trite_spawn_egg",
-			() -> new ForgeSpawnEggItem(UnusualFishEntities.TRITE , 0x0e011e, 0x5e1c68,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB)));
-
 	//Buckets
 
 	public static final RegistryObject<Item> AERO_MONO_BUCKET = ITEMS.register("aero_mono_bucket",
@@ -433,10 +380,6 @@ public final class UnusualFishItems {
 
 	public static final RegistryObject<Item> SPINDLEFISH_BUCKET = ITEMS.register("spindlefish_bucket",
 			() -> new ItemModFishBucket(UnusualFishEntities.SPINDLEFISH, () -> Fluids.WATER, Items.BUCKET, false,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
-
-	public static final RegistryObject<Item> RIPPER_BUCKET = ITEMS.register("ripper_bucket",
-			() -> new ItemModFishBucket(UnusualFishEntities.RIPPER, () -> Fluids.WATER, Items.BUCKET, false,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	public static final RegistryObject<Item> SEA_SPIDER_BUCKET = ITEMS.register("sea_spider_bucket",
@@ -525,10 +468,6 @@ public final class UnusualFishItems {
 
 	public static final RegistryObject<Item> GRAVEL_BUCKET = ITEMS.register("comet_bucket",
 			() -> new ItemModFishBucket(UnusualFishEntities.COMET_FISH, () -> Fluids.WATER, Items.BUCKET, false,
-					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
-
-	public static final RegistryObject<Item> ROOTBALL_BUCKET = ITEMS.register("rootball_bucket",
-			() -> new ItemModFishBucket(UnusualFishEntities.ROOTBALL, () -> Fluids.WATER, Items.BUCKET, false,
 					new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	public static final RegistryObject<Item> SQUODDLE_BUCKET = ITEMS.register("squoddle_bucket",

@@ -47,7 +47,6 @@ public UnusualFishMod() {
 	UnusualFishEnchantments.ENCHANTMENTS.register(bus);
 
 	MinecraftForge.EVENT_BUS.register(this);
-	MinecraftForge.EVENT_BUS.register(new UnusualFishCapabilities());
 
 
 	final ModLoadingContext modLoadingContext = ModLoadingContext.get();

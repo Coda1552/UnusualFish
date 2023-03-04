@@ -39,12 +39,12 @@ public class UnusualFishConfig {
     public static int bumpfaceSpawnWeight = 30;
     public static int bumpfaceSpawnRolls = 0;
 
-    public static int caveloachSpawnWeight = 30;
+    public static int caveloachSpawnWeight = 10;
     public static int caveloachSpawnRolls = 0;
-    public static int caveloachSpawnHeight = 30;
+    public static int caveloachSpawnHeight = 10;
 
-    public static int celestialFishSpawnWeight = 2;
-    public static int celestialFishSpawnRolls = 0;
+    public static int celestialFishSpawnWeight = 1;
+    public static int celestialFishSpawnRolls = 10;
 
     public static int circusFishSpawnWeight = 30;
     public static int circusFishSpawnRolls = 0;
@@ -65,10 +65,6 @@ public class UnusualFishConfig {
     public static int demonHerringSpawnWeight = 30;
     public static int demonHerringSpawnRolls = 0;
 
-    public static int prawnSpawnWeight = 20;
-    public static int prawnSpawnRolls = 1;
-    public static int prawnSpawnHeight = 0;
-
     public static int dragonBichirSpawnWeight = 10;
     public static int dragonBichirSpawnRolls = 0;
 
@@ -84,9 +80,6 @@ public class UnusualFishConfig {
 
     public static int freshwaterMantisSpawnWeight = 10;
     public static int freshwaterMantisSpawnRolls = 0;
-
-    public static int gnasherSpawnWeight = 10;
-    public static int gnasherSpawnRolls = 0;
 
     public static int gravelFlounderSpawnWeight = 10;
     public static int gravelFlounderSpawnRolls = 40;
@@ -107,8 +100,8 @@ public class UnusualFishConfig {
     public static int lobedSkipperSpawnWeight = 8;
     public static int lobedSkipperSpawnRolls = 1;
 
-    public static int manaJellyfishSpawnWeight = 20;
-    public static int manaJellyfishSpawnRolls = 0;
+    public static int manaJellyfishSpawnWeight = 10;
+    public static int manaJellyfishSpawnRolls = 5;
 
     public static int mossthornSpawnWeight = 20;
     public static int mossthornSpawnRolls = 0;
@@ -128,12 +121,6 @@ public class UnusualFishConfig {
 
     public static int rhinoTetraSpawnWeight = 30;
     public static int rhinoTetraSpawnRolls = 0;
-
-    public static int ripperSpawnWeight = 20;
-    public static int ripperSpawnRolls = 0;
-
-    public static int rootballSpawnWeight = 40;
-    public static int rootballSpawnRolls = 0;
 
     public static int sailorBarbSpawnWeight = 30;
     public static int sailorBarbSpawnRolls = 0;
@@ -209,15 +196,6 @@ public class UnusualFishConfig {
     public static int voltSpawnWeight = 30;
     public static int voltSpawnRolls = 0;
 
-    public static int tribbleSpawnWeight = 30;
-    public static int tribbleSpawnRolls = 0;
-
-    public static int trobSpawnWeight = 20;
-    public static int trobSpawnRolls = 0;
-
-    public static int triteSpawnWeight = 30;
-    public static int triteSpawnRolls = 0;
-
     public static void bake(ModConfig config) {
         try {
             aeroMonoSpawnWeight = ConfigHolder.COMMON.aeroMonoSpawnWeight.get();
@@ -276,10 +254,6 @@ public class UnusualFishConfig {
             demonHerringSpawnWeight = ConfigHolder.COMMON.demonHerringSpawnWeight.get();
             demonHerringSpawnRolls = ConfigHolder.COMMON.demonHerringSpawnRolls.get();
 
-            prawnSpawnWeight = ConfigHolder.COMMON.prawnSpawnWeight.get();
-            prawnSpawnRolls = ConfigHolder.COMMON.prawnSpawnRolls.get();
-            prawnSpawnHeight = ConfigHolder.COMMON.prawnSpawnHeight.get();
-
             dragonBichirSpawnWeight = ConfigHolder.COMMON.dragonBichirSpawnWeight.get();
             dragonBichirSpawnRolls = ConfigHolder.COMMON.dragonBichirSpawnRolls.get();
 
@@ -295,9 +269,6 @@ public class UnusualFishConfig {
 
             freshwaterMantisSpawnWeight = ConfigHolder.COMMON.freshwaterMantisSpawnWeight.get();
             freshwaterMantisSpawnRolls = ConfigHolder.COMMON.freshwaterMantisSpawnRolls.get();
-
-            gnasherSpawnWeight = ConfigHolder.COMMON.gnasherSpawnWeight.get();
-            gnasherSpawnRolls = ConfigHolder.COMMON.gnasherSpawnRolls.get();
 
             gravelFlounderSpawnWeight = ConfigHolder.COMMON.gravelFlounderSpawnWeight.get();
             gravelFlounderSpawnRolls = ConfigHolder.COMMON.gravelFlounderSpawnRolls.get();
@@ -339,12 +310,6 @@ public class UnusualFishConfig {
 
             rhinoTetraSpawnWeight = ConfigHolder.COMMON.rhinoTetraSpawnWeight.get();
             rhinoTetraSpawnRolls = ConfigHolder.COMMON.rhinoTetraSpawnRolls.get();
-
-            ripperSpawnWeight = ConfigHolder.COMMON.ripperSpawnWeight.get();
-            ripperSpawnRolls = ConfigHolder.COMMON.ripperSpawnRolls.get();
-
-            rootballSpawnWeight = ConfigHolder.COMMON.rootballSpawnWeight.get();
-            rootballSpawnRolls = ConfigHolder.COMMON.rootballSpawnRolls.get();
 
             sailorBarbSpawnWeight = ConfigHolder.COMMON.sailorBarbSpawnWeight.get();
             sailorBarbSpawnRolls = ConfigHolder.COMMON.sailorBarbSpawnRolls.get();
@@ -419,15 +384,6 @@ public class UnusualFishConfig {
 
             voltSpawnWeight = ConfigHolder.COMMON.voltSpawnWeight.get();
             voltSpawnRolls = ConfigHolder.COMMON.voltSpawnRolls.get();
-
-            tribbleSpawnWeight = ConfigHolder.COMMON.tribbleSpawnWeight.get();
-            tribbleSpawnRolls = ConfigHolder.COMMON.tribbleSpawnRolls.get();
-
-            trobSpawnWeight = ConfigHolder.COMMON.trobSpawnWeight.get();
-            trobSpawnRolls = ConfigHolder.COMMON.trobSpawnRolls.get();
-
-            triteSpawnWeight = ConfigHolder.COMMON.triteSpawnWeight.get();
-            triteSpawnRolls = ConfigHolder.COMMON.triteSpawnRolls.get();
 
         } catch (Exception e) {
             UnusualFishMod.LOGGER.warn("An exception was caused trying to load the config for Unusual Fish Mod.");

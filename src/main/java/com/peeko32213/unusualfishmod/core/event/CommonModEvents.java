@@ -12,9 +12,8 @@ import com.peeko32213.unusualfishmod.common.entity.ambient.massive.WhiskeredWhal
 import com.peeko32213.unusualfishmod.common.entity.ambient.predator.*;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.*;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.*;
-import com.peeko32213.unusualfishmod.common.entity.hostile.*;
 import com.peeko32213.unusualfishmod.common.entity.ulitity.*;
-import com.peeko32213.unusualfishmod.common.entity.ai.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.cave.HatchetFish;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -42,7 +41,6 @@ public class CommonModEvents {
             SpawnPlacements.register(UnusualFishEntities.GRAND_CORY.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, GrandCorydora::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.REDGIANT_SEASTAR.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, RedGiantSeaStar::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.RHINO_TETRA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, RhinoTetra::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.RIPPER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, Ripper::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SAILOR_BARB.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SailorBarb::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SEA_PANCAKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, SeaPancake::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SEA_SPIDER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, SeaSpider::canSpawn);
@@ -74,10 +72,7 @@ public class CommonModEvents {
             SpawnPlacements.register(UnusualFishEntities.COPPERFLAME.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CopperflameAnthias::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.LONGJAW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, LongjawRockfish::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.COMET_FISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, Cometfish::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.ROOTBALL.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Rootball::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.CELESTIAL_FISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CelestialFish::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.GNASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Gnasher::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.PRAWN.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Prawn::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SQUODDLE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Squoddle::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SEA_MOSQUITO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SeaMosquito::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.FORKFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, Forkfish::canSpawn);
@@ -95,9 +90,6 @@ public class CommonModEvents {
             SpawnPlacements.register(UnusualFishEntities.CRIMSONSHELL.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.GREENGLOW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, GreenglowLobefin::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.VOLT.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.TRIBLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Tribble::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.TROB.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Trob::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.TRITE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Trite::canSpawn);
         });
 
     }
@@ -106,7 +98,6 @@ public class CommonModEvents {
     public static void registerAttributes (EntityAttributeCreationEvent event){
         event.put(UnusualFishEntities.DUALITY_DAMSELFISH.get(), DualityDamselfish.createAttributes().build());
         event.put(UnusualFishEntities.MOSSTHORN.get(), Mossthorn.createAttributes().build());
-        event.put(UnusualFishEntities.RIPPER.get(), Ripper.createAttributes().build());
         event.put(UnusualFishEntities.SPINDLEFISH.get(), Spindlefish.createAttributes().build());
         event.put(UnusualFishEntities.RHINO_TETRA.get(), RhinoTetra.createAttributes().build());
         event.put(UnusualFishEntities.DROOPING_GOURAMI.get(), DroopingGourami.createAttributes().build());
@@ -146,10 +137,7 @@ public class CommonModEvents {
         event.put(UnusualFishEntities.COPPERFLAME.get(), CopperflameAnthias.createAttributes().build());
         event.put(UnusualFishEntities.LONGJAW.get(), LongjawRockfish.createAttributes().build());
         event.put(UnusualFishEntities.COMET_FISH.get(), Cometfish.createAttributes().build());
-        event.put(UnusualFishEntities.ROOTBALL.get(), Rootball.createAttributes().build());
         event.put(UnusualFishEntities.CELESTIAL_FISH.get(), CelestialFish.createAttributes().build());
-        event.put(UnusualFishEntities.GNASHER.get(), Gnasher.createAttributes().build());
-        event.put(UnusualFishEntities.PRAWN.get(), Prawn.createAttributes().build());
         event.put(UnusualFishEntities.SQUODDLE.get(), Squoddle.createAttributes().build());
         event.put(UnusualFishEntities.SEA_MOSQUITO.get(), SeaMosquito.createAttributes().build());
         event.put(UnusualFishEntities.FORKFISH.get(), Forkfish.createAttributes().build());
@@ -168,9 +156,6 @@ public class CommonModEvents {
         event.put(UnusualFishEntities.CRIMSONSHELL.get(), CrimsonshellSquid.createAttributes().build());
         event.put(UnusualFishEntities.GREENGLOW.get(), GreenglowLobefin.createAttributes().build());
         event.put(UnusualFishEntities.VOLT.get(), VoltAngler.createAttributes().build());
-        event.put(UnusualFishEntities.TRIBLE.get(), Tribble.createAttributes().build());
-        event.put(UnusualFishEntities.TROB.get(), Trob.createAttributes().build());
-        event.put(UnusualFishEntities.TRITE.get(), Trite.createAttributes().build());
 
     }
 

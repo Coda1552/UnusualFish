@@ -2,17 +2,19 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.client.model.BeakedHerringModel;
 import com.peeko32213.unusualfishmod.client.model.HatchetFishModel;
-import com.peeko32213.unusualfishmod.common.entity.ai.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.cave.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.small.BeakedHerring;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class HatchetfishRenderer extends MobRenderer<HatchetFish, HatchetFishModel<HatchetFish>> {
+public class HatchetFishRenderer extends MobRenderer<HatchetFish, HatchetFishModel<HatchetFish>> {
     protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/hatchetfish2.png");
 
-    public HatchetfishRenderer(EntityRendererProvider.Context renderManagerIn) {
+    public HatchetFishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new HatchetFishModel<>(renderManagerIn.bakeLayer(HatchetFishModel.LAYER_LOCATION)), 0.2F);
     }
 

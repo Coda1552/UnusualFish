@@ -15,11 +15,8 @@ import com.peeko32213.unusualfishmod.common.entity.ambient.massive.WhiskeredWhal
 import com.peeko32213.unusualfishmod.common.entity.ambient.predator.*;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.*;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.*;
-import com.peeko32213.unusualfishmod.common.entity.hostile.*;
-import com.peeko32213.unusualfishmod.common.entity.msc.AbyssalBlast;
-import com.peeko32213.unusualfishmod.common.entity.msc.AbyssalShot;
 import com.peeko32213.unusualfishmod.common.entity.ulitity.*;
-import com.peeko32213.unusualfishmod.common.entity.ai.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.cave.HatchetFish;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -44,9 +41,6 @@ public class UnusualFishEntities {
 			() -> EntityType.Builder.of(Mossthorn::new, MobCategory.UNDERGROUND_WATER_CREATURE).sized(0.8f, 1.0f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "mossthorn").toString()));
 
-	public static final RegistryObject<EntityType<Ripper>> RIPPER = ENTITIES.register("ripper",
-			() -> EntityType.Builder.of(Ripper::new, MobCategory.WATER_CREATURE).sized(0.9f, 0.6f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "ripper").toString()));
 
 	public static final RegistryObject<EntityType<Spindlefish>> SPINDLEFISH = ENTITIES.register("spindlefish",
 			() -> EntityType.Builder.of(Spindlefish::new, MobCategory.WATER_AMBIENT).sized(0.6f, 0.7f)
@@ -204,22 +198,9 @@ public class UnusualFishEntities {
 			() -> EntityType.Builder.of(Cometfish::new, MobCategory.WATER_AMBIENT).sized(0.5f, 0.4f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "comet_fish").toString()));
 
-	public static final RegistryObject<EntityType<Rootball>> ROOTBALL = ENTITIES.register("rootball",
-			() -> EntityType.Builder.of(Rootball::new, MobCategory.MONSTER).sized(0.5f, 0.4f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "rootball").toString()));
-
 	public static final RegistryObject<EntityType<CelestialFish>> CELESTIAL_FISH = ENTITIES.register("celestial",
 			() -> EntityType.Builder.of(CelestialFish::new, MobCategory.WATER_CREATURE).sized(1.0f, 1.8f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "celestial").toString()));
-
-	public static final RegistryObject<EntityType<Gnasher>> GNASHER = ENTITIES.register("gnasher",
-			() -> EntityType.Builder.of(Gnasher::new, MobCategory.WATER_CREATURE).sized(1.5f, 0.8f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "gnasher").toString()));
-
-	public static final RegistryObject<EntityType<Prawn>> PRAWN = ENTITIES.register("prawn",
-			() -> EntityType.Builder.of(Prawn::new, MobCategory.MONSTER).sized(1.7f, 1.0f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "prawn").toString()));
-
 	public static final RegistryObject<EntityType<Squoddle>> SQUODDLE = ENTITIES.register("squoddle",
 			() -> EntityType.Builder.of(Squoddle::new, MobCategory.WATER_AMBIENT).sized(0.5f, 0.4f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "squoddle").toString()));
@@ -263,15 +244,6 @@ public class UnusualFishEntities {
 	public static final RegistryObject<EntityType<SmelterSnail>> SMELTER_SNAIL = ENTITIES.register("smelter_snail",
 			() -> EntityType.Builder.of(SmelterSnail::new, MobCategory.WATER_CREATURE).sized(2.0f, 2.0f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "smelter_snail").toString()));
-
-	public static final RegistryObject<EntityType<AbyssalBlast>> ABYSSAL_BLAST = ENTITIES.register("abyssal_blast",
-			() -> registerEntity(EntityType.Builder.of(AbyssalBlast::new, MobCategory.MISC).sized(2.0F, 0.2F)
-					.setCustomClientFactory(AbyssalBlast::new).fireImmune(), "abyssal_blast"));
-
-	public static final RegistryObject<EntityType<AbyssalShot>> ABYSSAL_SHOT = ENTITIES.register("abyssal_shot",
-			() -> registerEntity(EntityType.Builder.of(AbyssalShot::new, MobCategory.MISC).sized(1.0F, 1.0F)
-					.setCustomClientFactory(AbyssalShot::new).fireImmune(), "abyssal_shot"));
-
 	public static final RegistryObject<EntityType<SnowflakeTailFish>> SNOWFLAKE = ENTITIES.register("snowflaketail",
 			() -> EntityType.Builder.of(SnowflakeTailFish::new, MobCategory.WATER_AMBIENT).sized(0.4f, 0.4f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "snowflaketail").toString()));
@@ -300,17 +272,6 @@ public class UnusualFishEntities {
 			() -> EntityType.Builder.of(VoltAngler::new, MobCategory.WATER_CREATURE).sized(0.6f, 0.6f)
 					.build(new ResourceLocation(UnusualFishMod.MODID, "voltangler").toString()));
 
-	public static final RegistryObject<EntityType<Tribble>> TRIBLE = ENTITIES.register("tribble",
-			() -> EntityType.Builder.of(Tribble::new, MobCategory.WATER_CREATURE).sized(0.8f, 0.2f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "tribble").toString()));
-
-	public static final RegistryObject<EntityType<Trob>> TROB = ENTITIES.register("trob",
-			() -> EntityType.Builder.of(Trob::new, MobCategory.WATER_CREATURE).sized(1.2f, 0.3f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "trob").toString()));
-
-	public static final RegistryObject<EntityType<Trite>> TRITE = ENTITIES.register("trite",
-			() -> EntityType.Builder.of(Trite::new, MobCategory.WATER_CREATURE).sized(1.7f, 0.4f)
-					.build(new ResourceLocation(UnusualFishMod.MODID, "trite").toString()));
 
 
 	private static final EntityType registerEntity(EntityType.Builder builder, String entityName) {
