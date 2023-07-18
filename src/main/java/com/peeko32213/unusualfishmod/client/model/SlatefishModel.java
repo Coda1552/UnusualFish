@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class SlatefishModel<T extends Slatefish> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "slatefish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "slatefish"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Spike1;

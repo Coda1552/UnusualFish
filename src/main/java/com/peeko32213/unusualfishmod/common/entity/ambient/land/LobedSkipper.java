@@ -364,7 +364,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_FISH;
+        return UnusualFishSounds.SMALL_FISH.get();
     }
 
 

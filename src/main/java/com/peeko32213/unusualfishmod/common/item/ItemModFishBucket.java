@@ -19,7 +19,7 @@ public class ItemModFishBucket extends MobBucketItem {
 							 boolean hasTooltip, Properties builder) {
 		super(entityType, fluid, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
 		DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> UnusualFishMod.CALLBACKS.add(() ->
-				ItemProperties.register(this, new ResourceLocation(UnusualFishMod.MODID, "variant"),
+				ItemProperties.register(this, new ResourceLocation(UnusualFishMod.MOD_ID, "variant"),
 						(stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0)));
 	}
 

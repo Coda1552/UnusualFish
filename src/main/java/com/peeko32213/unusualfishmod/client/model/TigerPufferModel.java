@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 public class TigerPufferModel<T extends TigerPuffer> extends ListModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "tiger_puffer"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "tiger_puffer"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Eye1;

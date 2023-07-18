@@ -1,7 +1,4 @@
-package com.peeko32213.unusualfishmod.client.model;// Made with Blockbench 4.2.5
-// Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package com.peeko32213.unusualfishmod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -15,8 +12,6 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
 public class AbyssalBlastModel<T extends AbyssalBlast> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "abyssal_blast"), "main");
 	private final ModelPart bb_main;
 
 	public AbyssalBlastModel(ModelPart root) {
@@ -34,7 +29,6 @@ public class AbyssalBlastModel<T extends AbyssalBlast> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 	}
 
 	@Override

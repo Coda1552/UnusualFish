@@ -44,7 +44,7 @@ public class UnusualFishCapabilities {
             }
         };
 
-        event.addCapability(new ResourceLocation(UnusualFishMod.MODID, "whip_update"), provider);
+        event.addCapability(new ResourceLocation(UnusualFishMod.MOD_ID, "whip_update"), provider);
         event.addListener(optionalWhipUpdate::invalidate);
     }
 

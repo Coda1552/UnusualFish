@@ -17,9 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class AhmarIdolModel<Type extends PinkfinIdol> extends ListModel<Type> {
-
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "ahmar_idol"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

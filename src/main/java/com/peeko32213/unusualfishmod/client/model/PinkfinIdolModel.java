@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class PinkfinIdolModel<T extends PinkfinIdol> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "pinkfin"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "pinkfin"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

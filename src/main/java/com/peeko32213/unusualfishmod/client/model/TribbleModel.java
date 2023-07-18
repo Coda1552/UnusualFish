@@ -11,12 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 public class TribbleModel<T extends Tribble> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "tribble"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "tribble"), "main");
 	private final ModelPart TailBits;
 	private final ModelPart Legs1;
 	private final ModelPart Legs2;

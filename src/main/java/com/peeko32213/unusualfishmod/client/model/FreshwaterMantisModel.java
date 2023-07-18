@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class FreshwaterMantisModel<T extends FreshwaterMantis> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "freshwater_mantis"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "freshwater_mantis"), "main");
 	private final ModelPart Head;
 	private final ModelPart Thegmina1;
 	private final ModelPart Thegmina2;

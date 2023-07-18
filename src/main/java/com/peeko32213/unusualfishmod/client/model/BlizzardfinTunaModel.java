@@ -13,7 +13,7 @@ import net.minecraft.util.Mth;
 
 public class BlizzardfinTunaModel<T extends BlizzardfinTuna> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "blizzardfin"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "blizzardfin"), "main");
 	private final ModelPart Body;
 	private final ModelPart BackBody;
 	private final ModelPart Tail;

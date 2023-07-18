@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 
 public class CrimsonshellSquidModel<T extends CrimsonshellSquid> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "crimsonshell"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "crimsonshell"), "main");
 	private final ModelPart Body;
 	private final ModelPart BigArm1;
 	private final ModelPart BigArm2;

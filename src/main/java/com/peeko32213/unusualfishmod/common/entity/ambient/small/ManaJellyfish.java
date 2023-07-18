@@ -116,7 +116,7 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_FISH;
+        return UnusualFishSounds.SMALL_FISH.get();
     }
 
     @Override
@@ -181,7 +181,7 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.WIZARD_BUCKET.get());
+        return new ItemStack(UnusualFishItems.WIZARD_JELLY_BUCKET.get());
     }
 
     public SoundEvent getFlopSound() {

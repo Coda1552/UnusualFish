@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class EyelashFishModel<T extends EyelashFish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "eyelash"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "eyelash"), "main");
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;
 	private final ModelPart Eyelash1;

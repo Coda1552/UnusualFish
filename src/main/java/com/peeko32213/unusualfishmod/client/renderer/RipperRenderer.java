@@ -17,14 +17,11 @@ public class RipperRenderer extends MobRenderer<Ripper, RipperModel<Ripper>> {
 		super(renderManagerIn, new RipperModel<>(renderManagerIn.bakeLayer(RipperModel.LAYER_LOCATION)), 0.2F);
 	}
 
-
-
 	@Override
 	public ResourceLocation getTextureLocation(Ripper entity) {
 		return TEXTURE;
 	}
 
-	//this code right here is what you insert when you want to give side flop to your fish \/
 	protected void setupRotations(Ripper p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {
 		super.setupRotations(p_116226_, p_116227_, p_116228_, p_116229_, p_116230_);
 		float f = 4.3F * Mth.sin(0.6F * p_116228_);

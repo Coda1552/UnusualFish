@@ -146,7 +146,7 @@ public class GreenglowLobefin extends WaterAnimal implements Bucketable, Neutral
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.DEEP_WATER;
+        return UnusualFishSounds.DEEP_WATER.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -223,7 +223,7 @@ public class GreenglowLobefin extends WaterAnimal implements Bucketable, Neutral
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.GREENGLOW_BUCKET.get());
+        return new ItemStack(UnusualFishItems.GREENGLOW_LOBED_FIN_BUCKET.get());
     }
 
     public static <T extends Mob> boolean canSpawn(EntityType<GreenglowLobefin> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {

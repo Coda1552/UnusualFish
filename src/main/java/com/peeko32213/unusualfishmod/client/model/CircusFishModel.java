@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class CircusFishModel<T extends CircusFish> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "circusfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "circusfish"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

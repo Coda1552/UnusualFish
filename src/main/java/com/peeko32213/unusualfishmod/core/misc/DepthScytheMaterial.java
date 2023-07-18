@@ -1,19 +1,16 @@
-package com.peeko32213.unusualfishmod.core.msc;
+package com.peeko32213.unusualfishmod.core.misc;
 
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.function.Supplier;
 
 public class DepthScytheMaterial implements Tier {
-
     private final float attackDamageBonus, speed;
     private final int enchantability, harvestLevel, durability;
     private final Supplier<Ingredient> repairMaterial;
 
-    public DepthScytheMaterial(float attackDamageBonus, int enchantability, int harvestLevel, float speed,
-                            int durability, Supplier<Ingredient> repairMaterial) {
+    public DepthScytheMaterial(float attackDamageBonus, int enchantability, int harvestLevel, float speed, int durability, Supplier<Ingredient> repairMaterial) {
         this.attackDamageBonus = attackDamageBonus;
         this.enchantability = enchantability;
         this.harvestLevel = harvestLevel;
@@ -51,5 +48,4 @@ public class DepthScytheMaterial implements Tier {
     public int getUses() {
         return this.durability;
     }
-
 }

@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 public class RhinoTetraModel<Type extends RhinoTetra> extends ListModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "rhino_tetra"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "rhino_tetra"), "main");
 	private final ModelPart Fin1;
 	private final ModelPart Tail;
 	private final ModelPart Fin2;

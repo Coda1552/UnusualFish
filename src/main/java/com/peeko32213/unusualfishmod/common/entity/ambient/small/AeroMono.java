@@ -109,7 +109,7 @@ public class AeroMono extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {

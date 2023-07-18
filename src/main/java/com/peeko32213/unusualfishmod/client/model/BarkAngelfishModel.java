@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class BarkAngelfishModel<T extends BarkAngelfish> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "bark_angelfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "bark_angelfish"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

@@ -151,7 +151,7 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_ENEMY;
+		return UnusualFishSounds.SMALL_ENEMY.get();
 	}
 
 	protected SoundEvent getDeathSound() {

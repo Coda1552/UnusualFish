@@ -97,7 +97,7 @@ public class Shockcat extends WaterAnimal {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.MEDIUM_FISH;
+		return UnusualFishSounds.MEDIUM_FISH.get();
 	}
 	public SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;

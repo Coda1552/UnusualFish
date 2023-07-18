@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class SailorBarbModel<T extends SailorBarb> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "sailor_barb"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "sailor_barb"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class MuddytopSnailModel<T extends MuddytopSnail> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "muddytop"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "muddytop"), "main");
 
 	private final ModelPart Shell;
 	private final ModelPart Eye1;

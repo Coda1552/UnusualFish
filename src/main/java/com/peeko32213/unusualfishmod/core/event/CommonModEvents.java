@@ -14,7 +14,7 @@ import com.peeko32213.unusualfishmod.common.entity.ambient.small.*;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.*;
 import com.peeko32213.unusualfishmod.common.entity.hostile.*;
 import com.peeko32213.unusualfishmod.common.entity.ulitity.*;
-import com.peeko32213.unusualfishmod.common.entity.ai.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.HatchetFish;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -26,7 +26,7 @@ import com.peeko32213.unusualfishmod.UnusualFishMod;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-@Mod.EventBusSubscriber(modid = UnusualFishMod.MODID, bus = Bus.MOD)
+@Mod.EventBusSubscriber(modid = UnusualFishMod.MOD_ID, bus = Bus.MOD)
 public class CommonModEvents {
 
     @SubscribeEvent
@@ -89,13 +89,13 @@ public class CommonModEvents {
             SpawnPlacements.register(UnusualFishEntities.BABY_BASKING_TIAMAT.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, BaskingTiamatBaby::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SMELTER_SNAIL.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, SmelterSnail::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.EYEKITO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, Eyekito::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.JUNGLE_SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, TigerJungleShark::canSpawn);
+            SpawnPlacements.register(UnusualFishEntities.TIGER_JUNGLE_SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, TigerJungleShark::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.SNOWFLAKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SnowflakeTailFish::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.EYELASH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, EyelashFish::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.CRIMSONSHELL.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.GREENGLOW.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, GreenglowLobefin::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.VOLT.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn);
-            SpawnPlacements.register(UnusualFishEntities.TRIBLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Tribble::canSpawn);
+            SpawnPlacements.register(UnusualFishEntities.CRIMSONSHELL_SQUID.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn);
+            SpawnPlacements.register(UnusualFishEntities.GREENGLOW_LOBED_FIN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, GreenglowLobefin::canSpawn);
+            SpawnPlacements.register(UnusualFishEntities.VOLT_ANGLER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn);
+            SpawnPlacements.register(UnusualFishEntities.TRIBBLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Tribble::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.TROB.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Trob::canSpawn);
             SpawnPlacements.register(UnusualFishEntities.TRITE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Trite::canSpawn);
         });
@@ -157,18 +157,18 @@ public class CommonModEvents {
         event.put(UnusualFishEntities.CORAL_SKRIMP.get(), CoralSkrimp.createAttributes().build());
         event.put(UnusualFishEntities.CIRCUSFISH.get(), CircusFish.createAttributes().build());
         event.put(UnusualFishEntities.BLIZZARDFIN.get(), BlizzardfinTuna.createAttributes().build());
-        event.put(UnusualFishEntities.WHISKERED.get(), WhiskeredWhaleShark.createAttributes().build());
+        event.put(UnusualFishEntities.WHISKERED_WHALE_SHARK.get(), WhiskeredWhaleShark.createAttributes().build());
         event.put(UnusualFishEntities.BASKING_TIAMAT.get(), BaskingTiamat.createAttributes().build());
         event.put(UnusualFishEntities.BABY_BASKING_TIAMAT.get(), BaskingTiamatBaby.createAttributes().build());
         event.put(UnusualFishEntities.SMELTER_SNAIL.get(), SmelterSnail.createAttributes().build());
         event.put(UnusualFishEntities.EYELASH.get(), EyelashFish.createAttributes().build());
         event.put(UnusualFishEntities.EYEKITO.get(), Eyekito.createAttributes().build());
         event.put(UnusualFishEntities.SNOWFLAKE.get(), SnowflakeTailFish.createAttributes().build());
-        event.put(UnusualFishEntities.JUNGLE_SHARK.get(), TigerJungleShark.createAttributes().build());
-        event.put(UnusualFishEntities.CRIMSONSHELL.get(), CrimsonshellSquid.createAttributes().build());
-        event.put(UnusualFishEntities.GREENGLOW.get(), GreenglowLobefin.createAttributes().build());
-        event.put(UnusualFishEntities.VOLT.get(), VoltAngler.createAttributes().build());
-        event.put(UnusualFishEntities.TRIBLE.get(), Tribble.createAttributes().build());
+        event.put(UnusualFishEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleShark.createAttributes().build());
+        event.put(UnusualFishEntities.CRIMSONSHELL_SQUID.get(), CrimsonshellSquid.createAttributes().build());
+        event.put(UnusualFishEntities.GREENGLOW_LOBED_FIN.get(), GreenglowLobefin.createAttributes().build());
+        event.put(UnusualFishEntities.VOLT_ANGLER.get(), VoltAngler.createAttributes().build());
+        event.put(UnusualFishEntities.TRIBBLE.get(), Tribble.createAttributes().build());
         event.put(UnusualFishEntities.TROB.get(), Trob.createAttributes().build());
         event.put(UnusualFishEntities.TRITE.get(), Trite.createAttributes().build());
 

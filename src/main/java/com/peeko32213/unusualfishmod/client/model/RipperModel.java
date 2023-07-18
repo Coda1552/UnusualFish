@@ -16,10 +16,8 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
-public class RipperModel<Type extends Ripper> extends ListModel<Type> {
-
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "ripper"), "main");
+public class RipperModel<T extends Ripper> extends ListModel<T> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(UnusualFishMod.MOD_ID, "ripper"), "main");
 	private final ModelPart FrontFin1;
 	private final ModelPart FrontFin2;
 	private final ModelPart BackFin1;
@@ -63,8 +61,7 @@ public class RipperModel<Type extends Ripper> extends ListModel<Type> {
 	}
 
 	@Override
-	public void setupAnim(Type entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch) {
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = 1.0F;
 		if (!entity.isInWater()) {
 			f = 1.5F;
@@ -76,11 +73,9 @@ public class RipperModel<Type extends Ripper> extends ListModel<Type> {
 
 		this.Body.xRot = headPitch * ((float)Math.PI / 180F);
 		this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
-		if (entity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-7D) {
-		}
 	}
 
-	public void prepareMobModel (Type p_102957_, float p_102958_, float p_102959_, float p_102960_) {
+	public void prepareMobModel(T p_102957_, float p_102958_, float p_102959_, float p_102960_) {
 		int i = p_102957_.getAttackAnimationTick();
 		if (i > 0) {
 			this.Jaw.xRot = -130F + 0.3F * Mth.triangleWave((float)i - p_102960_, -10.0F);
@@ -89,10 +84,6 @@ public class RipperModel<Type extends Ripper> extends ListModel<Type> {
 			this.Jaw.xRot = (-0.2F + 0.1F * Mth.triangleWave(p_102958_, 13.0F)) * p_102959_;
 		}
 	}
-
-	//1st number = position? lower = higher up on model
-	//2nd number = positon 2?
-	//3rd number = speed?
 
 	@Override
 	public Iterable<ModelPart> parts() {

@@ -170,7 +170,7 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_ENEMY;
+        return UnusualFishSounds.SMALL_ENEMY.get();
     }
 
     public boolean doHurtTarget(Entity p_32281_) {
@@ -191,10 +191,10 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
 
     private void explodeCreeper() {
         if (!this.level.isClientSide) {
-            Explosion.BlockInteraction explosion$blockinteraction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this) ? Explosion.BlockInteraction.NONE : Explosion.BlockInteraction.NONE;
+            Explosion.BlockInteraction blockInteraction = Explosion.BlockInteraction.NONE;
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, explosion$blockinteraction);
+            this.level.explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, blockInteraction);
             this.discard();
             this.spawnLingeringCloud();
         }

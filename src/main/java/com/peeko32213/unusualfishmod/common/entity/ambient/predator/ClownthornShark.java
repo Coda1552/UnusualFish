@@ -105,7 +105,7 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -182,7 +182,7 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.CLOWNTHORN_BUCKET.get());
+		return new ItemStack(UnusualFishItems.CLOWNTHORN_SHARK_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<ClownthornShark> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {

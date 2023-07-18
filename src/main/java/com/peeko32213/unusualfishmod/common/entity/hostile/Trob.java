@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -86,7 +85,7 @@ public class Trob extends WaterAnimal implements NeutralMob {
             for(int l = 0; l < k; ++l) {
                 float f1 = ((float)(l % 2) - 0.5F) * f;
                 float f2 = ((float)(l / 2) - 0.5F) * f;
-                Tribble sporpaEntity = UnusualFishEntities.TRIBLE.get().create(level);
+                Tribble sporpaEntity = UnusualFishEntities.TRIBBLE.get().create(level);
                 if (this.isPersistenceRequired()) {
                     sporpaEntity.setPersistenceRequired();
                 }
@@ -111,7 +110,7 @@ public class Trob extends WaterAnimal implements NeutralMob {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.EVIL_CHATTERING;
+        return UnusualFishSounds.EVIL_CHATTERING.get();
     }
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
@@ -122,7 +121,7 @@ public class Trob extends WaterAnimal implements NeutralMob {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.EVIL_SCUTTLING, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.EVIL_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public void addAdditionalSaveData(CompoundTag p_34458_) {

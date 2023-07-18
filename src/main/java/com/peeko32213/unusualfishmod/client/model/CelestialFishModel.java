@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class CelestialFishModel<T extends CelestialFish> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "celestial"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "celestial"), "main");
 	private final ModelPart body;
 	private final ModelPart fin1;
 	private final ModelPart fin2;

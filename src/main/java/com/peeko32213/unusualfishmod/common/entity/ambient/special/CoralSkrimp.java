@@ -79,7 +79,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.CRAB_CHATTER;
+		return UnusualFishSounds.CRAB_CHATTER.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -90,7 +90,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 	}
 
 	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UnusualFishSounds.CRAB_SCUTTLING, 0.15F, 1.0F);
+		this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
 	}
 
 	@Override
@@ -186,7 +186,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.SKRIMP_BUCKET.get());
+		return new ItemStack(UnusualFishItems.CORAL_SKRIMP_BUCKET.get());
 	}
 
 	static class MoveHelperController extends MoveControl {

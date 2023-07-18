@@ -144,7 +144,7 @@ public class BaskingTiamat extends WaterAnimal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.LARGE_FISH;
+        return UnusualFishSounds.LARGE_FISH.get();
     }
 
     public SoundEvent getDeathSound() {

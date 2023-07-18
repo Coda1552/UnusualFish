@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class EyekitoModel<T extends Eyekito> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "eyekito"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "eyekito"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Mouth;
 	private final ModelPart bb_main;

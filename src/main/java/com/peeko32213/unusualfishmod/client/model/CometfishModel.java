@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class CometfishModel<T extends Cometfish> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "comet_fish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "comet_fish"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

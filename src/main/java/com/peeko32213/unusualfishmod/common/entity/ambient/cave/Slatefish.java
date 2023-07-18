@@ -103,7 +103,7 @@ public class Slatefish extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -180,7 +180,7 @@ public class Slatefish extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.FALSE_BUCKET.get());
+		return new ItemStack(UnusualFishItems.SLATEFISH_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<Slatefish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {

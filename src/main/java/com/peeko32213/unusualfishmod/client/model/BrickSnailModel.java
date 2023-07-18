@@ -15,7 +15,7 @@ import net.minecraft.util.Mth;
 public class BrickSnailModel<T extends BrickSnail> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "brick_snail"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "brick_snail"), "main");
 	private final ModelPart Shell;
 	private final ModelPart Eye1;
 	private final ModelPart Eye2;

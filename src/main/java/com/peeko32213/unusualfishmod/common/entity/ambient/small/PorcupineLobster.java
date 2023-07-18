@@ -96,7 +96,7 @@ public class PorcupineLobster extends WaterAnimal implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.CRAB_CHATTER;
+        return UnusualFishSounds.CRAB_CHATTER.get();
     }
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
@@ -107,7 +107,7 @@ public class PorcupineLobster extends WaterAnimal implements Bucketable {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.CRAB_CHATTER, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.CRAB_CHATTER.get(), 0.15F, 1.0F);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class PorcupineLobster extends WaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.PORCUPINE_BUCKET.get());
+        return new ItemStack(UnusualFishItems.PORCUPINE_LOBSTA_BUCKET.get());
 
     }
 

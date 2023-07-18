@@ -207,7 +207,7 @@ public class BaskingTiamatBaby extends WaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.BASKING_BUCKET.get());
+        return new ItemStack(UnusualFishItems.BASKING_TIAMAT_BUCKET.get());
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {
@@ -215,7 +215,7 @@ public class BaskingTiamatBaby extends WaterAnimal implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.MEDIUM_FISH;
+        return UnusualFishSounds.MEDIUM_FISH.get();
     }
     public SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;

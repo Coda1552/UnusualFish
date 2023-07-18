@@ -3,7 +3,6 @@ package com.peeko32213.unusualfishmod.common.entity.ulitity;
 import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
-import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -135,7 +134,7 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.BLACKCAP_BUCKET.get());
+        return new ItemStack(UnusualFishItems.BLACKCAP_SNAIL_BUCKET.get());
     }
 
     static class MoveHelperController extends MoveControl {

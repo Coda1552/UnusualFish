@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 public class SpindlefishModel<Type extends Spindlefish> extends ListModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "spindlefish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "spindlefish"), "main");
 	private final ModelPart Fin1;
 	private final ModelPart Tail;
 	private final ModelPart Whiskers1;

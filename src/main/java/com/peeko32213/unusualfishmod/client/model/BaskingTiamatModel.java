@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class BaskingTiamatModel<T extends BaskingTiamat> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "basking_tiamat"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "basking_tiamat"), "main");
 
 	private final ModelPart Body;
 	private final ModelPart Fin1;

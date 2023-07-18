@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class CoralSkrimpModel<T extends CoralSkrimp> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "coral_skrimp"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "coral_skrimp"), "main");
 	private final ModelPart Head;
 	private final ModelPart Claw1;
 	private final ModelPart Claw2;

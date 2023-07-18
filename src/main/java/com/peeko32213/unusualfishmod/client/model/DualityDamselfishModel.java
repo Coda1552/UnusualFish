@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 public class DualityDamselfishModel<Type extends DualityDamselfish> extends ListModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "duality_damselfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "duality_damselfish"), "main");
 	private final ModelPart Body;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

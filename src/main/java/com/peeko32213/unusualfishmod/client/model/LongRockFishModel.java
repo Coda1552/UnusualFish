@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class LongRockFishModel<T extends LongjawRockfish> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "longjaw"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "longjaw"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Eye1;

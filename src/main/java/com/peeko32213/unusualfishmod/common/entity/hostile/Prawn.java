@@ -67,7 +67,7 @@ public class Prawn extends Monster {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.EVIL_CHATTERING;
+        return UnusualFishSounds.EVIL_CHATTERING.get();
     }
     protected SoundEvent getDeathSound() {
         return SoundEvents.SILVERFISH_DEATH;
@@ -78,7 +78,7 @@ public class Prawn extends Monster {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.EVIL_SCUTTLING, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.EVIL_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public static <T extends Mob> boolean canSpawn(EntityType<Prawn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {

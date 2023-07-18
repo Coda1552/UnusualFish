@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class DeepCrawlerModel<T extends DeepCrawler> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "deep_crawler"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "deep_crawler"), "main");
 
 	private final ModelPart Head;
 	private final ModelPart BigLeg1;

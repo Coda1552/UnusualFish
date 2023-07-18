@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class SnowflakeTailFishModel<T extends SnowflakeTailFish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "snowflaketail"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "snowflaketail"), "main");
 	private final ModelPart BottomFin1;
 	private final ModelPart BottomFin2;
 	private final ModelPart Tail;

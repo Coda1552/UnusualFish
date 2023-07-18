@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 public class SeaPancakeModel<Type extends SeaPancake> extends ListModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "sea_pancake"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "sea_pancake"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Eye1;
 	private final ModelPart Eye2;

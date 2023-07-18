@@ -101,7 +101,7 @@ public class SpoonShark extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.MEDIUM_FISH;
+		return UnusualFishSounds.MEDIUM_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -177,7 +177,7 @@ public class SpoonShark extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.SPOON_BUCKET.get());
+		return new ItemStack(UnusualFishItems.SPOON_SHARK_BUCKET.get());
 	}
 
 

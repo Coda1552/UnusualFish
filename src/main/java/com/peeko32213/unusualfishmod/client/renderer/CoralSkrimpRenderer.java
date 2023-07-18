@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class CoralSkrimpRenderer extends MobRenderer<CoralSkrimp, CoralSkrimpModel<CoralSkrimp>> {
 	public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (hashMap) -> {
-		hashMap.put(0, new ResourceLocation(UnusualFishMod.MODID, "textures/entity/coralskrimp/purple_skrimp.png"));
-		hashMap.put(1, new ResourceLocation(UnusualFishMod.MODID, "textures/entity/coralskrimp/red_skrimp.png"));
-		hashMap.put(2, new ResourceLocation(UnusualFishMod.MODID, "textures/entity/coralskrimp/yellow_skrimp.png"));
+		hashMap.put(0, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/coralskrimp/purple_skrimp.png"));
+		hashMap.put(1, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/coralskrimp/red_skrimp.png"));
+		hashMap.put(2, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/coralskrimp/yellow_skrimp.png"));
 	});
 
 	public CoralSkrimpRenderer(EntityRendererProvider.Context renderManagerIn) {

@@ -109,7 +109,7 @@ public class SnowflakeTailFish extends SchoolingWaterAnimal implements Bucketabl
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -186,7 +186,7 @@ public class SnowflakeTailFish extends SchoolingWaterAnimal implements Bucketabl
 
 	@Override
 	public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.SNOWFLAKE_BUCKET.get());
+        return new ItemStack(UnusualFishItems.SNOWFLAKE_TAIL_FISH_BUCKET.get());
 	}
 
 

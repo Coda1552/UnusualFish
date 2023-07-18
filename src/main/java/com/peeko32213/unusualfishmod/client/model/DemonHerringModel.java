@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class DemonHerringModel<T extends DemonHerring> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "demon_herring"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "demon_herring"), "main");
 	private final ModelPart Body;
 	private final ModelPart Jaw;
 	private final ModelPart Tail;

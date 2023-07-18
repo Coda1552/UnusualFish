@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class TrumpetSquidModel<T extends TrumpetSquid> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "trumpet_squid"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "trumpet_squid"), "main");
 	private final ModelPart Body;
 	private final ModelPart TopArms;
 	private final ModelPart BottomArms;

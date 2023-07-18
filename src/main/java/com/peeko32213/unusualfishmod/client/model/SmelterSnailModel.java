@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class SmelterSnailModel<T extends SmelterSnail> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "smelter_snail"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "smelter_snail"), "main");
 
 	private final ModelPart Body;
 	private final ModelPart Shell;

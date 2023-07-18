@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class MossthornModel<T extends Mossthorn> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "mossthorn"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "mossthorn"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

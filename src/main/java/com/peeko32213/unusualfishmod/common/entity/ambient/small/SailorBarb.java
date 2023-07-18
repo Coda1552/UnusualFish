@@ -118,7 +118,7 @@ public class SailorBarb extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;

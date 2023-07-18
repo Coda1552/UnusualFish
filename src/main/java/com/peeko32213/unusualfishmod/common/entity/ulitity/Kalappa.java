@@ -66,11 +66,11 @@ public class Kalappa extends PathfinderMob  {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.CRAB_CHATTER;
+        return UnusualFishSounds.CRAB_CHATTER.get();
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.CRAB_SCUTTLING, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random randomIn) {

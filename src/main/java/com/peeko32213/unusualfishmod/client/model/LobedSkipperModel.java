@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class LobedSkipperModel<T extends LobedSkipper> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "skipper"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "skipper"), "main");
 	private final ModelPart Tail;
 	private final ModelPart TopFin;
 	private final ModelPart Eye1;

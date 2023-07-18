@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class BlackcapSnailModel<T extends BlackCapSnail> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "blackcap_snail"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "blackcap_snail"), "main");
 	private final ModelPart Shell;
 	private final ModelPart Eye1;
 	private final ModelPart Eye2;

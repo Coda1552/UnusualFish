@@ -89,6 +89,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 		return 4;
 	}
 
+	// todo- test
 	public boolean isMaxGroupSizeReached(int p_30035_) {
 		return !this.isSchool;
 	}
@@ -102,7 +103,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.MEDIUM_FISH;
+		return UnusualFishSounds.MEDIUM_FISH.get();
 	}
 
 	public SoundEvent getDeathSound() {

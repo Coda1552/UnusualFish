@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class SeaMosquitoModel<T extends SeaMosquito> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "sea_mosquito"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "sea_mosquito"), "main");
 	private final ModelPart Mouth;
 	private final ModelPart Tail;
 	private final ModelPart Eye1;

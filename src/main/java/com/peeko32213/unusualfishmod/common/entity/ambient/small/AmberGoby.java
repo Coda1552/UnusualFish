@@ -117,7 +117,7 @@ public class AmberGoby extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -193,7 +193,7 @@ public class AmberGoby extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.YELLOW_BUCKET.get());
+		return new ItemStack(UnusualFishItems.AMBER_GOBY_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<AmberGoby> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {

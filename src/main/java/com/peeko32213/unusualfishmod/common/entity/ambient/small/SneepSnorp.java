@@ -118,7 +118,7 @@ public class SneepSnorp extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -194,7 +194,7 @@ public class SneepSnorp extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.BUMPFACE_BUCKET.get());
+		return new ItemStack(UnusualFishItems.SNEEPSNORP_BUCKET.get());
 	}
 
 

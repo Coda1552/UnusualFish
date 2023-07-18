@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ManaJellyfishModel<T extends ManaJellyfish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "wizard_jelly"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "wizard_jelly"), "main");
 	private final ModelPart Body;
 
 	public ManaJellyfishModel(ModelPart root) {

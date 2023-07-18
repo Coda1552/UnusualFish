@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class WhiskeredWhaleSharkModel<T extends WhiskeredWhaleShark> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "whiskered"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "whiskered"), "main");
 	private final ModelPart Whiskers;
 	private final ModelPart Tail;
 	private final ModelPart Tailfin;

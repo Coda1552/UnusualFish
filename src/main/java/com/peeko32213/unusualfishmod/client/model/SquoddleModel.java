@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class SquoddleModel<T extends Squoddle> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "squoddle"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "squoddle"), "main");
 	private final ModelPart Feeler1;
 	private final ModelPart Feeler2;
 	private final ModelPart Spines1;

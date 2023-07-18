@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class ForkfishModel<T extends Forkfish> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "forkfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "forkfish"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Fork2;
 	private final ModelPart MidFork;

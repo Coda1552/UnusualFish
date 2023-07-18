@@ -63,7 +63,7 @@ public class Trite extends WaterAnimal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.EVIL_CHATTERING;
+        return UnusualFishSounds.EVIL_CHATTERING.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -75,7 +75,7 @@ public class Trite extends WaterAnimal {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.EVIL_SCUTTLING, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.EVIL_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public void remove(Entity.RemovalReason p_149847_) {

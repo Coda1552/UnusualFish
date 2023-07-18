@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class KalappaModel<T extends Kalappa> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "kalappa"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "kalappa"), "main");
 	private final ModelPart Warts;
 	private final ModelPart Claw1;
 	private final ModelPart Claw2;

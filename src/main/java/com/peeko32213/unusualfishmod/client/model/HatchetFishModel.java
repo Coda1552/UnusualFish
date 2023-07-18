@@ -6,7 +6,7 @@ package com.peeko32213.unusualfishmod.client.model;// Made with Blockbench 4.2.5
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.peeko32213.unusualfishmod.UnusualFishMod;
-import com.peeko32213.unusualfishmod.common.entity.ai.HatchetFish;
+import com.peeko32213.unusualfishmod.common.entity.ambient.HatchetFish;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class HatchetFishModel<T extends HatchetFish> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "hatchet_fish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "hatchet_fish"), "main");
 
 	private final ModelPart Jaw;
 	private final ModelPart Eye1;

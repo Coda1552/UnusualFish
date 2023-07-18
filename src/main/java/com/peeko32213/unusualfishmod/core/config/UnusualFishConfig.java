@@ -4,9 +4,9 @@ import com.peeko32213.unusualfishmod.UnusualFishMod;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
-import static com.peeko32213.unusualfishmod.UnusualFishMod.MODID;
+import static com.peeko32213.unusualfishmod.UnusualFishMod.MOD_ID;
 
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 
 public class UnusualFishConfig {
     public static int aeroMonoSpawnWeight = 30;

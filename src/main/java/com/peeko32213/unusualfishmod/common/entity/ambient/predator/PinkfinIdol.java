@@ -94,7 +94,7 @@ public class PinkfinIdol extends WaterAnimal {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.DEEP_WATER;
+		return UnusualFishSounds.DEEP_WATER.get();
 	}
 
 	public SoundEvent getDeathSound() {

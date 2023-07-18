@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class SeaSpiderModel<T extends SeaSpider> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "sea_spider"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "sea_spider"), "main");
 	private final ModelPart Claw1;
 	private final ModelPart Claw2;
 	private final ModelPart Leg1;

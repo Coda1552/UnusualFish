@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class BeakedHerringModel<T extends BeakedHerring> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "beaked_herring"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "beaked_herring"), "main");
 	private final ModelPart Body;
 	private final ModelPart BackBody;
 	private final ModelPart Fin1;

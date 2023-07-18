@@ -11,13 +11,12 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 
 public class TrobModel<T extends Trob> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "trob"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "trob"), "main");
 
 	private final ModelPart MouthPart1;
 	private final ModelPart MouthPart2;

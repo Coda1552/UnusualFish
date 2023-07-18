@@ -65,7 +65,7 @@ public class Tribble extends WaterAnimal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_ENEMY;
+        return UnusualFishSounds.SMALL_ENEMY.get();
     }
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
@@ -76,7 +76,7 @@ public class Tribble extends WaterAnimal {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.EVIL_SCUTTLING, 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.EVIL_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     static class MoveHelperController extends MoveControl {

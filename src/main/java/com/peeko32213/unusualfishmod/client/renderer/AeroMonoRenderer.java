@@ -2,6 +2,7 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UFModelLayers;
 import com.peeko32213.unusualfishmod.client.model.AeroMonoModel;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.AeroMono;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,7 +14,7 @@ public class AeroMonoRenderer extends MobRenderer<AeroMono, AeroMonoModel<AeroMo
     protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/aeromono.png");
 
     public AeroMonoRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new AeroMonoModel<>(renderManagerIn.bakeLayer(AeroMonoModel.LAYER_LOCATION)), 0.2F);
+        super(renderManagerIn, new AeroMonoModel<>(renderManagerIn.bakeLayer(UFModelLayers.AERO_MONO)), 0.2F);
     }
 
     @Override

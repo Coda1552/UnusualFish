@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public final class UnusualFishBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
-            UnusualFishMod.MODID);
+            UnusualFishMod.MOD_ID);
 
     public static final RegistryObject<Block> COPPER_SPOTLIGHT = registerBlock("copper_spotlight",
             () -> new CopperSpotlightBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL).noOcclusion().instabreak().lightLevel(state -> 15).dynamicShape()), UnusualFishMod.UNUSUAL_TAB);

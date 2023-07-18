@@ -13,5 +13,4 @@ public interface IWhipUpdate {
     boolean getCharging();
 
     void setCharging(boolean charging);
-
 }

@@ -227,18 +227,16 @@
 
 	"tooltip.scythe": "Hits mobs in a wide sweep",
 
-	"unusualfishmod.sound.subtitle.crab_chatter": "Chattering",
-	"unusualfishmod.sound.subtitle.crab_scuttling": "Scuttling",
-	"unusualfishmod.sound.subtitle.deep_water": "Mysterious Sounds",
-	"unusualfishmod.sound.subtitle.gnasher_idle": "Gnasher Screams",
-	"unusualfishmod.sound.subtitle.large_fish": "Behemoth Wails",
-	"unusualfishmod.sound.subtitle.medium_fish": "Aquatic Noises",
-	"unusualfishmod.sound.subtitle.evil_chattering": "Evil Chattering",
-	"unusualfishmod.sound.subtitle.evil_scuttling": "Evil Scuttling",
-	"unusualfishmod.sound.subtitle.small_enemy": "Devious Noises",
-	"unusualfishmod.sound.subtitle.small_fish": "Aquatic Chirps",
-	"unusualfishmod.sound.subtitle.abyssal_blast": "Abyssal Blast",
-	"unusualfishmod.sound.subtitle.whip_crack": "Whip Cracks"
-
-
+	"unusualfishmod.sound.subtitle.crab_chatter": "Crab chatters",
+	"unusualfishmod.sound.subtitle.crab_scuttling": "Crab scuttles",
+	"unusualfishmod.sound.subtitle.deep_water": "Mysterious sounds",
+	"unusualfishmod.sound.subtitle.gnasher_idle": "Gnasher screams",
+	"unusualfishmod.sound.subtitle.large_fish": "Behemoth wails",
+	"unusualfishmod.sound.subtitle.medium_fish": "Aquatic noises",
+	"unusualfishmod.sound.subtitle.evil_chattering": "Something evil chatters",
+	"unusualfishmod.sound.subtitle.evil_scuttling": "Something evil scuttles",
+	"unusualfishmod.sound.subtitle.small_enemy": "Devious noises",
+	"unusualfishmod.sound.subtitle.small_fish": "Aquatic chirps",
+	"unusualfishmod.sound.subtitle.abyssal_blast": "Abyssal blast",
+	"unusualfishmod.sound.subtitle.whip_crack": "Whip cracks"
 }

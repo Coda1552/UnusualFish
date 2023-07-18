@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class StoutBichirModel<T extends StoutBichir> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "stout_bichir"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "stout_bichir"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart TailBit;

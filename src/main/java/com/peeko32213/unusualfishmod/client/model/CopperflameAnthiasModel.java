@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class CopperflameAnthiasModel<T extends CopperflameAnthias> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "copperflame"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "copperflame"), "main");
 	private final ModelPart Body;
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

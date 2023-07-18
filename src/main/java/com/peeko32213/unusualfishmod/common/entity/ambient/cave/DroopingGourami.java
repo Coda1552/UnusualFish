@@ -101,7 +101,7 @@ public class DroopingGourami extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -178,7 +178,7 @@ public class DroopingGourami extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.HANDY_GOURAMI_BUCKET.get());
+		return new ItemStack(UnusualFishItems.DROOPING_GOURAMI_BUCKET.get());
 	}
 
 

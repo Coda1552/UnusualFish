@@ -2,6 +2,7 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UFModelLayers;
 import com.peeko32213.unusualfishmod.client.model.BaskingTiamatBabyModel;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.BaskingTiamatBaby;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,7 +14,7 @@ public class BaskingTiamatBabyRenderer extends MobRenderer<BaskingTiamatBaby, Ba
     protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/babybaskingtiamat.png");
 
     public BaskingTiamatBabyRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new BaskingTiamatBabyModel<>(renderManagerIn.bakeLayer(BaskingTiamatBabyModel.LAYER_LOCATION)), 0.2F);
+        super(renderManagerIn, new BaskingTiamatBabyModel<>(renderManagerIn.bakeLayer(UFModelLayers.BABY_BASKING_TIAMAT)), 0.2F);
     }
 
     @Override

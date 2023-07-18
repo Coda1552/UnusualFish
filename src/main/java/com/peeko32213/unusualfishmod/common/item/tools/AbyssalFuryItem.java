@@ -90,7 +90,7 @@ public class AbyssalFuryItem extends Item {
                 Vec3 vector3d = livingEntityIn.getViewVector(1.0F);
                 Vector3f vector3f = new Vector3f(vector3d);
                 Random rand = new Random();
-                livingEntityIn.playSound(UnusualFishSounds.ABYSSAL_BLAST,1.0F, 0.5F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
+                livingEntityIn.playSound(UnusualFishSounds.ABYSSAL_BLAST.get(),1.0F, 0.5F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                 blast.shoot((double) vector3f.x(), (double) vector3f.y(), (double) vector3f.z(), 0.6F, 1);
                 if (!worldIn.isClientSide) {
                     worldIn.addFreshEntity(blast);

@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class GrandCorydoraModel<T extends GrandCorydora> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "grand_cory"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "grand_cory"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

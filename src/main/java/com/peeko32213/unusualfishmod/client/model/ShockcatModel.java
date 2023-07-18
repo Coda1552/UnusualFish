@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class ShockcatModel<T extends Shockcat> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "shockcat"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "shockcat"), "main");
 	private final ModelPart Body;
 	private final ModelPart BackBody;
 	private final ModelPart Tail;

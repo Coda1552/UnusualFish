@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 
 public class TripleTwirlPlecoModel<Type extends TripleTwirlPleco> extends ListModel<Type> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "triple_twirl_pleco"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "triple_twirl_pleco"), "main");
 	private final ModelPart Tail;
 	private final ModelPart BigWhisker;
 	private final ModelPart Whisker1;

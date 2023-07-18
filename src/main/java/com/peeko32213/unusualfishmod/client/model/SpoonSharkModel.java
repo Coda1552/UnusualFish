@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class SpoonSharkModel<T extends SpoonShark> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "spoon_shark"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "spoon_shark"), "main");
 	private final ModelPart Head;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

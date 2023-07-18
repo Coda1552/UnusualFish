@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 public class ZebraCornetfishModel<T extends ZebraCornetfish> extends ListModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "zebra_cornetfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "zebra_cornetfish"), "main");
 	private final ModelPart Mouth;
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

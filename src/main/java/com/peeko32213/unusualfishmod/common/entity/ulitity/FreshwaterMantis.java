@@ -88,7 +88,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable, SemiAqu
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.CRAB_CHATTER;
+		return UnusualFishSounds.CRAB_CHATTER.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -99,7 +99,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable, SemiAqu
 	}
 
 	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UnusualFishSounds.CRAB_SCUTTLING, 0.15F, 1.0F);
+		this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
 	}
 
 
@@ -193,7 +193,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable, SemiAqu
 	}
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.MANTIS_BUCKET.get());
+		return new ItemStack(UnusualFishItems.FRESHWATER_MANTIS_BUCKET.get());
 	}
 
 	@Override

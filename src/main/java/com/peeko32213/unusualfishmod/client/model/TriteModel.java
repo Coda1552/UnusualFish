@@ -11,12 +11,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 
 
 public class TriteModel<T extends Trite> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "trite"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "trite"), "main");
 	private final ModelPart Legs1;
 	private final ModelPart Legs2;
 	private final ModelPart Feeler1;

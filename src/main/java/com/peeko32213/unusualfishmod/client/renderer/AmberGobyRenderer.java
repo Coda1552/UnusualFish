@@ -2,6 +2,7 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UFModelLayers;
 import com.peeko32213.unusualfishmod.client.model.AmberGobyModel;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.AmberGoby;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -13,7 +14,7 @@ public class AmberGobyRenderer extends MobRenderer<AmberGoby, AmberGobyModel<Amb
     protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/ambergoby.png");
 
     public AmberGobyRenderer(EntityRendererProvider.Context renderManagerIn) {
-        super(renderManagerIn, new AmberGobyModel<>(renderManagerIn.bakeLayer(AmberGobyModel.LAYER_LOCATION)), 0.2F);
+        super(renderManagerIn, new AmberGobyModel<>(renderManagerIn.bakeLayer(UFModelLayers.AMBER_GOBY)), 0.2F);
     }
 
 

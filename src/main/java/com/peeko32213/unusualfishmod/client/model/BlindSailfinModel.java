@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class BlindSailfinModel<T extends BlindSailfin> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "blindsailfin"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "blindsailfin"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart FrontFin1;

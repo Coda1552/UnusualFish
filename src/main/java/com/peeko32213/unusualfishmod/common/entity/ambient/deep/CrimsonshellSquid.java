@@ -155,7 +155,7 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
 
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.DEEP_WATER;
+        return UnusualFishSounds.DEEP_WATER.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -232,7 +232,7 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.CRIMSON_BUCKET.get());
+        return new ItemStack(UnusualFishItems.CRIMSONSHELL_SQUID_BUCKET.get());
     }
 
     public static <T extends Mob> boolean canSpawn(EntityType<CrimsonshellSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {

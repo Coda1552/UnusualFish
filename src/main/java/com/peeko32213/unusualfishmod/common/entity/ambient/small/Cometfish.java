@@ -100,7 +100,7 @@ public class Cometfish extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH;
+		return UnusualFishSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -176,7 +176,7 @@ public class Cometfish extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.GRAVEL_BUCKET.get());
+		return new ItemStack(UnusualFishItems.COMETFISH_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<Cometfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {

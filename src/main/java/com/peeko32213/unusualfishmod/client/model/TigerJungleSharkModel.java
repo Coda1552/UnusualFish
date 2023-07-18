@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class TigerJungleSharkModel<T extends TigerJungleShark> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "jungleshark"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "jungleshark"), "main");
 	private final ModelPart Head;
 	private final ModelPart LowerJaw;
 	private final ModelPart Body;

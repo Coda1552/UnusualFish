@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 public class ClownthornSharkModel<Type extends ClownthornShark> extends ListModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "clownthorn_shark"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "clownthorn_shark"), "main");
 	private final ModelPart Body;
 	private final ModelPart BackBody;
 	private final ModelPart Fin1;

@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class PorcupineLobsterModel<T extends PorcupineLobster> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "porcupine_lobsta"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "porcupine_lobsta"), "main");
 	private final ModelPart BackBody;
 	private final ModelPart BackSpines1;
 	private final ModelPart BackSpines2;

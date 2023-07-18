@@ -13,7 +13,7 @@ public class ItemModFoods {
     public static final FoodProperties RAW_BUMPFACE = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.1F).meat().build();
     public static final FoodProperties RAW_TETRA_RHINO = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.1F).meat().fast().build();
     public static final FoodProperties RAW_SAILOR_BARB = (new FoodProperties.Builder()).nutrition(2).saturationMod(0.1F).meat().fast().build();
-    public static final FoodProperties RAW_BARK_ANGEL = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.1F).meat().fast().build();
+    public static final FoodProperties RAW_BARK_ANGELFISH = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.1F).meat().fast().build();
     public static final FoodProperties RAW_VEIL_TENTACLE = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).meat().build();
     public static final FoodProperties RAW_BLIZZARD_TUNA = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.1F).meat().build();
     public static final FoodProperties RAW_SPINDLEFISH = (new FoodProperties.Builder()).nutrition(1).saturationMod(0.1F).meat().effect(new MobEffectInstance(MobEffects.POISON, 200, 1), 1.0F).effect(new MobEffectInstance(MobEffects.WEAKNESS, 150, 1), 1.0F).build();
@@ -31,7 +31,7 @@ public class ItemModFoods {
     public static final FoodProperties COOKED_SAILOR_BARB = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.3F).meat().fast().build();
     public static final FoodProperties COOKED_VEIL_TENTACLE = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.6F).meat().build();
     public static final FoodProperties COOKED_BLIZZARD_TUNA = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.6F).meat().build();
-    public static final FoodProperties COOKED_BARK_ANGEL = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.2F).meat().fast().build();
+    public static final FoodProperties COOKED_BARK_ANGELFISH = (new FoodProperties.Builder()).nutrition(3).saturationMod(0.2F).meat().fast().build();
     public static final FoodProperties COOKED_MOSSTHORN = (new FoodProperties.Builder()).nutrition(4).saturationMod(0.3F).meat().fast().build();
     public static final FoodProperties COOKED_SHOCKCAT = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.6F).meat().build();
     public static final FoodProperties COOKED_LOBSTER = (new FoodProperties.Builder()).nutrition(7).saturationMod(0.6F).meat().build();

@@ -2,20 +2,14 @@ package com.peeko32213.unusualfishmod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.BaskingTiamatBaby;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class BaskingTiamatBabyModel<T extends BaskingTiamatBaby> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "basking_tiamat_baby"), "main");
-
 	private final ModelPart Body;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;
@@ -53,7 +47,6 @@ public class BaskingTiamatBabyModel<T extends BaskingTiamatBaby> extends EntityM
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 		float f = 1.0F;
 		if (!entity.isInWater()) {
 			f = 1.5F;
@@ -67,8 +60,6 @@ public class BaskingTiamatBabyModel<T extends BaskingTiamatBaby> extends EntityM
 
 		this.Body.xRot = headPitch * ((float)Math.PI / 180F);
 		this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
-
-
 	}
 
 	@Override

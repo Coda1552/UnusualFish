@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class RootballModel<T extends Rootball> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "rootball"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "rootball"), "main");
 	private final ModelPart Body;
 	private final ModelPart Leg1;
 	private final ModelPart Leg2;

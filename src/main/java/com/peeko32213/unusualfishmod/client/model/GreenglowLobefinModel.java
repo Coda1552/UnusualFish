@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class GreenglowLobefinModel<T extends GreenglowLobefin> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "greenglow"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "greenglow"), "main");
 	private final ModelPart Body;
 	private final ModelPart BackBody;
 	private final ModelPart Tail;

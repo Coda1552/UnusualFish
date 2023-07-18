@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 public class DragonBichirModel<T extends StoutBichir> extends ListModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "dragonfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "dragonfish"), "main");
 
 	private final ModelPart Body;
 	private final ModelPart BackBody;

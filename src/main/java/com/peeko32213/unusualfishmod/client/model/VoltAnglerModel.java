@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class VoltAnglerModel<T extends VoltAngler> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "voltangler"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "voltangler"), "main");
 	private final ModelPart Body;
 	private final ModelPart Jaw;
 	private final ModelPart Tail;

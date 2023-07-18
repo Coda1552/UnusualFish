@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class DroopingGouramiModel<T extends DroopingGourami> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "drooping_gourami"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "drooping_gourami"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

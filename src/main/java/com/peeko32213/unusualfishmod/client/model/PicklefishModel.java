@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class PicklefishModel<T extends Picklefish> extends ListModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "picklefish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "picklefish"), "main");
 	private final ModelPart Tail;
 	private final ModelPart Sensor;
 	private final ModelPart FrontFin1;

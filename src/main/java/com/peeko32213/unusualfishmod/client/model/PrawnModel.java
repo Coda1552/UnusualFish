@@ -1,7 +1,4 @@
-package com.peeko32213.unusualfishmod.client.model;// Made with Blockbench 4.2.5
-// Exported for Minecraft version 1.17 - 1.18 with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package com.peeko32213.unusualfishmod.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -16,10 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class PrawnModel<T extends Prawn> extends EntityModel<T> {
-
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "prawn"), "main");
-
 	private final ModelPart Tail;
 	private final ModelPart TailFlap;
 	private final ModelPart Jaw1;
@@ -104,7 +97,6 @@ public class PrawnModel<T extends Prawn> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 		float f = 1.0F;
 
 		this.Leg3.zRot = -Mth.cos(limbSwing * 0.3F) * 1.2F * limbSwingAmount;

@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 
 public class RoughbackGuitarfishModel<T extends RoughbackGuitarfish> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "roughback_guitarfish"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "roughback_guitarfish"), "main");
 	private final ModelPart BackBody;
 	private final ModelPart Backfin1;
 	private final ModelPart Backfin2;

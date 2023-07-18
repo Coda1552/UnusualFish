@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 public class RedGiantSeaStarModel<Type extends RedGiantSeaStar> extends EntityModel<Type> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MODID, "redgiant_seastar"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "redgiant_seastar"), "main");
 	private final ModelPart MedArmFront1;
 	private final ModelPart SmallArmFront1;
 	private final ModelPart BigArmFront;

@@ -15,7 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber(modid = UnusualFishMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = UnusualFishMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 
 public class CommonForgeEvents {
     public static boolean initBiomes = false;
@@ -240,7 +240,7 @@ public class CommonForgeEvents {
         }
 
         if (testBiome(BiomeConfig.whiskered_whaleshark, event.getCategory(), event.getName()) && UnusualFishConfig.whiskeredWhaleSharkSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.WHISKERED.get(), UnusualFishConfig.whiskeredWhaleSharkSpawnWeight, 1, 2));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.WHISKERED_WHALE_SHARK.get(), UnusualFishConfig.whiskeredWhaleSharkSpawnWeight, 1, 2));
         }
 
         if (testBiome(BiomeConfig.yellow_whip_goby, event.getCategory(), event.getName()) && UnusualFishConfig.yellowWhipGobySpawnWeight > 0) {
@@ -254,7 +254,7 @@ public class CommonForgeEvents {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.EYEKITO.get(), UnusualFishConfig.eyekitoSpawnWeight, 1, 2));
         }
         if (testBiome(BiomeConfig.jungle_shark, event.getCategory(), event.getName()) && UnusualFishConfig.jungleSharkSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.JUNGLE_SHARK.get(), UnusualFishConfig.jungleSharkSpawnWeight, 1, 2));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TIGER_JUNGLE_SHARK.get(), UnusualFishConfig.jungleSharkSpawnWeight, 1, 2));
         }
         if (testBiome(BiomeConfig.snowflake_fish, event.getCategory(), event.getName()) && UnusualFishConfig.snowflakeFishSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.SNOWFLAKE.get(), UnusualFishConfig.snowflakeFishSpawnWeight, 3, 5));
@@ -263,16 +263,16 @@ public class CommonForgeEvents {
             event.getSpawns().getSpawner(MobCategory.WATER_AMBIENT).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.EYELASH.get(), UnusualFishConfig.eyelashFishSpawnWeight, 4, 6));
         }
         if (testBiome(BiomeConfig.crimsonshell, event.getCategory(), event.getName()) && UnusualFishConfig.crimsonshellSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.CRIMSONSHELL.get(), UnusualFishConfig.crimsonshellSpawnWeight, 1, 2));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.CRIMSONSHELL_SQUID.get(), UnusualFishConfig.crimsonshellSpawnWeight, 1, 2));
         }
         if (testBiome(BiomeConfig.greenglow, event.getCategory(), event.getName()) && UnusualFishConfig.greenglowSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.GREENGLOW.get(), UnusualFishConfig.greenglowSpawnWeight, 1, 2));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.GREENGLOW_LOBED_FIN.get(), UnusualFishConfig.greenglowSpawnWeight, 1, 2));
         }
         if (testBiome(BiomeConfig.volt, event.getCategory(), event.getName()) && UnusualFishConfig.voltSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.VOLT.get(), UnusualFishConfig.voltSpawnWeight, 1, 2));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.VOLT_ANGLER.get(), UnusualFishConfig.voltSpawnWeight, 1, 2));
         }
         if (testBiome(BiomeConfig.tribble, event.getCategory(), event.getName()) && UnusualFishConfig.tribbleSpawnWeight > 0) {
-            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TRIBLE.get(), UnusualFishConfig.tribbleSpawnWeight, 3, 6));
+            event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TRIBBLE.get(), UnusualFishConfig.tribbleSpawnWeight, 3, 6));
         }
         if (testBiome(BiomeConfig.trob, event.getCategory(), event.getName()) && UnusualFishConfig.trobSpawnWeight > 0) {
             event.getSpawns().getSpawner(MobCategory.WATER_CREATURE).add(new MobSpawnSettings.SpawnerData(UnusualFishEntities.TROB.get(), UnusualFishConfig.trobSpawnWeight, 2, 4));

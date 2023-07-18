@@ -115,7 +115,7 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
 
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.DEEP_WATER;
+        return UnusualFishSounds.DEEP_WATER.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -192,7 +192,7 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.VOLT_BUCKET.get());
+        return new ItemStack(UnusualFishItems.VOLT_ANGLER_BUCKET.get());
     }
 
     public static <T extends Mob> boolean canSpawn(EntityType<VoltAngler> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
