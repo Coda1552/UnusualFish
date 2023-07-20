@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unusualfishmod:scythe"
+          "name": "unusualfishmod:depth_scythe"
         }
       ],
       "conditions": [
