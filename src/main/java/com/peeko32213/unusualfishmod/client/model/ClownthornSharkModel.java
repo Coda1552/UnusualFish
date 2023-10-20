@@ -84,11 +84,14 @@ public class ClownthornSharkModel<Type extends ClownthornShark> extends ListMode
 		this.BackBody.yRot = -f * 0.3F * Mth.sin(0.4F * ageInTicks);
 		this.Tail.yRot = -f * 0.3F * Mth.sin(0.4F * ageInTicks);
 
-		this.Body.xRot = headPitch * ((float)Math.PI / 180F);
-		this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
-		if (entity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-7D) {
+		if (entity.isInWater()) {
+			this.Body.xRot = headPitch * ((float)Math.PI / 180F);
+			this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
 		}
-
+		else {
+			this.Body.xRot = 0.0F;
+			this.Body.yRot = 0.0F;
+		}
 	}
 
 	@Override

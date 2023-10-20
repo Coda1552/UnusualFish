@@ -17,8 +17,6 @@ public class ClownthornSharkRenderer extends MobRenderer<ClownthornShark, Clownt
         super(renderManagerIn, new ClownthornSharkModel<>(renderManagerIn.bakeLayer(ClownthornSharkModel.LAYER_LOCATION)), 0.2F);
     }
 
-
-
     @Override
     public ResourceLocation getTextureLocation(ClownthornShark entity) {
         return TEXTURE;
@@ -30,9 +28,10 @@ public class ClownthornSharkRenderer extends MobRenderer<ClownthornShark, Clownt
         float f = 4.3F * Mth.sin(0.6F * p_116228_);
         p_116227_.mulPose(Vector3f.YP.rotationDegrees(f));
         if (!p_116226_.isInWater()) {
-            p_116227_.translate((double) 0.2F, (double) 0.1F, 0.0D);
+            p_116227_.translate(0.2F, 0.1F, 0.0D);
             p_116227_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
         }
+        p_116227_.translate(0.0D, 0.0D, 0.5D);
     }
 
 }

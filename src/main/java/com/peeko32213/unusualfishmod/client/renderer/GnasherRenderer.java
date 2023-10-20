@@ -1,6 +1,5 @@
 package com.peeko32213.unusualfishmod.client.renderer;
 
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.peeko32213.unusualfishmod.client.model.GnasherModel;
@@ -11,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class GnasherRenderer extends MobRenderer<Gnasher, GnasherModel<Gnasher>> {
-	protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/gnasherz.png");
+	protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/gnasher.png");
 
 	public GnasherRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new GnasherModel<>(renderManagerIn.bakeLayer(GnasherModel.LAYER_LOCATION)), 0.2F);
@@ -28,13 +27,8 @@ public class GnasherRenderer extends MobRenderer<Gnasher, GnasherModel<Gnasher>>
 		float f = 4.3F * Mth.sin(0.6F * p_116228_);
 		p_116227_.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!p_116226_.isInWater()) {
-			p_116227_.translate((double) 0.2F, (double) 0.1F, 0.0D);
+			p_116227_.translate(0.2F, 0.1F, 0.0D);
 			p_116227_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
-
-	protected float getFlipDegrees(Gnasher fish) {
-		return 0.0F;
-	}
-
 }

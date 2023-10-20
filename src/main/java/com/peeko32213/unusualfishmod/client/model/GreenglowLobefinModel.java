@@ -94,8 +94,6 @@ public class GreenglowLobefinModel<T extends GreenglowLobefin> extends EntityMod
 
 		this.Body.xRot = headPitch * ((float)Math.PI / 180F);
 		this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
-		if (entity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-7D) {
-		}
 
 	}
 
@@ -103,8 +101,6 @@ public class GreenglowLobefinModel<T extends GreenglowLobefin> extends EntityMod
 		super.prepareMobModel(p_102957_, p_102958_, p_102959_, p_102960_);
 		int l = p_102957_.getAttackAnimationTick();
 		if (l > 0) {
-			float f4 = Mth.sin(((float) l - p_102960_) / 10.0F * (float) Math.PI * 0.25F);
-			this.LowerJaw.xRot = ((float) Math.PI / 2F) * f4;
 			if (l > 5) {
 				this.LowerJaw.xRot = Mth.sin(((float) (-4 + l) - p_102960_) / 4.0F) * (float) Math.PI * 0.4F;
 			} else {
