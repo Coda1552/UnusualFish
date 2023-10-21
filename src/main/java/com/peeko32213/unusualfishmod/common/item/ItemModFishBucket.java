@@ -15,12 +15,10 @@ import net.minecraftforge.fml.DistExecutor;
 
 public class ItemModFishBucket extends MobBucketItem {
 
-	public ItemModFishBucket(Supplier<? extends EntityType<?>> entityType, Supplier<? extends Fluid> fluid, Item item,
-							 boolean hasTooltip, Properties builder) {
+	public ItemModFishBucket(Supplier<? extends EntityType<?>> entityType, Supplier<? extends Fluid> fluid, Item item, boolean hasTooltip, Properties builder) {
 		super(entityType, fluid, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
-		DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> UnusualFishMod.CALLBACKS.add(() ->
-				ItemProperties.register(this, new ResourceLocation(UnusualFishMod.MOD_ID, "variant"),
-						(stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0)));
+
+		DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> UnusualFishMod.CALLBACKS.add(() -> ItemProperties.register(this, new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0)));
 	}
 
 }

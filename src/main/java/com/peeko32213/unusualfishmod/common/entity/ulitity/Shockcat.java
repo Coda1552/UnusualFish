@@ -1,6 +1,6 @@
 package com.peeko32213.unusualfishmod.common.entity.ulitity;
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Shockcat extends WaterAnimal {
 	protected int attackCooldown = 0;
@@ -121,18 +121,7 @@ public class Shockcat extends WaterAnimal {
 		}
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<Shockcat> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= UnusualFishConfig.shockcatSpawnHeight;
+	public static <T extends Mob> boolean canSpawn(EntityType<Shockcat> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 10;
 	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.shockcatSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
-	private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-		float time = iServerWorld.getTimeOfDay(1.0F);
-		int light = iServerWorld.getMaxLocalRawBrightness(pos);
-		return light <= 4 && time > 0.27F && time <= 0.8F;
-	}
-
 }

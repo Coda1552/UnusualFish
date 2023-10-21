@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:deep_lukewarm_ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:porcupine_lobster",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

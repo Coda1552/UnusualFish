@@ -2,7 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.ambient.predator;
 
 
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -32,7 +32,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 
 public class TrumpetSquid extends WaterAnimal {
@@ -175,14 +175,8 @@ public class TrumpetSquid extends WaterAnimal {
 
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<TrumpetSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
+	public static boolean canSpawn(EntityType<TrumpetSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.trumpetSquidSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
-
 
 }

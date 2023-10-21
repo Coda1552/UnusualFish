@@ -7,22 +7,22 @@ license="MIT"
 modId="unusualfishmod" 
 version="1.2.0"
 displayName= "Unusual Fish Mod"
-logoFile= "examplemod.png"
+#logoFile= "examplemod.png"
 credits= "Thanks to Birdbasket, rusty_coconut, NotBop, Crydigo, Omatypaty and Circle Fish for textures! Thanks to Nete2605 for usage of Tiamats! Thanks to HugoMage and cech12 for helping with code!"
-authors= "Peeko32213"
+authors= "Peeko32213, codyhuh (maintainer), OmayPaty (most art)"
 description='''
 A mod that adds a variety of new aquatic creatures, both useful and atheistic!
 '''
 
-[[dependencies.examplemod]]
+[[dependencies.unusualfishmod]]
     modId="forge"
     mandatory=true
-    versionRange="[36.0.42,)"
+    versionRange="[43.2.0,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.examplemod]]
+[[dependencies.unusualfishmod]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,1.19)"
+    versionRange="[1.19.2,1.19.3)"
     ordering="NONE"
     side="BOTH"

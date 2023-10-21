@@ -1,6 +1,5 @@
 package com.peeko32213.unusualfishmod.client;
 
-import com.peeko32213.unusualfishmod.UFModelLayers;
 import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.client.model.*;
 import com.peeko32213.unusualfishmod.client.renderer.*;
@@ -26,12 +25,10 @@ public final class ClientEvents {
 		event.registerLayerDefinition(SailorBarbModel.LAYER_LOCATION, SailorBarbModel::createBodyLayer);
 		event.registerLayerDefinition(SeaSpiderModel.LAYER_LOCATION, SeaSpiderModel::createBodyLayer);
 		event.registerLayerDefinition(TripleTwirlPlecoModel.LAYER_LOCATION, TripleTwirlPlecoModel::createBodyLayer);
-		event.registerLayerDefinition(UFModelLayers.AERO_MONO, AeroMonoModel::createBodyLayer);
+		event.registerLayerDefinition(AeroMonoModel.LAYER_LOCATION, AeroMonoModel::createBodyLayer);
 		event.registerLayerDefinition(ClownthornSharkModel.LAYER_LOCATION, ClownthornSharkModel::createBodyLayer);
 		event.registerLayerDefinition(RoughbackGuitarfishModel.LAYER_LOCATION, RoughbackGuitarfishModel::createBodyLayer);
-		event.registerLayerDefinition(RedGiantSeaStarModel.LAYER_LOCATION, RedGiantSeaStarModel::createBodyLayer);
 		event.registerLayerDefinition(PinkfinIdolModel.LAYER_LOCATION, PinkfinIdolModel::createBodyLayer);
-		event.registerLayerDefinition(GrandCorydoraModel.LAYER_LOCATION, GrandCorydoraModel::createBodyLayer);
 		event.registerLayerDefinition(SeaPancakeModel.LAYER_LOCATION, SeaPancakeModel::createBodyLayer);
 		event.registerLayerDefinition(BrickSnailModel.LAYER_LOCATION, BrickSnailModel::createBodyLayer);
 		event.registerLayerDefinition(ZebraCornetfishModel.LAYER_LOCATION, ZebraCornetfishModel::createBodyLayer);
@@ -53,16 +50,13 @@ public final class ClientEvents {
 		event.registerLayerDefinition(PicklefishModel.LAYER_LOCATION, PicklefishModel::createBodyLayer);
 		event.registerLayerDefinition(BlindSailfinModel.LAYER_LOCATION, BlindSailfinModel::createBodyLayer);
 		event.registerLayerDefinition(DemonHerringModel.LAYER_LOCATION, DemonHerringModel::createBodyLayer);
-		event.registerLayerDefinition(UFModelLayers.AMBER_GOBY, AmberGobyModel::createBodyLayer);
+		event.registerLayerDefinition(AmberGobyModel.LAYER_LOCATION, AmberGobyModel::createBodyLayer);
 		event.registerLayerDefinition(HatchetFishModel.LAYER_LOCATION, HatchetFishModel::createBodyLayer);
-		event.registerLayerDefinition(SlatefishModel.LAYER_LOCATION, SlatefishModel::createBodyLayer);
 		event.registerLayerDefinition(CopperflameAnthiasModel.LAYER_LOCATION, CopperflameAnthiasModel::createBodyLayer);
-		event.registerLayerDefinition(LongRockFishModel.LAYER_LOCATION, LongRockFishModel::createBodyLayer);
-		event.registerLayerDefinition(CometfishModel.LAYER_LOCATION, CometfishModel::createBodyLayer);
 		event.registerLayerDefinition(RootballModel.LAYER_LOCATION, RootballModel::createBodyLayer);
 		event.registerLayerDefinition(CelestialFishModel.LAYER_LOCATION, CelestialFishModel::createBodyLayer);
 		event.registerLayerDefinition(GnasherModel.LAYER_LOCATION, GnasherModel::createBodyLayer);
-		event.registerLayerDefinition(UFModelLayers.PRAWN, PrawnModel::createBodyLayer);
+		event.registerLayerDefinition(PrawnModel.LAYER_LOCATION, PrawnModel::createBodyLayer);
 		event.registerLayerDefinition(SquoddleModel.LAYER_LOCATION, SquoddleModel::createBodyLayer);
 		event.registerLayerDefinition(SeaMosquitoModel.LAYER_LOCATION, SeaMosquitoModel::createBodyLayer);
 		event.registerLayerDefinition(ForkfishModel.LAYER_LOCATION, ForkfishModel::createBodyLayer);
@@ -70,20 +64,13 @@ public final class ClientEvents {
 		event.registerLayerDefinition(CoralSkrimpModel.LAYER_LOCATION, CoralSkrimpModel::createBodyLayer);
 		event.registerLayerDefinition(CircusFishModel.LAYER_LOCATION, CircusFishModel::createBodyLayer);
 		event.registerLayerDefinition(BlizzardfinTunaModel.LAYER_LOCATION, BlizzardfinTunaModel::createBodyLayer);
-		event.registerLayerDefinition(WhiskeredWhaleSharkModel.LAYER_LOCATION, WhiskeredWhaleSharkModel::createBodyLayer);
-		event.registerLayerDefinition(BaskingTiamatModel.LAYER_LOCATION, BaskingTiamatModel::createBodyLayer);
-		event.registerLayerDefinition(UFModelLayers.BABY_BASKING_TIAMAT, BaskingTiamatBabyModel::createBodyLayer);
 		event.registerLayerDefinition(SmelterSnailModel.LAYER_LOCATION, SmelterSnailModel::createBodyLayer);
-		event.registerLayerDefinition(EyekitoModel.LAYER_LOCATION, EyekitoModel::createBodyLayer);
 		event.registerLayerDefinition(EyelashFishModel.LAYER_LOCATION, EyelashFishModel::createBodyLayer);
 		event.registerLayerDefinition(SnowflakeTailFishModel.LAYER_LOCATION, SnowflakeTailFishModel::createBodyLayer);
 		event.registerLayerDefinition(TigerJungleSharkModel.LAYER_LOCATION, TigerJungleSharkModel::createBodyLayer);
 		event.registerLayerDefinition(CrimsonshellSquidModel.LAYER_LOCATION, CrimsonshellSquidModel::createBodyLayer);
-		event.registerLayerDefinition(GreenglowLobefinModel.LAYER_LOCATION, GreenglowLobefinModel::createBodyLayer);
 		event.registerLayerDefinition(VoltAnglerModel.LAYER_LOCATION, VoltAnglerModel::createBodyLayer);
 		event.registerLayerDefinition(TribbleModel.LAYER_LOCATION, TribbleModel::createBodyLayer);
-		event.registerLayerDefinition(TrobModel.LAYER_LOCATION, TrobModel::createBodyLayer);
-		event.registerLayerDefinition(TriteModel.LAYER_LOCATION, TriteModel::createBodyLayer);
 	}
 
 	@SubscribeEvent
@@ -100,9 +87,7 @@ public final class ClientEvents {
 		event.registerEntityRenderer(UnusualFishEntities.AERO_MONO.get(), AeroMonoRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.CLOWNTHORN_SHARK.get(), ClownthornSharkRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.ROUGHBACK.get(), RoughbackGuitarfishRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.REDGIANT_SEASTAR.get(), RedGiantSeaStarRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.PINKFIN.get(), PinkfinIdolRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.GRAND_CORY.get(), GrandCorydoraRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.SEA_PANCAKE.get(), SeaPancakeRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.BRICK_SNAIL.get(), BrickSnailRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.ZEBRA_CORNETFISH.get(), ZebraCornetfishRenderer::new);
@@ -126,10 +111,7 @@ public final class ClientEvents {
 		event.registerEntityRenderer(UnusualFishEntities.DEMON_HERRING.get(), DemonHerringRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.AMBER_GOBY.get(), AmberGobyRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.HATCHET_FISH.get(), HatchetfishRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.SLATEFISH.get(), SlatefishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.COPPERFLAME.get(), CopperflameAnthiasRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.LONGJAW.get(), LongjawRockfishRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.COMET_FISH.get(), CometfishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.ROOTBALL.get(), RootballRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.CELESTIAL_FISH.get(), CelestialFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.GNASHER.get(), GnasherRenderer::new);
@@ -141,21 +123,14 @@ public final class ClientEvents {
 		event.registerEntityRenderer(UnusualFishEntities.CORAL_SKRIMP.get(), CoralSkrimpRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.CIRCUSFISH.get(), CircusFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.BLIZZARDFIN.get(), BlizzardfinTunaRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.WHISKERED_WHALE_SHARK.get(), WhiskeredWhaleSharkRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.BABY_BASKING_TIAMAT.get(), BaskingTiamatBabyRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.BASKING_TIAMAT.get(), BaskingTiamatRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.SMELTER_SNAIL.get(), SmelterSnailRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.ABYSSAL_BLAST.get(), AbyssalBlastRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.EYEKITO.get(), EyekitoRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.EYELASH.get(), EyelashFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.SNOWFLAKE.get(), SnowflakeTailFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleSharkRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.CRIMSONSHELL_SQUID.get(), CrimsonshellSquidRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.GREENGLOW_LOBED_FIN.get(), GreenglowLobefinRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.VOLT_ANGLER.get(), VoltAnglerRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.TRIBBLE.get(), TribbleRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.TROB.get(), TrobRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.TRITE.get(), TriteRenderer::new);
 
 	}
 }

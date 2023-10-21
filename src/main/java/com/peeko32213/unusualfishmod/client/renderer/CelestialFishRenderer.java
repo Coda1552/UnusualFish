@@ -24,7 +24,7 @@ public class CelestialFishRenderer extends MobRenderer<CelestialFish, CelestialF
         return TEXTURE;
     }
 
-    //this code right here is what you insert when you want to give side flop to your fish \/
+
     protected void setupRotations(CelestialFish p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {
         super.setupRotations(p_116226_, p_116227_, p_116228_, p_116229_, p_116230_);
         float f = 2.3F * Mth.sin(0.2F * p_116228_);

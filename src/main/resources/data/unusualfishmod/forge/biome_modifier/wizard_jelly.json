@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:wizard_jelly",
+    "weight": 20,
+    "minCount": 3,
+    "maxCount": 4
+  }
+}

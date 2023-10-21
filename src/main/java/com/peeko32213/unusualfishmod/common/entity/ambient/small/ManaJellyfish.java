@@ -2,7 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.ambient.small;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import com.peeko32213.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -34,7 +34,7 @@ import net.minecraft.world.level.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 //REMOVE TILT FROM
 public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
@@ -198,12 +198,8 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
         }
     }
 
-    public static boolean canSpawn(EntityType<ManaJellyfish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<ManaJellyfish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
-    }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.manaJellyfishSpawnRolls, this.getRandom(), spawnReasonIn);
     }
 
     private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
@@ -215,5 +211,4 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
     public boolean checkSpawnObstruction(LevelReader worldIn) {
         return worldIn.isUnobstructed(this);
     }
-
 }

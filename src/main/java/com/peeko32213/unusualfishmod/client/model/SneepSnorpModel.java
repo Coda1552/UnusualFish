@@ -18,7 +18,7 @@ import net.minecraft.util.Mth;
 public class SneepSnorpModel<T extends SneepSnorp> extends EntityModel<T> {
 
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			new ResourceLocation(UnusualFishMod.MOD_ID, "sneepsnorp"), "main");
+			new ResourceLocation(UnusualFishMod.MOD_ID, "sneep_snorp"), "main");
 
 	private final ModelPart Tail;
 	private final ModelPart Fin1;

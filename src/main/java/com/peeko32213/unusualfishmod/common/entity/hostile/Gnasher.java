@@ -2,7 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.hostile;
 
 
 import com.peeko32213.unusualfishmod.common.entity.msc.AbyssalBlast;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -31,7 +31,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	protected int attackCooldown = 0;
@@ -165,8 +165,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		return SoundEvents.COD_FLOP;
 	}
 
-
-	public static boolean canSpawn(EntityType<Gnasher> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
+	public static boolean canSpawn(EntityType<Gnasher> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
 	}
 
@@ -174,10 +173,6 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		float time = iServerWorld.getTimeOfDay(1.0F);
 		int light = iServerWorld.getMaxLocalRawBrightness(pos);
 		return light <= 4 && time > 0.27F && time <= 0.8F;
-	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.gnasherSpawnRolls, this.getRandom(), spawnReasonIn);
 	}
 
 }

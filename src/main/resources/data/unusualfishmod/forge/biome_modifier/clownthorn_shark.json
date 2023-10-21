@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:warm_ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:clownthorn_shark",
+    "weight": 30,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}

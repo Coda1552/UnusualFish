@@ -64,10 +64,9 @@ public class DepthScytheItem extends Item {
         return true;
     }
 
-
     @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
-        if(allowdedIn(tab)) {
+        if (Enchantments.SWEEPING_EDGE.allowedInCreativeTab(this, tab)) {
             ItemStack stack = new ItemStack(this);
             stack.enchant(Enchantments.SWEEPING_EDGE, 5);
             list.add(stack);
@@ -86,7 +85,7 @@ public class DepthScytheItem extends Item {
     }
 
     @Override
-    public int getItemEnchantability(ItemStack stack) {
+    public int getEnchantmentValue(ItemStack stack) {
         return 1;
     }
 }

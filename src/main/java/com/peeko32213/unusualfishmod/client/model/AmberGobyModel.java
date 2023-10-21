@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class AmberGobyModel<T extends AmberGoby> extends EntityModel<T> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(UnusualFishMod.MOD_ID, "amber_goby"), "main");
 	private final ModelPart BackBody;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;

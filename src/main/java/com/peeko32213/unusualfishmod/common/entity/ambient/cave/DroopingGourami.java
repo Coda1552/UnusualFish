@@ -1,6 +1,6 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.cave;
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 
@@ -34,7 +34,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class DroopingGourami extends WaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(DroopingGourami.class, EntityDataSerializers.BOOLEAN);
@@ -182,12 +182,7 @@ public class DroopingGourami extends WaterAnimal implements Bucketable {
 	}
 
 
-	public static <T extends Mob> boolean canSpawn(EntityType<DroopingGourami> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
+	public static <T extends Mob> boolean canSpawn(EntityType<DroopingGourami> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.handyGouramiSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }

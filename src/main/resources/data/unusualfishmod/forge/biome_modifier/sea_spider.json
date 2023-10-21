@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:deep_ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:sea_spider",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 4
+  }
+}

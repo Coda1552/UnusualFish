@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SneepSnorpRenderer extends MobRenderer<SneepSnorp, SneepSnorpModel<SneepSnorp>> {
-protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/sneepsnorp.png");
+protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/sneep_snorp.png");
 
 public SneepSnorpRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new SneepSnorpModel<>(renderManagerIn.bakeLayer(SneepSnorpModel.LAYER_LOCATION)), 0.2F);

@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.ulitity;
 
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.ManaJellyfish;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CelestialFish extends WaterAnimal {
     protected int attackCooldown = 0;
@@ -119,12 +119,8 @@ public class CelestialFish extends WaterAnimal {
         }
     }
 
-    public static boolean canSpawn(EntityType<CelestialFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<CelestialFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
-    }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.celestialFishSpawnRolls, this.getRandom(), spawnReasonIn);
     }
 
     private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {

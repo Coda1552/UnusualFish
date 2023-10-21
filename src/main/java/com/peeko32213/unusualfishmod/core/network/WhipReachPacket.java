@@ -1,18 +1,13 @@
 package com.peeko32213.unusualfishmod.core.network;
 
-import com.mojang.math.Vector3d;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -21,15 +16,12 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkEvent;
 
-import javax.sound.sampled.Clip;
-import java.util.Random;
 import java.util.UUID;
 import java.util.function.Supplier;
 
 public class WhipReachPacket {
     private final UUID playerUUID;
-    private static final Random random = new Random();
-
+    private static final RandomSource random = RandomSource.create();
 
     public WhipReachPacket(UUID playerUUID) {
         this.playerUUID = playerUUID;

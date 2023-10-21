@@ -6,7 +6,7 @@ import com.peeko32213.unusualfishmod.common.entity.ambient.small.RhinoTetra;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.SailorBarb;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.SneepSnorp;
 import com.peeko32213.unusualfishmod.common.entity.ai.SemiAquatic;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -42,7 +42,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class FreshwaterMantis extends WaterAnimal implements Bucketable, SemiAquatic {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(FreshwaterMantis.class, EntityDataSerializers.BOOLEAN);
@@ -248,14 +248,9 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable, SemiAqu
 		}
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<FreshwaterMantis> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
+	public static <T extends Mob> boolean canSpawn(EntityType<FreshwaterMantis> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.freshwaterMantisSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }
 
 

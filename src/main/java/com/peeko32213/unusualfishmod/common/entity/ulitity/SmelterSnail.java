@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.ulitity;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.SemiAquatic;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -36,7 +36,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.IForgeShearable;
 
 import java.util.Collections;
-import java.util.Random;
+import java.util.List;
+
+import net.minecraft.util.RandomSource;
+
+import javax.annotation.Nonnull;
 
 public class SmelterSnail extends WaterAnimal implements SemiAquatic, Shearable, IForgeShearable {
 
@@ -207,9 +211,9 @@ public class SmelterSnail extends WaterAnimal implements SemiAquatic, Shearable,
         }
     }
 
-    @javax.annotation.Nonnull
+    @Nonnull
     @Override
-    public java.util.List<ItemStack> onSheared(@javax.annotation.Nullable Player player, @javax.annotation.Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
+    public List<ItemStack> onSheared(@javax.annotation.Nullable Player player, @Nonnull ItemStack item, Level world, BlockPos pos, int fortune) {
         world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
         if (!world.isClientSide()) {
             {
@@ -220,19 +224,8 @@ public class SmelterSnail extends WaterAnimal implements SemiAquatic, Shearable,
         return java.util.Collections.emptyList();
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<SmelterSnail> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= UnusualFishConfig.smelterSnailSpawnHeight;
-    }
-
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.smelterSnailSpawnRolls, this.getRandom(), spawnReasonIn);
-    }
-
-    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-        float time = iServerWorld.getTimeOfDay(1.0F);
-        int light = iServerWorld.getMaxLocalRawBrightness(pos);
-        return light <= 4 && time > 0.27F && time <= 0.8F;
+    public static boolean canSpawn(EntityType<SmelterSnail> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= -10;
     }
 
 }

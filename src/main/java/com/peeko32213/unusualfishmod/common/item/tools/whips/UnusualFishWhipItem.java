@@ -46,8 +46,8 @@ public class UnusualFishWhipItem extends TieredItem implements Vanishable {
     }
 
     @Override
-    public void fillItemCategory (CreativeModeTab tab, NonNullList< ItemStack > items){
-        if (this.allowdedIn(tab)) {
+    public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> items) {
+        if (Enchantments.SHARPNESS.allowedInCreativeTab(this, tab)) {
             ItemStack itemStack = new ItemStack(this);
             if (itemStack.is(UnusualFishItems.TENDRIL_WHIP.get())) {
                 itemStack.enchant(Enchantments.SHARPNESS, 1);

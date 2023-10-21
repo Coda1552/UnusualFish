@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.special;
 
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -41,7 +41,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class CoralSkrimp extends WaterAnimal implements Bucketable{
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CoralSkrimp.class, EntityDataSerializers.BOOLEAN);
@@ -220,14 +220,9 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 		}
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<CoralSkrimp> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
+	public static boolean canSpawn(EntityType<CoralSkrimp> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.coralSkrimpSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }
 
 

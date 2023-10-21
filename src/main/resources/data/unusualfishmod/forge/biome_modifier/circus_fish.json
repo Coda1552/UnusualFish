@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:lukewarm_ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:circus",
+    "weight": 30,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

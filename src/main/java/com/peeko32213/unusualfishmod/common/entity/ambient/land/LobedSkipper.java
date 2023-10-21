@@ -1,6 +1,6 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.land;
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -34,7 +34,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class LobedSkipper extends PathfinderMob implements Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(LobedSkipper.class, EntityDataSerializers.BOOLEAN);
@@ -368,12 +368,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     }
 
 
-    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, Random randomIn) {
+    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
         return worldIn.getBlockState(pos.below()).canOcclude();
     }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.lobedSkipperSpawnRolls, this.getRandom(), spawnReasonIn);
-    }
-
 }

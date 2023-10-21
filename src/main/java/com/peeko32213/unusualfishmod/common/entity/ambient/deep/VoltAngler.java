@@ -2,7 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.ambient.deep;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.BottomStrollGoal;
 import com.peeko32213.unusualfishmod.common.entity.ambient.special.SeaMosquito;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -41,7 +41,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.UUID;
 
 public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
@@ -195,12 +195,8 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         return new ItemStack(UnusualFishItems.VOLT_ANGLER_BUCKET.get());
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<VoltAngler> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
-    }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.voltSpawnRolls, this.getRandom(), spawnReasonIn);
+    public static boolean canSpawn(EntityType<VoltAngler> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
     }
 
     public void setRemainingPersistentAngerTime(int p_34448_) {

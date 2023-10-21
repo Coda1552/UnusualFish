@@ -2,10 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.ulitity;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import com.peeko32213.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
-import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
-
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -15,6 +12,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,12 +30,9 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Random;
 
 //REMOVE TILT FROM
 public class Mossthorn extends SchoolingWaterAnimal implements Bucketable {
@@ -198,11 +193,7 @@ public class Mossthorn extends SchoolingWaterAnimal implements Bucketable {
 		return new ItemStack(UnusualFishItems.MOSSTHORN_BUCKET.get());
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<Mossthorn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= UnusualFishConfig.mossthornSpawnHeight;
+	public static <T extends Mob> boolean canSpawn(EntityType<Mossthorn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 40;
 	}
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.mossthornSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }

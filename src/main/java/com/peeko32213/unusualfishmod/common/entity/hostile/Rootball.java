@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.hostile;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.CustomSwellGoal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -38,7 +38,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 public class Rootball extends Monster implements PowerableMob, Bucketable {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
@@ -283,19 +283,15 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
         this.entityData.set(FROM_BUCKET, p_203706_1_);
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return reason == MobSpawnType.SPAWNER || iServerWorld.canSeeSky(pos.above()) && canMonsterSpawnInLight(entityType, iServerWorld, reason, pos, random);
     }
 
-    public static boolean canMonsterSpawnInLight(EntityType<? extends Rootball> p_223325_0_, ServerLevelAccessor p_223325_1_, MobSpawnType p_223325_2_, BlockPos p_223325_3_, Random p_223325_4_) {
+    public static boolean canMonsterSpawnInLight(EntityType<? extends Rootball> p_223325_0_, ServerLevelAccessor p_223325_1_, MobSpawnType p_223325_2_, BlockPos p_223325_3_, RandomSource p_223325_4_) {
         return isValidLightLevel(p_223325_1_, p_223325_3_, p_223325_4_) && checkMobSpawnRules(p_223325_0_, p_223325_1_, p_223325_2_, p_223325_3_, p_223325_4_);
     }
 
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.rootballSpawnRolls, this.getRandom(), spawnReasonIn);
-    }
-
-    public static boolean isValidLightLevel(ServerLevelAccessor p_223323_0_, BlockPos p_223323_1_, Random p_223323_2_) {
+    public static boolean isValidLightLevel(ServerLevelAccessor p_223323_0_, BlockPos p_223323_1_, RandomSource p_223323_2_) {
         int light = p_223323_0_.getMaxLocalRawBrightness(p_223323_1_);
         return light <= 4;
     }

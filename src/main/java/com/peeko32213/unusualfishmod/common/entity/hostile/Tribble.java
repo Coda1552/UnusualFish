@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.hostile;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.CustomMeleeAttackGoal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 import java.util.function.Predicate;
 
 public class Tribble extends WaterAnimal {
@@ -76,7 +76,7 @@ public class Tribble extends WaterAnimal {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.EVIL_SCUTTLING.get(), 0.15F, 1.0F);
+        this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     static class MoveHelperController extends MoveControl {
@@ -110,7 +110,7 @@ public class Tribble extends WaterAnimal {
         }
     }
 
-    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
+    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
         return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
     }
 
@@ -119,9 +119,4 @@ public class Tribble extends WaterAnimal {
         int light = iServerWorld.getMaxLocalRawBrightness(pos);
         return light <= 4 && time > 0.27F && time <= 0.8F;
     }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.tribbleSpawnRolls, this.getRandom(), spawnReasonIn);
-    }
-
 }

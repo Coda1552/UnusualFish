@@ -1,6 +1,6 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.predator;
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -30,7 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 //TODO - REMOVE TILT
 public class CircusFish extends WaterAnimal implements Bucketable {
@@ -70,6 +70,7 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 	protected SoundEvent getAmbientSound() {
 		return UnusualFishSounds.SMALL_FISH.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -139,11 +140,7 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 		return new ItemStack(UnusualFishItems.CIRCUS_FISH_BUCKET.get());
 	}
 
-	public static boolean canSpawn(EntityType<CircusFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
-	}
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.circusFishSpawnRolls, this.getRandom(), spawnReasonIn);
+	public static boolean canSpawn(EntityType<CircusFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 }

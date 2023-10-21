@@ -1,7 +1,7 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.cave;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
@@ -36,7 +36,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 //REMOVE TILT FROM
 public class BlindSailfin extends WaterAnimal implements Bucketable {
@@ -79,8 +79,8 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 
 		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
 			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
+			float f = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
+			float f1 = Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
 		}
 
 	}
@@ -88,7 +88,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add((double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double) 0.4F, (double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -108,7 +108,6 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 	@Override
 	public void onAboveBubbleCol(boolean downwards) {
 	}
-
 
 
 	protected SoundEvent getAmbientSound() {
@@ -192,14 +191,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 		return new ItemStack(UnusualFishItems.BLIND_SAILFIN_BUCKET.get());
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= UnusualFishConfig.caveloachSpawnHeight;
+	public static <T extends Mob> boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 30;
 	}
-
-
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.caveloachSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }

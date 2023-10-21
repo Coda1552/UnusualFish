@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:warm_ocean"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:duality_damselfish",
+    "weight": 10,
+    "minCount": 2,
+    "maxCount": 2
+  }
+}

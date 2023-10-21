@@ -2,7 +2,7 @@ package com.peeko32213.unusualfishmod.common.entity.ambient;
 
 import com.peeko32213.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import com.peeko32213.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
+
 import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
+import net.minecraft.util.RandomSource;
 
 //REMOVE TILT FROM
 public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
@@ -181,7 +181,6 @@ public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public void loadFromBucketTag(CompoundTag p_148832_) {
-
 	}
 
 	@Override
@@ -198,13 +197,7 @@ public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 		return new ItemStack(UnusualFishItems.HATCHET_FISH_BUCKET.get());
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<HatchetFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, Random random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= UnusualFishConfig.hatchetFishSpawnHeight;
+	public static <T extends Mob> boolean canSpawn(EntityType<HatchetFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 0;
 	}
-
-
-	public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-		return UnusualFishEntities.rollSpawn(UnusualFishConfig.hatchetFishSpawnRolls, this.getRandom(), spawnReasonIn);
-	}
-
 }

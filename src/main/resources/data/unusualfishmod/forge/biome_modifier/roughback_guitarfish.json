@@ -1,0 +1,13 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": [
+    "minecraft:swamp"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:roughback_guitarfish",
+    "weight": 20,
+    "minCount": 1,
+    "maxCount": 3
+  }
+}

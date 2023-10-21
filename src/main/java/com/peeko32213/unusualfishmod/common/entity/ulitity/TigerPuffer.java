@@ -1,12 +1,10 @@
 package com.peeko32213.unusualfishmod.common.entity.ulitity;
 
-import com.peeko32213.unusualfishmod.core.config.UnusualFishConfig;
-import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -24,9 +22,6 @@ import net.minecraft.world.entity.monster.Drowned;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
-
-import java.util.Random;
 
 public class TigerPuffer extends WaterAnimal {
 
@@ -62,18 +57,6 @@ public class TigerPuffer extends WaterAnimal {
         });
     }
 
-    public void tick() {
-        super.tick();
-
-        if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-        }
-
-    }
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -89,10 +72,10 @@ public class TigerPuffer extends WaterAnimal {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
 
-
     protected SoundEvent getAmbientSound() {
         return UnusualFishSounds.MEDIUM_FISH.get();
     }
+
     public SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }
@@ -105,12 +88,7 @@ public class TigerPuffer extends WaterAnimal {
         return SoundEvents.COD_FLOP;
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, Random p_223364_4_) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, p_223364_4_);
+    public static boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
     }
-
-    public boolean checkSpawnRules(LevelAccessor worldIn, MobSpawnType spawnReasonIn) {
-        return UnusualFishEntities.rollSpawn(UnusualFishConfig.tigerPufferSpawnRolls, this.getRandom(), spawnReasonIn);
-    }
-
 }

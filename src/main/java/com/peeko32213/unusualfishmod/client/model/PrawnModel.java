@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class PrawnModel<T extends Prawn> extends EntityModel<T> {
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(UnusualFishMod.MOD_ID, "prawn"), "main");
 	private final ModelPart Tail;
 	private final ModelPart TailFlap;
 	private final ModelPart Jaw1;
