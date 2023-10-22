@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class MossthornRenderer extends MobRenderer<Mossthorn, MossthornModel<Mossthorn>> {
-	protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/mossthornz.png");
+	protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/mossthorn.png");
 
 	public MossthornRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new MossthornModel<>(renderManagerIn.bakeLayer(MossthornModel.LAYER_LOCATION)), 0.2F);
