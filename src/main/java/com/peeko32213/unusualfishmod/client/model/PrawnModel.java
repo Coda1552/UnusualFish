@@ -14,14 +14,9 @@ import net.minecraft.util.Mth;
 
 public class PrawnModel<T extends Prawn> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(UnusualFishMod.MOD_ID, "prawn"), "main");
+	private final ModelPart Feeler1;
+	private final ModelPart Feeler2;
 	private final ModelPart Tail;
-	private final ModelPart TailFlap;
-	private final ModelPart Jaw1;
-	private final ModelPart Jaw2;
-	private final ModelPart BigFeeler1;
-	private final ModelPart BigFeeler2;
-	private final ModelPart SmallFeeler1;
-	private final ModelPart SmallFeeler2;
 	private final ModelPart Arm1;
 	private final ModelPart Arm2;
 	private final ModelPart Leg1;
@@ -33,14 +28,9 @@ public class PrawnModel<T extends Prawn> extends EntityModel<T> {
 	private final ModelPart bb_main;
 
 	public PrawnModel(ModelPart root) {
+		this.Feeler1 = root.getChild("Feeler1");
+		this.Feeler2 = root.getChild("Feeler2");
 		this.Tail = root.getChild("Tail");
-		this.TailFlap = root.getChild("TailFlap");
-		this.Jaw1 = root.getChild("Jaw1");
-		this.Jaw2 = root.getChild("Jaw2");
-		this.BigFeeler1 = root.getChild("BigFeeler1");
-		this.BigFeeler2 = root.getChild("BigFeeler2");
-		this.SmallFeeler1 = root.getChild("SmallFeeler1");
-		this.SmallFeeler2 = root.getChild("SmallFeeler2");
 		this.Arm1 = root.getChild("Arm1");
 		this.Arm2 = root.getChild("Arm2");
 		this.Leg1 = root.getChild("Leg1");
@@ -56,50 +46,46 @@ public class PrawnModel<T extends Prawn> extends EntityModel<T> {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(0, 43).addBox(-2.0F, -7.0F, 0.0F, 5.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(28, 10).addBox(-2.0F, -7.0F, -4.0F, 5.0F, 7.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 21.0F, 4.0F, -0.8727F, 0.0F, 0.0F));
+		PartDefinition Feeler1 = partdefinition.addOrReplaceChild("Feeler1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -14.0F, 14.0F, 0.0F, 19.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 9.0F, -5.0F, 0.2054F, -0.0741F, -1.2294F));
 
-		PartDefinition TailFlap = partdefinition.addOrReplaceChild("TailFlap", CubeListBuilder.create().texOffs(0, 13).addBox(-3.0F, -2.0F, 0.0F, 7.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 21.5F, 8.0F, 0.2182F, 0.0F, 0.0F));
+		PartDefinition Feeler2 = partdefinition.addOrReplaceChild("Feeler2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-13.0F, 0.0F, -14.0F, 14.0F, 0.0F, 19.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.5F, 9.0F, -5.0F, 0.2054F, 0.0741F, 1.2294F));
 
-		PartDefinition Jaw1 = partdefinition.addOrReplaceChild("Jaw1", CubeListBuilder.create().texOffs(18, 0).addBox(0.0F, 0.0F, -2.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 18.0F, -4.0F, 0.0F, 0.0F, -0.2618F));
+		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(57, 48).addBox(-2.5F, 0.0F, 0.0F, 5.0F, 5.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 8.0F, 4.0F, 0.3491F, 0.0F, 0.0F));
 
-		PartDefinition Jaw2 = partdefinition.addOrReplaceChild("Jaw2", CubeListBuilder.create().texOffs(18, 0).mirror().addBox(-1.0F, 0.0F, -2.0F, 1.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 18.0F, -4.0F, 0.0F, 0.0F, 0.2618F));
+		PartDefinition TailFins = Tail.addOrReplaceChild("TailFins", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 0.0F, 10.0F, 0.2182F, 0.0F, 0.0F));
 
-		PartDefinition BigFeeler1 = partdefinition.addOrReplaceChild("BigFeeler1", CubeListBuilder.create().texOffs(0, 11).addBox(0.0F, -6.0F, -2.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.0F, 16.0F, -2.0F, 0.4363F, 0.0F, 0.0F));
+		PartDefinition TailFin1 = TailFins.addOrReplaceChild("TailFin1", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, 0.0F, 5.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.5F, 1.0F, 0.0F, -0.8027F, 0.1841F, -0.1872F));
 
-		PartDefinition BigFeeler2 = partdefinition.addOrReplaceChild("BigFeeler2", CubeListBuilder.create().texOffs(0, 11).mirror().addBox(0.0F, -6.0F, -2.0F, 0.0F, 6.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.0F, 16.0F, -2.0F, 0.4363F, 0.0F, 0.0F));
+		PartDefinition TailFin2 = TailFins.addOrReplaceChild("TailFin2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-4.0F, 0.0F, 0.0F, 5.0F, 0.0F, 8.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-0.5F, 1.025F, 0.0F, -0.8027F, -0.1841F, 0.1872F));
 
-		PartDefinition SmallFeeler1 = partdefinition.addOrReplaceChild("SmallFeeler1", CubeListBuilder.create().texOffs(21, 11).addBox(0.0F, -4.0F, -2.0F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.025F, 16.0F, -2.0F, 0.9163F, 0.0F, 0.0F));
+		PartDefinition Arm1 = partdefinition.addOrReplaceChild("Arm1", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -25.0F, -34.0F, 0.0F, 25.0F, 34.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.5F, 11.0F, -3.0F, -0.1309F, 0.0F, -0.9599F));
 
-		PartDefinition SmallFeeler2 = partdefinition.addOrReplaceChild("SmallFeeler2", CubeListBuilder.create().texOffs(21, 11).mirror().addBox(0.0F, -4.0F, -2.0F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.025F, 16.0F, -2.0F, 0.9163F, 0.0F, 0.0F));
+		PartDefinition Arm2 = partdefinition.addOrReplaceChild("Arm2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(3.0F, -25.0F, -34.0F, 0.0F, 25.0F, 34.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.5F, 11.0F, -3.0F, -0.1309F, 0.0F, 0.9599F));
 
-		PartDefinition Arm1 = partdefinition.addOrReplaceChild("Arm1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -13.0F, -24.0F, 0.0F, 18.0F, 25.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 21.0F, -3.5F, 0.0F, -0.8727F, 0.0F));
+		PartDefinition Leg1 = partdefinition.addOrReplaceChild("Leg1", CubeListBuilder.create().texOffs(0, 19).addBox(-14.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.5F, 15.0F, -3.0F, 0.0F, -0.3491F, 0.0F));
 
-		PartDefinition Arm2 = partdefinition.addOrReplaceChild("Arm2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, -13.0F, -24.0F, 0.0F, 18.0F, 25.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.5F, 21.0F, -3.5F, 0.0F, 0.8727F, 0.0F));
+		PartDefinition Leg2 = partdefinition.addOrReplaceChild("Leg2", CubeListBuilder.create().texOffs(0, 19).addBox(-14.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.5F, 15.0F, -1.5F, 0.0F, 0.1437F, 0.0F));
 
-		PartDefinition Leg1 = partdefinition.addOrReplaceChild("Leg1", CubeListBuilder.create().texOffs(26, 0).addBox(-1.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 20.0F, -1.0F, -0.3161F, 0.405F, -0.6771F));
+		PartDefinition Leg3 = partdefinition.addOrReplaceChild("Leg3", CubeListBuilder.create().texOffs(0, 19).addBox(-14.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-3.5F, 15.0F, 0.0F, 0.0F, 0.6438F, 0.0F));
 
-		PartDefinition Leg2 = partdefinition.addOrReplaceChild("Leg2", CubeListBuilder.create().texOffs(26, 0).addBox(-1.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 20.0F, -1.0F, 0.0175F, -0.0531F, -0.5765F));
+		PartDefinition Leg4 = partdefinition.addOrReplaceChild("Leg4", CubeListBuilder.create().texOffs(0, 19).mirror().addBox(-2.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(3.5F, 15.0F, -3.0F, 0.0F, 0.3491F, 0.0F));
 
-		PartDefinition Leg3 = partdefinition.addOrReplaceChild("Leg3", CubeListBuilder.create().texOffs(26, 0).addBox(-1.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.5F, 20.0F, -1.0F, 0.4601F, -0.6109F, -0.7384F));
+		PartDefinition Leg5 = partdefinition.addOrReplaceChild("Leg5", CubeListBuilder.create().texOffs(0, 19).mirror().addBox(-2.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(3.5F, 15.0F, -1.5F, 0.0F, -0.1437F, 0.0F));
 
-		PartDefinition Leg4 = partdefinition.addOrReplaceChild("Leg4", CubeListBuilder.create().texOffs(26, 0).mirror().addBox(-10.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.5F, 20.0F, -1.0F, -0.3161F, -0.405F, 0.6771F));
+		PartDefinition Leg6 = partdefinition.addOrReplaceChild("Leg6", CubeListBuilder.create().texOffs(0, 19).mirror().addBox(-2.0F, -3.0F, 0.0F, 16.0F, 13.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(3.5F, 15.0F, 0.0F, 0.0F, -0.6438F, 0.0F));
 
-		PartDefinition Leg5 = partdefinition.addOrReplaceChild("Leg5", CubeListBuilder.create().texOffs(26, 0).mirror().addBox(-10.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.5F, 20.0F, -1.0F, 0.0175F, 0.0531F, 0.5765F));
+		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(35, 7).addBox(-3.5F, -16.0F, -5.0F, 7.0F, 7.0F, 12.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 8).addBox(-1.5F, -16.0F, -10.0F, 3.0F, 3.0F, 5.0F, new CubeDeformation(0.0F))
+				.texOffs(32, 22).addBox(0.0F, -19.0F, -14.0F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition Leg6 = partdefinition.addOrReplaceChild("Leg6", CubeListBuilder.create().texOffs(26, 0).mirror().addBox(-10.0F, -1.0F, 0.0F, 11.0F, 10.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.5F, 20.0F, -1.0F, 0.4601F, 0.6109F, 0.7384F));
-
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 0).addBox(-2.5F, -8.0F, -4.0F, 5.0F, 5.0F, 8.0F, new CubeDeformation(0.01F))
-		.texOffs(42, 17).addBox(-1.0F, -8.0F, -8.0F, 2.0F, 2.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(0.0F, -10.0F, -10.0F, 0.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		float f = 1.0F;
 
+		limbSwingAmount = Mth.clamp(limbSwingAmount, -0.35F, 0.35F);
 		this.Leg3.zRot = -Mth.cos(limbSwing * 0.3F) * 1.2F * limbSwingAmount;
 		this.Leg4.zRot = -Mth.cos(limbSwing * 0.3F + (float) Math.PI) * 1.2F * limbSwingAmount;
 		this.Leg2.zRot = Mth.cos(limbSwing * 0.3F) * 1.2F * limbSwingAmount;
@@ -110,26 +96,15 @@ public class PrawnModel<T extends Prawn> extends EntityModel<T> {
 		this.Arm1.xRot = -Mth.cos(limbSwing * 0.5F) * 1.0F * limbSwingAmount;
 		this.Arm2.xRot = -Mth.cos(limbSwing * 0.5F + (float) Math.PI) * 1.0F * limbSwingAmount;
 
-		this.Jaw1.xRot = -f * 0.20F * Mth.sin(0.1F * ageInTicks);
-		this.Jaw2.xRot = f * 0.20F * Mth.sin(0.1F * ageInTicks);
-
-		this.BigFeeler1.xRot = -f * 0.20F * Mth.sin(0.15F * ageInTicks);
-		this.BigFeeler2.xRot = f * 0.20F * Mth.sin(0.15F * ageInTicks);
-		this.SmallFeeler1.xRot = -f * 0.30F * Mth.sin(0.15F * ageInTicks);
-		this.SmallFeeler2.xRot = f * 0.30F * Mth.sin(0.15F * ageInTicks);
-
+		this.Feeler1.xRot = -f * 0.20F * Mth.sin(0.15F * ageInTicks);
+		this.Feeler2.xRot = f * 0.20F * Mth.sin(0.15F * ageInTicks);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		Feeler1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		Feeler2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		TailFlap.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Jaw1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Jaw2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BigFeeler1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BigFeeler2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		SmallFeeler1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		SmallFeeler2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Arm1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Arm2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		Leg1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
