@@ -8,8 +8,8 @@ modId="unusualfishmod"
 version="1.2.0"
 displayName= "Unusual Fish Mod"
 #logoFile= "examplemod.png"
-credits= "Thanks to Birdbasket, rusty_coconut, NotBop, Crydigo, Omatypaty and Circle Fish for textures! Thanks to Nete2605 for usage of Tiamats! Thanks to HugoMage and cech12 for helping with code!"
-authors= "Peeko32213, codyhuh (maintainer), OmayPaty (most art)"
+#credits= ""
+authors= "codyhuh (maintainer), OmayPaty (most art), Peeko32213 (former author)"
 description='''
 A mod that adds a variety of new aquatic creatures, both useful and atheistic!
 '''

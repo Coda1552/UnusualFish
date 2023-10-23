@@ -41,12 +41,10 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import net.minecraft.util.RandomSource;
 
-//REMOVE TILT FROM
 public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
-
 
 	public EyelashFish(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
@@ -114,9 +112,6 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
 
-	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
-	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -205,10 +200,8 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 		this.entityData.set(FROM_BUCKET, p_203706_1_);
 	}
 
-
 	@Override
 	public void loadFromBucketTag(CompoundTag p_148832_) {
-
 	}
 
 	@Override
@@ -225,8 +218,7 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
         return new ItemStack(UnusualFishItems.EYELASH_FISH_BUCKET.get());
 	}
 
-
-	public static <T extends Mob> boolean canSpawn(EntityType<EyelashFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+	public static boolean canSpawn(EntityType<EyelashFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 
