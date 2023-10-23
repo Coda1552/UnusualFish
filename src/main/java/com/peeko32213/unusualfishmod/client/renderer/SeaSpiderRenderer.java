@@ -18,5 +18,4 @@ public class SeaSpiderRenderer extends MobRenderer<SeaSpider, SeaSpiderModel<Sea
 	public ResourceLocation getTextureLocation(SeaSpider entity) {
 		return TEXTURE;
 	}
-
 }
