@@ -2,7 +2,9 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.client.model.HatchetFishModel;
+import com.peeko32213.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import com.peeko32213.unusualfishmod.common.entity.ambient.HatchetFish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -14,15 +16,13 @@ public class HatchetfishRenderer extends MobRenderer<HatchetFish, HatchetFishMod
 
     public HatchetfishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new HatchetFishModel<>(renderManagerIn.bakeLayer(HatchetFishModel.LAYER_LOCATION)), 0.2F);
+        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/hatchetfish.png")));
     }
-
-
 
     @Override
     public ResourceLocation getTextureLocation(HatchetFish entity) {
         return TEXTURE;
     }
-
 
     protected void setupRotations(HatchetFish p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {
         super.setupRotations(p_116226_, p_116227_, p_116228_, p_116229_, p_116230_);

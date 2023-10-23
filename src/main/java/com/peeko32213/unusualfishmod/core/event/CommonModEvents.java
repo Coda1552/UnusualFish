@@ -67,7 +67,6 @@ public class CommonModEvents {
         e.register(UnusualFishEntities.CRIMSONSHELL_SQUID.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UnusualFishEntities.VOLT_ANGLER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UnusualFishEntities.TRIBBLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Tribble::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
-        e.register(UnusualFishEntities.SMELTER_SNAIL.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, SmelterSnail::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UnusualFishEntities.CORAL_SKRIMP.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, CoralSkrimp::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UnusualFishEntities.SQUODDLE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Squoddle::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UnusualFishEntities.GNASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Gnasher::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
@@ -136,7 +135,6 @@ public class CommonModEvents {
         event.put(UnusualFishEntities.CORAL_SKRIMP.get(), CoralSkrimp.createAttributes().build());
         event.put(UnusualFishEntities.CIRCUSFISH.get(), CircusFish.createAttributes().build());
         event.put(UnusualFishEntities.BLIZZARDFIN.get(), BlizzardfinTuna.createAttributes().build());
-        event.put(UnusualFishEntities.SMELTER_SNAIL.get(), SmelterSnail.createAttributes().build());
         event.put(UnusualFishEntities.EYELASH.get(), EyelashFish.createAttributes().build());
         event.put(UnusualFishEntities.SNOWFLAKE.get(), SnowflakeTailFish.createAttributes().build());
         event.put(UnusualFishEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleShark.createAttributes().build());

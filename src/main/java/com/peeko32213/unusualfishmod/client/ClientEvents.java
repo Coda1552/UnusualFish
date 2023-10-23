@@ -64,7 +64,6 @@ public final class ClientEvents {
 		event.registerLayerDefinition(CoralSkrimpModel.LAYER_LOCATION, CoralSkrimpModel::createBodyLayer);
 		event.registerLayerDefinition(CircusFishModel.LAYER_LOCATION, CircusFishModel::createBodyLayer);
 		event.registerLayerDefinition(BlizzardfinTunaModel.LAYER_LOCATION, BlizzardfinTunaModel::createBodyLayer);
-		event.registerLayerDefinition(SmelterSnailModel.LAYER_LOCATION, SmelterSnailModel::createBodyLayer);
 		event.registerLayerDefinition(EyelashFishModel.LAYER_LOCATION, EyelashFishModel::createBodyLayer);
 		event.registerLayerDefinition(SnowflakeTailFishModel.LAYER_LOCATION, SnowflakeTailFishModel::createBodyLayer);
 		event.registerLayerDefinition(TigerJungleSharkModel.LAYER_LOCATION, TigerJungleSharkModel::createBodyLayer);
@@ -123,7 +122,6 @@ public final class ClientEvents {
 		event.registerEntityRenderer(UnusualFishEntities.CORAL_SKRIMP.get(), CoralSkrimpRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.CIRCUSFISH.get(), CircusFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.BLIZZARDFIN.get(), BlizzardfinTunaRenderer::new);
-		event.registerEntityRenderer(UnusualFishEntities.SMELTER_SNAIL.get(), SmelterSnailRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.ABYSSAL_BLAST.get(), AbyssalBlastRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.EYELASH.get(), EyelashFishRenderer::new);
 		event.registerEntityRenderer(UnusualFishEntities.SNOWFLAKE.get(), SnowflakeTailFishRenderer::new);

@@ -2,7 +2,9 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.client.model.DemonHerringModel;
+import com.peeko32213.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.DemonHerring;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -14,9 +16,8 @@ public class DemonHerringRenderer extends MobRenderer<DemonHerring, DemonHerring
 
     public DemonHerringRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new DemonHerringModel<>(renderManagerIn.bakeLayer(DemonHerringModel.LAYER_LOCATION)), 0.2F);
+        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demonherring.png")));
     }
-
-
 
     @Override
     public ResourceLocation getTextureLocation(DemonHerring entity) {

@@ -2,7 +2,9 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.client.model.VoltAnglerModel;
+import com.peeko32213.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import com.peeko32213.unusualfishmod.common.entity.ambient.deep.VoltAngler;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -10,17 +12,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class VoltAnglerRenderer extends MobRenderer<VoltAngler, VoltAnglerModel<VoltAngler>> {
-    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/boltangler.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/voltangler.png");
 
     public VoltAnglerRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new VoltAnglerModel<>(renderManagerIn.bakeLayer(VoltAnglerModel.LAYER_LOCATION)), 0.2F);
+        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/voltangler.png")));
     }
 
     @Override
     public ResourceLocation getTextureLocation(VoltAngler entity) {
         return TEXTURE;
     }
-
 
     protected void setupRotations(VoltAngler p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {
         super.setupRotations(p_116226_, p_116227_, p_116228_, p_116229_, p_116230_);

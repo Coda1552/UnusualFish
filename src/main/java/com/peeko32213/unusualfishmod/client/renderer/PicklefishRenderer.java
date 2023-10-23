@@ -2,7 +2,9 @@ package com.peeko32213.unusualfishmod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.peeko32213.unusualfishmod.UnusualFishMod;
 import com.peeko32213.unusualfishmod.client.model.PicklefishModel;
+import com.peeko32213.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import com.peeko32213.unusualfishmod.common.entity.ambient.small.Picklefish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -14,6 +16,7 @@ public class PicklefishRenderer extends MobRenderer<Picklefish, PicklefishModel<
 
     public PicklefishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new PicklefishModel<>(renderManagerIn.bakeLayer(PicklefishModel.LAYER_LOCATION)), 0.2F);
+        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/picklefish.png")));
     }
 
     @Override
