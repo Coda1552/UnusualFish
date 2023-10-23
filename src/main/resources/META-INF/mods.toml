@@ -1,11 +1,10 @@
-
 modLoader="javafml"
 loaderVersion="[40,)"
 license="MIT"
 
 [[mods]] 
 modId="unusualfishmod" 
-version="1.2.0"
+version="${file.jarVersion}"
 displayName= "Unusual Fish Mod"
 #logoFile= "examplemod.png"
 #credits= ""

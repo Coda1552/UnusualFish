@@ -1,13 +1,10 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.predator;
 
-
-
-import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -26,13 +23,11 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
-
-import net.minecraft.util.RandomSource;
 
 public class TigerJungleShark extends WaterAnimal {
     protected int attackCooldown = 0;
     private int attackAnimationTick;
+
     public TigerJungleShark(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
@@ -89,13 +84,6 @@ public class TigerJungleShark extends WaterAnimal {
         if (this.attackCooldown > 0) {
             this.attackCooldown--;
         }
-
-        if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-        }
-
     }
 
     public void aiStep() {
@@ -106,7 +94,6 @@ public class TigerJungleShark extends WaterAnimal {
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
 
-        super.aiStep();
         if (this.attackAnimationTick > 0) {
             --this.attackAnimationTick;
         }

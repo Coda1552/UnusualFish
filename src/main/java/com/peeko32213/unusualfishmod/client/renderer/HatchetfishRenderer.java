@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class HatchetfishRenderer extends MobRenderer<HatchetFish, HatchetFishModel<HatchetFish>> {
-    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/hatchetfish2.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/hatchetfish.png");
 
     public HatchetfishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new HatchetFishModel<>(renderManagerIn.bakeLayer(HatchetFishModel.LAYER_LOCATION)), 0.2F);

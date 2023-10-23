@@ -14,7 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class CrimsonshellSquidRenderer extends MobRenderer<CrimsonshellSquid, CrimsonshellSquidModel<CrimsonshellSquid>> {
-    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/crimsonshellsquid2.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation("unusualfishmod:textures/entity/crimsonshellsquid.png");
 
     public CrimsonshellSquidRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new CrimsonshellSquidModel<>(renderManagerIn.bakeLayer(CrimsonshellSquidModel.LAYER_LOCATION)), 0.2F);
