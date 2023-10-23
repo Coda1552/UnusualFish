@@ -25,8 +25,8 @@ public class TigerJungleSharkModel<T extends TigerJungleShark> extends EntityMod
 	public TigerJungleSharkModel(ModelPart base) {
 		this.root = base.getChild("root");
 		this.body = root.getChild("body");
-		this.tail = root.getChild("tail");
-		this.head = root.getChild("head");
+		this.tail = body.getChild("tail");
+		this.head = body.getChild("head");
 		this.l_fin = body.getChild("l_fin");
 		this.r_fin = body.getChild("r_fin");
 		this.jaw = head.getChild("jaw");
@@ -37,9 +37,6 @@ public class TigerJungleSharkModel<T extends TigerJungleShark> extends EntityMod
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, 0.0F));
-
-		PartDefinition tail = root.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 33).addBox(0.0F, -5.0F, 9.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 19).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 3.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 5.0F));
 
 		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -2.0F, 0.0F, 6.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, -4.0F));
 
@@ -53,8 +50,11 @@ public class TigerJungleSharkModel<T extends TigerJungleShark> extends EntityMod
 
 		PartDefinition cube_r3 = r_fin.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(27, 29).addBox(-6.0F, 1.0F, -1.0F, 6.0F, 0.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.2618F, -0.2618F));
 
-		PartDefinition head = root.addOrReplaceChild("head", CubeListBuilder.create().texOffs(9, 33).addBox(-1.0F, 1.0F, -5.0F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
-				.texOffs(17, 19).addBox(-2.0F, -2.0F, -6.0F, 4.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, -4.0F));
+		PartDefinition tail = body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 33).addBox(0.0F, -5.0F, 9.0F, 0.0F, 11.0F, 3.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 19).addBox(-1.5F, -1.0F, 0.0F, 3.0F, 3.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 9.0F));
+
+		PartDefinition head = body.addOrReplaceChild("head", CubeListBuilder.create().texOffs(9, 33).addBox(-1.0F, 1.0F, -5.0F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
+				.texOffs(17, 19).addBox(-2.0F, -2.0F, -6.0F, 4.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
 		PartDefinition jaw = head.addOrReplaceChild("jaw", CubeListBuilder.create().texOffs(32, 13).addBox(-1.0F, -1.0F, -5.0F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
 				.texOffs(22, 0).addBox(-2.0F, 0.0F, -6.0F, 4.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.0F, 0.0F));
