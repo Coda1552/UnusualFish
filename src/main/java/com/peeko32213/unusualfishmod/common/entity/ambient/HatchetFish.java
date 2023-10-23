@@ -37,7 +37,6 @@ import net.minecraft.world.phys.Vec3;
 
 import net.minecraft.util.RandomSource;
 
-//REMOVE TILT FROM
 public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(HatchetFish.class, EntityDataSerializers.BOOLEAN);
 	private boolean isSchool = true;
@@ -72,22 +71,6 @@ public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 		});
 	}
 
-	//Squid Games
-
-
-	public void tick() {
-		super.tick();
-
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
-	}
-
-
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -102,8 +85,6 @@ public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 	protected PathNavigation createNavigation(Level p_27480_) {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
-
-	//Squid Games
 
 	public int getMaxSpawnClusterSize() {
 		return 5;

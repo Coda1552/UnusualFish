@@ -1,8 +1,5 @@
 package com.peeko32213.unusualfishmod.common.entity.ambient.small;
 
-
-
-import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
@@ -14,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -41,12 +39,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-import net.minecraft.util.RandomSource;
-
 public class Squoddle extends WaterAnimal implements Bucketable{
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Squoddle.class, EntityDataSerializers.BOOLEAN);
 	protected int attackCooldown = 0;
-
 
 	public Squoddle(EntityType<? extends Squoddle> type, Level world) {
 		super(type, world);
@@ -97,10 +92,6 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 
 	@Override
 	public void handleAirSupply(int p_209207_1_) {
-	}
-
-	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {

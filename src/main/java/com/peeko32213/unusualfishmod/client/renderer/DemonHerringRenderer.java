@@ -24,7 +24,6 @@ public class DemonHerringRenderer extends MobRenderer<DemonHerring, DemonHerring
         return TEXTURE;
     }
 
-
     protected void setupRotations(DemonHerring p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {
         super.setupRotations(p_116226_, p_116227_, p_116228_, p_116229_, p_116230_);
         float f = 4.3F * Mth.sin(0.6F * p_116228_);

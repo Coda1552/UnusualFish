@@ -1,7 +1,4 @@
-package com.peeko32213.unusualfishmod.client.model;// Made with Blockbench 4.1.5
-// Exported for Minecraft version 1.17 with Mojang mappings
-// Paste this class into your mod and generate all required imports
-
+package com.peeko32213.unusualfishmod.client.model;
 
 import com.google.common.collect.ImmutableList;
 import com.peeko32213.unusualfishmod.UnusualFishMod;

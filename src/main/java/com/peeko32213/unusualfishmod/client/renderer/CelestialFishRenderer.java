@@ -17,8 +17,6 @@ public class CelestialFishRenderer extends MobRenderer<CelestialFish, CelestialF
         super(renderManagerIn, new CelestialFishModel<>(renderManagerIn.bakeLayer(CelestialFishModel.LAYER_LOCATION)), 0.2F);
     }
 
-
-
     @Override
     public ResourceLocation getTextureLocation(CelestialFish entity) {
         return TEXTURE;
@@ -38,5 +36,4 @@ public class CelestialFishRenderer extends MobRenderer<CelestialFish, CelestialF
     protected int getBlockLightLevel(CelestialFish entity, BlockPos partialTicks) {
         return 15;
     }
-
 }

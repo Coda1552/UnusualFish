@@ -17,7 +17,6 @@ public class UnusualFishSounds {
     public static final RegistryObject<SoundEvent> LARGE_FISH = createSoundEvent("large_fish");
     public static final RegistryObject<SoundEvent> MEDIUM_FISH = createSoundEvent("medium_fish");
     public static final RegistryObject<SoundEvent> EVIL_CHATTERING = createSoundEvent("evil_chattering");
-    public static final RegistryObject<SoundEvent> EVIL_SCUTTLING = createSoundEvent("evil_scuttling");
     public static final RegistryObject<SoundEvent> SMALL_ENEMY = createSoundEvent("small_enemy");
     public static final RegistryObject<SoundEvent> SMALL_FISH = createSoundEvent("small_fish");
     public static final RegistryObject<SoundEvent> ABYSSAL_BLAST = createSoundEvent("abyssal_blast");

@@ -38,7 +38,6 @@ import net.minecraft.world.phys.Vec3;
 
 import net.minecraft.util.RandomSource;
 
-//REMOVE TILT FROM
 public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(DualityDamselfish.class, EntityDataSerializers.BOOLEAN);
 	private boolean isSchool = true;
@@ -72,22 +71,6 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 		});
 	}
 
-	//Squid Games
-
-
-	public void tick() {
-		super.tick();
-
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
-	}
-
-
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -103,8 +86,6 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
 
-	//Squid Games
-
 	public int getMaxSpawnClusterSize() {
 		return 1;
 	}
@@ -117,9 +98,6 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 		return 2;
 	}
 
-	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
-	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

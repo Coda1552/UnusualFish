@@ -16,8 +16,6 @@ public class CircusFishRenderer extends MobRenderer<CircusFish, CircusFishModel<
         super(renderManagerIn, new CircusFishModel<>(renderManagerIn.bakeLayer(CircusFishModel.LAYER_LOCATION)), 0.2F);
     }
 
-
-
     @Override
     public ResourceLocation getTextureLocation(CircusFish entity) {
         return TEXTURE;
