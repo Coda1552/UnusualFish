@@ -52,7 +52,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -93,7 +93,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 		return SoundEvents.COD_FLOP;
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<BlizzardfinTuna> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+	public static boolean canSpawn(EntityType<BlizzardfinTuna> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 }
