@@ -33,15 +33,14 @@ import net.minecraft.util.RandomSource;
 import java.util.function.Predicate;
 
 public class Tribble extends WaterAnimal {
+
     public Tribble(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new Tribble.MoveHelperController(this);
         this.maxUpStep = 1.0f;
     }
 
-    private static final Predicate<LivingEntity> INJURED_PREDICATE = (mob) -> {
-        return mob.getHealth() <= mob.getMaxHealth() / 2D;
-    };
+    private static final Predicate<LivingEntity> INJURED_PREDICATE = (mob) -> mob.getHealth() <= mob.getMaxHealth() / 2D;
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.4F).add(Attributes.ARMOR, 10.0D).add(Attributes.ATTACK_DAMAGE, 2.0D);
@@ -67,6 +66,7 @@ public class Tribble extends WaterAnimal {
     protected SoundEvent getAmbientSound() {
         return UnusualFishSounds.SMALL_ENEMY.get();
     }
+
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }
@@ -77,6 +77,21 @@ public class Tribble extends WaterAnimal {
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
         this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0.5F;
+    }
+
+    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
+    }
+
+    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
+        float time = iServerWorld.getTimeOfDay(1.0F);
+        int light = iServerWorld.getMaxLocalRawBrightness(pos);
+        return light <= 4 && time > 0.27F && time <= 0.8F;
     }
 
     static class MoveHelperController extends MoveControl {
@@ -108,15 +123,5 @@ public class Tribble extends WaterAnimal {
                 this.spider.setSpeed(0.0F);
             }
         }
-    }
-
-    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
-    }
-
-    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-        float time = iServerWorld.getTimeOfDay(1.0F);
-        int light = iServerWorld.getMaxLocalRawBrightness(pos);
-        return light <= 4 && time > 0.27F && time <= 0.8F;
     }
 }

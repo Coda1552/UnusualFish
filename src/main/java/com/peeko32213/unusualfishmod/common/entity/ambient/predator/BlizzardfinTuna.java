@@ -32,7 +32,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 
 	public BlizzardfinTuna(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.5F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
 	}
 
@@ -47,30 +47,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
-	}
-
-	public void tick() {
-		super.tick();
-
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
+		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1));
 	}
 
 	public void aiStep() {
@@ -84,12 +61,10 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 		super.aiStep();
 	}
 
-
 	public int getMaxSpawnClusterSize() {
 		return 4;
 	}
 
-	// todo- test
 	public boolean isMaxGroupSizeReached(int p_30035_) {
 		return !this.isSchool;
 	}

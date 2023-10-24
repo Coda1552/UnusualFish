@@ -84,59 +84,6 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
         });
     }
 
-    //Squid Games
-
-
-    public void tick() {
-        super.tick();
-
-        if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
-
-        }
-
-    }
-
-    static class MoveHelperController extends MoveControl {
-        private final CrimsonshellSquid fish;
-
-        MoveHelperController(CrimsonshellSquid fish) {
-            super(fish);
-            this.fish = fish;
-        }
-
-        public void tick() {
-            if (this.fish.isEyeInFluid(FluidTags.WATER)) {
-                this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-            }
-
-            if (this.operation == Operation.MOVE_TO && !this.fish.getNavigation().isDone()) {
-                float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                this.fish.setSpeed(Mth.lerp(0.125F, this.fish.getSpeed(), f));
-                double d0 = this.wantedX - this.fish.getX();
-                double d1 = this.wantedY - this.fish.getY();
-                double d2 = this.wantedZ - this.fish.getZ();
-                if (d1 != 0.0D) {
-                    double d3 = (double) Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
-                    this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
-                }
-
-                if (d0 != 0.0D || d2 != 0.0D) {
-                    float f1 = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-                    this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
-                    this.fish.yBodyRot = this.fish.yRot;
-                }
-
-            } else {
-                this.fish.setSpeed(0.0F);
-            }
-        }
-
-    }
-
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double) 0.4F, (double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -151,19 +98,17 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
     protected PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
-    //Squid Games
-
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.DEEP_WATER.get();
+        return SoundEvents.SQUID_AMBIENT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.COD_DEATH;
+        return SoundEvents.SQUID_DEATH;
     }
 
     protected SoundEvent getHurtSound(DamageSource p_28281_) {
-        return SoundEvents.COD_HURT;
+        return SoundEvents.SQUID_HURT;
     }
 
     protected SoundEvent getFlopSound() {
@@ -218,12 +163,11 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
 
     @Override
     public void loadFromBucketTag(CompoundTag p_148832_) {
-
     }
 
     @Override
     public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_EMPTY_FISH;
+        return SoundEvents.BUCKET_FILL_FISH;
     }
 
     protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
@@ -259,6 +203,43 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
 
     public void setPersistentAngerTarget(@Nullable UUID p_34444_) {
         this.persistentAngerTarget = p_34444_;
+    }
+
+    static class MoveHelperController extends MoveControl {
+        private final CrimsonshellSquid fish;
+
+        MoveHelperController(CrimsonshellSquid fish) {
+            super(fish);
+            this.fish = fish;
+        }
+
+        public void tick() {
+            if (this.fish.isEyeInFluid(FluidTags.WATER)) {
+                this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
+            }
+
+            if (this.operation == Operation.MOVE_TO && !this.fish.getNavigation().isDone()) {
+                float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                this.fish.setSpeed(Mth.lerp(0.125F, this.fish.getSpeed(), f));
+                double d0 = this.wantedX - this.fish.getX();
+                double d1 = this.wantedY - this.fish.getY();
+                double d2 = this.wantedZ - this.fish.getZ();
+                if (d1 != 0.0D) {
+                    double d3 = (double) Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
+                    this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
+                }
+
+                if (d0 != 0.0D || d2 != 0.0D) {
+                    float f1 = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
+                    this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
+                    this.fish.yBodyRot = this.fish.yRot;
+                }
+
+            } else {
+                this.fish.setSpeed(0.0F);
+            }
+        }
+
     }
 }
 

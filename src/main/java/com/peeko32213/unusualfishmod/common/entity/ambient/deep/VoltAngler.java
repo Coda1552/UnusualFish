@@ -81,25 +81,9 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         });
     }
 
-    //Squid Games
-
-
-    public void tick() {
-        super.tick();
-
-        if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
-
-        }
-
-    }
-
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double) 0.4F, (double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
             this.onGround = false;
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -111,8 +95,6 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
     protected PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
-    //Squid Games
-
 
     protected SoundEvent getAmbientSound() {
         return UnusualFishSounds.DEEP_WATER.get();
@@ -128,6 +110,11 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
 
     protected SoundEvent getFlopSound() {
         return SoundEvents.COD_FLOP;
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 0.5F;
     }
 
     @Override
