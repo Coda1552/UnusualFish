@@ -7,6 +7,7 @@ import com.peeko32213.unusualfishmod.core.init.UnusualFishEntities;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishItems;
 import com.peeko32213.unusualfishmod.core.init.UnusualFishSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -38,10 +39,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DiodeBlock;
+import net.minecraft.world.level.block.PoweredBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.redstone.Redstone;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import net.minecraft.util.RandomSource;
+
+import java.util.List;
 import java.util.UUID;
 
 public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
@@ -90,6 +98,31 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         }
 
         super.aiStep();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+        int radius = 3;
+
+        for (Direction dir : Direction.values()) {
+            for (int x = -radius; x < radius; x++) {
+                for (int y = -radius; y < radius; y++) {
+                    for (int z = -radius; z < radius; z++) {
+                        mutablePos.set(position().x, position().y, position().z).offset(x, y, z);
+                        BlockState state = this.level.getBlockState(mutablePos);
+                        level.updateNeighborsAt(mutablePos, Blocks.REDSTONE_BLOCK);
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static double distance(double x, double y, double z, double xRadius, double yRadius, double zRadius) {
+        return Mth.square(x / (xRadius)) + Mth.square(y / (yRadius)) + Mth.square(z / (zRadius));
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {

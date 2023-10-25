@@ -63,11 +63,14 @@ public class VoltAnglerModel<T extends VoltAngler> extends EntityModel<T> {
 		this.Fin1.xRot = -f * 0.30F * Mth.sin(0.1F * ageInTicks);
 		this.Fin2.xRot = -f * 0.30F * Mth.sin(0.1F * ageInTicks);
 
-		this.Body.xRot = headPitch * ((float)Math.PI / 180F);
-		this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
-		if (entity.getDeltaMovement().horizontalDistanceSqr() > 1.0E-7D) {
+		if (entity.isInWater()) {
+			this.Body.xRot = headPitch * ((float)Math.PI / 180F);
+			this.Body.yRot = netHeadYaw * ((float)Math.PI / 180F);
 		}
-
+		else {
+			this.Body.xRot = 0.0F;
+			this.Body.yRot = 0.0F;
+		}
 	}
 
 	@Override
