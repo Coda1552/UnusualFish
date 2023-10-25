@@ -75,14 +75,10 @@ public class SeaPancake extends WaterAnimal {
 		if (this.attackCooldown > 0) {
 			this.attackCooldown--;
 		}
+	}
 
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
+	public boolean requiresCustomPersistence() {
+		return true;
 	}
 
 	public void aiStep() {
@@ -100,7 +96,6 @@ public class SeaPancake extends WaterAnimal {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
 
-
 	protected SoundEvent getAmbientSound() {
 		return UnusualFishSounds.LARGE_FISH.get();
 	}
@@ -115,7 +110,6 @@ public class SeaPancake extends WaterAnimal {
 	public SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
 	}
-
 
 	@Override
 	public void playerTouch(Player entity) {

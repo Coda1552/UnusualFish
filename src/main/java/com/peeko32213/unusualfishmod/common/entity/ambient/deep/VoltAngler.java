@@ -100,27 +100,6 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         super.aiStep();
     }
 
-    @Override
-    public void tick() {
-        super.tick();
-
-        BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-        int radius = 3;
-
-        for (Direction dir : Direction.values()) {
-            for (int x = -radius; x < radius; x++) {
-                for (int y = -radius; y < radius; y++) {
-                    for (int z = -radius; z < radius; z++) {
-                        mutablePos.set(position().x, position().y, position().z).offset(x, y, z);
-                        BlockState state = this.level.getBlockState(mutablePos);
-                        level.updateNeighborsAt(mutablePos, Blocks.REDSTONE_BLOCK);
-                    }
-                }
-            }
-        }
-
-    }
-
     public static double distance(double x, double y, double z, double xRadius, double yRadius, double zRadius) {
         return Mth.square(x / (xRadius)) + Mth.square(y / (yRadius)) + Mth.square(z / (zRadius));
     }
