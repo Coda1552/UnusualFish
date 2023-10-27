@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -131,7 +131,7 @@ public class BrickSnail extends WaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.BRICK_SNAIL_BUCKET.get());
+        return new ItemStack(UFItems.BRICK_SNAIL_BUCKET.get());
     }
 
     static class MoveHelperController extends MoveControl {

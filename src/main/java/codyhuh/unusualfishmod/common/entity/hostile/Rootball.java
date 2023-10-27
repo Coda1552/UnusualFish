@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.hostile;
 
 import codyhuh.unusualfishmod.common.entity.ai.CustomSwellGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -168,7 +168,7 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_ENEMY.get();
+        return UFSounds.SMALL_ENEMY.get();
     }
 
     public boolean doHurtTarget(Entity p_32281_) {
@@ -256,7 +256,7 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.ROOTBALL_BUCKET.get());
+        return new ItemStack(UFItems.ROOTBALL_BUCKET.get());
     }
 
     @Override

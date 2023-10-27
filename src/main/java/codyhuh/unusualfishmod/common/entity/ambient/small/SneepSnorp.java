@@ -3,7 +3,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -169,7 +169,7 @@ public class SneepSnorp extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.SNEEPSNORP_BUCKET.get());
+		return new ItemStack(UFItems.SNEEPSNORP_BUCKET.get());
 	}
 
 

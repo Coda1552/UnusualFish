@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.hostile;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -50,7 +50,7 @@ public class Prawn extends Monster {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.EVIL_CHATTERING.get();
+        return UFSounds.EVIL_CHATTERING.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -62,7 +62,7 @@ public class Prawn extends Monster {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+        this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public static boolean canSpawn(EntityType<Prawn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {

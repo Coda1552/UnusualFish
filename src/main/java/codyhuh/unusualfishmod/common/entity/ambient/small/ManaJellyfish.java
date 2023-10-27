@@ -2,8 +2,8 @@ package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -115,7 +115,7 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_FISH.get();
+        return UFSounds.SMALL_FISH.get();
     }
 
     @Override
@@ -180,7 +180,7 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.WIZARD_JELLY_BUCKET.get());
+        return new ItemStack(UFItems.WIZARD_JELLY_BUCKET.get());
     }
 
     public SoundEvent getFlopSound() {

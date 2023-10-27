@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.land;
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -355,7 +355,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.SKIPPER_BUCKET.get());
+        return new ItemStack(UFItems.SKIPPER_BUCKET.get());
     }
 
     protected SoundEvent getJumpSound() {
@@ -363,7 +363,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_FISH.get();
+        return UFSounds.SMALL_FISH.get();
     }
 
 

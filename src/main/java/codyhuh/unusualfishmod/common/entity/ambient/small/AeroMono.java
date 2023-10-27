@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -157,7 +157,7 @@ public class AeroMono extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.AERO_MONO_BUCKET.get());
+		return new ItemStack(UFItems.AERO_MONO_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<AeroMono> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

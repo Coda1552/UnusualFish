@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -64,7 +64,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.CRAB_CHATTER.get();
+		return UFSounds.CRAB_CHATTER.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -75,7 +75,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+		this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.DEEP_CRAWLER_BUCKET.get());
+		return new ItemStack(UFItems.DEEP_CRAWLER_BUCKET.get());
 	}
 
 

@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -167,7 +167,7 @@ public class BarkAngelfish extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.BARK_ANGELFISH_BUCKET.get());
+		return new ItemStack(UFItems.BARK_ANGELFISH_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<BarkAngelfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

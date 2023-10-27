@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.cave;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -109,7 +109,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
+		return UFSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -186,7 +186,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.BLIND_SAILFIN_BUCKET.get());
+		return new ItemStack(UFItems.BLIND_SAILFIN_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {

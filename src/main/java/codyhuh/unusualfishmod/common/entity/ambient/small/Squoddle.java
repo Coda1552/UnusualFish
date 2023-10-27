@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ambient.small;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -103,7 +103,7 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 	}
 
 	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+		this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.SQUODDLE_BUCKET.get());
+		return new ItemStack(UFItems.SQUODDLE_BUCKET.get());
 	}
 
 	static class MoveHelperController extends MoveControl {

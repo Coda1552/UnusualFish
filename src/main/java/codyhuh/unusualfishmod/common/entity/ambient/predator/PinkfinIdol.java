@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ambient.predator;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -88,7 +88,7 @@ public class PinkfinIdol extends WaterAnimal {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.DEEP_WATER.get();
+		return UFSounds.DEEP_WATER.get();
 	}
 
 	public SoundEvent getDeathSound() {

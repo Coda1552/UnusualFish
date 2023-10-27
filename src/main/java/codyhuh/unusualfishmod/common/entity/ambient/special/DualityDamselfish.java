@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.special;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -167,7 +167,7 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.DUALITY_DAMSELFISH_BUCKET.get());
+		return new ItemStack(UFItems.DUALITY_DAMSELFISH_BUCKET.get());
 	}
 
 

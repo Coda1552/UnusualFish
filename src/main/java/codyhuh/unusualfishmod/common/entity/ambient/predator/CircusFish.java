@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.predator;
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -66,7 +66,7 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
+		return UFSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -135,7 +135,7 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.CIRCUS_FISH_BUCKET.get());
+		return new ItemStack(UFItems.CIRCUS_FISH_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<CircusFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

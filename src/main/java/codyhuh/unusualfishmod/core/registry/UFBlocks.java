@@ -29,7 +29,7 @@ public final class UFBlocks {
     }
 
     private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
-     CreativeModeTab tab) { return UnusualFishItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));}
+     CreativeModeTab tab) { return UFItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));}
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

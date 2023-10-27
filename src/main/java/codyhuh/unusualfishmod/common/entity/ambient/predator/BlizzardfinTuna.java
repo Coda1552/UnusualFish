@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ambient.predator;
 
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -75,7 +75,7 @@ public class BlizzardfinTuna extends SchoolingWaterAnimal {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.MEDIUM_FISH.get();
+		return UFSounds.MEDIUM_FISH.get();
 	}
 
 	public SoundEvent getDeathSound() {

@@ -18,18 +18,18 @@ public class UnusualFishMod {
 	public static final CreativeModeTab TAB = new CreativeModeTab(MOD_ID) {
 		@Override
 		public ItemStack makeIcon() {
-			return UnusualFishItems.RAW_RHINO_TETRA.get().getDefaultInstance();
+			return UFItems.RAW_RHINO_TETRA.get().getDefaultInstance();
 		}
 	};
 
 	public UnusualFishMod() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		UnusualFishItems.ITEMS.register(bus);
+		UFItems.ITEMS.register(bus);
 		UFEntities.ENTITIES.register(bus);
 		UFBlocks.BLOCKS.register(bus);
 		UFEnchantments.ENCHANTMENTS.register(bus);
-		UnusualFishSounds.SOUND_EVENTS.register(bus);
+		UFSounds.SOUND_EVENTS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.predator;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 
 import net.minecraft.core.BlockPos;
@@ -103,7 +103,7 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
+		return UFSounds.SMALL_FISH.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -180,7 +180,7 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.CLOWNTHORN_SHARK_BUCKET.get());
+		return new ItemStack(UFItems.CLOWNTHORN_SHARK_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<ClownthornShark> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

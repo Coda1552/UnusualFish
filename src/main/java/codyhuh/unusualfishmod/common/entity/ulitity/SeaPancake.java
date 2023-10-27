@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 
 import net.minecraft.core.BlockPos;
@@ -93,7 +93,7 @@ public class SeaPancake extends WaterAnimal {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.LARGE_FISH.get();
+		return UFSounds.LARGE_FISH.get();
 	}
 	public SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;

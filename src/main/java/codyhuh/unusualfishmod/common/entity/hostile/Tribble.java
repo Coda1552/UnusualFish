@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.hostile;
 
 import codyhuh.unusualfishmod.common.entity.ai.CustomMeleeAttackGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -62,7 +62,7 @@ public class Tribble extends WaterAnimal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.SMALL_ENEMY.get();
+        return UFSounds.SMALL_ENEMY.get();
     }
 
     protected SoundEvent getDeathSound() {
@@ -74,7 +74,7 @@ public class Tribble extends WaterAnimal {
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+        this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     @Override

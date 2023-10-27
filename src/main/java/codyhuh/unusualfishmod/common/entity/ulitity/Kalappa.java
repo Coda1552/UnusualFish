@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
@@ -61,11 +61,11 @@ public class Kalappa extends PathfinderMob  {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.CRAB_CHATTER.get();
+        return UFSounds.CRAB_CHATTER.get();
     }
 
     protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-        this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+        this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
     public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {

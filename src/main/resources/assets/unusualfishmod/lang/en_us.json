@@ -1,4 +1,6 @@
 {
+	"itemGroup.unusualfishmod": "Unusual Fish",
+
 	"item.unusualfishmod.raw_mossthorn": "Raw Mossthorn Patty",
 	"item.unusualfishmod.raw_ripper": "Raw Ripper",
 	"item.unusualfishmod.raw_aero_mono": "Raw Aero Mono",
@@ -29,16 +31,15 @@
 
 	"block.unusualfishmod.copper_spotlight": "Copper Spotlight",
 
-	"itemGroup.unusualfishmod": "Unusual Fish",
-
 	"item.unusualfishmod.glo_gel": "Glow Gel",
 	"item.unusualfishmod.gnasher_organ": "Gnasher Jewel",
 	"item.unusualfishmod.tendril": "Shocking Tendril",
 	"item.unusualfishmod.deep_chitin": "Deep Chitin",
+	"item.unusualfishmod.ripper_tooth": "Ripper Tooth",
 
 	"item.unusualfishmod.depth_scythe": "Depth Scythe",
 	"item.unusualfishmod.abyssal_fury": "Abyssal Fury",
-	"item.unusualfishmod.tendril_whip": "Tendril Whip",
+	"item.unusualfishmod.ripsaw": "Ripsaw",
 
 	"item.unusualfishmod.aero_mono_spawn_egg": "Aero Mono Spawn Egg",
 	"item.unusualfishmod.pinkfin_spawn_egg": "Pinkfin Idol Spawn Egg",

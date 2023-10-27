@@ -1,9 +1,9 @@
 package codyhuh.unusualfishmod.common.item;
 
 import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import com.mojang.math.Vector3f;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.function.Predicate;
 
 public class AbyssalFuryItem extends Item {
-    public static final Predicate<ItemStack> GLOGEL = (stack) -> stack.is(UnusualFishItems.GLO_GEL.get());
+    public static final Predicate<ItemStack> GLOGEL = (stack) -> stack.is(UFItems.GLO_GEL.get());
 
     public AbyssalFuryItem(Item.Properties properties) {
         super(properties);
@@ -86,7 +86,7 @@ public class AbyssalFuryItem extends Item {
                 Vec3 vector3d = livingEntityIn.getViewVector(1.0F);
                 Vector3f vector3f = new Vector3f(vector3d);
                 RandomSource rand = livingEntityIn.getRandom();
-                livingEntityIn.playSound(UnusualFishSounds.ABYSSAL_BLAST.get(),1.0F, 0.5F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
+                livingEntityIn.playSound(UFSounds.ABYSSAL_BLAST.get(),1.0F, 0.5F + (rand.nextFloat() - rand.nextFloat()) * 0.2F);
                 blast.shoot(vector3f.x(), vector3f.y(), vector3f.z(), 0.6F, 1);
                 if (!worldIn.isClientSide) {
                     worldIn.addFreshEntity(blast);

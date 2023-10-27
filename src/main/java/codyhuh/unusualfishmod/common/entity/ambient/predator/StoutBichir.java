@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ambient.predator;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.common.entity.ambient.small.ManaJellyfish;
 
 import net.minecraft.core.BlockPos;
@@ -91,7 +91,7 @@ public class StoutBichir extends WaterAnimal {
 
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.MEDIUM_FISH.get();
+        return UFSounds.MEDIUM_FISH.get();
     }
 
     public SoundEvent getDeathSound() {

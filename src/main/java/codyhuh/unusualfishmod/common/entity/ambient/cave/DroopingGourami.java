@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ambient.cave;
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -152,7 +152,7 @@ public class DroopingGourami extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.DROOPING_GOURAMI_BUCKET.get());
+		return new ItemStack(UFItems.DROOPING_GOURAMI_BUCKET.get());
 	}
 
 

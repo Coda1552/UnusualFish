@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 
 import net.minecraft.core.BlockPos;
@@ -100,7 +100,7 @@ public class RoughbackGuitarfish extends WaterAnimal {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
+		return UFSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;

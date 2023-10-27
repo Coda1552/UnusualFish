@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -102,7 +102,7 @@ public class TripleTwirlPleco extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_FISH.get();
+		return UFSounds.SMALL_FISH.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -178,7 +178,7 @@ public class TripleTwirlPleco extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.TRIPLE_TWIRL_PLECO_BUCKET.get());
+		return new ItemStack(UFItems.TRIPLE_TWIRL_PLECO_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<TripleTwirlPleco> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

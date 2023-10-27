@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.common.entity.ambient.small.ManaJellyfish;
 
 import net.minecraft.core.BlockPos;
@@ -93,7 +93,7 @@ public class CelestialFish extends WaterAnimal {
 
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.LARGE_FISH.get();
+        return UFSounds.LARGE_FISH.get();
     }
     public SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;

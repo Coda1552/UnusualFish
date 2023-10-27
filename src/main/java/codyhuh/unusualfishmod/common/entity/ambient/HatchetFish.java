@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -171,7 +171,7 @@ public class HatchetFish extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.HATCHET_FISH_BUCKET.get());
+		return new ItemStack(UFItems.HATCHET_FISH_BUCKET.get());
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<HatchetFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {

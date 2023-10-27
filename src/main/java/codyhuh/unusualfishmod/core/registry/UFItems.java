@@ -1,6 +1,7 @@
 package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
+import codyhuh.unusualfishmod.common.item.RipsawItem;
 import codyhuh.unusualfishmod.common.item.UFFishBucket;
 import codyhuh.unusualfishmod.common.item.AbyssalFuryItem;
 import codyhuh.unusualfishmod.common.item.DepthScytheItem;
@@ -13,7 +14,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public final class UnusualFishItems {
+public final class UFItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, UnusualFishMod.MOD_ID);
 
 	// Raw Foods
@@ -51,10 +52,12 @@ public final class UnusualFishItems {
 	public static final RegistryObject<Item> GLO_GEL = ITEMS.register("glo_gel", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> SHOCKCAT_TENDRIL = ITEMS.register("tendril", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> DEEP_CHITIN = ITEMS.register("deep_chitin", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RIPPER_TOOTH = ITEMS.register("ripper_tooth", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 
 	// Gear
 	public static final RegistryObject<Item> DEPTH_SCYTHE = ITEMS.register("depth_scythe", () -> new DepthScytheItem(Tiers.DIAMOND, 2, -3.4F, new Item.Properties().tab(UnusualFishMod.TAB).durability(600)));
 	public static final RegistryObject<Item> ABYSSAL_FURY = ITEMS.register("abyssal_fury", () -> new AbyssalFuryItem(new Item.Properties().tab(UnusualFishMod.TAB).durability(500)));
+	public static final RegistryObject<Item> RIPSAW = ITEMS.register("ripsaw", () -> new RipsawItem(new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1)));
 	//public static final RegistryObject<Item> STARGAZER = ITEMS.register("stargazer", () -> new StargazerItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	// Spawn Eggs

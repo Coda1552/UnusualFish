@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -153,7 +153,7 @@ public class Picklefish extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.PICKLEFISH_BUCKET.get());
+		return new ItemStack(UFItems.PICKLEFISH_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<Picklefish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

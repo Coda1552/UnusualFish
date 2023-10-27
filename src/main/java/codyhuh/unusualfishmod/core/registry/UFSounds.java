@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class UnusualFishSounds {
+public class UFSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, UnusualFishMod.MOD_ID);
 
     public static final RegistryObject<SoundEvent> CRAB_CHATTER = createSoundEvent("crab_chatter");

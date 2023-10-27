@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.hostile;
 
 
 import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -149,7 +149,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.GNASHER_IDLE.get();
+		return UFSounds.GNASHER_IDLE.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;

@@ -2,8 +2,8 @@ package codyhuh.unusualfishmod.common.entity.ambient.special;
 
 
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -78,7 +78,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.CRAB_CHATTER.get();
+		return UFSounds.CRAB_CHATTER.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -89,7 +89,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 	}
 
 	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UnusualFishSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+		this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable{
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.CORAL_SKRIMP_BUCKET.get());
+		return new ItemStack(UFItems.CORAL_SKRIMP_BUCKET.get());
 	}
 
 	static class MoveHelperController extends MoveControl {

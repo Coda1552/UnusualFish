@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ulitity;
 
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -73,7 +73,7 @@ public class TigerPuffer extends WaterAnimal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return UnusualFishSounds.MEDIUM_FISH.get();
+        return UFSounds.MEDIUM_FISH.get();
     }
 
     public SoundEvent getDeathSound() {

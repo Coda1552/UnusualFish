@@ -2,7 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.deep;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
 import codyhuh.unusualfishmod.common.entity.ambient.special.SeaMosquito;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -173,7 +173,7 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
 
     @Override
     public ItemStack getBucketItemStack() {
-        return new ItemStack(UnusualFishItems.CRIMSONSHELL_SQUID_BUCKET.get());
+        return new ItemStack(UFItems.CRIMSONSHELL_SQUID_BUCKET.get());
     }
 
     public static boolean canSpawn(EntityType<CrimsonshellSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

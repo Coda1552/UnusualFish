@@ -2,8 +2,8 @@ package codyhuh.unusualfishmod.common.entity.hostile;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -143,7 +143,7 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.SMALL_ENEMY.get();
+		return UFSounds.SMALL_ENEMY.get();
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -220,7 +220,7 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.RIPPER_BUCKET.get());
+		return new ItemStack(UFItems.RIPPER_BUCKET.get());
 
 	}
 

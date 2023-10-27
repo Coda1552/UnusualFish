@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity.ambient.special;
 
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
-import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
-import codyhuh.unusualfishmod.core.registry.UnusualFishSounds;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -101,7 +101,7 @@ public class SeaMosquito extends WaterAnimal implements Bucketable {
 
 
 	protected SoundEvent getAmbientSound() {
-		return UnusualFishSounds.CRAB_CHATTER.get();
+		return UFSounds.CRAB_CHATTER.get();
 	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
@@ -177,7 +177,7 @@ public class SeaMosquito extends WaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UnusualFishItems.SEA_MOSQUITO_BUCKET.get());
+		return new ItemStack(UFItems.SEA_MOSQUITO_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<SeaMosquito> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
