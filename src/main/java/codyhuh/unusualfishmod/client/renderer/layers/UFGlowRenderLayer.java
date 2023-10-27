@@ -18,4 +18,5 @@ public class UFGlowRenderLayer<T extends LivingEntity, M extends EntityModel<T>>
     public RenderType renderType() {
         return RenderType.eyes(glowLayer);
     }
+
 }

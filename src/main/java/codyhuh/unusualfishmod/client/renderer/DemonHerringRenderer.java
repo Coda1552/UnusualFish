@@ -3,27 +3,37 @@ package codyhuh.unusualfishmod.client.renderer;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.DemonHerringModel;
+import codyhuh.unusualfishmod.client.renderer.layers.DemonHerringGlowRenderLayer;
 import codyhuh.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import codyhuh.unusualfishmod.common.entity.ambient.small.DemonHerring;
+import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.util.Mth;
 
+import java.util.Map;
+
 public class DemonHerringRenderer extends MobRenderer<DemonHerring, DemonHerringModel<DemonHerring>> {
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring.png");
+    public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (hashMap) -> {
+        hashMap.put(0, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring_0.png"));
+        hashMap.put(1, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring_1.png"));
+        hashMap.put(2, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring_2.png"));
+    });
 
     public DemonHerringRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new DemonHerringModel<>(renderManagerIn.bakeLayer(UFModelLayers.DEMON_HERRING)), 0.2F);
-        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demonherring.png")));
+        addLayer(new DemonHerringGlowRenderLayer<>(this));
     }
 
     @Override
     public ResourceLocation getTextureLocation(DemonHerring entity) {
-        return TEXTURE;
+        return TEXTURES.getOrDefault(entity.getVariant(), TEXTURES.get(0));
     }
 
     protected void setupRotations(DemonHerring p_116226_, PoseStack p_116227_, float p_116228_, float p_116229_, float p_116230_) {

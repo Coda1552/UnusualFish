@@ -31,7 +31,6 @@ import net.minecraft.world.level.LevelAccessor;
 
 import net.minecraft.util.RandomSource;
 
-//TODO - REMOVE TILT
 public class CircusFish extends WaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CircusFish.class, EntityDataSerializers.BOOLEAN);
 

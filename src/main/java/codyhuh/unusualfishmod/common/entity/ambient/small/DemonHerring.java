@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity.ambient.small;
 
 import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.ambient.special.CoralSkrimp;
 import codyhuh.unusualfishmod.core.registry.UnusualFishItems;
 
 import net.minecraft.core.BlockPos;
@@ -11,12 +12,14 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -32,9 +35,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.ServerLevelAccessor;
+
+import javax.annotation.Nullable;
 
 public class DemonHerring extends SchoolingWaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(DemonHerring.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(DemonHerring.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
 
 	public DemonHerring(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
@@ -109,18 +116,27 @@ public class DemonHerring extends SchoolingWaterAnimal implements Bucketable {
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(FROM_BUCKET, false);
+		this.entityData.define(VARIANT, 0);
+	}
+
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
+
+	private void setVariant(int variant) {
+		this.entityData.set(VARIANT, variant);
 	}
 
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("FromBucket", this.isFromBucket());
-		compound.putBoolean("Bucketed", this.fromBucket());
+		compound.putInt("Variant", getVariant());
 	}
 
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setFromBucket(compound.getBoolean("FromBucket"));
-		this.setFromBucket(compound.getBoolean("Bucketed"));
+		this.setVariant(compound.getInt("Variant"));
 	}
 
 	@Override
@@ -132,7 +148,24 @@ public class DemonHerring extends SchoolingWaterAnimal implements Bucketable {
 	public void saveToBucketTag(ItemStack bucket) {
 		CompoundTag compoundnbt = bucket.getOrCreateTag();
 		compoundnbt.putFloat("Health", this.getHealth());
+		compoundnbt.putInt("Variant", this.getVariant());
+		if (this.hasCustomName()) {
+			bucket.setHoverName(this.getCustomName());
+		}
+	}
 
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		if (dataTag == null) {
+			setVariant(random.nextInt(3));
+		} else {
+			if (dataTag.contains("Variant", 3)){
+				this.setVariant(dataTag.getInt("Variant"));
+			}
+		}
+		return spawnDataIn;
 	}
 
 	public boolean requiresCustomPersistence() {
