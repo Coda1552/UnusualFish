@@ -13,9 +13,9 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
-public class UFFishBucket extends MobBucketItem {
+public class UFFishBucketItem extends MobBucketItem {
 
-	public UFFishBucket(Supplier<? extends EntityType<?>> entityType, Supplier<? extends Fluid> fluid, Item item, boolean hasTooltip, Properties builder) {
+	public UFFishBucketItem(Supplier<? extends EntityType<?>> entityType, Supplier<? extends Fluid> fluid, Item item, boolean hasTooltip, Properties builder) {
 		super(entityType, fluid, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
 
 		DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> UnusualFishMod.CALLBACKS.add(() -> ItemProperties.register(this, new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0)));

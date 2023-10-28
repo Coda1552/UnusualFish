@@ -1,0 +1,14 @@
+{
+  "parent" : "item/generated",
+  "textures" : {
+    "layer0" : "unusualfishmod:item/thunderous_shell"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blowing": 1
+      },
+      "model": "unusualfishmod:item/thunderous_shell_blowing"
+    }
+  ]
+}

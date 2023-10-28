@@ -5,7 +5,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.AxeItem;
@@ -16,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+// todo - fix
 public class RipsawItem extends AxeItem implements Vanishable {
 
     public RipsawItem(Properties p_41383_) {
@@ -31,8 +31,6 @@ public class RipsawItem extends AxeItem implements Vanishable {
     public void onUsingTick(ItemStack stack, LivingEntity user, int count) {
         if (user instanceof Player player) {
             if (count % 10 == 0) {
-                int i = this.getUseDuration(stack) - count;
-
                 EntityHitResult result = getLookAtEntity(player, player.level, player.getReachDistance());
 
                 if (result != null && result.getEntity() instanceof LivingEntity living) {

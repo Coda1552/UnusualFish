@@ -1,0 +1,14 @@
+{
+  "parent" : "item/generated",
+  "textures" : {
+    "layer0" : "unusualfishmod:item/clement_shell"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "blowing": 1
+      },
+      "model": "unusualfishmod:item/clement_shell_blowing"
+    }
+  ]
+}

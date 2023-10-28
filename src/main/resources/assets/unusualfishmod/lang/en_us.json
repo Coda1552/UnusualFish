@@ -14,7 +14,6 @@
 	"item.unusualfishmod.raw_veil_tentacle": "Raw Veil Tentacle",
 	"item.unusualfishmod.raw_shockcat": "Raw Shockcat Filet",
 	"item.unusualfishmod.raw_lobster": "Raw Porcupine Lobster Tail",
-	"item.unusualfishmod.raw_eyekito": "Raw Eyekito",
 	"item.unusualfishmod.raw_eyelash": "Raw Eyelash Fish",
 	"item.unusualfishmod.raw_snowflake": "Raw Snowflake Tail Fish",
 
@@ -36,10 +35,14 @@
 	"item.unusualfishmod.tendril": "Shocking Tendril",
 	"item.unusualfishmod.deep_chitin": "Deep Chitin",
 	"item.unusualfishmod.ripper_tooth": "Ripper Tooth",
+	"item.unusualfishmod.lobster_spike": "Lobster Spike",
 
 	"item.unusualfishmod.depth_scythe": "Depth Scythe",
 	"item.unusualfishmod.abyssal_fury": "Abyssal Fury",
 	"item.unusualfishmod.ripsaw": "Ripsaw",
+	"item.unusualfishmod.fluvial_shell": "Fluvial Shell",
+	"item.unusualfishmod.thunderous_shell": "Thunderous Shell",
+	"item.unusualfishmod.clement_shell": "Clement Shell",
 
 	"item.unusualfishmod.aero_mono_spawn_egg": "Aero Mono Spawn Egg",
 	"item.unusualfishmod.pinkfin_spawn_egg": "Pinkfin Idol Spawn Egg",
@@ -98,7 +101,6 @@
 	"item.unusualfishmod.whiskered_whale_shark_spawn_egg": "Whiskered Whale Shark Spawn Egg",
 	"item.unusualfishmod.basking_tiamat_spawn_egg": "Basking Tiamat Spawn Egg",
 	"item.unusualfishmod.basking_tiamat_baby_spawn_egg": "Baby Basking Tiamat Spawn Egg",
-	"item.unusualfishmod.eyekito_spawn_egg": "Eyekito Spawn Egg",
 	"item.unusualfishmod.eyelash_fish_spawn_egg": "Eyelash Fish Spawn Egg",
 	"item.unusualfishmod.snowflake_tail_fish_spawn_egg": "Snowflake Tail Fish Spawn Egg",
 	"item.unusualfishmod.tiger_jungle_shark_spawn_egg": "Tiger Jungle Shark Spawn Egg",
@@ -148,7 +150,6 @@
 	"item.unusualfishmod.coral_skrimp_bucket": "Bucket of Coral Skrimp",
 	"item.unusualfishmod.circus_fish_bucket": "Bucket of Circus Fish",
 	"item.unusualfishmod.basking_tiamat_bucket": "Bucket of Basking Tiamat",
-	"item.unusualfishmod.eyekito_bucket": "Bucket of Eyekito",
 	"item.unusualfishmod.eyelash_fish_bucket": "Bucket of Eyelash Fish",
 	"item.unusualfishmod.snowflake_tail_fish_bucket": "Bucket of Snowflake Tail Fish",
 	"item.unusualfishmod.crimsonshell_squid_bucket": "Bucket of Crimsonshell Squid",
