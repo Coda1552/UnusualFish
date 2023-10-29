@@ -1,12 +1,12 @@
 package codyhuh.unusualfishmod.client.renderer;
 
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.SeaMosquitoModel;
-import codyhuh.unusualfishmod.common.entity.ambient.special.SeaMosquito;
+import codyhuh.unusualfishmod.common.entity.SeaMosquito;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 
 public class SeaMosquitoRenderer extends MobRenderer<SeaMosquito, SeaMosquitoModel<SeaMosquito>> {

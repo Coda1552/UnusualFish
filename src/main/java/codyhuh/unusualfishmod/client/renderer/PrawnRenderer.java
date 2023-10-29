@@ -1,10 +1,10 @@
 package codyhuh.unusualfishmod.client.renderer;
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.model.PrawnModel;
-import codyhuh.unusualfishmod.common.entity.hostile.Prawn;
+import codyhuh.unusualfishmod.common.entity.Prawn;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 
 public class PrawnRenderer extends MobRenderer<Prawn, PrawnModel<Prawn>> {

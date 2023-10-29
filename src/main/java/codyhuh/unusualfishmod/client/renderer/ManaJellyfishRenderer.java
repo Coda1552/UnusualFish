@@ -3,11 +3,13 @@ package codyhuh.unusualfishmod.client.renderer;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.ManaJellyfishModel;
-import codyhuh.unusualfishmod.common.entity.ambient.small.ManaJellyfish;
+import codyhuh.unusualfishmod.common.entity.ManaJellyfish;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.*;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+
 import javax.annotation.Nullable;
 
 public class ManaJellyfishRenderer extends MobRenderer<ManaJellyfish, ManaJellyfishModel<ManaJellyfish>> {

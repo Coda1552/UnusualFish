@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.common.entity.ambient.deep.VoltAngler;
+import codyhuh.unusualfishmod.common.entity.VoltAngler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;

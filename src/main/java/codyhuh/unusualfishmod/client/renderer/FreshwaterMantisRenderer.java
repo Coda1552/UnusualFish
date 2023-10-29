@@ -1,11 +1,11 @@
 package codyhuh.unusualfishmod.client.renderer;
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.FreshwaterMantisModel;
-import codyhuh.unusualfishmod.common.entity.ulitity.FreshwaterMantis;
+import codyhuh.unusualfishmod.common.entity.FreshwaterMantis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 
 public class FreshwaterMantisRenderer extends MobRenderer<FreshwaterMantis, FreshwaterMantisModel<FreshwaterMantis>> {

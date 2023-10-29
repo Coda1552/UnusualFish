@@ -1,14 +1,14 @@
 package codyhuh.unusualfishmod.client.renderer;
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.GnasherModel;
 import codyhuh.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
-import codyhuh.unusualfishmod.common.entity.hostile.Gnasher;
+import codyhuh.unusualfishmod.common.entity.Gnasher;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 

@@ -1,22 +1,9 @@
 package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.entity.ambient.HatchetFish;
-import codyhuh.unusualfishmod.common.entity.ambient.cave.BlindSailfin;
-import codyhuh.unusualfishmod.common.entity.ambient.cave.DroopingGourami;
-import codyhuh.unusualfishmod.common.entity.ambient.deep.CrimsonshellSquid;
-import codyhuh.unusualfishmod.common.entity.ambient.deep.VoltAngler;
-import codyhuh.unusualfishmod.common.entity.ambient.land.LobedSkipper;
-import codyhuh.unusualfishmod.common.entity.ambient.predator.*;
-import codyhuh.unusualfishmod.common.entity.ambient.small.*;
-import codyhuh.unusualfishmod.common.entity.ambient.special.CoralSkrimp;
-import codyhuh.unusualfishmod.common.entity.ambient.special.DualityDamselfish;
-import codyhuh.unusualfishmod.common.entity.ambient.special.EyelashFish;
-import codyhuh.unusualfishmod.common.entity.ambient.special.SeaMosquito;
-import codyhuh.unusualfishmod.common.entity.hostile.*;
+import codyhuh.unusualfishmod.common.entity.*;
+import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
-import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
-import codyhuh.unusualfishmod.common.entity.ulitity.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

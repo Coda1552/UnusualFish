@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.common.entity.ambient.small.SailorBarb;
+import codyhuh.unusualfishmod.common.entity.SailorBarb;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.geom.ModelPart;

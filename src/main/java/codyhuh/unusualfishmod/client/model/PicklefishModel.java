@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.common.entity.ambient.small.Picklefish;
+import codyhuh.unusualfishmod.common.entity.Picklefish;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.ListModel;
 import net.minecraft.client.model.geom.ModelPart;

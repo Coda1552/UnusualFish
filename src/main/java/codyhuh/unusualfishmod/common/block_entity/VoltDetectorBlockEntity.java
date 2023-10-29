@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.block_entity;
 
-import codyhuh.unusualfishmod.common.entity.ambient.deep.VoltAngler;
+import codyhuh.unusualfishmod.common.entity.VoltAngler;
 import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

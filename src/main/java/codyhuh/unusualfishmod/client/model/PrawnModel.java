@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.client.model;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.entity.hostile.Prawn;
+import codyhuh.unusualfishmod.common.entity.Prawn;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;

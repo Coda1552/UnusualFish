@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.common.entity.ulitity.BlackCapSnail;
+import codyhuh.unusualfishmod.common.entity.BlackCapSnail;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;

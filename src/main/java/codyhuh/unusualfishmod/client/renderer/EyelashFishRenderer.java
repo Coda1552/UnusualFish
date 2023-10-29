@@ -3,14 +3,13 @@ package codyhuh.unusualfishmod.client.renderer;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.EyelashFishModel;
-import codyhuh.unusualfishmod.common.entity.ambient.special.EyelashFish;
+import codyhuh.unusualfishmod.common.entity.EyelashFish;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import net.minecraft.Util;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 

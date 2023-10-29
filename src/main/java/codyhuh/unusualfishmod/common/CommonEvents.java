@@ -1,20 +1,7 @@
 package codyhuh.unusualfishmod.common;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.entity.ambient.HatchetFish;
-import codyhuh.unusualfishmod.common.entity.ambient.cave.BlindSailfin;
-import codyhuh.unusualfishmod.common.entity.ambient.cave.DroopingGourami;
-import codyhuh.unusualfishmod.common.entity.ambient.deep.CrimsonshellSquid;
-import codyhuh.unusualfishmod.common.entity.ambient.deep.VoltAngler;
-import codyhuh.unusualfishmod.common.entity.ambient.land.LobedSkipper;
-import codyhuh.unusualfishmod.common.entity.ambient.predator.*;
-import codyhuh.unusualfishmod.common.entity.ambient.small.*;
-import codyhuh.unusualfishmod.common.entity.ambient.special.CoralSkrimp;
-import codyhuh.unusualfishmod.common.entity.ambient.special.DualityDamselfish;
-import codyhuh.unusualfishmod.common.entity.ambient.special.EyelashFish;
-import codyhuh.unusualfishmod.common.entity.ambient.special.SeaMosquito;
-import codyhuh.unusualfishmod.common.entity.hostile.*;
-import codyhuh.unusualfishmod.common.entity.ulitity.*;
+import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;

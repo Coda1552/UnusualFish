@@ -1,15 +1,12 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
+import codyhuh.unusualfishmod.common.entity.Squoddle;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import codyhuh.unusualfishmod.common.entity.ambient.small.Squoddle;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SquoddleModel<T extends Squoddle> extends EntityModel<T> {

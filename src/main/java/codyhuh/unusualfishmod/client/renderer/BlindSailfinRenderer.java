@@ -1,13 +1,13 @@
 package codyhuh.unusualfishmod.client.renderer;
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.BlindSailfinModel;
+import codyhuh.unusualfishmod.common.entity.BlindSailfin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
-import codyhuh.unusualfishmod.common.entity.ambient.cave.BlindSailfin;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 

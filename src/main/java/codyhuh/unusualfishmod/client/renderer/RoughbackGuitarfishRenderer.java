@@ -3,7 +3,7 @@ package codyhuh.unusualfishmod.client.renderer;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.RoughbackGuitarfishModel;
-import codyhuh.unusualfishmod.common.entity.ulitity.RoughbackGuitarfish;
+import codyhuh.unusualfishmod.common.entity.RoughbackGuitarfish;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

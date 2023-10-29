@@ -1,11 +1,11 @@
 package codyhuh.unusualfishmod.client.renderer;
 
+import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.SquoddleModel;
-import codyhuh.unusualfishmod.common.entity.ambient.small.Squoddle;
+import codyhuh.unusualfishmod.common.entity.Squoddle;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 
 public class SquoddleRenderer extends MobRenderer<Squoddle, SquoddleModel<Squoddle>> {

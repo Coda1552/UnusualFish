@@ -1,9 +1,9 @@
 package codyhuh.unusualfishmod.common.item;
 
-import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
+import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import com.mojang.math.Vector3f;
-import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

@@ -1,14 +1,11 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
+import codyhuh.unusualfishmod.common.entity.BeakedHerring;
 import com.google.common.collect.ImmutableList;
-import codyhuh.unusualfishmod.common.entity.ambient.small.BeakedHerring;
 import net.minecraft.client.model.ListModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class BeakedHerringModel<T extends BeakedHerring> extends ListModel<T> {

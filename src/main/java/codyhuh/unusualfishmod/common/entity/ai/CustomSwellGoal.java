@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ai;
 
-import codyhuh.unusualfishmod.common.entity.hostile.Rootball;
+import codyhuh.unusualfishmod.common.entity.Rootball;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 

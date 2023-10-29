@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.client.renderer;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
+import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;

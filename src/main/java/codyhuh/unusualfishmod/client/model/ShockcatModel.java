@@ -1,14 +1,11 @@
 package codyhuh.unusualfishmod.client.model;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.entity.ulitity.Shockcat;
+import codyhuh.unusualfishmod.common.entity.Shockcat;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.client.model.ListModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class ShockcatModel<T extends Shockcat> extends ListModel<T> {
