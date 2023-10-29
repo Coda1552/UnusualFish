@@ -18,7 +18,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -41,9 +40,13 @@ public class TigerJungleShark extends WaterAnimal {
     @Override
     public void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && attackCooldown == 0;
+            }
+        });
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
@@ -58,6 +61,8 @@ public class TigerJungleShark extends WaterAnimal {
                 return !this.mob.isInWater() && super.canUse();
             }
         });
+
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, TigerJungleShark.class, false));
     }
 
     @Override
@@ -84,11 +89,15 @@ public class TigerJungleShark extends WaterAnimal {
         if (this.attackCooldown > 0) {
             this.attackCooldown--;
         }
+
+        if (getTarget() != null && !getTarget().isAlive()) {
+            attackCooldown = 20 * 60 * 5; // 5 minutes
+        }
     }
 
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
-            this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4D, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
             this.onGround = false;
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
