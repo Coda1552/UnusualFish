@@ -16,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
-// todo - fix spear being backwards in hand when aiming-to-throw
 public class ThrownPrismarineSpearRenderer extends EntityRenderer<ThrownPrismarineSpear> {
     public static final ResourceLocation LOC = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/prismarine_spear.png");
 
