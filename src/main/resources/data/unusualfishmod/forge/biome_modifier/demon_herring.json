@@ -6,7 +6,7 @@
   "spawners":
   {
     "type": "unusualfishmod:demon_herring",
-    "weight": 30,
+    "weight": 20,
     "minCount": 2,
     "maxCount": 8
   }

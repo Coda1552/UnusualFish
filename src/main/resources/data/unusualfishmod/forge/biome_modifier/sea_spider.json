@@ -6,7 +6,7 @@
   "spawners":
   {
     "type": "unusualfishmod:sea_spider",
-    "weight": 20,
+    "weight": 15,
     "minCount": 1,
     "maxCount": 4
   }
