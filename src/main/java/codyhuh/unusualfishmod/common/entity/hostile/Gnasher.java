@@ -140,6 +140,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		if (p_28844_ == 4) {
 			this.attackAnimationTick = 10;
 		}
+		super.handleEntityEvent(p_28844_);
 	}
 
 	public int getAttackAnimationTick() {

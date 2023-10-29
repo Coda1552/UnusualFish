@@ -213,8 +213,9 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         if (id == 1) {
             this.jumpDuration = 10;
             this.jumpTicks = 0;
-        } else
+        } else {
             super.handleEntityEvent(id);
+        }
     }
 
     @Nonnull
