@@ -59,7 +59,7 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         Entity entity1 = this.getOwner();
         DamageSource damagesource = DamageSource.trident(this, entity1 == null ? this : entity1);
         this.dealtDamage = true;
-        SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
+
         if (entity.hurt(damagesource, f)) {
             if (entity.getType() == EntityType.ENDERMAN) {
                 return;
@@ -78,7 +78,7 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         this.setDeltaMovement(this.getDeltaMovement().multiply(-0.01D, -0.1D, -0.01D));
         float f1 = 1.0F;
 
-        this.playSound(soundevent, f1, 1.0F);
+        this.playSound(SoundEvents.TRIDENT_HIT, f1, 1.0F);
     }
 
     protected boolean tryPickup(Player p_150196_) {

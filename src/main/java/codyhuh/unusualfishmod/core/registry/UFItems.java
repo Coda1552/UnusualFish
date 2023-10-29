@@ -53,7 +53,6 @@ public final class UFItems {
 
 	// Gear
 	public static final RegistryObject<Item> DEPTH_SCYTHE = ITEMS.register("depth_scythe", () -> new DepthScytheItem(Tiers.DIAMOND, 2, -3.4F, new Item.Properties().tab(UnusualFishMod.TAB).durability(600)));
-	public static final RegistryObject<Item> ABYSSAL_FURY = ITEMS.register("abyssal_fury", () -> new AbyssalFuryItem(new Item.Properties().tab(UnusualFishMod.TAB).durability(500)));
 	public static final RegistryObject<Item> RIPSAW = ITEMS.register("ripsaw", () -> new RipsawItem(new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1)));
 	public static final RegistryObject<Item> FLUVIAL_SHELL = ITEMS.register("fluvial_shell", () -> new WeatherShellItem("rain", new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1).durability(1)));
 	public static final RegistryObject<Item> CLEMENT_SHELL = ITEMS.register("clement_shell", () -> new WeatherShellItem("clear", new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1).durability(1)));

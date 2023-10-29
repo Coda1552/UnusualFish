@@ -38,7 +38,6 @@
 	"item.unusualfishmod.lobster_spike": "Lobster Spike",
 
 	"item.unusualfishmod.depth_scythe": "Depth Scythe",
-	"item.unusualfishmod.abyssal_fury": "Abyssal Fury",
 	"item.unusualfishmod.ripsaw": "Ripsaw",
 	"item.unusualfishmod.fluvial_shell": "Fluvial Shell",
 	"item.unusualfishmod.thunderous_shell": "Thunderous Shell",
@@ -212,8 +211,6 @@
 	"entity.unusualfishmod.greenglow":"Greenglow Lobed Fin",
 	"entity.unusualfishmod.volt_angler":"Volt Anglerfish",
 	"entity.unusualfishmod.tribble":"Tribble",
-	"entity.unusualfishmod.abyssal_blast":"Abyssal Blast",
-	"entity.unusualfishmod.abyssal_shot":"Abyssal Shot",
 	"entity.unusualfishmod.prismarine_spear":"Prismarine Spear",
 
 	"tooltip.scythe": "Hits mobs in a wide sweep",
@@ -228,6 +225,5 @@
 	"unusualfishmod.sound.subtitle.evil_scuttling": "Something evil scuttles",
 	"unusualfishmod.sound.subtitle.small_enemy": "Devious noises",
 	"unusualfishmod.sound.subtitle.small_fish": "Aquatic chirps",
-	"unusualfishmod.sound.subtitle.abyssal_blast": "Abyssal blast",
 	"unusualfishmod.sound.subtitle.whip_crack": "Whip cracks"
 }

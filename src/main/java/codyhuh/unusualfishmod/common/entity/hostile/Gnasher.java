@@ -3,11 +3,11 @@ package codyhuh.unusualfishmod.common.entity.hostile;
 
 import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -28,8 +28,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
-
-import net.minecraft.util.RandomSource;
 
 public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	protected int attackCooldown = 0;

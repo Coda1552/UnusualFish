@@ -68,7 +68,7 @@ public class TigerJungleShark extends WaterAnimal {
         float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
         boolean flag = entityIn.hurt(DamageSource.mobAttack(this), f1);
         if (flag) {
-            entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, (double)0.4F, 0.0D));
+            entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4D, 0.0D));
             this.doEnchantDamageEffects(this, entityIn);
         }
         return flag;
@@ -105,6 +105,7 @@ public class TigerJungleShark extends WaterAnimal {
         if (p_28844_ == 4) {
             this.attackAnimationTick = 10;
         }
+        super.handleEntityEvent(p_28844_);
     }
 
     public int getAttackAnimationTick() {
