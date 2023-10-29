@@ -3,8 +3,6 @@ package codyhuh.unusualfishmod.common.block_entity;
 import codyhuh.unusualfishmod.common.entity.ambient.deep.VoltAngler;
 import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,6 +11,7 @@ import net.minecraft.world.phys.AABB;
 import java.util.ArrayList;
 import java.util.List;
 
+// todo - fix
 public class VoltDetectorBlockEntity extends BlockEntity {
     private static List<VoltAngler> list = new ArrayList<>(5);
 
