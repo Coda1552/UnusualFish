@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
-// todo - fix
 public class RipsawItem extends AxeItem implements Vanishable {
 
     public RipsawItem(Properties p_41383_) {
@@ -52,8 +51,16 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        player.startUsingItem(hand);
+        if (!level.isClientSide()) {
+            player.startUsingItem(hand);
+        }
+
         return super.use(level, player, hand);
+    }
+
+    @Override
+    public int getUseDuration(ItemStack p_41454_) {
+        return 72000;
     }
 
     public static EntityHitResult getLookAtEntity(Player player, Level level, double range) {
