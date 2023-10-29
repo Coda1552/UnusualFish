@@ -1,0 +1,24 @@
+{
+  "parent": "forge:item/default",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "unusualfishmod:item/prismarine_spear_handheld",
+    "textures": {
+      "layer0": "unusualfishmod:item/prismarine_spear_large"
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "unusualfishmod:item/prismarine_spear_gui",
+      "textures": {
+        "layer0": "unusualfishmod:item/prismarine_spear"
+      }
+    },
+    "fixed": {
+      "parent": "unusualfishmod:item/prismarine_spear_gui",
+      "textures": {
+        "layer0": "unusualfishmod:item/prismarine_spear"
+      }
+    }
+  }
+}

@@ -43,6 +43,7 @@
 	"item.unusualfishmod.fluvial_shell": "Fluvial Shell",
 	"item.unusualfishmod.thunderous_shell": "Thunderous Shell",
 	"item.unusualfishmod.clement_shell": "Clement Shell",
+	"item.unusualfishmod.prismarine_spear": "Prismarine Spear",
 
 	"item.unusualfishmod.aero_mono_spawn_egg": "Aero Mono Spawn Egg",
 	"item.unusualfishmod.pinkfin_spawn_egg": "Pinkfin Idol Spawn Egg",
@@ -204,8 +205,6 @@
 	"entity.unusualfishmod.coral_skrimp":"Coral Skrimp",
 	"entity.unusualfishmod.circusfish":"Circus Fish",
 	"entity.unusualfishmod.blizzardfin":"Blizzardfin Tuna",
-	"entity.unusualfishmod.abyssal_blast":"Abyssal Blast",
-	"entity.unusualfishmod.abyssal_shot":"Abyssal Shot",
 	"entity.unusualfishmod.eyelash":"Eyelash Fish",
 	"entity.unusualfishmod.snowflake":"Snowflake Tail Fish",
 	"entity.unusualfishmod.jungleshark":"Tiger Jungle Shark",
@@ -213,6 +212,9 @@
 	"entity.unusualfishmod.greenglow":"Greenglow Lobed Fin",
 	"entity.unusualfishmod.volt_angler":"Volt Anglerfish",
 	"entity.unusualfishmod.tribble":"Tribble",
+	"entity.unusualfishmod.abyssal_blast":"Abyssal Blast",
+	"entity.unusualfishmod.abyssal_shot":"Abyssal Shot",
+	"entity.unusualfishmod.prismarine_spear":"Prismarine Spear",
 
 	"tooltip.scythe": "Hits mobs in a wide sweep",
 

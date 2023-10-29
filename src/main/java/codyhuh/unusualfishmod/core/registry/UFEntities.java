@@ -14,6 +14,7 @@ import codyhuh.unusualfishmod.common.entity.ambient.special.DualityDamselfish;
 import codyhuh.unusualfishmod.common.entity.ambient.special.EyelashFish;
 import codyhuh.unusualfishmod.common.entity.ambient.special.SeaMosquito;
 import codyhuh.unusualfishmod.common.entity.hostile.*;
+import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import codyhuh.unusualfishmod.common.entity.msc.AbyssalBlast;
 import codyhuh.unusualfishmod.common.entity.msc.AbyssalShot;
 import codyhuh.unusualfishmod.common.entity.ulitity.*;
@@ -86,6 +87,7 @@ public class UFEntities {
 	// Other
 	public static final RegistryObject<EntityType<AbyssalBlast>> ABYSSAL_BLAST = ENTITIES.register("abyssal_blast", () -> EntityType.Builder.<AbyssalBlast>of(AbyssalBlast::new, MobCategory.MISC).sized(2.0F, 0.2F).setCustomClientFactory(AbyssalBlast::new).fireImmune().build("abyssal_blast"));
 	public static final RegistryObject<EntityType<AbyssalShot>> ABYSSAL_SHOT = ENTITIES.register("abyssal_shot", () -> EntityType.Builder.<AbyssalShot>of(AbyssalShot::new, MobCategory.MISC).sized(1.0F, 1.0F).setCustomClientFactory(AbyssalShot::new).fireImmune().build("abyssal_shot"));
+	public static final RegistryObject<EntityType<ThrownPrismarineSpear>> PRISMARINE_SPEAR = ENTITIES.register("prismarine_spear", () -> EntityType.Builder.<ThrownPrismarineSpear>of(ThrownPrismarineSpear::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("prismarine_spear"));
 }
 
 

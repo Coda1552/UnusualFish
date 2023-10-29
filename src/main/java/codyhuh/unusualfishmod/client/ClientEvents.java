@@ -3,6 +3,7 @@ package codyhuh.unusualfishmod.client;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.model.*;
 import codyhuh.unusualfishmod.client.renderer.*;
+import codyhuh.unusualfishmod.client.renderer.item.ThrownPrismarineSpearRenderer;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.client.renderer.block.model.ItemOverride;
@@ -24,64 +25,7 @@ public final class ClientEvents {
 		ItemProperties.register(UFItems.CLEMENT_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		ItemProperties.register(UFItems.FLUVIAL_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		ItemProperties.register(UFItems.THUNDEROUS_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
-	}
-
-	@SubscribeEvent
-	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions e) {
-		e.registerLayerDefinition(UFModelLayers.DUALITY_DAMSELFISH, DualityDamselfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.MOSSTHORN, MossthornModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.RIPPER, RipperModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SPINDLEFISH, SpindlefishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.RHINO_TETRA, RhinoTetraModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.DROOPING_GOURAMI, DroopingGouramiModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SAILOR_BARB, SailorBarbModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SEA_SPIDER, SeaSpiderModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.TRIPLE_TWIRL_PLECO, TripleTwirlPlecoModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.AERO_MONO, AeroMonoModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.CLOWNTHORN_SHARK, ClownthornSharkModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.ROUGHBACK_GUITARFISH, RoughbackGuitarfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.PINKFIN_IDOL, PinkfinIdolModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SEA_PANCAKE, SeaPancakeModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BRICK_SNAIL, BrickSnailModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.ZEBRA_CORNETFISH, ZebraCornetfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.TIGER_PUFFER, TigerPufferModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BLACKCAP_SNAIL, BlackcapSnailModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SNEEP_SNORP, SneepSnorpModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.DEEP_CRAWLER, DeepCrawlerModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.MANA_JELLYFISH, ManaJellyfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.PORCUPINE_LOBSTA, PorcupineLobsterModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.TRUMPET_SQUID, TrumpetSquidModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.FRESHWATER_MANTIS, FreshwaterMantisModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BARK_ANGELFISH, BarkAngelfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SHOCKCAT, ShockcatModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.MUDDYTOP_SNAIL, MuddytopSnailModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.KALAPPA, KalappaModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.LOBED_SKIPPER, LobedSkipperModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.STOUT_BICHIR, StoutBichirModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BEAKED_HERRING, BeakedHerringModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.PICKLEFISH, PicklefishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BLIND_SAILFIN, BlindSailfinModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.DEMON_HERRING, DemonHerringModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.AMBER_GOBY, AmberGobyModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.HATCHET_FISH, HatchetFishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.COPPERFLAME_ANTHIAS, CopperflameAnthiasModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.ROOTBALL, RootballModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.CELESTIAL_FISH, CelestialFishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.GNASHER, GnasherModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.PRAWN, PrawnModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SQUODDLE, SquoddleModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SEA_MOSQUITO, SeaMosquitoModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.FORKFISH, ForkfishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SPOON_SHARK, SpoonSharkModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.CORAL_SKRIMP, CoralSkrimpModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.CIRCUS_FISH, CircusFishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.BLIZZARDFIN_TUNA, BlizzardfinTunaModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.EYELASH_FISH, EyelashFishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.SNOWFLAKE_TAIL_FISH, SnowflakeTailFishModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.TIGER_JUNGLE_SHARK, TigerJungleSharkModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.CRIMSONSHELL_SQUID, CrimsonshellSquidModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.VOLT_ANGLER, VoltAnglerModel::createBodyLayer);
-		e.registerLayerDefinition(UFModelLayers.TRIBBLE, TribbleModel::createBodyLayer);
+		ItemProperties.register(UFItems.PRISMARINE_SPEAR.get(), new ResourceLocation("using"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 	}
 
 	@SubscribeEvent
@@ -141,6 +85,65 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.CRIMSONSHELL_SQUID.get(), CrimsonshellSquidRenderer::new);
 		e.registerEntityRenderer(UFEntities.VOLT_ANGLER.get(), VoltAnglerRenderer::new);
 		e.registerEntityRenderer(UFEntities.TRIBBLE.get(), TribbleRenderer::new);
+		e.registerEntityRenderer(UFEntities.PRISMARINE_SPEAR.get(), ThrownPrismarineSpearRenderer::new);
+	}
+
+	@SubscribeEvent
+	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions e) {
+		e.registerLayerDefinition(UFModelLayers.DUALITY_DAMSELFISH, DualityDamselfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.MOSSTHORN, MossthornModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.RIPPER, RipperModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SPINDLEFISH, SpindlefishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.RHINO_TETRA, RhinoTetraModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.DROOPING_GOURAMI, DroopingGouramiModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SAILOR_BARB, SailorBarbModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SEA_SPIDER, SeaSpiderModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.TRIPLE_TWIRL_PLECO, TripleTwirlPlecoModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.AERO_MONO, AeroMonoModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.CLOWNTHORN_SHARK, ClownthornSharkModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.ROUGHBACK_GUITARFISH, RoughbackGuitarfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.PINKFIN_IDOL, PinkfinIdolModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SEA_PANCAKE, SeaPancakeModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BRICK_SNAIL, BrickSnailModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.ZEBRA_CORNETFISH, ZebraCornetfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.TIGER_PUFFER, TigerPufferModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BLACKCAP_SNAIL, BlackcapSnailModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SNEEP_SNORP, SneepSnorpModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.DEEP_CRAWLER, DeepCrawlerModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.MANA_JELLYFISH, ManaJellyfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.PORCUPINE_LOBSTA, PorcupineLobsterModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.TRUMPET_SQUID, TrumpetSquidModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.FRESHWATER_MANTIS, FreshwaterMantisModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BARK_ANGELFISH, BarkAngelfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SHOCKCAT, ShockcatModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.MUDDYTOP_SNAIL, MuddytopSnailModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.KALAPPA, KalappaModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.LOBED_SKIPPER, LobedSkipperModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.STOUT_BICHIR, StoutBichirModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BEAKED_HERRING, BeakedHerringModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.PICKLEFISH, PicklefishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BLIND_SAILFIN, BlindSailfinModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.DEMON_HERRING, DemonHerringModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.AMBER_GOBY, AmberGobyModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.HATCHET_FISH, HatchetFishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.COPPERFLAME_ANTHIAS, CopperflameAnthiasModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.ROOTBALL, RootballModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.CELESTIAL_FISH, CelestialFishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.GNASHER, GnasherModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.PRAWN, PrawnModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SQUODDLE, SquoddleModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SEA_MOSQUITO, SeaMosquitoModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.FORKFISH, ForkfishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SPOON_SHARK, SpoonSharkModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.CORAL_SKRIMP, CoralSkrimpModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.CIRCUS_FISH, CircusFishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.BLIZZARDFIN_TUNA, BlizzardfinTunaModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.EYELASH_FISH, EyelashFishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.SNOWFLAKE_TAIL_FISH, SnowflakeTailFishModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.TIGER_JUNGLE_SHARK, TigerJungleSharkModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.CRIMSONSHELL_SQUID, CrimsonshellSquidModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.VOLT_ANGLER, VoltAnglerModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.TRIBBLE, TribbleModel::createBodyLayer);
 	}
 }
 
