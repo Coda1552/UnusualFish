@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " #P",
+    " P#",
+    "P  "
+  ],
+  "key": {
+    "#": {
+      "item": "unusualfishmod:lobster_spike"
+    },
+    "P": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:prismarine_spear",
+    "count": 1
+  }
+}

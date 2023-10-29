@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "unusualfishmod:raw_veil_tentacle"
-  },
-  "result": "unusualfishmod:cooked_veil_tentacle",
-  "experience": 0.35,
-  "cookingtime": 100
-}
