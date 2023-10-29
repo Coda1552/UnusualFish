@@ -30,6 +30,7 @@ public class UnusualFishMod {
 		UFBlocks.BLOCKS.register(bus);
 		UFEnchantments.ENCHANTMENTS.register(bus);
 		UFSounds.SOUND_EVENTS.register(bus);
+		UFBlockEntities.BLOCK_ENTITIES.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}

@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.ambient.deep;
 
+import codyhuh.unusualfishmod.common.block_entity.VoltDetectorBlockEntity;
 import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
@@ -12,7 +13,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.TimeUtil;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.InteractionHand;
@@ -91,8 +91,17 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         super.aiStep();
     }
 
-    public static double distance(double x, double y, double z, double xRadius, double yRadius, double zRadius) {
-        return Mth.square(x / (xRadius)) + Mth.square(y / (yRadius)) + Mth.square(z / (zRadius));
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (isAlive() && isInWater()) {
+            nearDetector(blockPosition(), 5);
+        }
+
+    }
+
+    private void nearDetector(BlockPos pos, int radius) {
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {

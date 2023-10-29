@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/cut_copper",
+    "side": "unusualfishmod:block/volt_detector_side",
+    "top": "unusualfishmod:block/volt_detector_top"
+  }
+}

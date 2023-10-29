@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#K#",
+    "cRc",
+    "ccc"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "K": {
+      "item": "unusualfishmod:tendril"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:volt_detector",
+    "count": 1
+  }
+}
