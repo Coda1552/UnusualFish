@@ -1,13 +1,19 @@
 package codyhuh.unusualfishmod.client.renderer.layers;
 
+import codyhuh.unusualfishmod.client.UFRenderTypes;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.EyesLayer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 
-public class UFGlowRenderLayer<T extends LivingEntity, M extends EntityModel<T>> extends EyesLayer<T, M> {
+public class UFGlowRenderLayer<T extends LivingEntity, M extends EntityModel<T>> extends RenderLayer<T, M> {
     private final ResourceLocation glowLayer;
 
     public UFGlowRenderLayer(RenderLayerParent<T, M> layer, ResourceLocation glowOverlayResourceLocation) {
@@ -15,8 +21,12 @@ public class UFGlowRenderLayer<T extends LivingEntity, M extends EntityModel<T>>
         this.glowLayer = glowOverlayResourceLocation;
     }
 
-    public RenderType renderType() {
-        return RenderType.eyes(glowLayer);
+    public void render(PoseStack p_116983_, MultiBufferSource p_116984_, int p_116985_, T p_116986_, float p_116987_, float p_116988_, float p_116989_, float p_116990_, float p_116991_, float p_116992_) {
+        VertexConsumer vertexconsumer = p_116984_.getBuffer(this.renderType());
+        this.getParentModel().renderToBuffer(p_116983_, vertexconsumer, 8192, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    public RenderType renderType() {
+        return UFRenderTypes.ufGlow(glowLayer);
+    }
 }

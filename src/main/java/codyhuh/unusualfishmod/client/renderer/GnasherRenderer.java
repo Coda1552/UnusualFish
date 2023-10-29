@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.client.renderer;
 
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.GnasherModel;
+import codyhuh.unusualfishmod.client.renderer.layers.UFGlowRenderLayer;
 import codyhuh.unusualfishmod.common.entity.hostile.Gnasher;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -16,6 +17,7 @@ public class GnasherRenderer extends MobRenderer<Gnasher, GnasherModel<Gnasher>>
 
 	public GnasherRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new GnasherModel<>(renderManagerIn.bakeLayer(UFModelLayers.GNASHER)), 0.2F);
+		addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/gnasher.png")));
 	}
 
 	@Override

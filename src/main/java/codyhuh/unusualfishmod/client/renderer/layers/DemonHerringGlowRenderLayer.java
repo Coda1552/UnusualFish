@@ -1,6 +1,7 @@
 package codyhuh.unusualfishmod.client.renderer.layers;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
+import codyhuh.unusualfishmod.client.UFRenderTypes;
 import codyhuh.unusualfishmod.common.entity.ambient.small.DemonHerring;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -31,7 +32,7 @@ public class DemonHerringGlowRenderLayer<T extends DemonHerring, M extends Entit
     }
 
     public RenderType renderType(T entity) {
-        return RenderType.eyes(TEXTURES.getOrDefault(entity.getVariant(), TEXTURES.get(0)));
+        return UFRenderTypes.ufGlow(TEXTURES.getOrDefault(entity.getVariant(), TEXTURES.get(0)));
     }
 
     public void render(PoseStack p_116983_, @NotNull MultiBufferSource p_116984_, int p_116985_, T p_116986_, float p_116987_, float p_116988_, float p_116989_, float p_116990_, float p_116991_, float p_116992_) {
