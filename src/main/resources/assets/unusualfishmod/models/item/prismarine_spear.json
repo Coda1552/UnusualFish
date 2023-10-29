@@ -20,5 +20,13 @@
         "layer0": "unusualfishmod:item/prismarine_spear"
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "using": 1
+      },
+      "model": "unusualfishmod:item/prismarine_spear_handheld_using"
+    }
+  ]
 }

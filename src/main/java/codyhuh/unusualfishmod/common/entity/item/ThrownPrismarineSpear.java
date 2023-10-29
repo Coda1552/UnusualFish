@@ -51,7 +51,7 @@ public class ThrownPrismarineSpear extends AbstractArrow {
 
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
-        float f = 8.0F;
+        float f = 5.0F;
         if (entity instanceof LivingEntity livingentity) {
             f += EnchantmentHelper.getDamageBonus(this.spearItem, livingentity.getMobType());
         }
