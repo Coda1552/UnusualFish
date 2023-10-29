@@ -44,13 +44,13 @@ public class TigerPuffer extends WaterAnimal {
             @Override
             protected void checkAndPerformAttack(LivingEntity p_25557_, double p_25558_) {
                 double d0 = this.getAttackReachSqr(p_25557_);
+
                 if (p_25558_ <= d0 && this.getTicksUntilNextAttack() <= 0) {
                     this.resetAttackCooldown();
                     this.mob.swing(InteractionHand.MAIN_HAND);
                     this.mob.doHurtTarget(p_25557_);
                     this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK);
                 }
-
             }
         });
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
