@@ -30,13 +30,14 @@
 
 	"block.unusualfishmod.copper_spotlight": "Copper Spotlight",
 	"block.unusualfishmod.volt_detector": "Volt Detector",
+	"block.unusualfishmod.nautical_lamp": "Nautical Lamp",
 
-	"item.unusualfishmod.glo_gel": "Glow Gel",
 	"item.unusualfishmod.gnasher_organ": "Gnasher Jewel",
 	"item.unusualfishmod.tendril": "Shocking Tendril",
-	"item.unusualfishmod.deep_chitin": "Deep Chitin",
 	"item.unusualfishmod.ripper_tooth": "Ripper Tooth",
-	"item.unusualfishmod.lobster_spike": "Lobster Spike",
+	"item.unusualfishmod.lobster_spike": "Lobster Sepike",
+	"item.unusualfishmod.relucent_shard": "Relucent Shard",
+	"item.unusualfishmod.crimson_shard": "Crimson Shard",
 
 	"item.unusualfishmod.depth_scythe": "Depth Scythe",
 	"item.unusualfishmod.ripsaw": "Ripsaw",

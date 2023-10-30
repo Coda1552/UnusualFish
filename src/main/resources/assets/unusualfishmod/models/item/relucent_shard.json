@@ -1,6 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/glow_gel"
+    "layer0" : "unusualfishmod:item/relucent_shard"
   }
 }

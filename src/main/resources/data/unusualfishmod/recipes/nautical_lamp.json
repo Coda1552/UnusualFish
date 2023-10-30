@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#P#",
+    "GSG",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:prismarine_shard"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "G": {
+      "tag": "forge:glass_panes"
+    },
+    "S": {
+      "item": "unusualfishmod:tendril"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:nautical_lamp",
+    "count": 3
+  }
+}

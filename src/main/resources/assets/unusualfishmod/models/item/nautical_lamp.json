@@ -1,6 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/deep_chitin"
+    "layer0" : "unusualfishmod:item/nautical_lamp"
   }
 }

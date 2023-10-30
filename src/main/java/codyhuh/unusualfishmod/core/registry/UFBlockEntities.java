@@ -12,4 +12,3 @@ public class UFBlockEntities {
 
     public static final RegistryObject<BlockEntityType<VoltDetectorBlockEntity>> VOLT_DETECTOR = BLOCK_ENTITIES.register("volt_detector", () -> BlockEntityType.Builder.of(VoltDetectorBlockEntity::new, UFBlocks.VOLT_DETECTOR.get()).build(null));
 }
-

@@ -44,12 +44,12 @@ public final class UFItems {
 	public static final RegistryObject<Item> COOKED_SHOCKCAT = ITEMS.register("cooked_shockcat", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_SHOCKCAT).tab(UnusualFishMod.TAB)));
 
 	// Drops
-	public static final RegistryObject<Item> GNASHER_ORGAN = ITEMS.register("gnasher_organ", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> GLO_GEL = ITEMS.register("glo_gel", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> SHOCKCAT_TENDRIL = ITEMS.register("tendril", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> DEEP_CHITIN = ITEMS.register("deep_chitin", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> GNASHER_ORGAN = ITEMS.register("gnasher_organ", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> TENDRIL = ITEMS.register("tendril", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RIPPER_TOOTH = ITEMS.register("ripper_tooth", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> LOBSTER_SPIKE = ITEMS.register("lobster_spike", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RELUCENT_SHARD = ITEMS.register("relucent_shard", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> CRIMSON_SHARD = ITEMS.register("crimson_shard", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 
 	// Gear
 	public static final RegistryObject<Item> DEPTH_SCYTHE = ITEMS.register("depth_scythe", () -> new DepthScytheItem(Tiers.DIAMOND, 2, -3.4F, new Item.Properties().tab(UnusualFishMod.TAB).durability(600)));

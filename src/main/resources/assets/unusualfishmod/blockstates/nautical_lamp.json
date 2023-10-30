@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "unusualfishmod:block/nautical_lamp"
+    },
+    "hanging=true": {
+      "model": "unusualfishmod:block/nautical_lamp_hanging"
+    }
+  }
+}
