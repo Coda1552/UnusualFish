@@ -41,7 +41,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
 
-public class CoralSkrimp extends WaterAnimal implements Bucketable{
+public class CoralSkrimp extends WaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CoralSkrimp.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(CoralSkrimp.class, EntityDataSerializers.INT);
 

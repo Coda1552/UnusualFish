@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.common.entity.ai;
+package codyhuh.unusualfishmod.common.entity.util;
 
 import com.mojang.datafixers.DataFixUtils;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -7,16 +7,16 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class FollowSchoolLeaderGoal extends Goal {
-    private final SchoolingWaterAnimal mob;
+    private final BucketableSchoolingWaterAnimal mob;
     private int timeToRecalcPath;
     private int nextStartTick;
 
-    public FollowSchoolLeaderGoal(SchoolingWaterAnimal p_25249_) {
+    public FollowSchoolLeaderGoal(BucketableSchoolingWaterAnimal p_25249_) {
         this.mob = p_25249_;
         this.nextStartTick = this.nextStartTick(p_25249_);
     }
 
-    protected int nextStartTick(SchoolingWaterAnimal p_25252_) {
+    protected int nextStartTick(BucketableSchoolingWaterAnimal p_25252_) {
         return reducedTickDelay(200 + p_25252_.getRandom().nextInt(200) % 20);
     }
 
@@ -30,11 +30,11 @@ public class FollowSchoolLeaderGoal extends Goal {
             return false;
         } else {
             this.nextStartTick = this.nextStartTick(this.mob);
-            Predicate<SchoolingWaterAnimal> predicate = (p_25258_) -> {
+            Predicate<BucketableSchoolingWaterAnimal> predicate = (p_25258_) -> {
                 return p_25258_.canBeFollowed() || !p_25258_.isFollower();
             };
-            List<? extends SchoolingWaterAnimal> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
-            SchoolingWaterAnimal schoolingWaterAnimal = DataFixUtils.orElse(list.stream().filter(SchoolingWaterAnimal::canBeFollowed).findAny(), this.mob);
+            List<? extends BucketableSchoolingWaterAnimal> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+            BucketableSchoolingWaterAnimal schoolingWaterAnimal = DataFixUtils.orElse(list.stream().filter(BucketableSchoolingWaterAnimal::canBeFollowed).findAny(), this.mob);
             schoolingWaterAnimal.addFollowers(list.stream().filter((p_25255_) -> {
                 return !p_25255_.isFollower();
             }));

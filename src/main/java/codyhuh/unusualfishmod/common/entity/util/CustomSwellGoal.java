@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.common.entity.ai;
+package codyhuh.unusualfishmod.common.entity.util;
 
 import codyhuh.unusualfishmod.common.entity.Rootball;
 import net.minecraft.world.entity.LivingEntity;

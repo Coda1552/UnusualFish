@@ -1,10 +1,11 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -20,13 +21,12 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
 
-public class StoutBichir extends WaterAnimal {
+public class StoutBichir extends BucketableWaterAnimal {
     protected int attackCooldown = 0;
-
 
     public StoutBichir(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
@@ -36,6 +36,11 @@ public class StoutBichir extends WaterAnimal {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+    }
+
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.STOUT_BICHIR_BUCKET.get());
     }
 
     @Override
@@ -60,17 +65,6 @@ public class StoutBichir extends WaterAnimal {
         });
     }
 
-    public void tick() {
-        super.tick();
-
-        if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-        }
-
-    }
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -85,7 +79,6 @@ public class StoutBichir extends WaterAnimal {
     protected PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
-
 
     protected SoundEvent getAmbientSound() {
         return UFSounds.MEDIUM_FISH.get();

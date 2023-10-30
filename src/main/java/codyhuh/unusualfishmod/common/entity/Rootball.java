@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.CustomSwellGoal;
+import codyhuh.unusualfishmod.common.entity.util.CustomSwellGoal;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

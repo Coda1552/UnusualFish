@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.common.entity.ai;
+package codyhuh.unusualfishmod.common.entity.util;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class SchoolingWaterAnimal extends WaterAnimal {
+public abstract class BucketableSchoolingWaterAnimal extends BucketableWaterAnimal {
     @Nullable
-    private SchoolingWaterAnimal leader;
+    private BucketableSchoolingWaterAnimal leader;
     private int schoolSize = 1;
 
-    public SchoolingWaterAnimal(EntityType<? extends SchoolingWaterAnimal> p_27523_, Level p_27524_) {
+    public BucketableSchoolingWaterAnimal(EntityType<? extends BucketableSchoolingWaterAnimal> p_27523_, Level p_27524_) {
         super(p_27523_, p_27524_);
     }
 
@@ -43,7 +43,7 @@ public class SchoolingWaterAnimal extends WaterAnimal {
         return this.leader != null && this.leader.isAlive();
     }
 
-    public SchoolingWaterAnimal startFollowing(SchoolingWaterAnimal p_27526_) {
+    public BucketableSchoolingWaterAnimal startFollowing(BucketableSchoolingWaterAnimal p_27526_) {
         this.leader = p_27526_;
         p_27526_.addFollower();
         return p_27526_;
@@ -92,8 +92,8 @@ public class SchoolingWaterAnimal extends WaterAnimal {
 
     }
 
-    public void addFollowers(Stream<? extends SchoolingWaterAnimal> p_27534_) {
-        p_27534_.limit((long)(this.getMaxSchoolSize() - this.schoolSize)).filter((p_27538_) -> {
+    public void addFollowers(Stream<? extends BucketableSchoolingWaterAnimal> p_27534_) {
+        p_27534_.limit(this.getMaxSchoolSize() - this.schoolSize).filter((p_27538_) -> {
             return p_27538_ != this;
         }).forEach((p_27536_) -> {
             p_27536_.startFollowing(this);
@@ -104,18 +104,18 @@ public class SchoolingWaterAnimal extends WaterAnimal {
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_27528_, DifficultyInstance p_27529_, MobSpawnType p_27530_, @Nullable SpawnGroupData p_27531_, @Nullable CompoundTag p_27532_) {
         super.finalizeSpawn(p_27528_, p_27529_, p_27530_, p_27531_, p_27532_);
         if (p_27531_ == null) {
-            p_27531_ = new SchoolingWaterAnimal.SchoolSpawnGroupData(this);
+            p_27531_ = new BucketableSchoolingWaterAnimal.SchoolSpawnGroupData(this);
         } else {
-            this.startFollowing(((SchoolingWaterAnimal.SchoolSpawnGroupData)p_27531_).leader);
+            this.startFollowing(((BucketableSchoolingWaterAnimal.SchoolSpawnGroupData)p_27531_).leader);
         }
 
         return p_27531_;
     }
 
     public static class SchoolSpawnGroupData implements SpawnGroupData {
-        public final SchoolingWaterAnimal leader;
+        public final BucketableSchoolingWaterAnimal leader;
 
-        public SchoolSpawnGroupData(SchoolingWaterAnimal p_27553_) {
+        public SchoolSpawnGroupData(BucketableSchoolingWaterAnimal p_27553_) {
             this.leader = p_27553_;
         }
     }

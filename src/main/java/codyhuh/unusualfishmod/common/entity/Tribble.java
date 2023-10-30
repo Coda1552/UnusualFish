@@ -1,5 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -21,17 +23,23 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 
-public class Tribble extends WaterAnimal {
+public class Tribble extends BucketableWaterAnimal {
 
     public Tribble(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new Tribble.MoveHelperController(this);
         this.maxUpStep = 1.0f;
+    }
+
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.TRIBBLE_BUCKET.get());
     }
 
     public static AttributeSupplier.Builder createAttributes() {

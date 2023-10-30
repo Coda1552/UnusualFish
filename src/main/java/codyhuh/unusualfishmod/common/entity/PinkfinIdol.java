@@ -1,5 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -21,16 +23,22 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.TropicalFish;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 
-public class PinkfinIdol extends WaterAnimal {
+public class PinkfinIdol extends BucketableWaterAnimal {
 
 	public PinkfinIdol(EntityType<? extends WaterAnimal> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
+	}
+
+	@Override
+	public ItemStack getBucketStack() {
+		return new ItemStack(UFItems.PINKFIN_IDOL_BUCKET.get());
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

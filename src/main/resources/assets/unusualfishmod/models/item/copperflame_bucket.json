@@ -1,6 +1,20 @@
 {
-  "parent" : "item/generated",
-  "textures" : {
-    "layer0" : "unusualfishmod:item/copperflameanthias_green_bucket"
-  }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "unusualfishmod:item/copperflameanthias_green_bucket"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "unusualfishmod:variant": 0
+      },
+      "model": "unusualfishmod:item/copperflame_bucket"
+    },
+    {
+      "predicate": {
+        "unusualfishmod:variant": 1
+      },
+      "model": "unusualfishmod:item/copperflame_bucket_2"
+    }
+  ]
 }

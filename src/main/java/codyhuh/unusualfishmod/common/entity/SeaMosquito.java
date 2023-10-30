@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.BottomStrollGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;

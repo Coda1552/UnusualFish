@@ -1,18 +1,12 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
-import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -24,21 +18,24 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketable {
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(DualityDamselfish.class, EntityDataSerializers.BOOLEAN);
+public class DualityDamselfish extends BucketableSchoolingWaterAnimal {
 	private boolean isSchool = true;
 
-	public DualityDamselfish(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
+	public DualityDamselfish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
+	}
+
+	@Override
+	public ItemStack getBucketStack() {
+		return new ItemStack(UFItems.DUALITY_DAMSELFISH_BUCKET.get());
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -66,7 +63,7 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4D, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -102,72 +99,6 @@ public class DualityDamselfish extends SchoolingWaterAnimal implements Bucketabl
 	protected SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
 	}
-
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(FROM_BUCKET, false);
-	}
-
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putBoolean("FromBucket", this.isFromBucket());
-		compound.putBoolean("Bucketed", this.fromBucket());
-	}
-
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setFromBucket(compound.getBoolean("FromBucket"));
-		this.setFromBucket(compound.getBoolean("Bucketed"));
-	}
-
-	@Override
-	public boolean fromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
-
-	}
-
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || this.fromBucket();
-	}
-
-	public boolean removeWhenFarAway(double p_213397_1_) {
-		return !this.fromBucket() && !this.hasCustomName();
-	}
-
-	private boolean isFromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public void setFromBucket(boolean p_203706_1_) {
-		this.entityData.set(FROM_BUCKET, p_203706_1_);
-	}
-
-	@Override
-	public void loadFromBucketTag(CompoundTag p_148832_) {
-
-	}
-
-	@Override
-	public SoundEvent getPickupSound() {
-		return SoundEvents.BUCKET_EMPTY_FISH;
-	}
-
-	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-	}
-
-	@Override
-	public ItemStack getBucketItemStack() {
-		return new ItemStack(UFItems.DUALITY_DAMSELFISH_BUCKET.get());
-	}
-
 
 	public static boolean canSpawn(EntityType<DualityDamselfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);

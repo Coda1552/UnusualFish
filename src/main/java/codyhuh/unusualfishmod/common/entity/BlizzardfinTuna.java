@@ -1,6 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -19,16 +20,22 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class BlizzardfinTuna extends SchoolingWaterAnimal {
+public class BlizzardfinTuna extends BucketableSchoolingWaterAnimal {
 	private boolean isSchool = true;
 
-	public BlizzardfinTuna(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
+	public BlizzardfinTuna(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.5F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
+	}
+
+	@Override
+	public ItemStack getBucketStack() {
+		return new ItemStack(UFItems.BLIZZARDFIN_BUCKET.get());
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

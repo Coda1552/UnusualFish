@@ -1,6 +1,8 @@
 package codyhuh.unusualfishmod.common.entity;
 
 
+import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,16 +26,22 @@ import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class MuddytopSnail extends WaterAnimal{
+public class MuddytopSnail extends BucketableWaterAnimal {
     protected int attackCooldown = 0;
 
     public MuddytopSnail(EntityType<? extends MuddytopSnail> type, Level world) {
         super(type, world);
         this.moveControl = new MuddytopSnail.MoveHelperController(this);
         this.maxUpStep = 1.0f;
+    }
+
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.MUDDYTOP_SNAIL_BUCKET.get());
     }
 
     public static AttributeSupplier.Builder createAttributes() {

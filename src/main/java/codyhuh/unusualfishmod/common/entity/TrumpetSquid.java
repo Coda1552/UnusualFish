@@ -1,5 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -25,13 +27,14 @@ import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TrumpetSquid extends WaterAnimal {
+public class TrumpetSquid extends BucketableWaterAnimal {
 	public float squidRotation;
 
 	public TrumpetSquid(EntityType<? extends TrumpetSquid> entityType, Level level) {
@@ -39,6 +42,11 @@ public class TrumpetSquid extends WaterAnimal {
 		this.moveControl = new TrumpetSquid.MoveHelperController(this);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
+	}
+
+	@Override
+	public ItemStack getBucketStack() {
+		return new ItemStack(UFItems.TRUMPET_SQUID_BUCKET.get());
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

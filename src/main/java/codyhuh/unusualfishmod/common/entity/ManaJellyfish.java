@@ -1,21 +1,14 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.FollowSchoolLeaderGoal;
-import codyhuh.unusualfishmod.common.entity.ai.SchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -28,26 +21,26 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.Vec3;
 
-//REMOVE TILT FROM
-public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(ManaJellyfish.class, EntityDataSerializers.BOOLEAN);
+public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
     protected int attackCooldown = 0;
     private boolean isSchool = true;
 
-
-    public ManaJellyfish(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
+    public ManaJellyfish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
+
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.WIZARD_JELLY_BUCKET.get());
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -73,20 +66,6 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
         });
     }
 
-    //Squid Games
-
-    public void tick() {
-        super.tick();
-
-            if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-                Vec3 vec3 = this.getViewVector(0.0F);
-                float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-                float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-            }
-
-        }
-
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -98,11 +77,13 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
         super.aiStep();
     }
 
+    public SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
+
     protected PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
-
-    //Squid Games
 
     public int getMaxSpawnClusterSize() {
         return 5;
@@ -118,75 +99,6 @@ public class ManaJellyfish extends SchoolingWaterAnimal implements Bucketable {
 
     protected SoundEvent getAmbientSound() {
         return UFSounds.SMALL_FISH.get();
-    }
-
-    @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
-    }
-
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putBoolean("FromBucket", this.isFromBucket());
-        compound.putBoolean("Bucketed", this.fromBucket());
-    }
-
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setFromBucket(compound.getBoolean("FromBucket"));
-        this.setFromBucket(compound.getBoolean("Bucketed"));
-    }
-
-    @Override
-    public boolean fromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-    @Override
-    public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
-
-    }
-
-    public boolean requiresCustomPersistence() {
-        return super.requiresCustomPersistence() || this.fromBucket();
-    }
-
-    public boolean removeWhenFarAway(double p_213397_1_) {
-        return !this.fromBucket() && !this.hasCustomName();
-    }
-
-    private boolean isFromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-    public void setFromBucket(boolean p_203706_1_) {
-        this.entityData.set(FROM_BUCKET, p_203706_1_);
-    }
-
-    @Override
-    public void loadFromBucketTag(CompoundTag p_148832_) {
-
-    }
-
-    @Override
-    public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_EMPTY_FISH;
-    }
-
-    protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-        return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-    }
-
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(UFItems.WIZARD_JELLY_BUCKET.get());
-    }
-
-    public SoundEvent getFlopSound() {
-        return SoundEvents.COD_FLOP;
     }
 
     @Override

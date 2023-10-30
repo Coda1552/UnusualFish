@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.common.entity.ai;
+package codyhuh.unusualfishmod.common.entity.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;

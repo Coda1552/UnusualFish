@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.ai.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.BottomStrollGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -150,13 +150,11 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         compound.putBoolean("FromBucket", this.isFromBucket());
-        compound.putBoolean("Bucketed", this.fromBucket());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         this.setFromBucket(compound.getBoolean("FromBucket"));
-        this.setFromBucket(compound.getBoolean("Bucketed"));
     }
 
     @Override
@@ -168,7 +166,6 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
-
     }
 
     public boolean requiresCustomPersistence() {
