@@ -116,7 +116,7 @@ public final class UFItems {
 	public static final RegistryObject<ForgeSpawnEggItem> VOLT_ANGLER_SPAWN_EGG = ITEMS.register("volt_angler_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.VOLT_ANGLER, 0x0e011e, 0xffea14, new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<ForgeSpawnEggItem> TRIBBLE_SPAWN_EGG = ITEMS.register("tribble_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.TRIBBLE, 0x0e011e, 0x5e1c68, new Item.Properties().tab(UnusualFishMod.TAB)));
 
-	// Buckets
+	// Buckets // todo - blizzardfin, copperflame anthias variants, coral skrimp variants, demonherring variants, muddytop snail, pinkfin idol, shockcat, stout bichir, tiger puffer, trumpet squid, tribble
 	public static final RegistryObject<Item> AERO_MONO_BUCKET = ITEMS.register("aero_mono_bucket", () -> new UFFishBucketItem(UFEntities.AERO_MONO, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1)));
 	public static final RegistryObject<Item> RHINO_TETRA_BUCKET = ITEMS.register("rhino_tetra_bucket", () -> new UFFishBucketItem(UFEntities.RHINO_TETRA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1)));
 	public static final RegistryObject<Item> DUALITY_DAMSELFISH_BUCKET = ITEMS.register("duality_damselfish_bucket", () -> new UFFishBucketItem(UFEntities.DUALITY_DAMSELFISH, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1)));
