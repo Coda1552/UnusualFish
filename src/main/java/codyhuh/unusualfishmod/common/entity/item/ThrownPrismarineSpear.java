@@ -23,6 +23,11 @@ public class ThrownPrismarineSpear extends AbstractArrow {
     private ItemStack spearItem = new ItemStack(UFItems.PRISMARINE_SPEAR.get());
     private boolean dealtDamage;
 
+    public ThrownPrismarineSpear(EntityType<? extends AbstractArrow> p_36711_, double p_36712_, double p_36713_, double p_36714_, Level p_36715_) {
+        this(p_36711_, p_36715_);
+        this.setPos(p_36712_, p_36713_, p_36714_);
+    }
+
     public ThrownPrismarineSpear(EntityType<? extends AbstractArrow> p_37561_, Level p_37562_) {
         super(p_37561_, p_37562_);
     }

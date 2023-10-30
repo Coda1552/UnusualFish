@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.client;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.model.*;
+import codyhuh.unusualfishmod.client.model.item.PrismarineSpearModel;
 import codyhuh.unusualfishmod.client.renderer.*;
 import codyhuh.unusualfishmod.client.renderer.item.ThrownPrismarineSpearRenderer;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
@@ -144,6 +145,7 @@ public final class ClientEvents {
 		e.registerLayerDefinition(UFModelLayers.CRIMSONSHELL_SQUID, CrimsonshellSquidModel::createBodyLayer);
 		e.registerLayerDefinition(UFModelLayers.VOLT_ANGLER, VoltAnglerModel::createBodyLayer);
 		e.registerLayerDefinition(UFModelLayers.TRIBBLE, TribbleModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.PRISMARINE_SPEAR, PrismarineSpearModel::createBodyLayer);
 	}
 }
 

@@ -59,6 +59,7 @@ public class UFModelLayers {
     public static final ModelLayerLocation TRUMPET_SQUID = create("trumpet_squid");
     public static final ModelLayerLocation VOLT_ANGLER = create("volt_angler");
     public static final ModelLayerLocation ZEBRA_CORNETFISH = create("zebra_cornetfish");
+    public static final ModelLayerLocation PRISMARINE_SPEAR = create("prismarine_spear");
 
     private static ModelLayerLocation create(String name) {
         return new ModelLayerLocation(new ResourceLocation(UnusualFishMod.MOD_ID, name), "main");

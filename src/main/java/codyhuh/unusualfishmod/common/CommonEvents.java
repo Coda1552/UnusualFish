@@ -2,20 +2,41 @@ package codyhuh.unusualfishmod.common;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.*;
+import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
+import codyhuh.unusualfishmod.core.registry.UFItems;
+import net.minecraft.core.Position;
+import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 @Mod.EventBusSubscriber(modid = UnusualFishMod.MOD_ID, bus = Bus.MOD)
 public class CommonEvents {
 
     @SubscribeEvent
-    public static void commonSetup(SpawnPlacementRegisterEvent e) {
+    public static void commonSetup(FMLCommonSetupEvent e) {
+        DispenserBlock.registerBehavior(UFItems.PRISMARINE_SPEAR.get(), new AbstractProjectileDispenseBehavior() {
+            protected Projectile getProjectile(Level level, Position pos, ItemStack stack) {
+                ThrownPrismarineSpear arrow = new ThrownPrismarineSpear(UFEntities.PRISMARINE_SPEAR.get(), pos.x(), pos.y(), pos.z(), level);
+                arrow.pickup = AbstractArrow.Pickup.ALLOWED;
+                return arrow;
+            }
+        });
+    }
+
+    @SubscribeEvent
+    public static void registerSpawnPlacements(SpawnPlacementRegisterEvent e) {
         e.register(UFEntities.AERO_MONO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, AeroMono::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UFEntities.PINKFIN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, PinkfinIdol::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
         e.register(UFEntities.CLOWNTHORN_SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, ClownthornShark::canSpawn, SpawnPlacementRegisterEvent.Operation.OR);
