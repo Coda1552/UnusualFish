@@ -1,7 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/lower_bucket",
-    "layer1" : "unusualfishmod:item/bucket_content/mossthorn"
+    "layer0" : "unusualfishmod:item/mossthorn_bucket"
   }
 }

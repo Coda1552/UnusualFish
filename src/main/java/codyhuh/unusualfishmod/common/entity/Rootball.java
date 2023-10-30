@@ -1,7 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.ai.CustomSwellGoal;
-import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -12,8 +11,6 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -22,13 +19,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -37,8 +32,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public class Rootball extends Monster implements PowerableMob, Bucketable {
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
+public class Rootball extends Monster implements PowerableMob {
     private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_IS_POWERED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
@@ -89,14 +83,11 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
         this.entityData.define(DATA_SWELL_DIR, -1);
         this.entityData.define(DATA_IS_POWERED, false);
         this.entityData.define(DATA_IS_IGNITED, false);
-        this.entityData.define(FROM_BUCKET, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("FromBucket", this.isFromBucket());
-        compound.putBoolean("Bucketed", this.fromBucket());
         if (this.entityData.get(DATA_IS_POWERED)) {
             compound.putBoolean("powered", true);
         }
@@ -108,8 +99,6 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
 
     public void readAdditionalSaveData(CompoundTag p_32296_) {
         super.readAdditionalSaveData(p_32296_);
-        this.setFromBucket(p_32296_.getBoolean("FromBucket"));
-        this.setFromBucket(p_32296_.getBoolean("Bucketed"));
         this.entityData.set(DATA_IS_POWERED, p_32296_.getBoolean("powered"));
         if (p_32296_.contains("Fuse", 99)) {
             this.maxSwell = p_32296_.getShort("Fuse");
@@ -228,56 +217,6 @@ public class Rootball extends Monster implements PowerableMob, Bucketable {
     @Override
     public boolean isPowered() {
         return this.entityData.get(DATA_IS_POWERED);
-    }
-
-
-    @Override
-    public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
-
-    }
-
-
-    @Override
-    public void loadFromBucketTag(CompoundTag p_148832_) {
-
-    }
-
-    @Override
-    public SoundEvent getPickupSound() {
-        return SoundEvents.BUCKET_EMPTY_FISH;
-    }
-
-    protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-        return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-    }
-
-    @Override
-    public ItemStack getBucketItemStack() {
-        return new ItemStack(UFItems.ROOTBALL_BUCKET.get());
-    }
-
-    @Override
-    public boolean fromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-
-    public boolean requiresCustomPersistence() {
-        return super.requiresCustomPersistence() || this.fromBucket();
-    }
-
-    public boolean removeWhenFarAway(double p_213397_1_) {
-        return !this.fromBucket() && !this.hasCustomName();
-    }
-
-    private boolean isFromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-    public void setFromBucket(boolean p_203706_1_) {
-        this.entityData.set(FROM_BUCKET, p_203706_1_);
     }
 
     public static boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {

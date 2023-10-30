@@ -1,8 +1,6 @@
-
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/lower_bucket",
-    "layer1" : "unusualfishmod:item/bucket_content/bark_angelfish"
+    "layer0" : "unusualfishmod:item/bark_angelfish_bucket"
   }
 }
