@@ -86,6 +86,11 @@ public class TigerPuffer extends WaterAnimal {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
 
+    @Override
+    protected float getSoundVolume() {
+        return 0.4F;
+    }
+
     protected SoundEvent getAmbientSound() {
         return UFSounds.MEDIUM_FISH.get();
     }

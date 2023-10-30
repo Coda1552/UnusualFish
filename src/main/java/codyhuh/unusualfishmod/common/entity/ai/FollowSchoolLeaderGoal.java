@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class FollowSchoolLeaderGoal extends Goal {
-    private static final int INTERVAL_TICKS = 200;
     private final SchoolingWaterAnimal mob;
     private int timeToRecalcPath;
     private int nextStartTick;

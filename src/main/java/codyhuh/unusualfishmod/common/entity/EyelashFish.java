@@ -10,7 +10,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +23,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
-import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -34,18 +35,20 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.pathfinder.Path;
 
 import javax.annotation.Nullable;
 
 public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> ESCAPING = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
+	private static Path path;
 
 	public EyelashFish(EntityType<? extends SchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
 	}
 
@@ -54,42 +57,45 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
 			@Override
 			public boolean canUse() {
 				return super.canUse() && isInWater();
 			}
 		});
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 	}
 
-	public void tick() {
-		super.tick();
-
-			if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-				Vec3 vec3 = this.getViewVector(0.0F);
-				float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-				float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			}
+	@Override
+	public boolean hurt(DamageSource p_21016_, float p_21017_) {
+		if (!isEscaping() && isInWater()) {
+			setEscaping(true);
+			path = getNavigation().createPath(blockPosition().relative(getDirection(), 10), 1);
 		}
-
+		return super.hurt(p_21016_, p_21017_);
+	}
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
+
+		if (isEscaping()) {
+			if (getNavigation().moveTo(path, 1.0D)) {
+				setSpeed(5.0F);
+
+				if (path.isDone()) {
+					setEscaping(false);
+					setSpeed(1.0F);
+				}
+			}
+		}
+
 		super.aiStep();
 	}
 
@@ -136,6 +142,7 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
 		this.entityData.define(FROM_BUCKET, false);
+		this.entityData.define(ESCAPING, false);
 	}
 
 	public int getVariant() {
@@ -197,6 +204,14 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 		this.entityData.set(FROM_BUCKET, p_203706_1_);
 	}
 
+	private boolean isEscaping() {
+		return this.entityData.get(ESCAPING);
+	}
+
+	public void setEscaping(boolean escaping) {
+		this.entityData.set(ESCAPING, escaping);
+	}
+
 	@Override
 	public void loadFromBucketTag(CompoundTag p_148832_) {
 	}
@@ -212,7 +227,7 @@ public class EyelashFish extends SchoolingWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-        return new ItemStack(UFItems.EYELASH_FISH_BUCKET.get());
+		return new ItemStack(UFItems.EYELASH_FISH_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<EyelashFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

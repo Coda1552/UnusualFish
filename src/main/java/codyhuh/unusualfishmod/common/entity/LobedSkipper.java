@@ -53,7 +53,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     }
     protected void registerGoals() {
         this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-        this.goalSelector.addGoal(2, new SkipperPanicGoal(1.25));
+        this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.5F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
@@ -103,8 +103,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         float motion = super.getJumpPower();
             return motion;
     }
-
-    //Rabbit Time : )
 
     private int jumpTicks;
     private int jumpDuration;
@@ -252,48 +250,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         }
     }
 
-    public class SkipperMoveController extends MoveControl {
-        private double nextJumpSpeed;
-
-        public SkipperMoveController() {
-            super(LobedSkipper.this);
-        }
-
-        @Override
-        public void tick() {
-            if (isOnGround() && !jumping && !((SkipperJumpController) jumpControl).getIsJumping())
-                setMovementSpeed(0.0D);
-            else if (this.hasWanted()) setMovementSpeed(this.nextJumpSpeed);
-
-            super.tick();
-        }
-
-        @Override
-        public void setWantedPosition(double x, double y, double z, double speedIn) {
-            if (isInWater()) speedIn = 1.5D;
-
-            super.setWantedPosition(x, y, z, speedIn);
-
-            if (speedIn > 0.0D) this.nextJumpSpeed = speedIn;
-        }
-    }
-
-    public class SkipperPanicGoal extends PanicGoal {
-
-        public SkipperPanicGoal(double speedIn) {
-            super(LobedSkipper.this, speedIn);
-        }
-
-        @Override
-        public void tick() {
-            super.tick();
-            setMovementSpeed(this.speedModifier);
-        }
-
-    }
-
-//Rabbit Time is Over : (
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -321,7 +277,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
-
     }
 
     public boolean requiresCustomPersistence() {
@@ -342,7 +297,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
     @Override
     public void loadFromBucketTag(CompoundTag p_148832_) {
-
     }
 
     @Override
@@ -367,8 +321,33 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         return UFSounds.SMALL_FISH.get();
     }
 
-
     public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
         return worldIn.getBlockState(pos.below()).canOcclude();
+    }
+
+    public class SkipperMoveController extends MoveControl {
+        private double nextJumpSpeed;
+
+        public SkipperMoveController() {
+            super(LobedSkipper.this);
+        }
+
+        @Override
+        public void tick() {
+            if (isOnGround() && !jumping && !((SkipperJumpController) jumpControl).getIsJumping())
+                setMovementSpeed(0.0D);
+            else if (this.hasWanted()) setMovementSpeed(this.nextJumpSpeed);
+
+            super.tick();
+        }
+
+        @Override
+        public void setWantedPosition(double x, double y, double z, double speedIn) {
+            if (isInWater()) speedIn = 1.5D;
+
+            super.setWantedPosition(x, y, z, speedIn);
+
+            if (speedIn > 0.0D) this.nextJumpSpeed = speedIn;
+        }
     }
 }

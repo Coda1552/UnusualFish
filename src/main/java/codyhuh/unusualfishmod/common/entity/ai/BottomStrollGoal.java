@@ -11,6 +11,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 
 public class BottomStrollGoal extends RandomStrollGoal {
+
     public BottomStrollGoal(PathfinderMob p_i48937_1_, double p_i48937_2_, int p_i48937_4_) {
         super(p_i48937_1_, p_i48937_2_, p_i48937_4_);
     }

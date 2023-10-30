@@ -15,10 +15,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -50,7 +47,7 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.MOVEMENT_SPEED, (double) 1.0D)
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.MOVEMENT_SPEED, 1.0D)
 				.add(Attributes.ATTACK_DAMAGE, 2.0D);
 	}
 
@@ -58,7 +55,6 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.5D, false));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
 			@Override
 			public boolean canUse() {
@@ -71,6 +67,8 @@ public class Ripper extends SchoolingWaterAnimal implements Bucketable {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, p -> p.getHealth() <= p.getMaxHealth() / 3));
 	}
 
 	@Override
