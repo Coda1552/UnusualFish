@@ -1,9 +1,11 @@
 package codyhuh.unusualfishmod.common.item;
 
 import codyhuh.unusualfishmod.core.registry.UFTiers;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
@@ -29,12 +31,18 @@ public class RipsawItem extends AxeItem implements Vanishable {
     @Override
     public void onUsingTick(ItemStack stack, LivingEntity user, int count) {
         if (user instanceof Player player) {
-            if (count % 10 == 0) {
-                EntityHitResult result = getLookAtEntity(player, player.level, player.getReachDistance());
+            EntityHitResult result = getLookAtEntity(player, player.level, player.getReachDistance() + 1.0D);
+            CompoundTag tag = stack.getOrCreateTag();
 
-                if (result != null && result.getEntity() instanceof LivingEntity living) {
-                    living.hurt(DamageSource.playerAttack(player), getAttackDamage());
+            float i = count % 10.0F;
+            float progress = i / 10.0F;
 
+            tag.putFloat("SawingProgress", progress);
+
+            System.out.println(tag.getFloat("SawingProgress"));
+
+            if (result != null && result.getEntity() instanceof LivingEntity living) {
+                if (living.hurt(DamageSource.playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {
                         p_40665_.broadcastBreakEvent(living.getUsedItemHand());
                     });
@@ -42,6 +50,13 @@ public class RipsawItem extends AxeItem implements Vanishable {
             }
         }
 
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level p_41405_, Entity p_41406_, int p_41407_, boolean held) {
+        if (!held) {
+            stack.getOrCreateTag().putFloat("SawingProgress", 0.0F);
+        }
     }
 
     @Override

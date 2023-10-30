@@ -24,9 +24,10 @@ public final class ClientEvents {
 		ItemProperties.register(UFItems.FLUVIAL_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		ItemProperties.register(UFItems.THUNDEROUS_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		ItemProperties.register(UFItems.PRISMARINE_SPEAR.get(), new ResourceLocation("using"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
-		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0);
-		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0);
-		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getTag().getInt("Variant") : 0);
+		ItemProperties.register(UFItems.RIPSAW.get(), new ResourceLocation("sawing"), (stack, level, player, i) -> player != null && player.isUsingItem() && stack.hasTag() ? stack.getOrCreateTag().getFloat("SawingProgress") : 0.0F);
+		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
 	}
 
 	@SubscribeEvent
