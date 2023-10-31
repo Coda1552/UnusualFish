@@ -39,8 +39,6 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
             tag.putFloat("SawingProgress", progress);
 
-            System.out.println(tag.getFloat("SawingProgress"));
-
             if (result != null && result.getEntity() instanceof LivingEntity living) {
                 if (living.hurt(DamageSource.playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {
