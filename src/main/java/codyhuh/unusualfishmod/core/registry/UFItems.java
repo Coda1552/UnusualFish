@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.item.*;
+import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tiers;
@@ -24,8 +25,8 @@ public final class UFItems {
 	public static final RegistryObject<Item> COOKED_AERO_MONO_STICK = ITEMS.register("cooked_aero_mono_stick", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_AERO_MONO_STICK).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_BUMPFACE = ITEMS.register("raw_bumpface", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BUMPFACE).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> COOKED_BUMPFACE = ITEMS.register("cooked_bumpface", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_BUMPFACE).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> RAW_RHINO_TETRA = ITEMS.register("raw_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_TETRA_RHINO).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_RHINO_TETRA = ITEMS.register("cooked_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_TETRA_RHINO).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_RHINO_TETRA = ITEMS.register("raw_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_RHINO_TETRA).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> COOKED_RHINO_TETRA = ITEMS.register("cooked_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_RHINO_TETRA).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SAILOR_BARB = ITEMS.register("raw_sailor_barb", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SAILOR_BARB).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> COOKED_SAILOR_BARB = ITEMS.register("cooked_sailor_barb", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_SAILOR_BARB).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_BARK_ANGELFISH = ITEMS.register("raw_bark_angelfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BARK_ANGELFISH).tab(UnusualFishMod.TAB)));
@@ -38,8 +39,16 @@ public final class UFItems {
 	public static final RegistryObject<Item> COOKED_LOBSTER = ITEMS.register("cooked_lobster", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_LOBSTER).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_MOSSTHORN = ITEMS.register("raw_mossthorn", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_MOSSTHORN).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> COOKED_MOSSTHORN = ITEMS.register("cooked_mossthorn", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_MOSSTHORN).tab(UnusualFishMod.TAB)));
-	//public static final RegistryObject<Item> COOKED_VEIL_TENTACLE = ITEMS.register("cooked_veil_tentacle", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_VEIL_TENTACLE).tab(UnusualFishMod.TAB)));
-	//public static final RegistryObject<Item> RAW_VEIL_TENTACLE = ITEMS.register("raw_veil_tentacle", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_VEIL_TENTACLE).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> UNUSUAL_FILLET = ITEMS.register("unusual_fillet", () -> new Item(new Item.Properties().food(UFFoodProperties.UNUSUAL_FILLET).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> COOKED_UNUSUAL_FILLET = ITEMS.register("cooked_unusual_fillet", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_UNUSUAL_FILLET).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> LOBSTER_ROLL = ITEMS.register("lobster_roll", () -> new Item(new Item.Properties().food(UFFoodProperties.LOBSTER_ROLL).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> ODD_FISHSTICKS = ITEMS.register("odd_fishsticks", () -> new Item(new Item.Properties().food(UFFoodProperties.ODD_FISHSTICKS).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> PICKLEDISH = ITEMS.register("pickledish", () -> new BowlFoodItem(new Item.Properties().food(UFFoodProperties.PICKLEDISH).stacksTo(1).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> STRANGE_BROTH = ITEMS.register("strange_broth", () -> new BowlFoodItem(new Item.Properties().food(UFFoodProperties.STRANGE_BROTH).stacksTo(1).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> UNUSUAL_SANDWICH = ITEMS.register("unusual_sandwich", () -> new Item(new Item.Properties().food(UFFoodProperties.UNUSUAL_SANDWICH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> WEIRD_GOLDFISH = ITEMS.register("weird_goldfish", () -> new Item(new Item.Properties().food(UFFoodProperties.WEIRD_GOLDFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_PICKLEFSIH = ITEMS.register("raw_picklefish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_PICKLEFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> COOKED_PICKLEFISH = ITEMS.register("cooked_picklefish", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_PICKLEFISH).tab(UnusualFishMod.TAB)));
 
 	// Drops
 	public static final RegistryObject<Item> GNASHER_ORGAN = ITEMS.register("gnasher_organ", () -> new Item(new Item.Properties()));

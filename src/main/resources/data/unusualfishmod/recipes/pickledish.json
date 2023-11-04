@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#US",
+    " B "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:carrot"
+    },
+    "U": {
+      "item": "unusualfishmod:raw_picklefish"
+    },
+    "S": {
+      "item": "minecraft:sea_pickle"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:pickledish",
+    "count": 1
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "KUS",
+    " B "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:seagrass"
+    },
+    "K": {
+      "item": "minecraft:kelp"
+    },
+    "U": {
+      "item": "unusualfishmod:cooked_unusual_fillet"
+    },
+    "S": {
+      "item": "minecraft:sea_pickle"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:strange_broth",
+    "count": 1
+  }
+}

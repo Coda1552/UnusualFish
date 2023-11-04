@@ -1,7 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/lower_bucket",
-    "layer1" : "unusualfishmod:item/bucket_content/spindlefish"
+    "layer0" : "unusualfishmod:item/spindlefish_bucket"
   }
 }

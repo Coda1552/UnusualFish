@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "KUK",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bread"
+    },
+    "K": {
+      "item": "minecraft:kelp"
+    },
+    "U": {
+      "item": "unusualfishmod:cooked_unusual_fillet"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:unusual_sandwich",
+    "count": 1
+  }
+}

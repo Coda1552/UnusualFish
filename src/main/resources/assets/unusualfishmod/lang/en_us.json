@@ -16,6 +16,8 @@
 	"item.unusualfishmod.raw_lobster": "Raw Porcupine Lobster Tail",
 	"item.unusualfishmod.raw_eyelash": "Raw Eyelash Fish",
 	"item.unusualfishmod.raw_snowflake": "Raw Snowflake Tail Fish",
+	"item.unusualfishmod.unusual_fillet": "Raw Unusual Fillet",
+	"item.unusualfishmod.raw_picklefish": "Raw Picklefish",
 
 	"item.unusualfishmod.cooked_aero_mono_stick": "Cooked Aero Mono Kebab",
 	"item.unusualfishmod.cooked_bumpface": "Cooked Bumpface",
@@ -27,6 +29,15 @@
 	"item.unusualfishmod.cooked_shockcat": "Cooked Shockcat Filet",
 	"item.unusualfishmod.cooked_lobster": "Cooked Porcupine Lobster Tail",
 	"item.unusualfishmod.cooked_bark_angelfish": "Cooked Bark Angelfish",
+	"item.unusualfishmod.cooked_unusual_fillet": "Cooked Unusual Fillet",
+	"item.unusualfishmod.cooked_picklefish": "Cooked Picklefish",
+
+	"item.unusualfishmod.lobster_roll": "Lobster Roll",
+	"item.unusualfishmod.odd_fishsticks": "Odd Fishsticks",
+	"item.unusualfishmod.pickledish": "Pickledish",
+	"item.unusualfishmod.strange_broth": "Strange Broth",
+	"item.unusualfishmod.unusual_sandwich": "Unusual Sandwich",
+	"item.unusualfishmod.weird_goldfish": "Weird Goldfish",
 
 	"block.unusualfishmod.copper_spotlight": "Copper Spotlight",
 	"block.unusualfishmod.volt_detector": "Volt Detector",
@@ -35,7 +46,7 @@
 	"item.unusualfishmod.gnasher_organ": "Gnasher Jewel",
 	"item.unusualfishmod.tendril": "Shocking Tendril",
 	"item.unusualfishmod.ripper_tooth": "Ripper Tooth",
-	"item.unusualfishmod.lobster_spike": "Lobster Sepike",
+	"item.unusualfishmod.lobster_spike": "Lobster Spike",
 	"item.unusualfishmod.relucent_shard": "Relucent Shard",
 	"item.unusualfishmod.crimson_shard": "Crimson Shard",
 
