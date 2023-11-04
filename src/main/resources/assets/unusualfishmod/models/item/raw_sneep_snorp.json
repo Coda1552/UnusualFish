@@ -1,6 +1,6 @@
 {
   "parent" : "item/generated",
   "textures" : {
-    "layer0" : "unusualfishmod:item/cooked_picklefish"
+    "layer0" : "unusualfishmod:item/raw_sneep_snorp"
   }
 }

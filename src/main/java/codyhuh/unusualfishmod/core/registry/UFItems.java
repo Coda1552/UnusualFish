@@ -48,7 +48,18 @@ public final class UFItems {
 	public static final RegistryObject<Item> UNUSUAL_SANDWICH = ITEMS.register("unusual_sandwich", () -> new Item(new Item.Properties().food(UFFoodProperties.UNUSUAL_SANDWICH).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> WEIRD_GOLDFISH = ITEMS.register("weird_goldfish", () -> new Item(new Item.Properties().food(UFFoodProperties.WEIRD_GOLDFISH).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_PICKLEFSIH = ITEMS.register("raw_picklefish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_PICKLEFISH).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_PICKLEFISH = ITEMS.register("cooked_picklefish", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_PICKLEFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_AMBER_GOBY = ITEMS.register("raw_amber_goby", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AMBER_GOBY).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_BEAKED_HERRING = ITEMS.register("raw_beaked_herring", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BEAKED_HERRING).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_BLIND_SAILFIN = ITEMS.register("raw_blind_sailfin", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BLIND_SAILFIN).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_CIRCUS_FISH = ITEMS.register("raw_circus_fish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_CIRCUS_FISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_COPPERFLAME_ANTHIAS = ITEMS.register("raw_copperflame_anthias", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_COPPERFLAME_ANTHIAS).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_DEMON_HERRING = ITEMS.register("raw_demon_herring", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_DEMON_HERRING).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_DROOPING_GOURAMI = ITEMS.register("raw_drooping_gourami", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_DROOPING_GOURAMI).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_DUALITY_DAMSELFISH = ITEMS.register("raw_duality_damselfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_DUALITY_DAMSELFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_FORKFISH = ITEMS.register("raw_forkfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_FORKFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_HATCHETFISH = ITEMS.register("raw_hatchetfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_HATCHETFISH).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_SNEEP_SNORP = ITEMS.register("raw_sneep_snorp", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SNEEP_SNORP).tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> RAW_TRIPLE_TWIRL_PLECO = ITEMS.register("raw_triple_twirl_pleco", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_TRIPLE_TWIRL_PLECO).tab(UnusualFishMod.TAB)));
 
 	// Drops
 	public static final RegistryObject<Item> GNASHER_ORGAN = ITEMS.register("gnasher_organ", () -> new Item(new Item.Properties()));

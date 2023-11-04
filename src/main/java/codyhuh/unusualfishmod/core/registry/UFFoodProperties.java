@@ -23,6 +23,18 @@ public class UFFoodProperties {
     public static final FoodProperties RAW_EYELASH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
     public static final FoodProperties UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(3).saturationMod(0.15F).build();
     public static final FoodProperties RAW_PICKLEFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_AMBER_GOBY = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_BEAKED_HERRING = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_BLIND_SAILFIN = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_CIRCUS_FISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_COPPERFLAME_ANTHIAS = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_DEMON_HERRING = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_DROOPING_GOURAMI = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_DUALITY_DAMSELFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_FORKFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_HATCHETFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_SNEEP_SNORP = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_TRIPLE_TWIRL_PLECO = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
 
     // Cooked
     public static final FoodProperties COOKED_AERO_MONO_STICK = new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 150, 1), 1.0F).build();
@@ -35,7 +47,6 @@ public class UFFoodProperties {
     public static final FoodProperties COOKED_SHOCKCAT = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
     public static final FoodProperties COOKED_LOBSTER = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
     public static final FoodProperties COOKED_UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
-    public static final FoodProperties COOKED_PICKLEFISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.35F).build();
 
     // Meals
     public static final FoodProperties LOBSTER_ROLL = new FoodProperties.Builder().nutrition(10).saturationMod(0.8F).build();
