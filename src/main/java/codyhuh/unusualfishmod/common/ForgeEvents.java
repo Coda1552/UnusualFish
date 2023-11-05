@@ -1,8 +1,6 @@
 package codyhuh.unusualfishmod.common;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.block.VoltDetectorBlock;
-import codyhuh.unusualfishmod.common.entity.VoltAngler;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,8 +25,10 @@ public class ForgeEvents {
         Level level = e.getEntity().getLevel();
 
         AABB aabb = entity.getBoundingBox();
-        BlockPos blockpos = new BlockPos(aabb.minX - 0.5D, aabb.minY - 0.5D, aabb.minZ - 0.5D);
-        BlockPos blockpos1 = new BlockPos(aabb.maxX + 0.5D, aabb.maxY + 0.5D, aabb.maxZ + 0.5D);
+        double range = 2.0D;
+
+        BlockPos blockpos = new BlockPos(aabb.minX - range, aabb.minY - range, aabb.minZ - range);
+        BlockPos blockpos1 = new BlockPos(aabb.maxX + range, aabb.maxY + range, aabb.maxZ + range);
 
         if (level.hasChunksAt(blockpos, blockpos1)) {
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
@@ -51,14 +51,6 @@ public class ForgeEvents {
 
                                 arrow.setDeltaMovement(arrowMovement);
                                 level.addFreshEntity(arrow);
-                            }
-                        }
-
-                        if (blockstate.is(UFBlocks.VOLT_DETECTOR.get()) && entity instanceof VoltAngler) {
-                            int anglers = blockstate.getValue(VoltDetectorBlock.ANGLERS);
-
-                            if (anglers < 5) {
-                                blockstate.setValue(VoltDetectorBlock.ANGLERS, anglers + 1);
                             }
                         }
                     }
