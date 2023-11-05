@@ -1,53 +1,41 @@
 package codyhuh.unusualfishmod.common.block;
 
-import codyhuh.unusualfishmod.common.block_entity.VoltDetectorBlockEntity;
-import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class VoltDetectorBlock extends BaseEntityBlock {
+public class VoltDetectorBlock extends Block {
+    public static final IntegerProperty ANGLERS = IntegerProperty.create("anglers", 0, 5);
 
     public VoltDetectorBlock(Properties p_49795_) {
         super(p_49795_);
+        this.registerDefaultState(this.stateDefinition.any().setValue(ANGLERS, 0));
+    }
+
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_49646_) {
+        p_49646_.add(ANGLERS);
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState p_49232_) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    public boolean isSignalSource(BlockState p_60571_) {
+    public boolean isSignalSource(BlockState state) {
         return true;
     }
 
     @Override
     public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
-        if (level.getBlockEntity(pos) instanceof VoltDetectorBlockEntity voltDetector && !voltDetector.getAnglerList().isEmpty()) {
-            return Math.min(voltDetector.getAnglerList().size() * 3, 15);
-        }
-        else {
-            return 0;
-        }
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return UFBlockEntities.VOLT_DETECTOR.get().create(pos, state);
+        return state.getValue(ANGLERS) * 3;
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState p_153213_, BlockEntityType<T> type) {
-        return createTickerHelper(type, UFBlockEntities.VOLT_DETECTOR.get(), VoltDetectorBlockEntity::serverTick);
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+        if (state.getValue(ANGLERS) > 0) {
+            state.setValue(ANGLERS, state.getValue(ANGLERS) - 1);
+        }
     }
 }

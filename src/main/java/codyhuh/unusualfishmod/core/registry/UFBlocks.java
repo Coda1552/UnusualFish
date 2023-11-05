@@ -22,8 +22,9 @@ public final class UFBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, UnusualFishMod.MOD_ID);
 
     public static final RegistryObject<Block> COPPER_SPOTLIGHT = registerBlock("copper_spotlight", () -> new CopperSpotlightBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL).noOcclusion().instabreak().lightLevel(state -> 15).dynamicShape()), UnusualFishMod.TAB);
-    public static final RegistryObject<Block> VOLT_DETECTOR = registerBlock("volt_detector", () -> new VoltDetectorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().sound(SoundType.METAL).lightLevel(state -> 10)), UnusualFishMod.TAB);
-    public static final RegistryObject<Block> NAUTICAL_LAMP = registerBlock("nautical_lamp", () -> new NauticalLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN).sound(SoundType.METAL).lightLevel(state -> 15)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> VOLT_DETECTOR = registerBlock("volt_detector", () -> new VoltDetectorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL).randomTicks().lightLevel(state -> 10)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> NAUTICAL_LAMP = registerBlock("nautical_lamp", () -> new NauticalLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> SEA_BOOM = registerBlock("sea_boom", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).sound(SoundType.METAL)), UnusualFishMod.TAB);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
