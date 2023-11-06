@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.block.NauticalLampBlock;
+import codyhuh.unusualfishmod.common.block.SeaBoomBlock;
 import codyhuh.unusualfishmod.common.block.VoltDetectorBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,7 +23,7 @@ public final class UFBlocks {
 
     public static final RegistryObject<Block> VOLT_DETECTOR = registerBlock("volt_detector", () -> new VoltDetectorBlock(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).sound(SoundType.METAL).randomTicks().lightLevel(state -> 10)), UnusualFishMod.TAB);
     public static final RegistryObject<Block> NAUTICAL_LAMP = registerBlock("nautical_lamp", () -> new NauticalLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)), UnusualFishMod.TAB);
-    public static final RegistryObject<Block> SEA_BOOM = registerBlock("sea_boom", () -> new Block(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).sound(SoundType.METAL)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> SEA_BOOM = registerBlock("sea_boom", () -> new SeaBoomBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).sound(SoundType.METAL).randomTicks()), UnusualFishMod.TAB);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {

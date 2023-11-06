@@ -1,7 +1,10 @@
 {
   "variants": {
-    "": {
+    "loaded=false": {
       "model": "unusualfishmod:block/sea_boom"
+    },
+    "loaded=true": {
+      "model": "unusualfishmod:block/sea_boom_loaded"
     }
   }
 }
