@@ -19,8 +19,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 
-// todo - fix
-// todo - compare a list of current anglers and a list of cached anglers and remove anglers that arent on the new list
 public class VoltDetectorBlock extends BaseEntityBlock {
     public static final IntegerProperty ANGLERS = IntegerProperty.create("anglers", 0, 5);
 
