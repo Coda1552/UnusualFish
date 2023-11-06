@@ -1,11 +1,9 @@
 package codyhuh.unusualfishmod.common.entity;
 
-
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -24,9 +22,7 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
 
-//REMOVE TILT FROM
 public class RoughbackGuitarfish extends WaterAnimal {
 	protected int attackCooldown = 0;
 
@@ -38,6 +34,10 @@ public class RoughbackGuitarfish extends WaterAnimal {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+	}
+
+	public boolean requiresCustomPersistence() {
+		return true;
 	}
 
 	protected void registerGoals() {
@@ -59,8 +59,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 		});
 	}
 
-	//Squid Games
-
 
 	public void tick() {
 		super.tick();
@@ -68,14 +66,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 		if (this.attackCooldown > 0) {
 			this.attackCooldown--;
 		}
-
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
 	}
 
 
@@ -93,12 +83,11 @@ public class RoughbackGuitarfish extends WaterAnimal {
 	protected PathNavigation createNavigation(Level p_27480_) {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
-	//Squid Games
-
 
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.SMALL_FISH.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -110,7 +99,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 	protected SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
 	}
-
 
 	@Override
 	public void playerTouch(Player entity) {
