@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.util;
 
+import codyhuh.unusualfishmod.common.entity.CrimsonshellSquid;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -24,9 +25,9 @@ import net.minecraft.world.level.Level;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public abstract class AgeableWaterAnimal extends WaterAnimal {
-    private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(AgeableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
-    private static final EntityDataAccessor<Boolean> DATA_GRAVID = SynchedEntityData.defineId(AgeableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
+public abstract class BreedableWaterAnimal extends WaterAnimal {
+    private static final EntityDataAccessor<Boolean> DATA_BABY_ID = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_GRAVID = SynchedEntityData.defineId(BreedableWaterAnimal.class, EntityDataSerializers.BOOLEAN);
     protected int age;
     protected int forcedAge;
     protected int forcedAgeTimer;
@@ -34,7 +35,7 @@ public abstract class AgeableWaterAnimal extends WaterAnimal {
     @Nullable
     private UUID loveCause;
 
-    protected AgeableWaterAnimal(EntityType<? extends WaterAnimal> p_146738_, Level p_146739_) {
+    protected BreedableWaterAnimal(EntityType<? extends WaterAnimal> p_146738_, Level p_146739_) {
         super(p_146738_, p_146739_);
     }
 
@@ -47,7 +48,7 @@ public abstract class AgeableWaterAnimal extends WaterAnimal {
     }
 
     @Nullable
-    public abstract AgeableWaterAnimal getBreedOffspring(ServerLevel p_146743_, AgeableWaterAnimal p_146744_);
+    public abstract BreedableWaterAnimal getBreedOffspring(ServerLevel p_146743_, BreedableWaterAnimal p_146744_);
 
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -288,7 +289,7 @@ public abstract class AgeableWaterAnimal extends WaterAnimal {
         this.inLove = 0;
     }
 
-    public boolean canMate(AgeableWaterAnimal p_27569_) {
+    public boolean canMate(BreedableWaterAnimal p_27569_) {
         if (p_27569_ == this) {
             return false;
         } else if (p_27569_.getClass() != this.getClass()) {
@@ -298,13 +299,24 @@ public abstract class AgeableWaterAnimal extends WaterAnimal {
         }
     }
 
-    public void spawnChildFromBreeding(ServerLevel p_27564_, AgeableWaterAnimal p_27565_) {
-        AgeableWaterAnimal ageable = this.getBreedOffspring(p_27564_, p_27565_);
+    public void spawnChildFromBreeding(ServerLevel p_27564_, BreedableWaterAnimal animal) {
+        BreedableWaterAnimal ageable = this.getBreedOffspring(p_27564_, animal);
+
+        if (animal instanceof CrimsonshellSquid/* || animal instanceof TrumpetSquid*/) {
+            //Reset the "inLove" state for the animals
+            this.setAge(6000);
+            animal.setAge(6000);
+            this.resetLove();
+            animal.resetLove();
+
+            animal.setGravid(true);
+            return;
+        }
 
         if (ageable != null) {
             ServerPlayer serverplayer = this.getLoveCause();
-            if (serverplayer == null && p_27565_.getLoveCause() != null) {
-                serverplayer = p_27565_.getLoveCause();
+            if (serverplayer == null && animal.getLoveCause() != null) {
+                serverplayer = animal.getLoveCause();
             }
 
             if (serverplayer != null) {
@@ -312,9 +324,9 @@ public abstract class AgeableWaterAnimal extends WaterAnimal {
             }
 
             this.setAge(6000);
-            p_27565_.setAge(6000);
+            animal.setAge(6000);
             this.resetLove();
-            p_27565_.resetLove();
+            animal.resetLove();
             ageable.setBaby(true);
             ageable.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             p_27564_.addFreshEntityWithPassengers(ageable);

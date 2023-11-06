@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.block;
 
-import codyhuh.unusualfishmod.common.entity.util.AgeableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -27,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Supplier;
 
 public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedBlock {
-    private final Supplier<EntityType<? extends AgeableWaterAnimal>> entityType;
+    private final Supplier<EntityType<? extends BreedableWaterAnimal>> entityType;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     protected static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
@@ -38,7 +38,7 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     protected static final VoxelShape WEST_AABB = Block.box(10, 0, 0, 16, 16, 16);
 
 
-    public SquidEggsBlock(Supplier<EntityType<? extends AgeableWaterAnimal>> tadpole, Properties p_221177_) {
+    public SquidEggsBlock(Supplier<EntityType<? extends BreedableWaterAnimal>> tadpole, Properties p_221177_) {
         super(p_221177_);
         entityType = tadpole;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP).setValue(WATERLOGGED, true));
@@ -84,7 +84,7 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
         int i = p_221223_.nextInt(2, 6);
 
         for(int j = 1; j <= i; ++j) {
-            AgeableWaterAnimal squid = entityType.get().create(p_221221_);
+            BreedableWaterAnimal squid = entityType.get().create(p_221221_);
             double d0 = (double)p_221222_.getX() + this.getRandomTadpolePositionOffset(p_221223_);
             double d1 = (double)p_221222_.getZ() + this.getRandomTadpolePositionOffset(p_221223_);
             int k = p_221223_.nextInt(1, 361);

@@ -1,7 +1,8 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.AgeableWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimalBreedGoal;
 import codyhuh.unusualfishmod.common.entity.util.SquidLayEggsGoal;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
@@ -48,7 +49,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class CrimsonshellSquid extends AgeableWaterAnimal implements Bucketable, NeutralMob {
+public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketable, NeutralMob {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CrimsonshellSquid.class, EntityDataSerializers.BOOLEAN);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private int remainingPersistentAngerTime;
@@ -67,6 +68,7 @@ public class CrimsonshellSquid extends AgeableWaterAnimal implements Bucketable,
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(0, new BreedableWaterAnimalBreedGoal(this, 1.0D));
         this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
         this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
             @Override
@@ -94,7 +96,7 @@ public class CrimsonshellSquid extends AgeableWaterAnimal implements Bucketable,
 
     @Nullable
     @Override
-    public AgeableWaterAnimal getBreedOffspring(ServerLevel level, AgeableWaterAnimal p_146744_) {
+    public BreedableWaterAnimal getBreedOffspring(ServerLevel level, BreedableWaterAnimal p_146744_) {
         return null;
     }
 

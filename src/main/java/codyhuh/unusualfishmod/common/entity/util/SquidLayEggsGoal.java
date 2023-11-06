@@ -1,17 +1,19 @@
 package codyhuh.unusualfishmod.common.entity.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 public class SquidLayEggsGoal extends MoveToBlockGoal {
-    private final AgeableWaterAnimal squid;
+    private final BreedableWaterAnimal squid;
     private final Block eggsBlock;
 
-    public SquidLayEggsGoal(AgeableWaterAnimal squid, Block eggsBlock) {
-        super(squid, 1.0D, 24, 12);
+    public SquidLayEggsGoal(BreedableWaterAnimal squid, Block eggsBlock) {
+        super(squid, 1.0D, 24, 24);
         this.squid = squid;
         this.eggsBlock = eggsBlock;
     }
@@ -50,8 +52,12 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
     }
 
     @Override
-    protected boolean isValidTarget(LevelReader level, BlockPos pos) {
-        return level.isWaterAt(pos);
+    protected boolean isValidTarget(LevelReader level, BlockPos blockPos) {
+        Vec3 pos = Vec3.atCenterOf(blockPos);
+        Direction dir = Direction.getNearest(pos.x, pos.y, pos.z);
+
+        // todo - fix squids not selecting a valid target
+        return level.isWaterAt(blockPos) && level.getBlockState(blockPos).isFaceSturdy(level, blockPos, dir);
     }
 
     @Override
