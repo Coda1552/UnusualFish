@@ -22,29 +22,12 @@ public class VoltDetectorBlockEntity extends BlockEntity {
     }
 
     public final List<VoltAngler> getAnglerList() {
-        return anglersList;
+        return currentList;
     }
 
     public void addAnglerToList(VoltAngler obj) {
-        anglersList.add(obj);
+        currentList.add(obj);
     }
-
-    public void removeAnglersFromList() {
-        for (VoltAngler angler : anglersList) {
-            if (!currentList.contains(angler)) {
-                currentList.remove(angler);
-                anglersList = currentList;
-            }
-        }
-    }
-
-    /*
-    1- 2 lists: old and current
-    2- if an obj is on old and NOT on current, remove from old
-    3- set old to current
-     */
-
-    // todo - fix block update not sending a redstone signal (maybe sync the currentList and ANGLERS blockstate property?)
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, VoltDetectorBlockEntity voltDetector) {
         if (!anglersList.equals(currentList)) {
@@ -53,19 +36,21 @@ public class VoltDetectorBlockEntity extends BlockEntity {
 
         nearDetector(level, pos, 2.5);
 
-        voltDetector.removeAnglersFromList();
+        int anglers = currentList.size();
 
-        if (state.is(UFBlocks.VOLT_DETECTOR.get())) {
-            int anglers = currentList.size();
-
+        if (state.is(UFBlocks.VOLT_DETECTOR.get()) && level.getBlockState(pos).getValue(VoltDetectorBlock.ANGLERS) != anglers) {
             level.setBlock(pos, state.setValue(VoltDetectorBlock.ANGLERS, anglers), 3);
+            ((VoltDetectorBlock)state.getBlock()).updateNeighbours(level, pos);
         }
 
+        if (anglers != 0) {
+            System.out.println(anglers);
+        }
     }
 
     private static void nearDetector(Level level, BlockPos pos, double radius) {
         AABB aabb = new AABB(pos);
-        anglersList = level.getEntitiesOfClass(VoltAngler.class, aabb.inflate(radius));
+        currentList = level.getEntitiesOfClass(VoltAngler.class, aabb.inflate(radius));
 
         BlockPos blockpos = new BlockPos(aabb.minX - radius, aabb.minY - radius, aabb.minZ - radius);
         BlockPos blockpos1 = new BlockPos(aabb.maxX + radius, aabb.maxY + radius, aabb.maxZ + radius);
@@ -78,13 +63,12 @@ public class VoltDetectorBlockEntity extends BlockEntity {
                     for(int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k) {
                         mutablePos.set(i, j, k);
 
-                        int anglers = voltDetector.getAnglerList().size();
+                        int anglers = currentList.size();
 
                         if (anglers < 5) {
-                            for (VoltAngler angler : anglersList) {
-                                if (!voltDetector.getAnglerList().contains(angler)) {
+                            for (VoltAngler angler : currentList) {
+                                if (!currentList.contains(angler)) {
                                     voltDetector.addAnglerToList(angler);
-                                    System.out.println(voltDetector.getAnglerList().size());
                                 }
 
                             }

@@ -71,7 +71,7 @@ public class VoltDetectorBlock extends BaseEntityBlock {
         return true;
     }
 
-    private void updateNeighbours(Level level, BlockPos pos) {
+    public void updateNeighbours(Level level, BlockPos pos) {
         level.updateNeighborsAt(pos, this);
         for (Direction dir : Direction.values()) {
             level.updateNeighborsAt(pos.relative(dir), this);
