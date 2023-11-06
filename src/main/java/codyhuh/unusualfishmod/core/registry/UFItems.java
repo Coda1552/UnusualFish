@@ -17,20 +17,15 @@ public final class UFItems {
 
 	// Foods
 	public static final RegistryObject<Item> RAW_EYELASH = ITEMS.register("raw_eyelash", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_EYELASH).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> RAW_RIPPER = ITEMS.register("raw_ripper", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_RIPPER).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SPINDLEFISH = ITEMS.register("raw_spindlefish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SPINDLEFISH).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SNOWFLAKE = ITEMS.register("raw_snowflake", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SNOWFLAKE).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_AERO_MONO = ITEMS.register("raw_aero_mono", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AERO_MONO).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_AERO_MONO_STICK = ITEMS.register("raw_aero_mono_stick", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AERO_MONO_STICK).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> COOKED_AERO_MONO_STICK = ITEMS.register("cooked_aero_mono_stick", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_AERO_MONO_STICK).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_BUMPFACE = ITEMS.register("raw_bumpface", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BUMPFACE).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_BUMPFACE = ITEMS.register("cooked_bumpface", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_BUMPFACE).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_RHINO_TETRA = ITEMS.register("raw_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_RHINO_TETRA).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_RHINO_TETRA = ITEMS.register("cooked_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_RHINO_TETRA).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SAILOR_BARB = ITEMS.register("raw_sailor_barb", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SAILOR_BARB).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_SAILOR_BARB = ITEMS.register("cooked_sailor_barb", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_SAILOR_BARB).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_BARK_ANGELFISH = ITEMS.register("raw_bark_angelfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BARK_ANGELFISH).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> COOKED_BARK_ANGELFISH = ITEMS.register("cooked_bark_angelfish", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_BARK_ANGELFISH).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_BLIZZARD_TUNA = ITEMS.register("raw_blizzard_tuna", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BLIZZARD_TUNA).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> COOKED_BLIZZARD_TUNA = ITEMS.register("cooked_blizzard_tuna", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_BLIZZARD_TUNA).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SHOCKCAT = ITEMS.register("raw_shockcat", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SHOCKCAT).tab(UnusualFishMod.TAB)));

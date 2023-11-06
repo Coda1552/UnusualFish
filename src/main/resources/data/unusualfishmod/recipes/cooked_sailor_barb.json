@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "unusualfishmod:raw_sailor_barb"
-  },
-  "result": "unusualfishmod:cooked_sailor_barb",
-  "experience": 0.1,
-  "cookingtime": 200
-}

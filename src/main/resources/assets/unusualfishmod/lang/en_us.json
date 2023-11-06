@@ -2,7 +2,6 @@
 	"itemGroup.unusualfishmod": "Unusual Fish",
 
 	"item.unusualfishmod.raw_mossthorn": "Raw Mossthorn Patty",
-	"item.unusualfishmod.raw_ripper": "Ripper",
 	"item.unusualfishmod.raw_aero_mono": "Aero Mono",
 	"item.unusualfishmod.raw_aero_mono_stick": "Raw Aero Mono Kebab",
 	"item.unusualfishmod.raw_bumpface": "Bumpface",
@@ -31,15 +30,10 @@
 	"item.unusualfishmod.raw_triple_twirl_pleco": "Triple Twirl Pleco",
 
 	"item.unusualfishmod.cooked_aero_mono_stick": "Cooked Aero Mono Kebab",
-	"item.unusualfishmod.cooked_bumpface": "Cooked Bumpface",
-	"item.unusualfishmod.cooked_rhino_tetra": "Cooked Rhino Tetra",
-	"item.unusualfishmod.cooked_sailor_barb": "Cooked Sailor Barb",
 	"item.unusualfishmod.cooked_blizzard_tuna": "Cooked Blizzard Tuna",
-	"item.unusualfishmod.cooked_veil_tentacle": "Cooked Veil Tentacle",
 	"item.unusualfishmod.cooked_mossthorn": "Cooked Mossthorn Patty",
 	"item.unusualfishmod.cooked_shockcat": "Cooked Shockcat Filet",
 	"item.unusualfishmod.cooked_lobster": "Cooked Porcupine Lobster Tail",
-	"item.unusualfishmod.cooked_bark_angelfish": "Cooked Bark Angelfish",
 	"item.unusualfishmod.cooked_unusual_fillet": "Cooked Unusual Fillet",
 
 	"item.unusualfishmod.lobster_roll": "Lobster Roll",

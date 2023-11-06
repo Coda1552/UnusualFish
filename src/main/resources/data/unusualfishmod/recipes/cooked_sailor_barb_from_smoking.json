@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "unusualfishmod:raw_sailor_barb"
-  },
-  "result": "unusualfishmod:cooked_sailor_barb",
-  "experience": 0.35,
-  "cookingtime": 75
-}

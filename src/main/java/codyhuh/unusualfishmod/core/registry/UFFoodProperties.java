@@ -38,15 +38,11 @@ public class UFFoodProperties {
 
     // Cooked
     public static final FoodProperties COOKED_AERO_MONO_STICK = new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 150, 1), 1.0F).build();
-    public static final FoodProperties COOKED_BUMPFACE = new FoodProperties.Builder().nutrition(5).saturationMod(0.5F).build();
-    public static final FoodProperties COOKED_RHINO_TETRA = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).fast().build();
-    public static final FoodProperties COOKED_SAILOR_BARB = new FoodProperties.Builder().nutrition(4).saturationMod(0.3F).fast().build();
-    public static final FoodProperties COOKED_BLIZZARD_TUNA = new FoodProperties.Builder().nutrition(7).saturationMod(0.5F).build();
-    public static final FoodProperties COOKED_BARK_ANGELFISH = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).fast().build();
-    public static final FoodProperties COOKED_MOSSTHORN = new FoodProperties.Builder().nutrition(4).saturationMod(0.3F).fast().build();
+    public static final FoodProperties COOKED_BLIZZARD_TUNA = new FoodProperties.Builder().nutrition(8).saturationMod(0.5F).build();
+    public static final FoodProperties COOKED_MOSSTHORN = new FoodProperties.Builder().nutrition(7).saturationMod(0.3F).fast().build();
     public static final FoodProperties COOKED_SHOCKCAT = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
     public static final FoodProperties COOKED_LOBSTER = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
-    public static final FoodProperties COOKED_UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
+    public static final FoodProperties COOKED_UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(6).saturationMod(0.4F).build();
 
     // Meals
     public static final FoodProperties LOBSTER_ROLL = new FoodProperties.Builder().nutrition(10).saturationMod(0.8F).build();
