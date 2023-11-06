@@ -1,7 +1,11 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.AgeableWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.SquidLayEggsGoal;
+import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -44,7 +48,7 @@ import net.minecraft.world.phys.Vec3;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class CrimsonshellSquid extends WaterAnimal implements Bucketable, NeutralMob {
+public class CrimsonshellSquid extends AgeableWaterAnimal implements Bucketable, NeutralMob {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CrimsonshellSquid.class, EntityDataSerializers.BOOLEAN);
     private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     private int remainingPersistentAngerTime;
@@ -62,10 +66,8 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
-        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
         this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
             @Override
             public boolean canUse() {
@@ -78,8 +80,22 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
                 return !this.mob.isInWater() && super.canUse();
             }
         });
+        this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(3, new ResetUniversalAngerTargetGoal<>(this, true));
+    }
+
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(UFTags.RAW_UNUSUAL_FISH);
+    }
+
+    @Nullable
+    @Override
+    public AgeableWaterAnimal getBreedOffspring(ServerLevel level, AgeableWaterAnimal p_146744_) {
+        return null;
     }
 
     public boolean hurt(DamageSource p_29963_, float p_29964_) {
@@ -147,14 +163,14 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
         this.entityData.define(FROM_BUCKET, false);
     }
 
-    public void addAdditionalSaveData(CompoundTag compound) {
-        super.addAdditionalSaveData(compound);
-        compound.putBoolean("FromBucket", this.isFromBucket());
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("FromBucket", this.isFromBucket());
     }
 
-    public void readAdditionalSaveData(CompoundTag compound) {
-        super.readAdditionalSaveData(compound);
-        this.setFromBucket(compound.getBoolean("FromBucket"));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        this.setFromBucket(tag.getBoolean("FromBucket"));
     }
 
     @Override
@@ -193,8 +209,9 @@ public class CrimsonshellSquid extends WaterAnimal implements Bucketable, Neutra
         return SoundEvents.BUCKET_FILL_FISH;
     }
 
-    protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-        return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
+    @Override
+    public InteractionResult mobInteract(Player p_27584_, InteractionHand p_27585_) {
+        return Bucketable.bucketMobPickup(p_27584_, p_27585_, this).orElse(super.mobInteract(p_27584_, p_27585_));
     }
 
     @Override

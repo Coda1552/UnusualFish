@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "unusualfishmod:block/crimson_eggs",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "unusualfishmod:block/crimson_eggs",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "unusualfishmod:block/crimson_eggs",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "unusualfishmod:block/crimson_eggs",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "unusualfishmod:block/crimson_eggs"
+    },
+    "facing=west": {
+      "model": "unusualfishmod:block/crimson_eggs",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

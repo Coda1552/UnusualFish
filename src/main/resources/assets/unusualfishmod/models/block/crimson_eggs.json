@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "unusualfishmod:block/crimson_eggs"
+  },
+  "render_type": "cutout"
+}
