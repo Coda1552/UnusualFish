@@ -8,12 +8,6 @@
           "type": "minecraft:item",
           "name": "unusualfishmod:raw_lobster"
         }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.6
-        }
       ]
     }
   ]

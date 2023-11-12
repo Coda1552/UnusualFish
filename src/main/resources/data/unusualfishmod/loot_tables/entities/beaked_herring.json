@@ -23,12 +23,6 @@
           "type": "minecraft:item",
           "name": "unusualfishmod:raw_beaked_herring"
         }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.6
-        }
       ]
     }
   ]

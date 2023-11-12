@@ -23,12 +23,6 @@
           "type": "minecraft:item",
           "name": "unusualfishmod:raw_bark_angelfish"
         }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.6
-        }
       ]
     }
   ]

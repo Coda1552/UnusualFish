@@ -21,13 +21,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "unusualfishmod:raw_bumpface"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:random_chance",
-          "chance": 0.6
+          "name": "unusualfishmod:raw_sneep_snorp"
         }
       ]
     }
