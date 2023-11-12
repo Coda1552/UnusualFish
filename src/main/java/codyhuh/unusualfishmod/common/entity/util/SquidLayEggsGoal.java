@@ -1,5 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.util;
 
+import codyhuh.unusualfishmod.common.block.SquidEggsBlock;
+import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -42,13 +44,15 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
         }
 
         if (isReachedTarget()) {
-            squid.level.setBlock(getMoveToTarget(), eggsBlock.defaultBlockState(), 2);
+            Vec3 pos = Vec3.atCenterOf(blockPos);
+            Direction dir = Direction.getNearest(pos.x, pos.y, pos.z);
+
+            squid.level.setBlock(getMoveToTarget(), eggsBlock.defaultBlockState().setValue(SquidEggsBlock.FACING, dir.getOpposite()), 2);
             squid.playSound(SoundEvents.FROG_LAY_SPAWN);
             squid.setGravid(false);
             stop();
         }
 
-        System.out.println(getMoveToTarget());
     }
 
     @Override
@@ -56,8 +60,9 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
         Vec3 pos = Vec3.atCenterOf(blockPos);
         Direction dir = Direction.getNearest(pos.x, pos.y, pos.z);
 
-        // todo - fix squids not selecting a valid target
-        return level.isWaterAt(blockPos) && level.getBlockState(blockPos).isFaceSturdy(level, blockPos, dir);
+        BlockPos newPos = blockPos.relative(dir, 1);
+
+        return !level.getBlockState(blockPos).is(UFTags.SQUID_EGGS) && level.isWaterAt(blockPos) && level.getBlockState(newPos).isFaceSturdy(level, newPos, dir);
     }
 
     @Override

@@ -26,6 +26,7 @@ public final class UFBlocks {
     public static final RegistryObject<Block> NAUTICAL_LAMP = registerBlock("nautical_lamp", () -> new NauticalLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)), UnusualFishMod.TAB);
     public static final RegistryObject<Block> SEA_BOOM = registerBlock("sea_boom", () -> new SeaBoomBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).sound(SoundType.METAL).randomTicks()), UnusualFishMod.TAB);
     public static final RegistryObject<Block> CRIMSON_EGGS = registerBlock("crimson_eggs", () -> new SquidEggsBlock(UFEntities.CRIMSONSHELL_SQUID::get, BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> RELUCENT_EGGS = registerBlock("relucent_eggs", () -> new SquidEggsBlock(UFEntities.TRUMPET_SQUID::get, BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)), UnusualFishMod.TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

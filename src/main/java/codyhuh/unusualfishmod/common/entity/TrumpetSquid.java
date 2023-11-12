@@ -1,15 +1,24 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimalBreedGoal;
+import codyhuh.unusualfishmod.common.entity.util.SquidLayEggsGoal;
+import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -25,6 +34,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +43,10 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
-public class TrumpetSquid extends BucketableWaterAnimal {
+public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
+	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(TrumpetSquid.class, EntityDataSerializers.BOOLEAN);
 	public float squidRotation;
 
 	public TrumpetSquid(EntityType<? extends TrumpetSquid> entityType, Level level) {
@@ -44,23 +56,16 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
 	}
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.TRUMPET_SQUID_BUCKET.get());
-	}
-
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.ARMOR, 10.0D);
 	}
 
 	@Override
 	public void registerGoals() {
-		super.registerGoals();
 		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.goalSelector.addGoal(0, new BreedableWaterAnimalBreedGoal(this, 1.0D));
+		this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
 			@Override
 			public boolean canUse() {
@@ -73,7 +78,9 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
-	}
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));}
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround && this.verticalCollision) {
@@ -88,6 +95,12 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 
 	protected PathNavigation createNavigation(Level p_27480_) {
 		return new WaterBoundPathNavigation(this, p_27480_);
+	}
+
+	@Nullable
+	@Override
+	public BreedableWaterAnimal getBreedOffspring(ServerLevel p_146743_, BreedableWaterAnimal p_146744_) {
+		return null;
 	}
 
 	public boolean hurt(DamageSource p_29963_, float p_29964_) {
@@ -157,6 +170,73 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 		}
 	}
 
+	public static boolean canSpawn(EntityType<TrumpetSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(FROM_BUCKET, false);
+	}
+
+	public void addAdditionalSaveData(CompoundTag tag) {
+		super.addAdditionalSaveData(tag);
+		tag.putBoolean("FromBucket", this.isFromBucket());
+	}
+
+	public void readAdditionalSaveData(CompoundTag tag) {
+		super.readAdditionalSaveData(tag);
+		this.setFromBucket(tag.getBoolean("FromBucket"));
+	}
+
+	@Override
+	public boolean fromBucket() {
+		return this.entityData.get(FROM_BUCKET);
+	}
+
+	@Override
+	public void saveToBucketTag(ItemStack bucket) {
+		CompoundTag compoundnbt = bucket.getOrCreateTag();
+		compoundnbt.putFloat("Health", this.getHealth());
+	}
+
+	public boolean requiresCustomPersistence() {
+		return super.requiresCustomPersistence() || this.fromBucket();
+	}
+
+	public boolean removeWhenFarAway(double p_213397_1_) {
+		return !this.fromBucket() && !this.hasCustomName();
+	}
+
+	private boolean isFromBucket() {
+		return this.entityData.get(FROM_BUCKET);
+	}
+
+	public void setFromBucket(boolean p_203706_1_) {
+		this.entityData.set(FROM_BUCKET, p_203706_1_);
+	}
+
+	@Override
+	public void loadFromBucketTag(CompoundTag p_148832_) {
+	}
+
+	@Override
+	public SoundEvent getPickupSound() {
+		return SoundEvents.BUCKET_FILL_FISH;
+	}
+
+	@Override
+	public InteractionResult mobInteract(Player p_27584_, InteractionHand p_27585_) {
+		return Bucketable.bucketMobPickup(p_27584_, p_27585_, this).orElse(super.mobInteract(p_27584_, p_27585_));
+	}
+
+	@Override
+	public ItemStack getBucketItemStack() {
+		return new ItemStack(UFItems.CRIMSONSHELL_SQUID_BUCKET.get());
+	}
+
 	static class MoveHelperController extends MoveControl {
 		private final TrumpetSquid fish;
 
@@ -177,7 +257,7 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 				double d1 = this.wantedY - this.fish.getY();
 				double d2 = this.wantedZ - this.fish.getZ();
 				if (d1 != 0.0D) {
-					double d3 = (double) Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
+					double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
 				}
 
@@ -193,21 +273,4 @@ public class TrumpetSquid extends BucketableWaterAnimal {
 		}
 
 	}
-
-	public void tick() {
-		super.tick();
-
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
-	}
-
-	public static boolean canSpawn(EntityType<TrumpetSquid> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-	}
-
 }
