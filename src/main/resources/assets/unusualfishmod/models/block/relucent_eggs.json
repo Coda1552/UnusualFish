@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "unusualfishmod:block/relucent_eggs"
+  },
+  "render_type": "cutout"
+}
