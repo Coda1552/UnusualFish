@@ -2,13 +2,15 @@ package codyhuh.unusualfishmod.client.model;
 
 import codyhuh.unusualfishmod.common.entity.TrumpetSquid;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.model.ListModel;
+import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class TrumpetSquidModel<T extends TrumpetSquid> extends ListModel<T> {
+import java.util.Collections;
+
+public class TrumpetSquidModel<T extends TrumpetSquid> extends AgeableListModel<T> {
 	private final ModelPart Body;
 	private final ModelPart TopArms;
 	private final ModelPart BottomArms;
@@ -67,7 +69,12 @@ public class TrumpetSquidModel<T extends TrumpetSquid> extends ListModel<T> {
 	}
 
 	@Override
-	public Iterable<ModelPart> parts() {
-		return ImmutableList.of(this.Body);
+	protected Iterable<ModelPart> headParts() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	protected Iterable<ModelPart> bodyParts() {
+		return ImmutableList.of(Body);
 	}
 }

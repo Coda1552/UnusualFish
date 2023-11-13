@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "unusualfishmod:block/relucent_bricks",
+    "side": "unusualfishmod:block/relucent_bricks",
+    "top": "unusualfishmod:block/relucent_bricks"
+  }
+}

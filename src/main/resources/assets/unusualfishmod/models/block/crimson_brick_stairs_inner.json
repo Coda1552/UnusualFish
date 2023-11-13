@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "unusualfishmod:block/crimson_bricks",
+    "side": "unusualfishmod:block/crimson_bricks",
+    "top": "unusualfishmod:block/crimson_bricks"
+  }
+}

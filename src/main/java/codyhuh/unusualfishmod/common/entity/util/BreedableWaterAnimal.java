@@ -1,6 +1,7 @@
 package codyhuh.unusualfishmod.common.entity.util;
 
 import codyhuh.unusualfishmod.common.entity.CrimsonshellSquid;
+import codyhuh.unusualfishmod.common.entity.TrumpetSquid;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -302,7 +303,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     public void spawnChildFromBreeding(ServerLevel p_27564_, BreedableWaterAnimal animal) {
         BreedableWaterAnimal ageable = this.getBreedOffspring(p_27564_, animal);
 
-        if (animal instanceof CrimsonshellSquid/* || animal instanceof TrumpetSquid*/) {
+        if (animal instanceof CrimsonshellSquid || animal instanceof TrumpetSquid) {
             //Reset the "inLove" state for the animals
             this.setAge(6000);
             animal.setAge(6000);

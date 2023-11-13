@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unusualfishmod:block/crimson_tile_slab"
+    },
+    "type=double": {
+      "model": "unusualfishmod:block/crimson_tiles"
+    },
+    "type=top": {
+      "model": "unusualfishmod:block/crimson_tile_slab_top"
+    }
+  }
+}

@@ -1,15 +1,16 @@
 package codyhuh.unusualfishmod.client.model;
 
 import codyhuh.unusualfishmod.common.entity.CrimsonshellSquid;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.model.EntityModel;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.client.model.AgeableListModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class CrimsonshellSquidModel<T extends CrimsonshellSquid> extends EntityModel<T> {
+import java.util.Collections;
+
+public class CrimsonshellSquidModel<T extends CrimsonshellSquid> extends AgeableListModel<T> {
 	private final ModelPart Body;
 	private final ModelPart BigArm1;
 	private final ModelPart BigArm2;
@@ -98,7 +99,12 @@ public class CrimsonshellSquidModel<T extends CrimsonshellSquid> extends EntityM
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	protected Iterable<ModelPart> headParts() {
+		return Collections.emptyList();
+	}
+
+	@Override
+	protected Iterable<ModelPart> bodyParts() {
+		return ImmutableList.of(Body);
 	}
 }

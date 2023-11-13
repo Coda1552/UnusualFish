@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "unusualfishmod:block/relucent_tile_slab"
+    },
+    "type=double": {
+      "model": "unusualfishmod:block/relucent_tiles"
+    },
+    "type=top": {
+      "model": "unusualfishmod:block/relucent_tile_slab_top"
+    }
+  }
+}

@@ -45,17 +45,11 @@ public class VoltDetectorBlockEntity extends BlockEntity {
 
         nearDetector(level, pos, radius);
 
-        System.out.println(radius);
-
         int anglers = currentList.size();
 
         if (level.hasChunksAt(pos, pos) && state.is(UFBlocks.VOLT_DETECTOR.get()) && !level.getBlockState(pos).isAir() && level.getBlockState(pos).getValue(VoltDetectorBlock.ANGLERS) != anglers) {
             level.setBlock(pos, state.setValue(VoltDetectorBlock.ANGLERS, anglers), 3);
             ((VoltDetectorBlock)state.getBlock()).updateNeighbours(level, pos);
-        }
-
-        if (anglers != 0) {
-            System.out.println(anglers);
         }
     }
 

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "unusualfishmod:block/relucent_tiles",
+    "side": "unusualfishmod:block/relucent_tiles",
+    "top": "unusualfishmod:block/relucent_tiles"
+  }
+}

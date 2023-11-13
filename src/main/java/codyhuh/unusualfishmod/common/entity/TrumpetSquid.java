@@ -5,6 +5,7 @@ import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimalBreedGoal;
 import codyhuh.unusualfishmod.common.entity.util.SquidLayEggsGoal;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
+import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -91,6 +92,11 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		}
 
 		super.aiStep();
+	}
+
+	@Override
+	public boolean isFood(ItemStack stack) {
+		return stack.is(UFTags.RAW_UNUSUAL_FISH);
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
@@ -181,11 +187,13 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		this.entityData.define(FROM_BUCKET, false);
 	}
 
+	@Override
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putBoolean("FromBucket", this.isFromBucket());
 	}
 
+	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		this.setFromBucket(tag.getBoolean("FromBucket"));

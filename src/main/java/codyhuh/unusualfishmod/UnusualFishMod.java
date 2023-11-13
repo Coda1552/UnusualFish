@@ -8,13 +8,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Mod(UnusualFishMod.MOD_ID)
 public class UnusualFishMod {
 	public static final String MOD_ID = "unusualfishmod";
-	public static final List<Runnable> CALLBACKS = new ArrayList<>();
 	public static final CreativeModeTab TAB = new CreativeModeTab(MOD_ID) {
 		@Override
 		public ItemStack makeIcon() {
