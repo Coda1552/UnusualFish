@@ -1,0 +1,9 @@
+{
+  "type": "unusualfishmod:unusual_catch_glm",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:gameplay/fishing"
+    }
+  ]
+}

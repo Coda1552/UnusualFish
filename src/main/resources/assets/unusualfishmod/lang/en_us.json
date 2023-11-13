@@ -234,6 +234,9 @@
 
 	"tooltip.scythe": "Hits mobs in a wide sweep",
 
+	"enchantment.unusualfishmod.unusual_catch": "Unusual Catch",
+	"enchantment.unusualfishmod.unusual_catch.desc": "Allows you to catch unusual fish.",
+
 	"unusualfishmod.sound.subtitle.crab_chatter": "Crab chatters",
 	"unusualfishmod.sound.subtitle.crab_scuttling": "Crab scuttles",
 	"unusualfishmod.sound.subtitle.deep_water": "Mysterious sounds",
