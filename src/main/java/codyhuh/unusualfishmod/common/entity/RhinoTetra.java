@@ -4,13 +4,19 @@ import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -23,8 +29,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+
+import javax.annotation.Nullable;
 
 public class RhinoTetra extends BucketableSchoolingWaterAnimal {
+	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(RhinoTetra.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
 
 	public RhinoTetra(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
@@ -98,6 +108,56 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal {
 
 	protected SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(VARIANT, 0);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		compound.putInt("Variant", getVariant());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		this.setVariant(compound.getInt("Variant"));
+	}
+
+	@Override
+	public void saveToBucketTag(ItemStack bucket) {
+		CompoundTag compoundnbt = bucket.getOrCreateTag();
+		compoundnbt.putFloat("Health", this.getHealth());
+		compoundnbt.putInt("Variant", this.getVariant());
+		if (this.hasCustomName()) {
+			bucket.setHoverName(this.getCustomName());
+		}
+	}
+
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
+
+	private void setVariant(int variant) {
+		this.entityData.set(VARIANT, variant);
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		if (dataTag == null) {
+			setVariant(random.nextInt(8));
+		} else {
+			if (dataTag.contains("Variant", 3)){
+				this.setVariant(dataTag.getInt("Variant"));
+			}
+		}
+		return spawnDataIn;
 	}
 
 	public static boolean canSpawn(EntityType<RhinoTetra> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
