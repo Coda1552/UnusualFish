@@ -48,6 +48,7 @@
 	"block.unusualfishmod.sea_boom": "Sea Boom",
 	"block.unusualfishmod.crimson_eggs": "Crimson Eggs",
 	"block.unusualfishmod.relucent_eggs": "Relucent Eggs",
+	"block.unusualfishmod.copper_antenna": "Copper Antenna",
 
 	"item.unusualfishmod.gnasher_organ": "Gnasher Jewel",
 	"item.unusualfishmod.tendril": "Shocking Tendril",
@@ -62,6 +63,7 @@
 	"item.unusualfishmod.thunderous_shell": "Thunderous Shell",
 	"item.unusualfishmod.clement_shell": "Clement Shell",
 	"item.unusualfishmod.prismarine_spear": "Prismarine Spear",
+	"item.unusualfishmod.weapon_parts": "Weapon Parts",
 
 	"item.unusualfishmod.aero_mono_spawn_egg": "Aero Mono Spawn Egg",
 	"item.unusualfishmod.pinkfin_spawn_egg": "Pinkfin Idol Spawn Egg",

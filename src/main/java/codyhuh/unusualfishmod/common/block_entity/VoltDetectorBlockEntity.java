@@ -5,6 +5,7 @@ import codyhuh.unusualfishmod.common.entity.VoltAngler;
 import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,7 +35,17 @@ public class VoltDetectorBlockEntity extends BlockEntity {
             currentList = anglersList;
         }
 
-        nearDetector(level, pos, 2.5);
+        double radius = 2.5D;
+
+        for (Direction dir : Direction.values()) {
+            if (level.getBlockState(pos.relative(dir)).is(UFBlocks.COPPER_ANTENNA.get())) {
+                radius = 5.0D;
+            }
+        }
+
+        nearDetector(level, pos, radius);
+
+        System.out.println(radius);
 
         int anglers = currentList.size();
 

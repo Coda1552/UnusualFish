@@ -65,7 +65,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(0, new BreedableWaterAnimalBreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
+		this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.RELUCENT_EGGS.get()));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
 			@Override
 			public boolean canUse() {

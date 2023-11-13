@@ -35,9 +35,9 @@ public class ForgeEvents {
         if (level.hasChunksAt(blockpos, blockpos1)) {
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-            for(int i = blockpos.getX(); i <= blockpos1.getX(); ++i) {
-                for(int j = blockpos.getY(); j <= blockpos1.getY(); ++j) {
-                    for(int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k) {
+            for (int i = blockpos.getX(); i <= blockpos1.getX(); ++i) {
+                for (int j = blockpos.getY(); j <= blockpos1.getY(); ++j) {
+                    for (int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k) {
                         mutablePos.set(i, j, k);
                         BlockState blockstate = level.getBlockState(mutablePos);
 
@@ -71,7 +71,6 @@ public class ForgeEvents {
                 }
             }
         }
-
     }
 
 }

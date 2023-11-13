@@ -71,6 +71,7 @@ public final class UFItems {
 	public static final RegistryObject<Item> CLEMENT_SHELL = ITEMS.register("clement_shell", () -> new WeatherShellItem("clear", new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1).durability(1)));
 	public static final RegistryObject<Item> THUNDEROUS_SHELL = ITEMS.register("thunderous_shell", () -> new WeatherShellItem("thunder", new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1).durability(1)));
 	public static final RegistryObject<Item> PRISMARINE_SPEAR = ITEMS.register("prismarine_spear", () -> new PrismarineSpearItem(new Item.Properties().tab(UnusualFishMod.TAB).stacksTo(1).durability(100)));
+	public static final RegistryObject<Item> WEAPON_PARTS = ITEMS.register("weapon_parts", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	//public static final RegistryObject<Item> STARGAZER = ITEMS.register("stargazer", () -> new StargazerItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	// Buckets

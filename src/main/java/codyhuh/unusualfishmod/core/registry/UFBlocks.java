@@ -1,10 +1,7 @@
 package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.common.block.NauticalLampBlock;
-import codyhuh.unusualfishmod.common.block.SeaBoomBlock;
-import codyhuh.unusualfishmod.common.block.SquidEggsBlock;
-import codyhuh.unusualfishmod.common.block.VoltDetectorBlock;
+import codyhuh.unusualfishmod.common.block.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -27,6 +24,7 @@ public final class UFBlocks {
     public static final RegistryObject<Block> SEA_BOOM = registerBlock("sea_boom", () -> new SeaBoomBlock(BlockBehaviour.Properties.copy(Blocks.PRISMARINE).sound(SoundType.METAL).randomTicks()), UnusualFishMod.TAB);
     public static final RegistryObject<Block> CRIMSON_EGGS = registerBlock("crimson_eggs", () -> new SquidEggsBlock(UFEntities.CRIMSONSHELL_SQUID::get, BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)), UnusualFishMod.TAB);
     public static final RegistryObject<Block> RELUCENT_EGGS = registerBlock("relucent_eggs", () -> new SquidEggsBlock(UFEntities.TRUMPET_SQUID::get, BlockBehaviour.Properties.copy(Blocks.FROGSPAWN)), UnusualFishMod.TAB);
+    public static final RegistryObject<Block> COPPER_ANTENNA = registerBlock("copper_antenna", () -> new CopperAntennaBlock(BlockBehaviour.Properties.copy(Blocks.LIGHTNING_ROD)), UnusualFishMod.TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block, CreativeModeTab tab) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

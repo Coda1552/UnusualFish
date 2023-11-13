@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "unusualfishmod:block/copper_antenna",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "unusualfishmod:block/copper_antenna",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "unusualfishmod:block/copper_antenna",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "unusualfishmod:block/copper_antenna",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "unusualfishmod:block/copper_antenna"
+    },
+    "facing=west": {
+      "model": "unusualfishmod:block/copper_antenna",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

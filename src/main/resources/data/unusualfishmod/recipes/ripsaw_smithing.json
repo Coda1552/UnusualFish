@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "addition": {
+    "item": "unusualfishmod:ripper_tooth"
+  },
+  "base": {
+    "item": "unusualfishmod:weapon_parts"
+  },
+  "result": {
+    "item": "unusualfishmod:ripsaw"
+  }
+}
