@@ -55,6 +55,7 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
 
     }
 
+    // todo - fix egg rotation/placement
     @Override
     protected boolean isValidTarget(LevelReader level, BlockPos blockPos) {
         Vec3 pos = Vec3.atCenterOf(blockPos);
