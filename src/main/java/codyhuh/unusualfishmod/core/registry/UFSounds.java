@@ -20,7 +20,7 @@ public class UFSounds {
     public static final RegistryObject<SoundEvent> SMALL_ENEMY = createSoundEvent("small_enemy");
     public static final RegistryObject<SoundEvent> SMALL_FISH = createSoundEvent("small_fish");
     public static final RegistryObject<SoundEvent> ABYSSAL_BLAST = createSoundEvent("abyssal_blast");
-    public static final RegistryObject<SoundEvent> WHIP_CRACK = createSoundEvent("whip_crack");
+    public static final RegistryObject<SoundEvent> SAWING = createSoundEvent("sawing");
 
     private static RegistryObject<SoundEvent> createSoundEvent(final String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(UnusualFishMod.MOD_ID, name)));

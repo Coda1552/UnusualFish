@@ -1,4 +1,19 @@
 {
+  "sawing": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:saw1"
+      },
+      {
+        "name": "unusualfishmod:saw2"
+      },
+      {
+        "name": "unusualfishmod:saw3"
+      }
+    ],
+    "subtitle": "unusualfishmod.sound.subtitle.sawing"
+  },
   "crab_chatter": {
     "category": "neutral",
     "sounds": [

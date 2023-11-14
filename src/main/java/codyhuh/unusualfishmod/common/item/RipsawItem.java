@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.common.item;
 
+import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.core.registry.UFTiers;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
@@ -34,12 +35,16 @@ public class RipsawItem extends AxeItem implements Vanishable {
             EntityHitResult result = getLookAtEntity(player, player.level, player.getReachDistance() + 1.0D);
             CompoundTag tag = stack.getOrCreateTag();
 
-            float i = count % 10.0F;
-            float progress = i / 10.0F;
+            float i = count % 10;
+            float progress = i / 10;
 
             tag.putFloat("SawingProgress", progress);
 
             if (result != null && result.getEntity() instanceof LivingEntity living) {
+                if (count % 15 == 0) {
+                    player.playSound(UFSounds.SAWING.get());
+                }
+
                 if (living.hurt(DamageSource.playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {
                         p_40665_.broadcastBreakEvent(living.getUsedItemHand());
