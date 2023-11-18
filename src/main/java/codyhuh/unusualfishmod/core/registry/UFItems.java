@@ -63,6 +63,7 @@ public final class UFItems {
 	public static final RegistryObject<Item> LOBSTER_SPIKE = ITEMS.register("lobster_spike", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RELUCENT_SHARD = ITEMS.register("relucent_shard", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> CRIMSON_SHARD = ITEMS.register("crimson_shard", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
+	public static final RegistryObject<Item> DEPTH_CLAW = ITEMS.register("depth_claw", () -> new Item(new Item.Properties().tab(UnusualFishMod.TAB)));
 
 	// Gear
 	public static final RegistryObject<Item> DEPTH_SCYTHE = ITEMS.register("depth_scythe", () -> new DepthScytheItem(Tiers.DIAMOND, 3, -2.4F, new Item.Properties().tab(UnusualFishMod.TAB).durability(600)));
