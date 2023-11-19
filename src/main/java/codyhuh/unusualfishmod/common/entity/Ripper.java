@@ -51,7 +51,6 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.5D, false));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
 			@Override
 			public boolean canUse() {
@@ -64,6 +63,7 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, p -> p.getHealth() <= p.getMaxHealth() / 3));
 	}
