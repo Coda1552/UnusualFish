@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CSC",
+    "SPS",
+    "CSC"
+  ],
+  "key": {
+    "S": {
+      "item": "unusualfishmod:lobster_spike"
+    },
+    "P": {
+      "item": "minecraft:prismarine_bricks"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:sea_boom",
+    "count": 2
+  }
+}
