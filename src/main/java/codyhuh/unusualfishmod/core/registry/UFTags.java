@@ -14,6 +14,7 @@ public class UFTags {
     public static final TagKey<EntityType<?>> TIGER_PUFFER_PREY = entityTag("tiger_puffer_prey");
     public static final TagKey<EntityType<?>> SNAILS = entityTag("snails");
     public static final TagKey<Item> RAW_UNUSUAL_FISH = itemTag("raw_unusual_fish");
+    public static final TagKey<Item> UNUSUAL_CATCH_ITEMS = itemTag("unusual_catch");
     public static final TagKey<Block> SQUID_EGGS = blockTag("squid_eggs");
 
     private static TagKey<EntityType<?>> entityTag(String path) {

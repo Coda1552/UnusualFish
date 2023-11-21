@@ -1,0 +1,9 @@
+{
+  "type": "unusualfishmod:underwater_ruins_glm",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/underwater_ruin_big"
+    }
+  ]
+}

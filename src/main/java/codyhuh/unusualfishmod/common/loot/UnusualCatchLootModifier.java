@@ -26,7 +26,7 @@ public class UnusualCatchLootModifier extends LootModifier {
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        var items = ForgeRegistries.ITEMS.tags().getTag(UFTags.RAW_UNUSUAL_FISH).stream().toList();
+        var items = ForgeRegistries.ITEMS.tags().getTag(UFTags.UNUSUAL_CATCH_ITEMS).stream().toList();
         int size = items.size();
 
         ObjectArrayList<ItemStack> ret = new ObjectArrayList<>();
