@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "K",
+    "c"
+  ],
+  "key": {
+    "K": {
+      "item": "unusualfishmod:tendril"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    }
+  },
+  "result": {
+    "item": "unusualfishmod:copper_antenna",
+    "count": 1
+  }
+}

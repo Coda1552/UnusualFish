@@ -47,7 +47,7 @@ public final class UFItems {
 	public static final RegistryObject<Item> RAW_HATCHETFISH = ITEMS.register("raw_hatchetfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_HATCHETFISH).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_SNEEP_SNORP = ITEMS.register("raw_sneep_snorp", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SNEEP_SNORP).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> RAW_TRIPLE_TWIRL_PLECO = ITEMS.register("raw_triple_twirl_pleco", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_TRIPLE_TWIRL_PLECO).tab(UnusualFishMod.TAB)));
-	public static final RegistryObject<Item> UNUSUAL_FILLET = ITEMS.register("unusual_fillet", () -> new Item(new Item.Properties().food(UFFoodProperties.UNUSUAL_FILLET).tab(UnusualFishMod.TAB)));
+	//public static final RegistryObject<Item> UNUSUAL_FILLET = ITEMS.register("unusual_fillet", () -> new Item(new Item.Properties().food(UFFoodProperties.UNUSUAL_FILLET)));
 	public static final RegistryObject<Item> COOKED_UNUSUAL_FILLET = ITEMS.register("cooked_unusual_fillet", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_UNUSUAL_FILLET).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> LOBSTER_ROLL = ITEMS.register("lobster_roll", () -> new Item(new Item.Properties().food(UFFoodProperties.LOBSTER_ROLL).tab(UnusualFishMod.TAB)));
 	public static final RegistryObject<Item> ODD_FISHSTICKS = ITEMS.register("odd_fishsticks", () -> new Item(new Item.Properties().food(UFFoodProperties.ODD_FISHSTICKS).tab(UnusualFishMod.TAB)));
