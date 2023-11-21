@@ -44,10 +44,7 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
         }
 
         if (isReachedTarget()) {
-            Vec3 pos = Vec3.atCenterOf(blockPos);
-            Direction dir = Direction.getNearest(pos.x, pos.y, pos.z);
-
-            squid.level.setBlock(getMoveToTarget(), eggsBlock.defaultBlockState().setValue(SquidEggsBlock.FACING, dir.getOpposite()), 2);
+            squid.level.setBlock(getMoveToTarget().below(), eggsBlock.defaultBlockState().setValue(SquidEggsBlock.FACING, Direction.UP), 2);
             squid.playSound(SoundEvents.FROG_LAY_SPAWN);
             squid.setGravid(false);
             stop();
@@ -55,15 +52,9 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
 
     }
 
-    // todo - fix egg rotation/placement
     @Override
     protected boolean isValidTarget(LevelReader level, BlockPos blockPos) {
-        Vec3 pos = Vec3.atCenterOf(blockPos);
-        Direction dir = Direction.getNearest(pos.x, pos.y, pos.z);
-
-        BlockPos newPos = blockPos.relative(dir, 1);
-
-        return !level.getBlockState(blockPos).is(UFTags.SQUID_EGGS) && level.isWaterAt(blockPos) && level.getBlockState(newPos).isFaceSturdy(level, newPos, dir);
+        return !level.getBlockState(blockPos).is(UFTags.SQUID_EGGS) && level.isWaterAt(blockPos) && level.getBlockState(blockPos.below()).canOcclude();
     }
 
     @Override

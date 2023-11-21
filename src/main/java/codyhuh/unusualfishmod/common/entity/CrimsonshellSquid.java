@@ -67,9 +67,9 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
     }
 
     protected void registerGoals() {
+        this.goalSelector.addGoal(0, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(0, new BreedableWaterAnimalBreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(1, new SquidLayEggsGoal(this, UFBlocks.CRIMSON_EGGS.get()));
         this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
             @Override
             public boolean canUse() {
