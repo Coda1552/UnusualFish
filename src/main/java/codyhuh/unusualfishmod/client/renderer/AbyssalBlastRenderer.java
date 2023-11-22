@@ -4,9 +4,7 @@ import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -14,6 +12,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
     private static final ResourceLocation TEXTURE_0 = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/abyssalblast/abyssal_blast_0.png");
@@ -28,8 +28,8 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
     public void render(AbyssalBlast entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
         matrixStackIn.pushPose();
         matrixStackIn.translate(0.0D, 0.25F, 0.0D);
-        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entityIn.yRotO, entityIn.getYRot()) - 90.0F));
-        matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot())));
+        matrixStackIn.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entityIn.yRotO, entityIn.getYRot()) - 90.0F));
+        matrixStackIn.mulPose(Axis.XP.rotationDegrees(Mth.lerp(partialTicks, entityIn.xRotO, entityIn.getXRot())));
         int arcs = Mth.clamp(Mth.floor(entityIn.tickCount / 5F), 1, 4);
         matrixStackIn.translate(0.0D, 0.0F, 0.4D);
 

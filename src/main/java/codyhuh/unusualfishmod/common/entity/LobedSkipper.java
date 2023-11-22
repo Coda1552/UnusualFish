@@ -1,11 +1,12 @@
 package codyhuh.unusualfishmod.common.entity;
 
-
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -43,14 +44,13 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         this.jumpControl = new SkipperJumpController();
         this.moveControl = new SkipperMoveController();
         this.setMovementSpeed(0.0D);
-        this.maxUpStep = 1.1f;
-
+        this.setMaxUpStep(1.1F);
     }
-
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5D);
     }
+
     protected void registerGoals() {
         this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.5D));
         this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));
@@ -113,7 +113,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
     public void customServerAiStep() {
         if (this.currentMoveTypeDuration > 0) --this.currentMoveTypeDuration;
 
-        if (this.isOnGround()) {
+        if (this.onGround()) {
             if (!this.wasOnGround) {
                 this.setJumping(false);
                 this.checkLandingDelay();
@@ -135,7 +135,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
             } else if (!jumpHelper.canJump()) this.enableJumpControl();
         }
 
-        this.wasOnGround = this.isOnGround();
+        this.wasOnGround = this.onGround();
     }
 
     @Override
@@ -182,8 +182,8 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
             }
         }
 
-        if (!this.level.isClientSide)
-            this.level.broadcastEntityEvent(this, (byte) 1);
+        if (!this.level().isClientSide)
+            this.level().broadcastEntityEvent(this, (byte) 1);
     }
 
     public void setMovementSpeed(double newSpeed) {
@@ -218,7 +218,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
     @Nonnull
     @Override
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
@@ -334,7 +334,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
         @Override
         public void tick() {
-            if (isOnGround() && !jumping && !((SkipperJumpController) jumpControl).getIsJumping())
+            if (onGround() && !jumping && !((SkipperJumpController) jumpControl).getIsJumping())
                 setMovementSpeed(0.0D);
             else if (this.hasWanted()) setMovementSpeed(this.nextJumpSpeed);
 

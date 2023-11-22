@@ -46,7 +46,7 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 	public Squoddle(EntityType<? extends Squoddle> type, Level world) {
 		super(type, world);
 		this.moveControl = new Squoddle.MoveHelperController(this);
-		this.maxUpStep = 1.5f;
+		this.setMaxUpStep(1.5F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -73,8 +73,8 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 	@Override
 	public void playerTouch(Player entity) {
 		super.playerTouch(entity);
-		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
-			entity.hurt(DamageSource.mobAttack(this), 2.0F);
+		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
+			entity.hurt(damageSources().mobAttack(this), 2.0F);
 			entity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 2, false, false));
 			this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
 			this.attackCooldown = 80;
@@ -82,7 +82,7 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
-		return new GroundPathNavigation(this, level);
+		return new GroundPathNavigation(this, level());
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class MuddytopSnail extends BucketableWaterAnimal {
     public MuddytopSnail(EntityType<? extends MuddytopSnail> type, Level world) {
         super(type, world);
         this.moveControl = new MuddytopSnail.MoveHelperController(this);
-        this.maxUpStep = 1.0f;
+        this.setMaxUpStep(1.0F);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MuddytopSnail extends BucketableWaterAnimal {
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {
-        return new GroundPathNavigation(this, level);
+        return new GroundPathNavigation(this, level());
     }
 
     @Override
@@ -73,8 +73,8 @@ public class MuddytopSnail extends BucketableWaterAnimal {
     @Override
     public void playerTouch(Player entity) {
         super.playerTouch(entity);
-        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
-            entity.hurt(DamageSource.mobAttack(this), 2.0F);
+        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
+            entity.hurt(damageSources().mobAttack(this), 2.0F);
             this.attackCooldown = 80;
         }
     }

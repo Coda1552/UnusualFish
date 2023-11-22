@@ -41,7 +41,7 @@ public class BrickSnail extends WaterAnimal implements Bucketable {
     public BrickSnail(EntityType<? extends BrickSnail> type, Level world) {
         super(type, world);
         this.moveControl = new BrickSnail.MoveHelperController(this);
-        this.maxUpStep = 1.0f;
+        this.setMaxUpStep(1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -56,7 +56,7 @@ public class BrickSnail extends WaterAnimal implements Bucketable {
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {
-        return new GroundPathNavigation(this, level);
+        return new GroundPathNavigation(this, level());
     }
 
     @Override

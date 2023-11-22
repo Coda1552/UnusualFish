@@ -1,5 +1,5 @@
 {
-	"itemGroup.unusualfishmod": "Unusual Fish",
+	"itemGroup.unusual_fish_mod": "Unusual Fish",
 
 	"item.unusualfishmod.raw_mossthorn": "Raw Mossthorn Patty",
 	"item.unusualfishmod.raw_aero_mono": "Aero Mono",
@@ -43,7 +43,6 @@
 	"item.unusualfishmod.unusual_sandwich": "Unusual Sandwich",
 	"item.unusualfishmod.weird_goldfish": "Weird Goldfish",
 
-	"item.unusualfishmod.gnasher_organ": "Gnasher Jewel",
 	"item.unusualfishmod.tendril": "Shocking Tendril",
 	"item.unusualfishmod.ripper_tooth": "Ripper Tooth",
 	"item.unusualfishmod.lobster_spike": "Lobster Spike",

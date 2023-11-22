@@ -24,13 +24,13 @@ public class ForgeEvents {
     @SubscribeEvent
     public static void livingTick(LivingEvent.LivingTickEvent e) {
         LivingEntity entity = e.getEntity();
-        Level level = e.getEntity().getLevel();
+        Level level = e.getEntity().level();
 
         AABB aabb = entity.getBoundingBox();
         double range = 2.0D;
 
-        BlockPos blockpos = new BlockPos(aabb.minX - range, aabb.minY - range, aabb.minZ - range);
-        BlockPos blockpos1 = new BlockPos(aabb.maxX + range, aabb.maxY + range, aabb.maxZ + range);
+        BlockPos blockpos = new BlockPos((int) (aabb.minX - range), (int) (aabb.minY - range), (int) (aabb.minZ - range));
+        BlockPos blockpos1 = new BlockPos((int) (aabb.maxX + range), (int) (aabb.maxY + range), (int) (aabb.maxZ + range));
 
         if (level.hasChunksAt(blockpos, blockpos1)) {
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();

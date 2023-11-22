@@ -176,11 +176,11 @@ public class Rootball extends Monster implements PowerableMob {
     }
 
     private void explodeCreeper() {
-        if (!this.level.isClientSide) {
-            Explosion.BlockInteraction blockInteraction = Explosion.BlockInteraction.NONE;
+        if (!this.level().isClientSide) {
+            Level.ExplosionInteraction interaction = Level.ExplosionInteraction.BLOCK;
             float f = this.isPowered() ? 2.0F : 1.0F;
             this.dead = true;
-            this.level.explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, blockInteraction);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, interaction);
             this.discard();
             this.spawnLingeringCloud();
         }
@@ -190,7 +190,7 @@ public class Rootball extends Monster implements PowerableMob {
     private void spawnLingeringCloud() {
         Collection<MobEffectInstance> collection = this.getActiveEffects();
         if (!collection.isEmpty()) {
-            AreaEffectCloud areaeffectcloud = new AreaEffectCloud(this.level, this.getX(), this.getY(), this.getZ());
+            AreaEffectCloud areaeffectcloud = new AreaEffectCloud(this.level(), this.getX(), this.getY(), this.getZ());
             areaeffectcloud.setRadius(2.5F);
             areaeffectcloud.setRadiusOnUse(-0.5F);
             areaeffectcloud.setWaitTime(10);
@@ -201,7 +201,7 @@ public class Rootball extends Monster implements PowerableMob {
                 areaeffectcloud.addEffect(new MobEffectInstance(mobeffectinstance));
             }
 
-            this.level.addFreshEntity(areaeffectcloud);
+            this.level().addFreshEntity(areaeffectcloud);
         }
 
     }

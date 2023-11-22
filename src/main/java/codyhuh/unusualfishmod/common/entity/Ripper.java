@@ -26,7 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.Fluids;
 
 public class Ripper extends BucketableSchoolingWaterAnimal {
 	protected int attackCooldown = 0;
@@ -71,20 +71,20 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 	@Override
 	public boolean doHurtTarget(Entity entityIn) {
 		this.attackAnimationTick = 10;
-		this.level.broadcastEntityEvent(this, (byte)4);
+		this.level().broadcastEntityEvent(this, (byte)4);
 		float f = this.getAttackDamage();
 		float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-		boolean flag = entityIn.hurt(DamageSource.mobAttack(this), f1);
+		boolean flag = entityIn.hurt(damageSources().mobAttack(this), f1);
 		if (flag) {
 			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
 			this.doEnchantDamageEffects(this, entityIn);
 
-			ItemEntity item = EntityType.ITEM.create(level);
+			ItemEntity item = EntityType.ITEM.create(level());
 
 			item.moveTo(position());
 			item.setItem(new ItemStack(UFItems.RIPPER_TOOTH.get()));
 
-			level.addFreshEntity(item);
+			level().addFreshEntity(item);
 		}
 		return flag;
 	}
@@ -103,9 +103,9 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 			--this.attackAnimationTick;
 		}
 
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
@@ -161,7 +161,7 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 	}
 
 	public static boolean canSpawn(EntityType<Ripper> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
 	}
 
 	private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {

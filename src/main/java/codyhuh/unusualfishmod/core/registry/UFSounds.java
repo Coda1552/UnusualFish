@@ -23,7 +23,7 @@ public class UFSounds {
     public static final RegistryObject<SoundEvent> SAWING = createSoundEvent("sawing");
 
     private static RegistryObject<SoundEvent> createSoundEvent(final String name) {
-        return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(UnusualFishMod.MOD_ID, name)));
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(UnusualFishMod.MOD_ID, name)));
     }
 
 }

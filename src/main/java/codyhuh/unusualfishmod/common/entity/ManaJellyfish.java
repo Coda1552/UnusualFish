@@ -26,7 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.Fluids;
 
 public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
     protected int attackCooldown = 0;
@@ -67,9 +67,9 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
     }
 
     public void aiStep() {
-        if (!this.isInWater() && this.onGround && this.verticalCollision) {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-            this.onGround = false;
+            this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
@@ -104,7 +104,7 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
     @Override
     public void playerTouch(Player entity) {
         super.playerTouch(entity);
-        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
+        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
             entity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 300, 0, false, false));
             entity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0, false, false));
             this.attackCooldown = 80;
@@ -112,7 +112,7 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
     }
 
     public static boolean canSpawn(EntityType<ManaJellyfish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
     }
 
     private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {

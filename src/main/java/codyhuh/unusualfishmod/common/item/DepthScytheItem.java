@@ -3,23 +3,17 @@ package codyhuh.unusualfishmod.common.item;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class DepthScytheItem extends Item {
     public final Multimap<Attribute, AttributeModifier> attributeModifiers;
@@ -41,9 +35,9 @@ public class DepthScytheItem extends Item {
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         if (state.is(Blocks.COBWEB)) {
             return 15.0F;
-        } else {
-            Material material = state.getMaterial();
-            return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && material != Material.WATER_PLANT && !state.is(BlockTags.LEAVES) && material != Material.VEGETABLE ? 1.0F : 1.5F;
+        }
+        else {
+            return super.getDestroySpeed(stack, state);
         }
     }
 
@@ -64,14 +58,14 @@ public class DepthScytheItem extends Item {
         return true;
     }
 
-    @Override
+/*    @Override
     public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
         if (Enchantments.SWEEPING_EDGE.allowedInCreativeTab(this, tab)) {
             ItemStack stack = new ItemStack(this);
             stack.enchant(Enchantments.SWEEPING_EDGE, 5);
             list.add(stack);
         }
-    }
+    }*/
 
     @Override
     public void onCraftedBy(ItemStack stack, Level level, Player player) {

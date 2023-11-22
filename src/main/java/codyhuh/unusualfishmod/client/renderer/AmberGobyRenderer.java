@@ -5,7 +5,7 @@ import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.AmberGobyModel;
 import codyhuh.unusualfishmod.common.entity.AmberGoby;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -28,11 +28,11 @@ public class AmberGobyRenderer extends MobRenderer<AmberGoby, AmberGobyModel<Amb
 
         float f = 4.3F * Mth.sin(0.6F * p_116228_);
 
-        p_116227_.mulPose(Vector3f.YP.rotationDegrees(f));
+        p_116227_.mulPose(Axis.YP.rotationDegrees(f));
 
         if (!p_116226_.isInWater()) {
             p_116227_.translate(0.2D, 0.1D, 0.0D);
-            p_116227_.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+            p_116227_.mulPose(Axis.ZP.rotationDegrees(90.0F));
         }
     }
 

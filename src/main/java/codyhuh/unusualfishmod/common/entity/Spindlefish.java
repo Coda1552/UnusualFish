@@ -81,7 +81,7 @@ public class Spindlefish extends WaterAnimal implements Bucketable {
 			this.attackCooldown--;
 		}
 
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
+		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
 			Vec3 vec3 = this.getViewVector(0.0F);
 			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
 			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
@@ -92,9 +92,9 @@ public class Spindlefish extends WaterAnimal implements Bucketable {
 
 
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
@@ -191,8 +191,8 @@ public class Spindlefish extends WaterAnimal implements Bucketable {
 	@Override
 	public void playerTouch(Player entity) {
 		super.playerTouch(entity);
-		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
-			entity.hurt(DamageSource.mobAttack(this), 2.0F);
+		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
+			entity.hurt(damageSources().mobAttack(this), 2.0F);
 			entity.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 0, false, false));
 			this.attackCooldown = 80;
 		}

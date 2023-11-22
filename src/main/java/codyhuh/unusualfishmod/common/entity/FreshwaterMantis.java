@@ -39,7 +39,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable {
 	public FreshwaterMantis(EntityType<? extends FreshwaterMantis> type, Level world) {
 		super(type, world);
 		this.moveControl = new FreshwaterMantis.MoveHelperController(this);
-		this.maxUpStep = 1.1f;
+		this.setMaxUpStep(1.1F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -62,7 +62,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable {
 
 	@Override
 	public boolean doHurtTarget(Entity entityIn) {
-		boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+		boolean flag = entityIn.hurt(damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
 		if (flag) {
 			this.doEnchantDamageEffects(this, entityIn);
 		}
@@ -71,7 +71,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable {
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
-		return new GroundPathNavigation(this, level);
+		return new GroundPathNavigation(this, level());
 	}
 
 	protected SoundEvent getAmbientSound() {
@@ -108,7 +108,7 @@ public class FreshwaterMantis extends WaterAnimal implements Bucketable {
 			this.setAirSupply(p_149194_ - 1);
 			if (this.getAirSupply() == -20) {
 				this.setAirSupply(0);
-				this.hurt(DamageSource.DRY_OUT, 1.0F);
+				this.hurt(damageSources().dryOut(), 1.0F);
 			}
 		} else {
 			this.setAirSupply(this.getMaxAirSupply());

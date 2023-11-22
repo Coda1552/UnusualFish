@@ -1,5 +1,6 @@
 {
-  "type": "minecraft:smithing",
+  "type": "minecraft:smithing_transform",
+  "template": {},
   "addition": {
     "item": "unusualfishmod:depth_claw"
   },
@@ -7,6 +8,6 @@
     "item": "unusualfishmod:weapon_parts"
   },
   "result": {
-    "item": "unusualfishmod:depth_scythe"
+    "item": "unusualfishmod:deep_scythe"
   }
 }

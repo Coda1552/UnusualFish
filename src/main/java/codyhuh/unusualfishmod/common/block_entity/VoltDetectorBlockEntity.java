@@ -57,8 +57,8 @@ public class VoltDetectorBlockEntity extends BlockEntity {
         AABB aabb = new AABB(pos);
         currentList = level.getEntitiesOfClass(VoltAngler.class, aabb.inflate(radius));
 
-        BlockPos blockpos = new BlockPos(aabb.minX - radius, aabb.minY - radius, aabb.minZ - radius);
-        BlockPos blockpos1 = new BlockPos(aabb.maxX + radius, aabb.maxY + radius, aabb.maxZ + radius);
+        BlockPos blockpos = new BlockPos((int) (aabb.minX - radius), (int) (aabb.minY - radius), (int) (aabb.minZ - radius));
+        BlockPos blockpos1 = new BlockPos((int) (aabb.maxX + radius), (int) (aabb.maxY + radius), (int) (aabb.maxZ + radius));
 
         if (level.getBlockEntity(pos) instanceof VoltDetectorBlockEntity voltDetector && level.hasChunksAt(blockpos, blockpos1)) {
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();

@@ -25,7 +25,7 @@ public class BreedableWaterAnimalBreedGoal extends Goal {
 
     public BreedableWaterAnimalBreedGoal(BreedableWaterAnimal p_25125_, double p_25126_, Class<? extends BreedableWaterAnimal> p_25127_) {
         this.animal = p_25125_;
-        this.level = p_25125_.level;
+        this.level = p_25125_.level();
         this.partnerClass = p_25127_;
         this.speedModifier = p_25126_;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE, Goal.Flag.LOOK));
@@ -61,7 +61,7 @@ public class BreedableWaterAnimalBreedGoal extends Goal {
 
     @Nullable
     private BreedableWaterAnimal getFreePartner() {
-        List<? extends BreedableWaterAnimal> list = this.level.getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
+        List<? extends BreedableWaterAnimal> list = this.animal.level().getNearbyEntities(this.partnerClass, PARTNER_TARGETING, this.animal, this.animal.getBoundingBox().inflate(8.0D));
         double d0 = Double.MAX_VALUE;
         BreedableWaterAnimal animal = null;
 

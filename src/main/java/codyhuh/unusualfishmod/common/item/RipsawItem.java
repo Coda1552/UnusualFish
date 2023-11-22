@@ -30,9 +30,9 @@ public class RipsawItem extends AxeItem implements Vanishable {
     }
 
     @Override
-    public void onUsingTick(ItemStack stack, LivingEntity user, int count) {
+    public void onUseTick(Level level, LivingEntity user, ItemStack stack, int count) {
         if (user instanceof Player player) {
-            EntityHitResult result = getLookAtEntity(player, player.level, player.getReachDistance() + 1.0D);
+            EntityHitResult result = getLookAtEntity(player, player.level(), player.getEntityReach() + 1.0D);
             CompoundTag tag = stack.getOrCreateTag();
 
             float i = count % 10;
@@ -45,7 +45,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
                     player.playSound(UFSounds.SAWING.get());
                 }
 
-                if (living.hurt(DamageSource.playerAttack(player), getAttackDamage())) {
+                if (living.hurt(player.damageSources().playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {
                         p_40665_.broadcastBreakEvent(living.getUsedItemHand());
                     });

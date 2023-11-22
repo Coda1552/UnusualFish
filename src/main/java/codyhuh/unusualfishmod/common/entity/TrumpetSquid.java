@@ -84,9 +84,9 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));}
 
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
@@ -111,7 +111,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 
 	public boolean hurt(DamageSource p_29963_, float p_29964_) {
 		if (super.hurt(p_29963_, p_29964_) && this.getLastHurtByMob() != null) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.spawnInk();
 			}
 
@@ -133,7 +133,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		for(int i = 0; i < 30; ++i) {
 			Vec3 vec31 = this.rotateVector(new Vec3((double)this.random.nextFloat() * 0.6D - 0.3D, -1.0D, (double)this.random.nextFloat() * 0.6D - 0.3D));
 			Vec3 vec32 = vec31.scale(0.3D + (double)(this.random.nextFloat() * 2.0F));
-			((ServerLevel)this.level).sendParticles(ParticleTypes.SQUID_INK, vec3.x, vec3.y + 0.5D, vec3.z, 0, vec32.x, vec32.y, vec32.z, (double)0.1F);
+			((ServerLevel)this.level()).sendParticles(ParticleTypes.SQUID_INK, vec3.x, vec3.y + 0.5D, vec3.z, 0, vec32.x, vec32.y, vec32.z, (double)0.1F);
 		}
 	}
 

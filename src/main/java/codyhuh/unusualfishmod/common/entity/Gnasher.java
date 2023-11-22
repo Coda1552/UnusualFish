@@ -26,7 +26,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
 
 public class Gnasher extends WaterAnimal implements RangedAttackMob {
@@ -70,23 +70,23 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	public void performRangedAttack(LivingEntity target, float distanceFactor) {
 		this.lookAt(target, 100, 100);
 		this.yBodyRot = yBodyRotO;
-		AbyssalBlast glass = new AbyssalBlast(this.level, this);
+		AbyssalBlast glass = new AbyssalBlast(this.level(), this);
 		double xDistance = target.getX() - this.getX();
 		double yDistance = target.getY(0.3333333333333333D) - glass.getY();
 		double zDistance = target.getZ() - this.getZ();
 		double yMath = Mth.sqrt((float) ((xDistance * xDistance) + (zDistance * zDistance)));
 		glass.shoot(xDistance, yDistance + yMath * 0.10000000298023224D, zDistance, 1.6F, 11.0F);
-		this.level.addFreshEntity(glass);
+		this.level().addFreshEntity(glass);
 	}
 
 
 	@Override
 	public boolean doHurtTarget(Entity entityIn) {
 		this.attackAnimationTick = 10;
-		this.level.broadcastEntityEvent(this, (byte)4);
+		this.level().broadcastEntityEvent(this, (byte)4);
 		float f = this.getAttackDamage();
 		float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-		boolean flag = entityIn.hurt(DamageSource.mobAttack(this), f1);
+		boolean flag = entityIn.hurt(damageSources().mobAttack(this), f1);
 		if (flag) {
 			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, (double)0.4F, 0.0D));
 			this.doEnchantDamageEffects(this, entityIn);
@@ -103,7 +103,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 			this.attackCooldown--;
 		}
 
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
+		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
 			Vec3 vec3 = this.getViewVector(0.0F);
 			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
 			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
@@ -114,9 +114,9 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 
 
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
@@ -163,7 +163,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	}
 
 	public static boolean canSpawn(EntityType<Gnasher> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
 	}
 
 	private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {

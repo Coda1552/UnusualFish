@@ -5,7 +5,7 @@ import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.model.item.PrismarineSpearModel;
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -25,8 +25,8 @@ public class ThrownPrismarineSpearRenderer extends EntityRenderer<ThrownPrismari
     public void render(ThrownPrismarineSpear spear, float p_116112_, float p_116113_, PoseStack stack, MultiBufferSource buffer, int p_116116_) {
         stack.pushPose();
 
-        stack.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(p_116113_, spear.yRotO, spear.getYRot()) - 90.0F));
-        stack.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(p_116113_, spear.xRotO, spear.getXRot()) + 90.0F));
+        stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(p_116113_, spear.yRotO, spear.getYRot()) - 90.0F));
+        stack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(p_116113_, spear.xRotO, spear.getXRot()) + 90.0F));
 
         this.model.renderToBuffer(stack, buffer.getBuffer(this.model.renderType(this.getTextureLocation(spear))), p_116116_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 

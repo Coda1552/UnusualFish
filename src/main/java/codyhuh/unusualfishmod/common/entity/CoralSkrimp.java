@@ -48,7 +48,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable {
 	public CoralSkrimp(EntityType<? extends CoralSkrimp> type, Level world) {
 		super(type, world);
 		this.moveControl = new CoralSkrimp.MoveHelperController(this);
-		this.maxUpStep = 1.5f;
+		this.setMaxUpStep(1.5F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -64,7 +64,7 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable {
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
-		return new GroundPathNavigation(this, level);
+		return new GroundPathNavigation(this, level());
 	}
 
 	@Override

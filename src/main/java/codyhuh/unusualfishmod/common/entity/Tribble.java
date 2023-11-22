@@ -27,14 +27,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.Fluids;
+
 
 public class Tribble extends BucketableWaterAnimal {
 
     public Tribble(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new Tribble.MoveHelperController(this);
-        this.maxUpStep = 1.0f;
+        this.setMaxUpStep(1.0F);
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Tribble extends BucketableWaterAnimal {
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {
-        return new GroundPathNavigation(this, level);
+        return new GroundPathNavigation(this, level());
     }
 
     @Override
@@ -82,7 +83,7 @@ public class Tribble extends BucketableWaterAnimal {
     }
 
     public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getMaterial() == Material.WATER && iServerWorld.getBlockState(pos.above()).getMaterial() == Material.WATER && isLightLevelOk(pos, iServerWorld);
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
     }
 
     private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {

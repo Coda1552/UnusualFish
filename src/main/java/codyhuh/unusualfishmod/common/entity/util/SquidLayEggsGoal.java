@@ -44,7 +44,7 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
         }
 
         if (isReachedTarget()) {
-            squid.level.setBlock(getMoveToTarget().below(), eggsBlock.defaultBlockState().setValue(SquidEggsBlock.FACING, Direction.UP), 2);
+            squid.level().setBlock(getMoveToTarget().below(), eggsBlock.defaultBlockState().setValue(SquidEggsBlock.FACING, Direction.UP), 2);
             squid.playSound(SoundEvents.FROG_LAY_SPAWN);
             squid.setGravid(false);
             stop();

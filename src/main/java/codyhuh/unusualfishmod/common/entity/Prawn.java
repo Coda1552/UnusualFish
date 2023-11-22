@@ -44,7 +44,7 @@ public class Prawn extends Monster {
 
     @Override
     public boolean doHurtTarget(Entity entityIn) {
-        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
+        boolean flag = entityIn.hurt(damageSources().mobAttack(this), (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE));
         if (flag) {
             this.doEnchantDamageEffects(this, entityIn);
         }

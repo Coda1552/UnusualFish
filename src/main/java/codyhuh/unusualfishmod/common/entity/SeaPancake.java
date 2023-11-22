@@ -37,6 +37,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -84,17 +85,17 @@ public class SeaPancake extends WaterAnimal {
 	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 
-		if (stack.is(UFItems.RAW_LOBSTER.get()) && level instanceof ServerLevel serverLevel) {
-			LootTable loottable = serverLevel.getServer().getLootTables().get(FEED_REWARD);
-			List<ItemStack> list = loottable.getRandomItems((new LootContext.Builder((ServerLevel) level)).withParameter(LootContextParams.ORIGIN, position()).withParameter(LootContextParams.THIS_ENTITY, this).withRandom(random).create(LootContextParamSets.PIGLIN_BARTER));
+		if (stack.is(UFItems.RAW_LOBSTER.get()) && level() instanceof ServerLevel serverlevel) {
+			LootTable loottable = serverlevel.getServer().getLootData().getLootTable(FEED_REWARD);
+			List<ItemStack> list = loottable.getRandomItems(new LootParams.Builder(serverlevel).withParameter(LootContextParams.ORIGIN, position()).withParameter(LootContextParams.THIS_ENTITY, this).withLuck(random.nextFloat()).create(LootContextParamSets.PIGLIN_BARTER));
 
 			if (!list.isEmpty() && random.nextBoolean()) {
-				ItemEntity item = EntityType.ITEM.create(level);
+				ItemEntity item = EntityType.ITEM.create(level());
 
 				item.setItem(list.get(0));
 				item.moveTo(position());
 
-				level.addFreshEntity(item);
+				level().addFreshEntity(item);
 
 				playSound(SoundEvents.ITEM_PICKUP, 1.0F, 1.0F);
 			}
@@ -103,7 +104,7 @@ public class SeaPancake extends WaterAnimal {
 				stack.shrink(1);
 			}
 
-			serverLevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getRandomX(1.0D), position().y - 0.25D, getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+			serverlevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getRandomX(1.0D), position().y - 0.25D, getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			playSound(SoundEvents.DOLPHIN_EAT, 1.0F, 1.0F);
 		}
 
@@ -123,9 +124,9 @@ public class SeaPancake extends WaterAnimal {
 	}
 
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}

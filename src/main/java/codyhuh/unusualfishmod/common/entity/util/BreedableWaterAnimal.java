@@ -58,7 +58,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     }
 
     public int getAge() {
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             return this.entityData.get(DATA_BABY_ID) ? -1 : 1;
         } else {
             return this.age;
@@ -148,10 +148,10 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public void aiStep() {
         super.aiStep();
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             if (this.forcedAgeTimer > 0) {
                 if (this.forcedAgeTimer % 4 == 0) {
-                    this.level.addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
+                    this.level().addParticle(ParticleTypes.HAPPY_VILLAGER, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
                 }
 
                 --this.forcedAgeTimer;
@@ -177,7 +177,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
                 double d0 = this.random.nextGaussian() * 0.02D;
                 double d1 = this.random.nextGaussian() * 0.02D;
                 double d2 = this.random.nextGaussian() * 0.02D;
-                this.level.addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+                this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
             }
         }
 
@@ -204,7 +204,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
                 double d0 = this.random.nextGaussian() * 0.02D;
                 double d1 = this.random.nextGaussian() * 0.02D;
                 double d2 = this.random.nextGaussian() * 0.02D;
-                this.level.addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
+                this.level().addParticle(ParticleTypes.HEART, this.getRandomX(1.0D), this.getRandomY() + 0.5D, this.getRandomZ(1.0D), d0, d1, d2);
             }
         } else {
             super.handleEntityEvent(p_27562_);
@@ -229,7 +229,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             this.loveCause = p_27596_.getUUID();
         }
 
-        this.level.broadcastEntityEvent(this, (byte)18);
+        this.level().broadcastEntityEvent(this, (byte)18);
     }
 
     @Nullable
@@ -237,7 +237,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         if (this.loveCause == null) {
             return null;
         } else {
-            Player player = this.level.getPlayerByUUID(this.loveCause);
+            Player player = this.level().getPlayerByUUID(this.loveCause);
             return player instanceof ServerPlayer ? (ServerPlayer)player : null;
         }
     }
@@ -251,7 +251,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     }
 
     public int getExperienceReward() {
-        return 1 + this.level.random.nextInt(3);
+        return 1 + this.level().random.nextInt(3);
     }
 
     public boolean isFood(ItemStack p_27600_) {
@@ -262,7 +262,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         ItemStack itemstack = p_27584_.getItemInHand(p_27585_);
         if (this.isFood(itemstack)) {
             int i = this.getAge();
-            if (!this.level.isClientSide && i == 0 && this.canFallInLove()) {
+            if (!this.level().isClientSide && i == 0 && this.canFallInLove()) {
                 this.usePlayerItem(p_27584_, p_27585_, itemstack);
                 this.setInLove(p_27584_);
                 return InteractionResult.SUCCESS;
@@ -271,10 +271,10 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             if (this.isBaby()) {
                 this.usePlayerItem(p_27584_, p_27585_, itemstack);
                 this.ageUp(getSpeedUpSecondsWhenFeeding(-i), true);
-                return InteractionResult.sidedSuccess(this.level.isClientSide);
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
             }
 
-            if (this.level.isClientSide) {
+            if (this.level().isClientSide) {
                 return InteractionResult.CONSUME;
             }
         }

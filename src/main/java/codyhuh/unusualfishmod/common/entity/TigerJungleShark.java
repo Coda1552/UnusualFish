@@ -68,10 +68,10 @@ public class TigerJungleShark extends WaterAnimal {
     @Override
     public boolean doHurtTarget(Entity entityIn) {
         this.attackAnimationTick = 10;
-        this.level.broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte)4);
         float f = this.getAttackDamage();
         float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), f1);
+        boolean flag = entityIn.hurt(damageSources().mobAttack(this), f1);
         if (flag) {
             entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4D, 0.0D));
             this.doEnchantDamageEffects(this, entityIn);
@@ -96,9 +96,9 @@ public class TigerJungleShark extends WaterAnimal {
     }
 
     public void aiStep() {
-        if (!this.isInWater() && this.onGround && this.verticalCollision) {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4D, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-            this.onGround = false;
+            this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }

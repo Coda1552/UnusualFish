@@ -45,14 +45,12 @@ public class PorcupineLobster extends WaterAnimal implements Bucketable {
     public PorcupineLobster(EntityType<? extends PorcupineLobster> type, Level world) {
         super(type, world);
         this.moveControl = new PorcupineLobster.MoveHelperController(this);
-        this.maxUpStep = 1.5f;
+        this.setMaxUpStep(1.5F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F).add(Attributes.ARMOR, (double) 7.0F).add(Attributes.ATTACK_DAMAGE, (double) 3.0F);
     }
-
-
 
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.5F));
@@ -73,14 +71,14 @@ public class PorcupineLobster extends WaterAnimal implements Bucketable {
     @Override
     public void playerTouch(Player entity) {
         super.playerTouch(entity);
-        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
-            entity.hurt(DamageSource.mobAttack(this), 3.0F);
+        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
+            entity.hurt(damageSources().mobAttack(this), 3.0F);
             this.attackCooldown = 80;
         }
     }
 
     protected PathNavigation createNavigation(Level p_27480_) {
-        return new GroundPathNavigation(this, level);
+        return new GroundPathNavigation(this, level());
     }
 
     @Override

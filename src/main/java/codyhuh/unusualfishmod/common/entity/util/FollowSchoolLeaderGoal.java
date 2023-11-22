@@ -33,7 +33,7 @@ public class FollowSchoolLeaderGoal extends Goal {
             Predicate<BucketableSchoolingWaterAnimal> predicate = (p_25258_) -> {
                 return p_25258_.canBeFollowed() || !p_25258_.isFollower();
             };
-            List<? extends BucketableSchoolingWaterAnimal> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+            List<? extends BucketableSchoolingWaterAnimal> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
             BucketableSchoolingWaterAnimal schoolingWaterAnimal = DataFixUtils.orElse(list.stream().filter(BucketableSchoolingWaterAnimal::canBeFollowed).findAny(), this.mob);
             schoolingWaterAnimal.addFollowers(list.stream().filter((p_25255_) -> {
                 return !p_25255_.isFollower();

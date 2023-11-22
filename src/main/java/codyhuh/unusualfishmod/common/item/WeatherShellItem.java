@@ -48,7 +48,7 @@ public class WeatherShellItem extends Item {
 
         if (!player.isUsingItem() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.startUsingItem(hand);
-            player.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1), 1.0F, 1.0F);
+            player.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1).get(), 1.0F, 1.0F);
             player.getCooldowns().addCooldown(this, getUseDuration(stack));
         }
 

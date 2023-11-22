@@ -39,7 +39,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	public DeepCrawler(EntityType<? extends DeepCrawler> type, Level world) {
 		super(type, world);
 		this.moveControl = new DeepCrawler.MoveHelperController(this);
-		this.maxUpStep = 1.0f;
+		this.setMaxUpStep(1.0F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -55,7 +55,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
-		return new GroundPathNavigation(this, level);
+		return new GroundPathNavigation(this, level());
 	}
 
 	@Override

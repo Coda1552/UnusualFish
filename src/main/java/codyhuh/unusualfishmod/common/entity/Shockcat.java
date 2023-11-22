@@ -76,7 +76,7 @@ public class Shockcat extends BucketableWaterAnimal {
 	public void tick() {
 		super.tick();
 
-		if (this.level.isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
+		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
 			Vec3 vec3 = this.getViewVector(0.0F);
 			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
 			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
@@ -86,9 +86,9 @@ public class Shockcat extends BucketableWaterAnimal {
 	}
 
 	public void aiStep() {
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
@@ -119,7 +119,7 @@ public class Shockcat extends BucketableWaterAnimal {
 	@Override
 	public void playerTouch(Player entity) {
 		super.playerTouch(entity);
-		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level.getDifficulty() != Difficulty.PEACEFUL) {
+		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
 			entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 3, false, false));
 			entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 200, 2, false, false));
 			this.attackCooldown = 80;

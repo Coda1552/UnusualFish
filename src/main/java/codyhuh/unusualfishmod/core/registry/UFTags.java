@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -18,7 +19,7 @@ public class UFTags {
     public static final TagKey<Block> SQUID_EGGS = blockTag("squid_eggs");
 
     private static TagKey<EntityType<?>> entityTag(String path) {
-        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(UnusualFishMod.MOD_ID, path));
+        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(UnusualFishMod.MOD_ID, path));
     }
 
     private static TagKey<Item> itemTag(String path) {
