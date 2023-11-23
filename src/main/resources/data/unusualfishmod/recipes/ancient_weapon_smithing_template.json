@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "unusualfishmod:raw_unusual_fish"
+    },
+    "C": {
+      "tag": "minecraft:coral_blocks"
+    },
+    "S": {
+      "item": "unusualfishmod:ancient_weapon_smithing_template"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 2,
+    "item": "minecraft:netherite_upgrade_smithing_template"
+  },
+  "show_notification": true
+}

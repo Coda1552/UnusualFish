@@ -1,6 +1,8 @@
 {
   "type": "minecraft:smithing_transform",
-  "template": {},
+  "template": {
+    "item": "unusualfishmod:ancient_weapon_smithing_template"
+  },
   "addition": {
     "item": "unusualfishmod:ripper_tooth"
   },

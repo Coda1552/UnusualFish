@@ -57,6 +57,7 @@
 	"item.unusualfishmod.clement_shell": "Clement Shell",
 	"item.unusualfishmod.prismarine_spear": "Prismarine Spear",
 	"item.unusualfishmod.weapon_parts": "Weapon Parts",
+	"item.unusualfishmod.ancient_weapon_smithing_template": "Smithing Template",
 
 	"item.unusualfishmod.aero_mono_spawn_egg": "Aero Mono Spawn Egg",
 	"item.unusualfishmod.pinkfin_spawn_egg": "Pinkfin Idol Spawn Egg",
@@ -254,6 +255,12 @@
 
 	"enchantment.unusualfishmod.unusual_catch": "Unusual Catch",
 	"enchantment.unusualfishmod.unusual_catch.desc": "Allows you to catch unusual fish.",
+
+	"upgrade.unusualfishmod.ancient_weapon_upgrade": "Ancient Weapon",
+	"item.unusualfishmod.smithing_template.ancient_weapon_parts.applies_to": "Ancient Weapon Parts",
+	"item.unusualfishmod.smithing_template.ancient_weapon_parts.ingredients": "Ripper Tooth, Depth Claw",
+	"item.unusualfishmod.smithing_template.ancient_weapon_parts.base_slot_description": "Add Weapon Parts",
+	"item.unusualfishmod.smithing_template.ancient_weapon_parts.additions_slot_description": "Add Depth Claw or Ripper Tooth",
 
 	"unusualfishmod.sound.subtitle.crab_chatter": "Crab chatters",
 	"unusualfishmod.sound.subtitle.crab_scuttling": "Crab scuttles",

@@ -2,18 +2,32 @@ package codyhuh.unusualfishmod.core.registry;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.item.*;
-import net.minecraft.world.item.BowlFoodItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.List;
+
 public final class UFItems {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, UnusualFishMod.MOD_ID);
+
+	private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
+	private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
+	private static final Component ANCIENT_WEAPON_UPGRADE = Component.translatable(Util.makeDescriptionId("upgrade", new ResourceLocation(UnusualFishMod.MOD_ID, "ancient_weapon_upgrade"))).withStyle(TITLE_FORMAT);
+	private static final Component ANCIENT_WEAPON_APPLIES_TO = Component.translatable(Util.makeDescriptionId("item", new ResourceLocation(UnusualFishMod.MOD_ID, "smithing_template.ancient_weapon_parts.applies_to"))).withStyle(DESCRIPTION_FORMAT);
+	private static final Component ANCIENT_WEAPON_INGREDIENTS = Component.translatable(Util.makeDescriptionId("item", new ResourceLocation(UnusualFishMod.MOD_ID, "smithing_template.ancient_weapon_parts.ingredients"))).withStyle(DESCRIPTION_FORMAT);
+	private static final Component ANCIENT_WEAPON_BASE_SLOT_DESCRIPTION = Component.translatable(Util.makeDescriptionId("item", new ResourceLocation(UnusualFishMod.MOD_ID, "smithing_template.ancient_weapon_parts.base_slot_description")));
+	private static final Component ANCIENT_WEAPON_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(Util.makeDescriptionId("item", new ResourceLocation(UnusualFishMod.MOD_ID, "smithing_template.ancient_weapon_parts.additions_slot_description")));
+	private static final ResourceLocation EMPTY_SLOT_WEAPON_PARTS = new ResourceLocation(UnusualFishMod.MOD_ID, "item/empty_slot_weapon_parts");
+	private static final ResourceLocation EMPTY_SLOT_DEPTH_CLAW = new ResourceLocation(UnusualFishMod.MOD_ID, "item/empty_slot_depth_claw");
+	private static final ResourceLocation EMPTY_SLOT_RIPPER_TOOTH = new ResourceLocation(UnusualFishMod.MOD_ID, "item/empty_slot_ripper_tooth");
 
 	// Foods
 	public static final RegistryObject<Item> RAW_EYELASH = ITEMS.register("raw_eyelash", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_EYELASH)));
@@ -72,6 +86,7 @@ public final class UFItems {
 	public static final RegistryObject<Item> THUNDEROUS_SHELL = ITEMS.register("thunderous_shell", () -> new WeatherShellItem("thunder", new Item.Properties().stacksTo(1).durability(1)));
 	public static final RegistryObject<Item> PRISMARINE_SPEAR = ITEMS.register("prismarine_spear", () -> new PrismarineSpearItem(new Item.Properties().stacksTo(1).durability(100)));
 	public static final RegistryObject<Item> WEAPON_PARTS = ITEMS.register("weapon_parts", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> ANCIENT_WEAPON_SMITHING_TEMPLATE = ITEMS.register("ancient_weapon_smithing_template", () -> new SmithingTemplateItem(ANCIENT_WEAPON_APPLIES_TO, ANCIENT_WEAPON_INGREDIENTS, ANCIENT_WEAPON_UPGRADE, ANCIENT_WEAPON_ADDITIONS_SLOT_DESCRIPTION, ANCIENT_WEAPON_BASE_SLOT_DESCRIPTION, List.of(EMPTY_SLOT_WEAPON_PARTS), List.of(EMPTY_SLOT_DEPTH_CLAW, EMPTY_SLOT_RIPPER_TOOTH)));
 	//public static final RegistryObject<Item> STARGAZER = ITEMS.register("stargazer", () -> new StargazerItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	// Buckets

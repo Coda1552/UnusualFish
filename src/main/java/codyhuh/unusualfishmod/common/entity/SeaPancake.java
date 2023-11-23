@@ -141,6 +141,7 @@ public class SeaPancake extends WaterAnimal {
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.LARGE_FISH.get();
 	}
+
 	public SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -151,11 +152,6 @@ public class SeaPancake extends WaterAnimal {
 
 	public SoundEvent getFlopSound() {
 		return SoundEvents.COD_FLOP;
-	}
-
-	@Override
-	public void playerTouch(Player entity) { // todo - remove
-		super.playerTouch(entity);
 	}
 
 	public static boolean canSpawn(EntityType<SeaPancake> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

@@ -6,7 +6,7 @@
   "spawners":
   {
     "type": "unusualfishmod:sea_pancake",
-    "weight": 20,
+    "weight": 5,
     "minCount": 1,
     "maxCount": 1
   }
