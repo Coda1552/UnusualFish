@@ -27,6 +27,10 @@
         },
         {
           "type": "minecraft:item",
+          "name": "unusualfishmod:ancient_weapon_smithing_template"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:book",
           "functions": [
             {
