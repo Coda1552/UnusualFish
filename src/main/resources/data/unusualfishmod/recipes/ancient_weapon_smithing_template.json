@@ -3,10 +3,10 @@
   "category": "misc",
   "key": {
     "#": {
-      "tag": "unusualfishmod:raw_unusual_fish"
+      "item": "minecraft:sand"
     },
     "C": {
-      "tag": "minecraft:coral_blocks"
+      "tag": "unusualfishmod:raw_unusual_fish"
     },
     "S": {
       "item": "unusualfishmod:ancient_weapon_smithing_template"
@@ -19,7 +19,7 @@
   ],
   "result": {
     "count": 2,
-    "item": "minecraft:netherite_upgrade_smithing_template"
+    "item": "unusualfishmod:ancient_weapon_smithing_template"
   },
   "show_notification": true
 }
