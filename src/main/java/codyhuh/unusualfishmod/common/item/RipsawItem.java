@@ -40,10 +40,11 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
             tag.putFloat("SawingProgress", progress);
 
+            if (count % 15 == 0) {
+                player.playSound(UFSounds.SAWING.get());
+            }
+
             if (result != null && result.getEntity() instanceof LivingEntity living) {
-                if (count % 15 == 0) {
-                    player.playSound(UFSounds.SAWING.get());
-                }
 
                 if (living.hurt(DamageSource.playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {

@@ -140,6 +140,7 @@ public class SeaPancake extends WaterAnimal {
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.LARGE_FISH.get();
 	}
+
 	public SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

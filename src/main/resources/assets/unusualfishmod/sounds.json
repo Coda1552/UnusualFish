@@ -158,15 +158,6 @@
     ],
     "subtitle": "unusualfishmod.sound.subtitle.small_fish"
   },
-  "whip_crack": {
-    "category": "neutral",
-    "sounds": [
-      {
-        "name": "unusualfishmod:whip_crack_0"
-      }
-    ],
-    "subtitle": "unusualfishmod.sound.subtitle.whip_crack"
-  },
   "abyssal_blast": {
     "category": "neutral",
     "sounds": [

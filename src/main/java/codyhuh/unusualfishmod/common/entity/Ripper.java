@@ -79,12 +79,14 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
 			this.doEnchantDamageEffects(this, entityIn);
 
-			ItemEntity item = EntityType.ITEM.create(level);
+			if (random.nextFloat() > 0.8F) {
+				ItemEntity item = EntityType.ITEM.create(level);
 
-			item.moveTo(position());
-			item.setItem(new ItemStack(UFItems.RIPPER_TOOTH.get()));
+				item.moveTo(position());
+				item.setItem(new ItemStack(UFItems.RIPPER_TOOTH.get()));
 
-			level.addFreshEntity(item);
+				level.addFreshEntity(item);
+			}
 		}
 		return flag;
 	}
