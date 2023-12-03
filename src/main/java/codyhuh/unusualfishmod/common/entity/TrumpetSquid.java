@@ -242,7 +242,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 
 	@Override
 	public ItemStack getBucketItemStack() {
-		return new ItemStack(UFItems.CRIMSONSHELL_SQUID_BUCKET.get());
+		return new ItemStack(UFItems.TRUMPET_SQUID_BUCKET.get());
 	}
 
 	static class MoveHelperController extends MoveControl {
