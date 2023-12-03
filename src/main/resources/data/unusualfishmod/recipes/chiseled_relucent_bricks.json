@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "_",
+        "_"
+    ],
+    "key": {
+        "_": {
+            "item": "unusualfishmod:relucent_brick_slab"
+        }
+    },
+    "result": {
+        "item": "unusualfishmod:chiseled_relucent_bricks",
+        "count": 1
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "_",
+        "_"
+    ],
+    "key": {
+        "_": {
+            "item": "unusualfishmod:crimson_tile_slab"
+        }
+    },
+    "result": {
+        "item": "unusualfishmod:chiseled_crimson_bricks",
+        "count": 1
+    }
+}

@@ -6,7 +6,7 @@
   "spawners":
   {
     "type": "unusualfishmod:triple_twirl_pleco",
-    "weight": 30,
+    "weight": 10,
     "minCount": 2,
     "maxCount": 4
   }
