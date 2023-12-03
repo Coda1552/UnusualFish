@@ -1,0 +1,8 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "unusualfishmod:relucent_tiles"
+    },
+    "result": "unusualfishmod:relucent_tile_stairs",
+    "count": 1
+}
