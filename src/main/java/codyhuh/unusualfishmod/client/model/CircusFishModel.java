@@ -30,13 +30,14 @@ public class CircusFishModel<T extends CircusFish> extends ListModel<T> {
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
 		PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -14.0F, -6.0F, 0.0F, 17.0F, 17.0F, new CubeDeformation(0.0F))
-				.texOffs(22, 22).addBox(-2.5F, -10.0F, -6.0F, 5.0F, 10.0F, 12.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+				.texOffs(22, 22).addBox(-2.5F, -10.0F, -6.0F, 5.0F, 10.0F, 12.0F, new CubeDeformation(0.0F))
+				.texOffs(23, 46).addBox(-1.5F, -5.0F, -6.2F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition LowerFin2 = Body.addOrReplaceChild("lowerfin1", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 0.0F, -4.0F, 0.1719F, -0.0302F, 0.1719F));
+		PartDefinition LowerFin2 = Body.addOrReplaceChild("lowerfin2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 0.0F, -4.0F, 0.1719F, -0.0302F, 0.1719F));
 
-		PartDefinition LowerFin1 = Body.addOrReplaceChild("lowerfin2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, -4.0F, 0.1719F, 0.0302F, -0.1719F));
+		PartDefinition LowerFin1 = Body.addOrReplaceChild("lowerfin1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, -4.0F, 0.1719F, 0.0302F, -0.1719F));
 
-		PartDefinition Fin2 = Body.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(16, 0).mirror().addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.55F, -3.0F, 0.0F, 0.1745F, -0.2182F, 0.0F));
+		PartDefinition Fin2 = Body.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(16, 0).mirror().addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.55F, -3.0F, 0.0F, 0.1745F, -0.9163F, 0.0F));
 
 		PartDefinition Fin1 = Body.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(16, 0).addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.55F, -3.0F, 0.0F, 0.1745F, 0.2182F, 0.0F));
 
@@ -44,6 +45,7 @@ public class CircusFishModel<T extends CircusFish> extends ListModel<T> {
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
+
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
