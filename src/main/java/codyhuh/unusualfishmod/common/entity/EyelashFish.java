@@ -170,7 +170,7 @@ public class EyelashFish extends BucketableSchoolingWaterAnimal {
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		if (dataTag == null) {
-			setVariant(random.nextInt(11));
+			setVariant(random.nextInt(15));
 		} else {
 			if (dataTag.contains("Variant", 11)){
 				this.setVariant(dataTag.getInt("Variant"));

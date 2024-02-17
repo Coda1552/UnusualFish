@@ -28,6 +28,10 @@ public class EyelashFishRenderer extends MobRenderer<EyelashFish, EyelashFishMod
 		hashMap.put(8, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_9.png"));
 		hashMap.put(9, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_10.png"));
 		hashMap.put(10, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_11.png"));
+		hashMap.put(11, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_12.png"));
+		hashMap.put(12, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_13.png"));
+		hashMap.put(13, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_14.png"));
+		hashMap.put(14, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelashfish/eyelash_fish_15.png"));
 	});
 
 	public EyelashFishRenderer(EntityRendererProvider.Context renderManagerIn) {
