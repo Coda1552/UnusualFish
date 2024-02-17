@@ -109,8 +109,13 @@ public class RoughbackGuitarfish extends WaterAnimal {
 		}
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<RoughbackGuitarfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	@Override
+	public int getMaxSpawnClusterSize() {
+		return 1;
+	}
+
+	public static boolean canSpawn(EntityType<RoughbackGuitarfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return random.nextBoolean() && WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 }
 
