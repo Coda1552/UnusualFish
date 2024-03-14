@@ -1,0 +1,9 @@
+{
+  "type": "unusualfishmod:buried_treasure_glm",
+  "conditions": [
+    {
+      "condition": "forge:loot_table_id",
+      "loot_table_id": "minecraft:chests/buried_treasure"
+    }
+  ]
+}

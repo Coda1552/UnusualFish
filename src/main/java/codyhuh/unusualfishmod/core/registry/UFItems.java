@@ -6,6 +6,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -87,7 +88,8 @@ public final class UFItems {
 	public static final RegistryObject<Item> PRISMARINE_SPEAR = ITEMS.register("prismarine_spear", () -> new PrismarineSpearItem(new Item.Properties().stacksTo(1).durability(100)));
 	public static final RegistryObject<Item> WEAPON_PARTS = ITEMS.register("weapon_parts", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> ANCIENT_WEAPON_SMITHING_TEMPLATE = ITEMS.register("ancient_weapon_smithing_template", () -> new SmithingTemplateItem(ANCIENT_WEAPON_APPLIES_TO, ANCIENT_WEAPON_INGREDIENTS, ANCIENT_WEAPON_UPGRADE, ANCIENT_WEAPON_ADDITIONS_SLOT_DESCRIPTION, ANCIENT_WEAPON_BASE_SLOT_DESCRIPTION, List.of(EMPTY_SLOT_WEAPON_PARTS), List.of(EMPTY_SLOT_DEPTH_CLAW, EMPTY_SLOT_RIPPER_TOOTH)));
-	//public static final RegistryObject<Item> STARGAZER = ITEMS.register("stargazer", () -> new StargazerItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
+	public static final RegistryObject<Item> MUSIC_DISC_SEAFOAM = ITEMS.register("music_disc_seafoam", () -> new RecordItem(1, UFSounds.MUSIC_DISC_SEAFOAM, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 155));
+//public static final RegistryObject<Item> STARGAZER = ITEMS.register("stargazer", () -> new StargazerItem(new Item.Properties().tab(UnusualFishMod.UNUSUAL_TAB).stacksTo(1)));
 
 	// Buckets
 	public static final RegistryObject<Item> AERO_MONO_BUCKET = ITEMS.register("aero_mono_bucket", () -> new UFFishBucketItem(UFEntities.AERO_MONO, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));

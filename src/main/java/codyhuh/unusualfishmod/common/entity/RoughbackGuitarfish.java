@@ -36,10 +36,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
-	public boolean requiresCustomPersistence() {
-		return true;
-	}
-
 	protected void registerGoals() {
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(4, new HurtByTargetGoal(this));
@@ -59,7 +55,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 		});
 	}
 
-
 	public void tick() {
 		super.tick();
 
@@ -67,7 +62,6 @@ public class RoughbackGuitarfish extends WaterAnimal {
 			this.attackCooldown--;
 		}
 	}
-
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround() && this.verticalCollision) {

@@ -1,4 +1,12 @@
 {
+  "seafoam": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "unusualfishmod:seafoam"
+      }
+    ]
+  },
   "sawing": {
     "category": "neutral",
     "sounds": [

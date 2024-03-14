@@ -2,6 +2,7 @@
   "replace": false,
   "entries": [
     "unusualfishmod:unusual_catch_glm",
-    "unusualfishmod:underwater_ruins_glm"
+    "unusualfishmod:underwater_ruins_glm",
+    "unusualfishmod:buried_treasure_glm"
   ]
 }
