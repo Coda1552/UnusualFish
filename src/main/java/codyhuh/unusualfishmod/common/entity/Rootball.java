@@ -28,18 +28,18 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.event.ForgeEventFactory;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public class Rootball extends Monster implements PowerableMob {
+public class Rootball extends Monster {
     private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.INT);
-    private static final EntityDataAccessor<Boolean> DATA_IS_POWERED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
     private int oldSwell;
     private int swell;
     private int maxSwell = 30;
-    private int explosionRadius = 3;
+    private float explosionRadius = 1.5F;
 
     public Rootball(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
@@ -81,16 +81,11 @@ public class Rootball extends Monster implements PowerableMob {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(DATA_SWELL_DIR, -1);
-        this.entityData.define(DATA_IS_POWERED, false);
         this.entityData.define(DATA_IS_IGNITED, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        super.addAdditionalSaveData(compound);
-        if (this.entityData.get(DATA_IS_POWERED)) {
-            compound.putBoolean("powered", true);
-        }
 
         compound.putShort("Fuse", (short)this.maxSwell);
         compound.putByte("ExplosionRadius", (byte)this.explosionRadius);
@@ -99,7 +94,7 @@ public class Rootball extends Monster implements PowerableMob {
 
     public void readAdditionalSaveData(CompoundTag p_32296_) {
         super.readAdditionalSaveData(p_32296_);
-        this.entityData.set(DATA_IS_POWERED, p_32296_.getBoolean("powered"));
+
         if (p_32296_.contains("Fuse", 99)) {
             this.maxSwell = p_32296_.getShort("Fuse");
         }
@@ -176,11 +171,9 @@ public class Rootball extends Monster implements PowerableMob {
     }
 
     private void explodeCreeper() {
-        if (!this.level().isClientSide) {
-            Level.ExplosionInteraction interaction = Level.ExplosionInteraction.BLOCK;
-            float f = this.isPowered() ? 2.0F : 1.0F;
+        if (!level().isClientSide) {
             this.dead = true;
-            this.level().explode(this, this.getX(), this.getY(), this.getZ(), (float)this.explosionRadius * f, interaction);
+            this.level().explode(this, this.getX(), this.getY(), this.getZ(), explosionRadius, Level.ExplosionInteraction.MOB);
             this.discard();
             this.spawnLingeringCloud();
         }
@@ -212,11 +205,6 @@ public class Rootball extends Monster implements PowerableMob {
 
     public void ignite() {
         this.entityData.set(DATA_IS_IGNITED, true);
-    }
-
-    @Override
-    public boolean isPowered() {
-        return this.entityData.get(DATA_IS_POWERED);
     }
 
     public static boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {

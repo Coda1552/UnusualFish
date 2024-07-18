@@ -5,7 +5,7 @@
   ],
   "spawners":
   {
-    "type": "unusualfishmod:aero_mono",
+    "type": "unusualfishmod:rootball",
     "weight": 30,
     "minCount": 3,
     "maxCount": 5
