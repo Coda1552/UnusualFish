@@ -5,7 +5,7 @@
   ],
   "spawners":
   {
-    "type": "unusualfishmod:porcupine_lobster",
+    "type": "unusualfishmod:porcupine_lobsta",
     "weight": 20,
     "minCount": 1,
     "maxCount": 4
