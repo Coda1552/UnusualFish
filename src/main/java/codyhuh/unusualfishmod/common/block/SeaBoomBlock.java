@@ -55,15 +55,4 @@ public class SeaBoomBlock extends BaseEntityBlock {
             level.setBlock(pos, state.setValue(LOADED, true), 3);
         }
     }
-
-    @Nullable
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        for (Direction dir : Direction.values()) {
-            if (context.getLevel().getBlockState(context.getClickedPos().relative(dir)).getFluidState().is(FluidTags.WATER)) {
-                return this.defaultBlockState().setValue(LOADED, true);
-            }
-        }
-        return this.defaultBlockState();
-    }
 }

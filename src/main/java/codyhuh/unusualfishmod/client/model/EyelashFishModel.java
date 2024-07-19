@@ -15,41 +15,43 @@ public class EyelashFishModel<T extends EyelashFish> extends EntityModel<T> {
 	private final ModelPart Eyelash1;
 	private final ModelPart Eyelash2;
 	private final ModelPart Tail;
-	private final ModelPart bb_main;
+	private final ModelPart Fish;
 
 	public EyelashFishModel(ModelPart root) {
-		this.Fin1 = root.getChild("Fin1");
-		this.Fin2 = root.getChild("Fin2");
-		this.Eyelash1 = root.getChild("Eyelash1");
-		this.Eyelash2 = root.getChild("Eyelash2");
-		this.Tail = root.getChild("Tail");
-		this.bb_main = root.getChild("bb_main");
+		this.Fish = root.getChild("fish");
+		this.Fin1 = Fish.getChild("l_fin");
+		this.Fin2 = Fish.getChild("r_fin");
+		this.Eyelash1 = Fish.getChild("l_eyelash");
+		this.Eyelash2 = Fish.getChild("r_eyelash");
+		this.Tail = Fish.getChild("tail");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Fin1 = partdefinition.addOrReplaceChild("Fin1", CubeListBuilder.create(), PartPose.offset(1.0F, 20.0F, 0.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition cube_r1 = Fin1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(6, 2).addBox(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.8727F, 0.0F));
+		PartDefinition r_fin = fish.addOrReplaceChild("r_fin", CubeListBuilder.create(), PartPose.offset(-1.0F, -1.0F, 0.0F));
 
-		PartDefinition Fin2 = partdefinition.addOrReplaceChild("Fin2", CubeListBuilder.create(), PartPose.offset(-1.0F, 20.0F, 0.0F));
+		PartDefinition cube_r1 = r_fin.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(6, 2).addBox(-1.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.8727F, 0.0F));
 
-		PartDefinition cube_r2 = Fin2.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(6, 0).addBox(-1.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.8727F, 0.0F));
+		PartDefinition l_fin = fish.addOrReplaceChild("l_fin", CubeListBuilder.create(), PartPose.offset(1.0F, -1.0F, 0.0F));
 
-		PartDefinition Eyelash1 = partdefinition.addOrReplaceChild("Eyelash1", CubeListBuilder.create(), PartPose.offset(1.0F, 19.0F, 0.0F));
+		PartDefinition cube_r2 = l_fin.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(6, 2).addBox(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.8727F, 0.0F));
 
-		PartDefinition cube_r3 = Eyelash1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, 0.8727F));
+		PartDefinition l_eyelash = fish.addOrReplaceChild("l_eyelash", CubeListBuilder.create(), PartPose.offset(1.0F, -2.0F, 0.0F));
 
-		PartDefinition Eyelash2 = partdefinition.addOrReplaceChild("Eyelash2", CubeListBuilder.create(), PartPose.offset(-1.0F, 19.0F, 0.0F));
+		PartDefinition cube_r3 = l_eyelash.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(6, 5).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, 0.8727F));
 
-		PartDefinition cube_r4 = Eyelash2.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(6, 5).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, -0.8727F));
+		PartDefinition r_eyelash = fish.addOrReplaceChild("r_eyelash", CubeListBuilder.create(), PartPose.offset(-1.0F, -2.0F, 0.0F));
 
-		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(0, 12).addBox(0.0F, -1.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, 2.0F));
+		PartDefinition cube_r4 = r_eyelash.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(6, 5).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, -0.8727F));
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(12, 0).addBox(-1.0F, -5.0F, -1.0F, 2.0F, 5.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(0.0F, -1.0F, 1.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 0).addBox(-1.0F, -2.0F, -2.0F, 2.0F, 5.0F, 3.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(0.0F, 2.0F, 0.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
+
+		PartDefinition tail = fish.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 12).addBox(0.0F, -1.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 2.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
@@ -71,11 +73,6 @@ public class EyelashFishModel<T extends EyelashFish> extends EntityModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Fin1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Fin2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Eyelash1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Eyelash2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		Fish.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }
