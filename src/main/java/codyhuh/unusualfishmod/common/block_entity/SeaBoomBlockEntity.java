@@ -8,6 +8,7 @@ import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
@@ -26,7 +27,7 @@ public class SeaBoomBlockEntity extends BlockEntity {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SeaBoomBlockEntity voltDetector) {
         AABB aabb = new AABB(pos);
-        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(2.0D), e -> !(e instanceof Player)); // todo remove player check
+        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(2.0D), e -> !level.getBlockState(pos).getValue(SeaBoomBlock.HOSTILE_ONLY) || e instanceof Monster);
 
         if (level.hasChunksAt(pos, pos) && state.is(UFBlocks.SEA_BOOM.get()) && !level.getBlockState(pos).isAir() && !entities.isEmpty() && level.getBlockState(pos).getValue(SeaBoomBlock.LOADED)) {
             level.setBlock(pos, state.setValue(SeaBoomBlock.LOADED, false), 3);
@@ -46,6 +47,7 @@ public class SeaBoomBlockEntity extends BlockEntity {
 
                         if (c == 1) arrowMovement = arrowMovement.yRot(45.0F);
 
+                        spike.hostileOnly = level.getBlockState(pos).getValue(SeaBoomBlock.HOSTILE_ONLY);
                         spike.setDeltaMovement(arrowMovement);
                         level.addFreshEntity(spike);
                     }

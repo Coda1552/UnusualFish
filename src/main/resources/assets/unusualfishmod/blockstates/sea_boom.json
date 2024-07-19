@@ -1,10 +1,16 @@
 {
   "variants": {
-    "loaded=false": {
+    "loaded=false,hostile_only=false": {
       "model": "unusualfishmod:block/sea_boom"
     },
-    "loaded=true": {
+    "loaded=true,hostile_only=false": {
       "model": "unusualfishmod:block/sea_boom_loaded"
+    },
+    "loaded=false,hostile_only=true": {
+      "model": "unusualfishmod:block/sea_boom_hostiles"
+    },
+    "loaded=true,hostile_only=true": {
+      "model": "unusualfishmod:block/sea_boom_hostiles_loaded"
     }
   }
 }
