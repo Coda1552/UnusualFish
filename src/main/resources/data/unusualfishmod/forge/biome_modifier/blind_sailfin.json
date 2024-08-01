@@ -3,7 +3,7 @@
   "biomes": "#minecraft:is_overworld",
   "spawners":
   {
-    "type": "unusualfishmod:blind_sailfin",
+    "type": "unusualfishmod:blindsailfin",
     "weight": 30,
     "minCount": 1,
     "maxCount": 1

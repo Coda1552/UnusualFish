@@ -34,7 +34,6 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
-//REMOVE TILT FROM
 public class BlindSailfin extends WaterAnimal implements Bucketable {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(BlindSailfin.class, EntityDataSerializers.BOOLEAN);
 
@@ -187,7 +186,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 		return new ItemStack(UFItems.BLIND_SAILFIN_BUCKET.get());
 	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+	public static boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 30;
 	}
 }

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
 
@@ -168,7 +169,7 @@ public class Ripper extends BucketableSchoolingWaterAnimal {
 
 	private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
 		float time = iServerWorld.getTimeOfDay(1.0F);
-		int light = iServerWorld.getMaxLocalRawBrightness(pos);
-		return light <= 4 && time > 0.27F && time <= 0.8F;
+		int light = iServerWorld.getBrightness(LightLayer.BLOCK, pos);
+		return light <= 4/* && time > 0.27F && time <= 0.8F*/;
 	}
 }

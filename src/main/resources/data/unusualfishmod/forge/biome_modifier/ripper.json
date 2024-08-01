@@ -5,8 +5,8 @@
   ],
   "spawners":
   {
-    "type": "unusualfishmod:rootball",
-    "weight": 40,
+    "type": "unusualfishmod:ripper",
+    "weight": 10,
     "minCount": 1,
     "maxCount": 2
   }
