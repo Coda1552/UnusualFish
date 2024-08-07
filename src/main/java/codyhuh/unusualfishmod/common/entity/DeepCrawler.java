@@ -47,10 +47,10 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8F));
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.8F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(4, new AvoidEntityGoal(this, Player.class, 8, 1.3D, 1.0D));
 	}
 
@@ -65,6 +65,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.CRAB_CHATTER.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

@@ -69,7 +69,7 @@ public class DeepCrawlerModel<T extends DeepCrawler> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.Tail.yRot = Mth.cos(limbSwing * 0.5F) * 1.7F * limbSwingAmount;
+		this.Tail.yRot = Mth.cos(limbSwing * 0.5F) * 0.7F * limbSwingAmount;
 		this.LittleLeg1.zRot = -Mth.cos(limbSwing * 0.5F) * 1.7F * limbSwingAmount;
 		this.BigLeg3.zRot = -Mth.cos(limbSwing * 0.5F + (float) Math.PI) * 1.7F * limbSwingAmount;
 		this.BigLeg2.zRot = Mth.cos(limbSwing * 0.5F) * 1.7F * limbSwingAmount;
