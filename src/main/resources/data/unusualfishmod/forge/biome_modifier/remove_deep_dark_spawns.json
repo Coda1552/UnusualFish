@@ -4,6 +4,7 @@
   "entity_types": [
     "unusualfishmod:deep_crawler",
     "unusualfishmod:shockcat",
-    "unusualfishmod:hatchet_fish"
+    "unusualfishmod:hatchet_fish",
+    "unusualfishmod:blindsailfin"
   ]
 }
