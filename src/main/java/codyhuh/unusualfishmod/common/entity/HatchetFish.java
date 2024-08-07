@@ -106,6 +106,6 @@ public class HatchetFish extends BucketableSchoolingWaterAnimal {
 	}
 
 	public static boolean canSpawn(EntityType<HatchetFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 0;
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getLightEmission(pos) < 8 && iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 0;
 	}
 }
