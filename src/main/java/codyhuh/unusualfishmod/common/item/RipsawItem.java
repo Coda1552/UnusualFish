@@ -21,7 +21,7 @@ import net.minecraft.world.phys.Vec3;
 public class RipsawItem extends AxeItem implements Vanishable {
 
     public RipsawItem(Properties p_41383_) {
-        super(UFTiers.RIPPER_SAW, 5.0F, -1.0F, p_41383_);
+        super(UFTiers.RIPPER_SAW, 7.0F, -1.0F, p_41383_);
     }
 
     @Override

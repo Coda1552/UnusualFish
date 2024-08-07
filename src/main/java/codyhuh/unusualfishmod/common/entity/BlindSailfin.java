@@ -187,6 +187,6 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 	}
 
 	public static boolean canSpawn(EntityType<BlindSailfin> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 30;
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getLightEmission(pos) < 8 && iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 30;
 	}
 }
