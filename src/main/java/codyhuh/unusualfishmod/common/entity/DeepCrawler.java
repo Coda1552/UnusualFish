@@ -144,15 +144,18 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 		return new ItemStack(UFItems.DEEP_CRAWLER_BUCKET.get());
 	}
 
+	public static boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
+	}
 
 	static class MoveHelperController extends MoveControl {
+
 		private final Mob spider;
 
 		MoveHelperController(Mob spider) {
 			super(spider);
 			this.spider = spider;
 		}
-
 		public void tick() {
 			if (this.spider.isEyeInFluid(FluidTags.WATER)) {
 				this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, 0.0D, 0.0D));
@@ -174,10 +177,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 				this.spider.setSpeed(0.0F);
 			}
 		}
-	}
 
-	public static <T extends Mob> boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 20;
 	}
 }
 
