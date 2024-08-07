@@ -97,10 +97,6 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal {
         return 10;
     }
 
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.SMALL_FISH.get();
-    }
-
     @Override
     public void playerTouch(Player entity) {
         super.playerTouch(entity);

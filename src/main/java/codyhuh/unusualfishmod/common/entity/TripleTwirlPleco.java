@@ -96,12 +96,7 @@ public class TripleTwirlPleco extends WaterAnimal implements Bucketable {
 	protected PathNavigation createNavigation(Level p_27480_) {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
-	//Squid Games
 
-
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.SMALL_FISH.get();
-	}
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

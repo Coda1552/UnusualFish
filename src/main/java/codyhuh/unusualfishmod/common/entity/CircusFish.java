@@ -67,10 +67,6 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
 
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.SMALL_FISH.get();
-	}
-
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

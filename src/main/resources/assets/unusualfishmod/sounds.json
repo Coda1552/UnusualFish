@@ -79,39 +79,6 @@
     ],
     "subtitle": "unusualfishmod.sound.subtitle.gnasher_idle"
   },
-  "large_fish": {
-    "category": "neutral",
-    "sounds": [
-      {
-        "name": "unusualfishmod:large_fish_0"
-      },
-      {
-        "name": "unusualfishmod:large_fish_1"
-      },
-      {
-        "name": "unusualfishmod:large_fish_2"
-      },
-      {
-        "name": "unusualfishmod:large_fish_3"
-      },
-      {
-        "name": "unusualfishmod:large_fish_4"
-      }
-    ],
-    "subtitle": "unusualfishmod.sound.subtitle.large_fish"
-  },
-  "medium_fish": {
-    "category": "neutral",
-    "sounds": [
-      {
-        "name": "unusualfishmod:medium_fish_0"
-      },
-      {
-        "name": "unusualfishmod:medium_fish_1"
-      }
-    ],
-    "subtitle": "unusualfishmod.sound.subtitle.medium_fish"
-  },
   "evil_chattering": {
     "category": "neutral",
     "sounds": [
@@ -144,27 +111,6 @@
       }
     ],
     "subtitle": "unusualfishmod.sound.subtitle.small_enemy"
-  },
-  "small_fish": {
-    "category": "neutral",
-    "sounds": [
-      {
-        "name": "unusualfishmod:small_fish_0"
-      },
-      {
-        "name": "unusualfishmod:small_fish_1"
-      },
-      {
-        "name": "unusualfishmod:small_fish_2"
-      },
-      {
-        "name": "unusualfishmod:small_fish_3"
-      },
-      {
-        "name": "unusualfishmod:small_fish_4"
-      }
-    ],
-    "subtitle": "unusualfishmod.sound.subtitle.small_fish"
   },
   "abyssal_blast": {
     "category": "neutral",

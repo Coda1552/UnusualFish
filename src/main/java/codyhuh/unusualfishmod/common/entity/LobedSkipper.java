@@ -310,14 +310,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         return new ItemStack(UFItems.SKIPPER_BUCKET.get());
     }
 
-    protected SoundEvent getJumpSound() {
-        return SoundEvents.SLIME_JUMP_SMALL;
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.SMALL_FISH.get();
-    }
-
     public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
         return worldIn.getBlockState(pos.below()).canOcclude();
     }

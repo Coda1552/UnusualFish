@@ -90,10 +90,6 @@ public class Mossthorn extends BucketableSchoolingWaterAnimal {
 		return 7;
 	}
 
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.SMALL_FISH.get();
-	}
-
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}

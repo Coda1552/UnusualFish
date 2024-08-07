@@ -125,11 +125,6 @@ public class TigerJungleShark extends WaterAnimal {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
 
-
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.MEDIUM_FISH.get();
-    }
-
     public SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }

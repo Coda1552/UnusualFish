@@ -104,11 +104,6 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 	public void onAboveBubbleCol(boolean downwards) {
 	}
 
-
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.SMALL_FISH.get();
-	}
-
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
