@@ -171,8 +171,9 @@ public class EyelashFish extends BucketableSchoolingWaterAnimal {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		if (dataTag == null) {
 			setVariant(random.nextInt(15));
-		} else {
-			if (dataTag.contains("Variant", 11)){
+		}
+		else {
+			if (dataTag.contains("Variant", 3)){
 				this.setVariant(dataTag.getInt("Variant"));
 			}
 		}

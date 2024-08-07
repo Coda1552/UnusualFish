@@ -146,7 +146,6 @@ public class CoralSkrimp extends WaterAnimal implements Bucketable {
 		return spawnDataIn;
 	}
 
-
 	@Override
 	public boolean fromBucket() {
 		return this.entityData.get(FROM_BUCKET);
