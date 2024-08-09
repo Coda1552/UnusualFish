@@ -145,7 +145,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	public static boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
 	}
 
 	static class MoveHelperController extends MoveControl {
