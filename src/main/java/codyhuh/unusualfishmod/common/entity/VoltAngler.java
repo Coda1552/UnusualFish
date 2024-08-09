@@ -104,10 +104,6 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
         return new WaterBoundPathNavigation(this, p_27480_);
     }
 
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.DEEP_WATER.get();
-    }
-
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }
