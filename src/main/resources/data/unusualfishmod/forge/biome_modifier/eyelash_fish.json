@@ -1,13 +1,11 @@
 {
   "type": "forge:add_spawns",
-  "biomes": [
-    "minecraft:mushroom_fields"
-  ],
+  "biomes": "#minecraft:is_jungle",
   "spawners":
   {
     "type": "unusualfishmod:eyelash",
-    "weight": 30,
-    "minCount": 4,
+    "weight": 20,
+    "minCount": 2,
     "maxCount": 6
   }
 }

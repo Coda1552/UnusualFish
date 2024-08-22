@@ -43,7 +43,7 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F).add(Attributes.ARMOR, 10.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F).add(Attributes.ARMOR, 10.0D);
 	}
 
 	protected void registerGoals() {

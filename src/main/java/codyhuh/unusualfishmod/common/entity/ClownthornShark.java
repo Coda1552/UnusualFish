@@ -44,7 +44,7 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D);
 	}
 
 	protected void registerGoals() {

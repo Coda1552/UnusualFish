@@ -44,7 +44,7 @@ public class BlindSailfin extends WaterAnimal implements Bucketable {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D);
 	}
 
 	protected void registerGoals() {

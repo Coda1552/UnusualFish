@@ -58,7 +58,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.ARMOR, 10.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 15.0D).add(Attributes.ATTACK_DAMAGE, 4.0D).add(Attributes.ARMOR, 10.0D);
 	}
 
 	@Override

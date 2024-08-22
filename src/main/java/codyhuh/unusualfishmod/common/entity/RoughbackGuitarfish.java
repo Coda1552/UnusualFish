@@ -33,7 +33,7 @@ public class RoughbackGuitarfish extends WaterAnimal {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 16.0D).add(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
 	protected void registerGoals() {

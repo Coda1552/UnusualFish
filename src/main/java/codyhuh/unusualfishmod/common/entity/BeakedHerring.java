@@ -39,7 +39,7 @@ public class BeakedHerring extends BucketableSchoolingWaterAnimal {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 1.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D);
 	}
 
 	protected void registerGoals() {
