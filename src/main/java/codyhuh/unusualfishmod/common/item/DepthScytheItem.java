@@ -27,11 +27,6 @@ public class DepthScytheItem extends Item {
         this.attributeModifiers = builder.build();
     }
 
-    @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
-        return slot.equals(EquipmentSlot.MAINHAND) || slot.equals(EquipmentSlot.OFFHAND) ? attributeModifiers : getDefaultAttributeModifiers(slot);
-    }
-
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         if (state.is(Blocks.COBWEB)) {
             return 15.0F;
