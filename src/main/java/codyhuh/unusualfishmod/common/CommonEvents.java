@@ -67,8 +67,8 @@ public class CommonEvents {
         e.register(UFEntities.SEA_MOSQUITO.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SeaMosquito::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.FORKFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, Forkfish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.SPOON_SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SpoonShark::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        e.register(UFEntities.CIRCUSFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CircusFish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        e.register(UFEntities.BLIZZARDFIN.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, BlizzardfinTuna::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        e.register(UFEntities.CIRCUS_FISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CircusFish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        e.register(UFEntities.BLIZZARDFIN_TUNA.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, BlizzardfinTuna::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.TIGER_JUNGLE_SHARK.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, TigerJungleShark::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.SNOWFLAKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, SnowflakeTailFish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.EYELASH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, EyelashFish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
@@ -141,8 +141,8 @@ public class CommonEvents {
         event.put(UFEntities.FORKFISH.get(), Forkfish.createAttributes().build());
         event.put(UFEntities.SPOON_SHARK.get(), SpoonShark.createAttributes().build());
         event.put(UFEntities.CORAL_SKRIMP.get(), CoralSkrimp.createAttributes().build());
-        event.put(UFEntities.CIRCUSFISH.get(), CircusFish.createAttributes().build());
-        event.put(UFEntities.BLIZZARDFIN.get(), BlizzardfinTuna.createAttributes().build());
+        event.put(UFEntities.CIRCUS_FISH.get(), CircusFish.createAttributes().build());
+        event.put(UFEntities.BLIZZARDFIN_TUNA.get(), BlizzardfinTuna.createAttributes().build());
         event.put(UFEntities.EYELASH.get(), EyelashFish.createAttributes().build());
         event.put(UFEntities.SNOWFLAKE.get(), SnowflakeTailFish.createAttributes().build());
         event.put(UFEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleShark.createAttributes().build());

@@ -79,8 +79,8 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.FORKFISH.get(), ForkfishRenderer::new);
 		e.registerEntityRenderer(UFEntities.SPOON_SHARK.get(), SpoonSharkRenderer::new);
 		e.registerEntityRenderer(UFEntities.CORAL_SKRIMP.get(), CoralSkrimpRenderer::new);
-		e.registerEntityRenderer(UFEntities.CIRCUSFISH.get(), CircusFishRenderer::new);
-		e.registerEntityRenderer(UFEntities.BLIZZARDFIN.get(), BlizzardfinTunaRenderer::new);
+		e.registerEntityRenderer(UFEntities.CIRCUS_FISH.get(), CircusFishRenderer::new);
+		e.registerEntityRenderer(UFEntities.BLIZZARDFIN_TUNA.get(), BlizzardfinTunaRenderer::new);
 		e.registerEntityRenderer(UFEntities.ABYSSAL_BLAST.get(), AbyssalBlastRenderer::new);
 		e.registerEntityRenderer(UFEntities.EYELASH.get(), EyelashFishRenderer::new);
 		e.registerEntityRenderer(UFEntities.SNOWFLAKE.get(), SnowflakeTailFishRenderer::new);
