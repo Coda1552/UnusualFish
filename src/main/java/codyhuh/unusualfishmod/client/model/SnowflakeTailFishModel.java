@@ -15,45 +15,45 @@ public class SnowflakeTailFishModel<T extends SnowflakeTailFish> extends EntityM
 	private final ModelPart Tail;
 	private final ModelPart Fin2;
 	private final ModelPart Fin1;
-	private final ModelPart TopFin;
-	private final ModelPart bb_main;
+	private final ModelPart fish;
 
 	public SnowflakeTailFishModel(ModelPart root) {
-		this.BottomFin1 = root.getChild("BottomFin1");
-		this.BottomFin2 = root.getChild("BottomFin2");
-		this.Tail = root.getChild("Tail");
-		this.Fin2 = root.getChild("Fin2");
-		this.Fin1 = root.getChild("Fin1");
-		this.TopFin = root.getChild("TopFin");
-		this.bb_main = root.getChild("bb_main");
+		this.fish = root.getChild("fish");
+		this.BottomFin1 = fish.getChild("bottom_fin_left");
+		this.BottomFin2 = fish.getChild("bottom_fin_right");
+		this.Tail = fish.getChild("tail");
+		this.Fin2 = fish.getChild("r_fin");
+		this.Fin1 = fish.getChild("l_fin");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition BottomFin1 = partdefinition.addOrReplaceChild("BottomFin1", CubeListBuilder.create(), PartPose.offset(1.0F, 24.0F, 0.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 22.0F, 0.0F));
 
-		PartDefinition cube_r1 = BottomFin1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(12, 4).addBox(1.0F, 0.0F, -1.0F, 0.0F, 3.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 0.0F, 0.0F, -0.3491F, 0.1309F, 0.0F));
+		PartDefinition bottom_fin_left = fish.addOrReplaceChild("bottom_fin_left", CubeListBuilder.create(), PartPose.offset(1.0F, 2.0F, 0.0F));
 
-		PartDefinition BottomFin2 = partdefinition.addOrReplaceChild("BottomFin2", CubeListBuilder.create(), PartPose.offset(-1.0F, 24.0F, 0.0F));
+		PartDefinition cube_r1 = bottom_fin_left.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(12, 4).addBox(1.0F, 0.0F, -1.0F, 0.0F, 3.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, 0.0F, 0.0F, -0.3491F, 0.1309F, 0.0F));
 
-		PartDefinition cube_r2 = BottomFin2.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 0.0F, 3.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, -0.3491F, -0.1309F, 0.0F));
+		PartDefinition bottom_fin_right = fish.addOrReplaceChild("bottom_fin_right", CubeListBuilder.create(), PartPose.offset(-1.0F, 2.0F, 0.0F));
 
-		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(19, 19).addBox(0.0F, -4.0F, 0.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.0F, 3.0F));
+		PartDefinition cube_r2 = bottom_fin_right.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, 0.0F, -1.0F, 0.0F, 3.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, 0.0F, -0.3491F, -0.1309F, 0.0F));
 
-		PartDefinition Fin2 = partdefinition.addOrReplaceChild("Fin2", CubeListBuilder.create(), PartPose.offset(-1.0F, 23.0F, -1.0F));
+		PartDefinition tail = fish.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(19, 19).addBox(0.0F, -2.0F, 0.0F, 0.0F, 7.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 3.0F));
 
-		PartDefinition cube_r3 = Fin2.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(12, 7).addBox(-3.0F, -1.0F, 0.0F, 3.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.9163F, -0.2618F));
+		PartDefinition r_fin = fish.addOrReplaceChild("r_fin", CubeListBuilder.create(), PartPose.offset(-1.0F, 1.0F, -1.0F));
 
-		PartDefinition Fin1 = partdefinition.addOrReplaceChild("Fin1", CubeListBuilder.create(), PartPose.offset(1.0F, 23.0F, -1.0F));
+		PartDefinition cube_r3 = r_fin.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(12, 7).addBox(-3.0F, -1.0F, 0.0F, 3.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.9163F, -0.2618F));
 
-		PartDefinition cube_r4 = Fin1.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, -1.0F, 0.0F, 3.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.9163F, 0.2618F));
+		PartDefinition l_fin = fish.addOrReplaceChild("l_fin", CubeListBuilder.create(), PartPose.offset(1.0F, 1.0F, -1.0F));
 
-		PartDefinition TopFin = partdefinition.addOrReplaceChild("TopFin", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -5.0F, 0.0F, 0.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, 0.0F));
+		PartDefinition cube_r4 = l_fin.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, -1.0F, 0.0F, 3.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.9163F, 0.2618F));
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 15).addBox(-1.0F, -4.0F, -4.0F, 2.0F, 4.0F, 7.0F, new CubeDeformation(0.0F))
-		.texOffs(12, 0).addBox(0.0F, -1.0F, 1.0F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 15).addBox(-1.0F, -2.0F, -4.0F, 2.0F, 4.0F, 7.0F, new CubeDeformation(0.0F))
+				.texOffs(12, 0).addBox(0.0F, 1.0F, 1.0F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+
+		PartDefinition top_fin = fish.addOrReplaceChild("top_fin", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -5.0F, 0.0F, 0.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
@@ -75,12 +75,6 @@ public class SnowflakeTailFishModel<T extends SnowflakeTailFish> extends EntityM
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		BottomFin1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		BottomFin2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Fin2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Fin1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		TopFin.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		fish.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

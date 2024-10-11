@@ -17,35 +17,43 @@ public class CircusFishModel<T extends CircusFish> extends ListModel<T> {
 	private final ModelPart Body;
 
 	public CircusFishModel(ModelPart root) {
-		this.Body = root.getChild("body");
-		this.Tail = this.Body.getChild("tail");
-		this.Fin1 = this.Body.getChild("fin1");
-		this.Fin2 = this.Body.getChild("fin2");
-		this.LowerFin1 = this.Body.getChild("lowerfin1");
-		this.LowerFin2 = this.Body.getChild("lowerfin2");
+		this.Body = root.getChild("Body");
+		this.Tail = this.Body.getChild("Tail");
+		this.Fin1 = this.Body.getChild("Fin1");
+		this.Fin2 = this.Body.getChild("Fin2");
+		this.LowerFin1 = this.Body.getChild("LowerFin1");
+		this.LowerFin2 = this.Body.getChild("LowerFin2");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -14.0F, -6.0F, 0.0F, 17.0F, 17.0F, new CubeDeformation(0.0F))
-				.texOffs(22, 22).addBox(-2.5F, -10.0F, -6.0F, 5.0F, 10.0F, 12.0F, new CubeDeformation(0.0F))
-				.texOffs(23, 46).addBox(-1.5F, -5.0F, -6.2F, 3.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -10.0F, -3.0F, 0.0F, 17.0F, 17.0F, new CubeDeformation(0.0F))
+				.texOffs(22, 22).addBox(-2.5F, -6.0F, -3.0F, 5.0F, 10.0F, 12.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-2.5F, -6.0F, -4.0F, 5.0F, 4.0F, 1.0F, new CubeDeformation(0.0F))
+				.texOffs(12, 0).addBox(-1.5F, -2.0F, -5.0F, 3.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 20.0F, -3.0F));
 
-		PartDefinition LowerFin2 = Body.addOrReplaceChild("lowerfin2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 0.0F, -4.0F, 0.1719F, -0.0302F, 0.1719F));
+		PartDefinition Fin1 = Body.addOrReplaceChild("Fin1", CubeListBuilder.create(), PartPose.offset(2.5F, 2.0F, 1.0F));
 
-		PartDefinition LowerFin1 = Body.addOrReplaceChild("lowerfin1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, 0.0F, 0.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 0.0F, -4.0F, 0.1719F, 0.0302F, -0.1719F));
+		PartDefinition cube_r1 = Fin1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -3.0F, 0.0F, 0.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.6109F, 0.0F));
 
-		PartDefinition Fin2 = Body.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(16, 0).mirror().addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-2.55F, -3.0F, 0.0F, 0.1745F, -0.9163F, 0.0F));
+		PartDefinition Fin2 = Body.addOrReplaceChild("Fin2", CubeListBuilder.create(), PartPose.offset(-2.5F, 2.0F, 1.0F));
 
-		PartDefinition Fin1 = Body.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(16, 0).addBox(0.0F, -1.0F, -1.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(2.55F, -3.0F, 0.0F, 0.1745F, 0.2182F, 0.0F));
+		PartDefinition cube_r2 = Fin2.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, -3.0F, 0.0F, 0.0F, 7.0F, 6.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.6109F, 0.0F));
 
-		PartDefinition Tail = Body.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -5.0F, 6.0F));
+		PartDefinition Tail = Body.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(12, 0).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 9.0F));
+
+		PartDefinition LowerFin1 = Body.addOrReplaceChild("LowerFin1", CubeListBuilder.create(), PartPose.offset(1.0F, 4.0F, 0.0F));
+
+		PartDefinition cube_r3 = LowerFin1.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 8).addBox(0.0F, 0.0F, -2.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 1.0F, 0.2618F, 0.0F, -0.2618F));
+
+		PartDefinition LowerFin2 = Body.addOrReplaceChild("LowerFin2", CubeListBuilder.create(), PartPose.offset(-1.0F, 4.0F, 0.0F));
+
+		PartDefinition cube_r4 = LowerFin2.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 8).mirror().addBox(0.0F, 0.0F, -2.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 1.0F, 0.2618F, 0.0F, 0.2618F));
 
 		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
-
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {

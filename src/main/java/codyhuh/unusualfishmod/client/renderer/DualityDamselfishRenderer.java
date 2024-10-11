@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class DualityDamselfishRenderer extends MobRenderer<DualityDamselfish, DualityDamselfishModel<DualityDamselfish>> {
-	protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/dualitydamsel.png");
+	protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/duality_damsel_1.png");
 
 	public DualityDamselfishRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new DualityDamselfishModel<>(renderManagerIn.bakeLayer(UFModelLayers.DUALITY_DAMSELFISH)), 0.2F);

@@ -13,28 +13,36 @@ public class SneepSnorpModel<T extends SneepSnorp> extends EntityModel<T> {
 	private final ModelPart Tail;
 	private final ModelPart Fin1;
 	private final ModelPart Fin2;
-	private final ModelPart bb_main;
+	private final ModelPart Root;
 
-	public SneepSnorpModel(ModelPart root) {
-		this.Tail = root.getChild("Tail");
-		this.Fin1 = root.getChild("Fin1");
-		this.Fin2 = root.getChild("Fin2");
-		this.bb_main = root.getChild("bb_main");
+	public SneepSnorpModel(ModelPart base) {
+		this.Root = base.getChild("Root");
+		this.Tail = Root.getChild("Tail");
+		this.Fin1 = Root.getChild("Fin1");
+		this.Fin2 = Root.getChild("Fin2");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Tail = partdefinition.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.0F, 0.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 22.0F, 4.0F));
+		PartDefinition Root = partdefinition.addOrReplaceChild("Root", CubeListBuilder.create().texOffs(10, 10).addBox(-1.0F, -2.0F, 0.0F, 2.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 0).addBox(-1.0F, -1.0F, -8.0F, 2.0F, 2.0F, 8.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 5).addBox(0.0F, -5.0F, 1.0F, 0.0F, 9.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 22.0F, 0.0F));
 
-		PartDefinition Fin1 = partdefinition.addOrReplaceChild("Fin1", CubeListBuilder.create().texOffs(8, 5).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 22.0F, 2.0F, 0.0F, 0.6545F, 0.0F));
+		PartDefinition Fin1 = Root.addOrReplaceChild("Fin1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.5F, 0.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, 1.5F, 2.0F, 0.0F, 0.6545F, 0.0F));
 
-		PartDefinition Fin2 = partdefinition.addOrReplaceChild("Fin2", CubeListBuilder.create().texOffs(8, 5).mirror().addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 22.0F, 2.0F, 0.0F, -0.6545F, 0.0F));
+		PartDefinition Fin2 = Root.addOrReplaceChild("Fin2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, -1.5F, 0.0F, 0.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.0F, 1.5F, 2.0F, 0.0F, -0.6545F, 0.0F));
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(0, 10).addBox(-1.0F, -4.0F, 0.0F, 2.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(-1.0F, -3.0F, -8.0F, 2.0F, 2.0F, 8.0F, new CubeDeformation(0.0F))
-		.texOffs(12, 9).addBox(0.0F, -5.0F, 2.0F, 0.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition Tail = Root.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(0, 14).addBox(0.0F, -2.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 4.0F));
+
+		PartDefinition RightBottomFin = Root.addOrReplaceChild("RightBottomFin", CubeListBuilder.create(), PartPose.offset(0.0F, 2.0F, 2.0F));
+
+		PartDefinition RightBottomFin_r1 = RightBottomFin.addOrReplaceChild("RightBottomFin_r1", CubeListBuilder.create().texOffs(10, 13).addBox(0.0F, 0.0F, -1.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.4363F));
+
+		PartDefinition LeftBottomFin = Root.addOrReplaceChild("LeftBottomFin", CubeListBuilder.create(), PartPose.offset(0.0F, 2.0F, 2.0F));
+
+		PartDefinition LeftBottomFin_r1 = LeftBottomFin.addOrReplaceChild("LeftBottomFin_r1", CubeListBuilder.create().texOffs(10, 13).mirror().addBox(0.0F, 0.0F, -1.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.4363F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
@@ -54,9 +62,6 @@ public class SneepSnorpModel<T extends SneepSnorp> extends EntityModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Fin1.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		Fin2.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-		bb_main.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+		Root.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

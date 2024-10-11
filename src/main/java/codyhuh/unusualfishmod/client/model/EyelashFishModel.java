@@ -32,26 +32,29 @@ public class EyelashFishModel<T extends EyelashFish> extends EntityModel<T> {
 
 		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 21.0F, 0.0F));
 
-		PartDefinition r_fin = fish.addOrReplaceChild("r_fin", CubeListBuilder.create(), PartPose.offset(-1.0F, -1.0F, 0.0F));
-
-		PartDefinition cube_r1 = r_fin.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(6, 2).addBox(-1.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.8727F, 0.0F));
-
 		PartDefinition l_fin = fish.addOrReplaceChild("l_fin", CubeListBuilder.create(), PartPose.offset(1.0F, -1.0F, 0.0F));
 
-		PartDefinition cube_r2 = l_fin.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(6, 2).addBox(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.8727F, 0.0F));
+		PartDefinition cube_r1 = l_fin.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, -0.8727F, 0.0F));
+
+		PartDefinition r_fin = fish.addOrReplaceChild("r_fin", CubeListBuilder.create(), PartPose.offset(-1.0F, -1.0F, 0.0F));
+
+		PartDefinition cube_r2 = r_fin.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-1.0F, -2.0F, 0.0F, 1.0F, 1.0F, 0.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 1.0F, 0.0F, 0.0F, 0.8727F, 0.0F));
 
 		PartDefinition l_eyelash = fish.addOrReplaceChild("l_eyelash", CubeListBuilder.create(), PartPose.offset(1.0F, -2.0F, 0.0F));
 
-		PartDefinition cube_r3 = l_eyelash.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(6, 5).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, 0.8727F));
+		PartDefinition cube_r3 = l_eyelash.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -1.0F, 0.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, 0.0F, 0.0F, 0.6109F));
 
 		PartDefinition r_eyelash = fish.addOrReplaceChild("r_eyelash", CubeListBuilder.create(), PartPose.offset(-1.0F, -2.0F, 0.0F));
 
-		PartDefinition cube_r4 = r_eyelash.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(6, 5).addBox(0.0F, -4.0F, 0.0F, 0.0F, 4.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, -0.1309F, 0.0F, -0.8727F));
+		PartDefinition cube_r4 = r_eyelash.addOrReplaceChild("cube_r4", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, -6.0F, -1.0F, 0.0F, 6.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, -1.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 0).addBox(-1.0F, -2.0F, -2.0F, 2.0F, 5.0F, 3.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 0).addBox(0.0F, 2.0F, 0.0F, 0.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
+		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(11, 10).addBox(-1.0F, -2.0F, -1.0F, 2.0F, 5.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition tail = fish.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 12).addBox(0.0F, -1.0F, 0.0F, 0.0F, 4.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.0F, 2.0F));
+		PartDefinition cube_r5 = body.addOrReplaceChild("cube_r5", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, 0.0F, -1.0F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 3.0F, 1.0F, 0.4363F, 0.0F, 0.4363F));
+
+		PartDefinition cube_r6 = body.addOrReplaceChild("cube_r6", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -1.0F, 0.0F, 4.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 3.0F, 1.0F, 0.4363F, 0.0F, -0.4363F));
+
+		PartDefinition tail = fish.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 9).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 2.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}

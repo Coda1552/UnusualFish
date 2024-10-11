@@ -14,32 +14,40 @@ public class BlackcapSnailModel<T extends BlackCapSnail> extends EntityModel<T> 
 	private final ModelPart Eye1;
 	private final ModelPart Eye2;
 	private final ModelPart Mouth;
-	private final ModelPart bb_main;
+	private final ModelPart root;
+	private final ModelPart body;
 
-	public BlackcapSnailModel(ModelPart root) {
+	public BlackcapSnailModel(ModelPart base) {
+		this.root = base.getChild("root");
+		this.body = root.getChild("body");
 		this.Shell = root.getChild("Shell");
-		this.Eye1 = root.getChild("Eye1");
-		this.Eye2 = root.getChild("Eye2");
-		this.Mouth = root.getChild("Mouth");
-		this.bb_main = root.getChild("bb_main");
+		this.Eye1 = body.getChild("Eye1");
+		this.Eye2 = body.getChild("Eye2");
+		this.Mouth = body.getChild("Mouth");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Shell = partdefinition.addOrReplaceChild("Shell", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -1.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 8).addBox(-1.5F, -9.0F, -1.0F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 22.0F, -2.0F, -0.1309F, 0.0F, 0.0F));
+		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 23.0F, -1.0F));
 
-		PartDefinition Eye1 = partdefinition.addOrReplaceChild("Eye1", CubeListBuilder.create().texOffs(0, 1).addBox(0.0F, 0.0F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.5F, 22.0F, -1.0F, 0.2182F, -0.1745F, 0.0F));
+		PartDefinition Shell = root.addOrReplaceChild("Shell", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -1.0F, 4.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 8).addBox(-1.5F, -9.0F, -1.0F, 3.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -1.0F, 0.0F, -0.1309F, 0.0F, 0.0F));
 
-		PartDefinition Eye2 = partdefinition.addOrReplaceChild("Eye2", CubeListBuilder.create().texOffs(0, 1).mirror().addBox(0.0F, 0.0F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-1.5F, 22.0F, -1.0F, 0.2182F, 0.1745F, 0.0F));
+		PartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(12, 8).addBox(-1.5F, -1.0F, -1.0F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		PartDefinition Mouth = partdefinition.addOrReplaceChild("Mouth", CubeListBuilder.create().texOffs(0, 0).addBox(-0.5F, 0.0F, -2.0F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 4).addBox(-0.5F, 1.0F, -2.0F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 22.0F, -2.0F, 0.0436F, 0.0F, 0.0F));
+		PartDefinition Eye1 = body.addOrReplaceChild("Eye1", CubeListBuilder.create(), PartPose.offsetAndRotation(1.5F, -1.0F, -1.0F, 0.0F, 0.0F, 0.0F));
 
-		PartDefinition bb_main = partdefinition.addOrReplaceChild("bb_main", CubeListBuilder.create().texOffs(12, 8).addBox(-1.5F, -2.0F, -2.0F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(12, 13).addBox(-1.5F, -1.0F, 1.0F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition cube_r1 = Eye1.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -1.0F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, -0.6109F, 0.0F));
+
+		PartDefinition Eye2 = body.addOrReplaceChild("Eye2", CubeListBuilder.create(), PartPose.offsetAndRotation(-1.5F, -1.0F, -1.0F, 0.0F, 0.0F, 0.0F));
+
+		PartDefinition cube_r2 = Eye2.addOrReplaceChild("cube_r2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(0.0F, -1.0F, -2.0F, 0.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.6109F, 0.0F));
+
+		PartDefinition Mouth = body.addOrReplaceChild("Mouth", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, -1.0F));
+
+		PartDefinition cube_r3 = Mouth.addOrReplaceChild("cube_r3", CubeListBuilder.create().texOffs(12, 0).addBox(-2.5F, 0.0F, -2.0F, 5.0F, 0.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.6109F, 0.0F, 0.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
@@ -59,10 +67,6 @@ public class BlackcapSnailModel<T extends BlackCapSnail> extends EntityModel<T> 
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Shell.render(poseStack, buffer, packedLight, packedOverlay);
-		Eye1.render(poseStack, buffer, packedLight, packedOverlay);
-		Eye2.render(poseStack, buffer, packedLight, packedOverlay);
-		Mouth.render(poseStack, buffer, packedLight, packedOverlay);
-		bb_main.render(poseStack, buffer, packedLight, packedOverlay);
+		root.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }

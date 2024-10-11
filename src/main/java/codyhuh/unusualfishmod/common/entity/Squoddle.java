@@ -59,7 +59,6 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.4F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)));
-
 	}
 
 	@Override
@@ -75,7 +74,6 @@ public class Squoddle extends WaterAnimal implements Bucketable{
 		super.playerTouch(entity);
 		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
 			entity.hurt(damageSources().mobAttack(this), 2.0F);
-			entity.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 2, false, false));
 			this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
 			this.attackCooldown = 80;
 		}

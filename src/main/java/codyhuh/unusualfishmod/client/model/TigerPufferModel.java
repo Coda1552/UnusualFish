@@ -16,39 +16,52 @@ public class TigerPufferModel<T extends TigerPuffer> extends ListModel<T> {
 	private final ModelPart Fin2;
 	private final ModelPart Body;
 	private final ModelPart BackBody;
+	private final ModelPart Head;
 
 	public TigerPufferModel(ModelPart root) {
-		this.Body = root.getChild("body");
-		this.BackBody = this.Body.getChild("backbody");
-		this.Tail = this.BackBody.getChild("tail");
-		this.Eye1 = this.Body.getChild("eye1");
-		this.Eye2 = this.Body.getChild("eye2");
-		this.Fin1 = this.Body.getChild("fin1");
-		this.Fin2 = this.Body.getChild("fin2");
+		this.Body = root.getChild("Body");
+		this.BackBody = this.Body.getChild("BackBody");
+		this.Tail = this.BackBody.getChild("Tail");
+		this.Head = this.Body.getChild("Head");
+		this.Eye1 = this.Head.getChild("Eye1");
+		this.Eye2 = this.Head.getChild("Eye2");
+		this.Fin1 = this.Body.getChild("Fin1");
+		this.Fin2 = this.Body.getChild("Fin2");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition Body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 17.0F, new CubeDeformation(0.0F))
-				.texOffs(14, 29).addBox(-6.0F, -1.0F, -9.0F, 12.0F, 7.0F, 3.0F, new CubeDeformation(0.0F))
-				.texOffs(41, 0).addBox(-2.5F, 0.0F, -14.0F, 5.0F, 6.0F, 5.0F, new CubeDeformation(0.0F))
-				.texOffs(0, 22).addBox(0.0F, -10.0F, 4.0F, 0.0F, 20.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 18.0F, 0.0F));
+		PartDefinition Body = partdefinition.addOrReplaceChild("Body", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -6.0F, -6.0F, 12.0F, 12.0F, 17.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 19).addBox(0.0F, -10.0F, -1.0F, 0.0F, 20.0F, 10.0F, new CubeDeformation(0.0F))
+				.texOffs(12, 46).addBox(0.0F, -9.0F, 10.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0F))
+				.texOffs(0, 43).addBox(0.0F, 3.0F, 10.0F, 0.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 18.0F, 0.0F));
 
-		PartDefinition Eye1 = Body.addOrReplaceChild("eye1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -3.0F, -3.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(2.5F, -1.0F, -7.0F));
+		PartDefinition BottomFin_r1 = Body.addOrReplaceChild("BottomFin_r1", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-5.0F, 0.0F, -3.0F, 5.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-6.0F, 6.0F, 6.0F, 0.0F, 0.0F, -0.6109F));
 
-		PartDefinition Eye2 = Body.addOrReplaceChild("eye2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-4.0F, -3.0F, -3.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-2.5F, -1.0F, -7.0F));
+		PartDefinition BottomFin_r2 = Body.addOrReplaceChild("BottomFin_r2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -3.0F, 5.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.0F, 6.0F, 6.0F, 0.0F, 0.0F, 0.6109F));
 
-		PartDefinition Fin1 = Body.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(0, 0).addBox(0.05F, -4.0F, -1.0F, 0.0F, 5.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(6.0F, 2.0F, -2.0F, -0.2618F, 1.0036F, 0.0F));
+		PartDefinition Head = Body.addOrReplaceChild("Head", CubeListBuilder.create().texOffs(20, 29).addBox(-6.0F, -5.0F, -5.0F, 12.0F, 8.0F, 5.0F, new CubeDeformation(0.0F))
+				.texOffs(40, 42).addBox(-3.0F, -3.0F, -9.0F, 6.0F, 6.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 3.0F, -6.0F));
 
-		PartDefinition Fin2 = Body.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-0.05F, -4.0F, -1.0F, 0.0F, 5.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(-6.0F, 2.0F, -2.0F, -0.2618F, -1.0036F, 0.0F));
+		PartDefinition Eye1 = Head.addOrReplaceChild("Eye1", CubeListBuilder.create().texOffs(24, 52).addBox(-2.0F, -2.0F, -5.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(4.5F, -4.0F, -1.0F));
 
-		PartDefinition BackBody = Body.addOrReplaceChild("backbody", CubeListBuilder.create().texOffs(36, 31).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 11.0F));
+		PartDefinition Eye2 = Head.addOrReplaceChild("Eye2", CubeListBuilder.create().texOffs(24, 52).mirror().addBox(-2.0F, -2.0F, -5.0F, 4.0F, 3.0F, 4.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offset(-4.5F, -4.0F, -1.0F));
 
-		PartDefinition Tail = BackBody.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(14, 29).addBox(0.0F, -3.0F, 0.0F, 0.0F, 6.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 5.0F));
+		PartDefinition Fin1 = Body.addOrReplaceChild("Fin1", CubeListBuilder.create(), PartPose.offsetAndRotation(6.0F, 6.0F, -6.0F, 0.0F, 0.0F, 0.0F));
 
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		PartDefinition fin_r1 = Fin1.addOrReplaceChild("fin_r1", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, 0.0F, -3.0F, 5.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.6109F));
+
+		PartDefinition Fin2 = Body.addOrReplaceChild("Fin2", CubeListBuilder.create(), PartPose.offsetAndRotation(-6.0F, 6.0F, -6.0F, 0.0F, 0.0F, 0.0F));
+
+		PartDefinition fin_r2 = Fin2.addOrReplaceChild("fin_r2", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(-5.0F, 0.0F, -3.0F, 5.0F, 0.0F, 7.0F, new CubeDeformation(0.0F)).mirror(false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.6109F));
+
+		PartDefinition BackBody = Body.addOrReplaceChild("BackBody", CubeListBuilder.create().texOffs(41, 0).addBox(-2.0F, -2.0F, 0.0F, 4.0F, 4.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 11.0F));
+
+		PartDefinition Tail = BackBody.addOrReplaceChild("Tail", CubeListBuilder.create().texOffs(20, 32).addBox(0.0F, -5.0F, 0.0F, 0.0F, 10.0F, 10.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 6.0F));
+
+		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
 	@Override
