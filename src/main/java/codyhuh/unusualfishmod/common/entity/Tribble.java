@@ -61,10 +61,6 @@ public class Tribble extends BucketableWaterAnimal {
     public void handleAirSupply(int p_209207_1_) {
     }
 
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.SMALL_ENEMY.get();
-    }
-
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }

@@ -34,7 +34,7 @@ public class TigerJungleShark extends WaterAnimal {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 13.0D).add(Attributes.ATTACK_DAMAGE, 3.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 3.0D);
     }
 
     @Override

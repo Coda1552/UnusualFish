@@ -52,7 +52,7 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 16.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
 
     protected void registerGoals() {
@@ -102,10 +102,6 @@ public class VoltAngler extends WaterAnimal implements Bucketable, NeutralMob {
 
     protected PathNavigation createNavigation(Level p_27480_) {
         return new WaterBoundPathNavigation(this, p_27480_);
-    }
-
-    protected SoundEvent getAmbientSound() {
-        return UFSounds.DEEP_WATER.get();
     }
 
     protected SoundEvent getDeathSound() {

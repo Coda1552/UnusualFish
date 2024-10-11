@@ -48,7 +48,7 @@ public class Shockcat extends BucketableWaterAnimal {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 16.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
 	}
 
 	@Override
@@ -123,6 +123,6 @@ public class Shockcat extends BucketableWaterAnimal {
 	}
 
 	public static <T extends Mob> boolean canSpawn(EntityType<Shockcat> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 10 && iServerWorld.getLightEmission(pos) < 8;
+		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 10 && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && iServerWorld.getLightEmission(pos) < 8;
 	}
 }
