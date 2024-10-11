@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 
 import codyhuh.unusualfishmod.common.entity.util.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.SnailMoveControl;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -35,7 +36,7 @@ public class MuddytopSnail extends BucketableWaterAnimal {
 
     public MuddytopSnail(EntityType<? extends MuddytopSnail> type, Level world) {
         super(type, world);
-        this.moveControl = new MuddytopSnail.MoveHelperController(this);
+        this.moveControl = new SnailMoveControl(this);
         this.setMaxUpStep(1.0F);
     }
 
@@ -69,7 +70,6 @@ public class MuddytopSnail extends BucketableWaterAnimal {
     public void handleAirSupply(int p_209207_1_) {
     }
 
-
     @Override
     public void playerTouch(Player entity) {
         super.playerTouch(entity);
@@ -79,40 +79,10 @@ public class MuddytopSnail extends BucketableWaterAnimal {
         }
     }
 
-    static class MoveHelperController extends MoveControl {
-        private final Mob snail;
-
-        MoveHelperController(Mob snail) {
-            super(snail);
-            this.snail = snail;
-        }
-
-        public void tick() {
-            if (this.snail.isEyeInFluid(FluidTags.WATER)) {
-                this.snail.setDeltaMovement(this.snail.getDeltaMovement().add(0.0D, 0.0D, 0.0D));
-            }
-
-            if (this.operation == Operation.MOVE_TO && !this.snail.getNavigation().isDone()) {
-                double d0 = this.wantedX - this.snail.getX();
-                double d1 = this.wantedY - this.snail.getY();
-                double d2 = this.wantedZ - this.snail.getZ();
-                double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
-                d1 = d1 / d3;
-                float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-                this.snail.yRot = this.rotlerp(this.snail.yRot, f, 90.0F);
-                this.snail.yBodyRot = this.snail.yRot;
-                float f1 = (float) (this.speedModifier * this.snail.getAttributeValue(Attributes.MOVEMENT_SPEED));
-                this.snail.setSpeed(Mth.lerp(0.125F, this.snail.getSpeed(), f1));
-                this.snail.setDeltaMovement(this.snail.getDeltaMovement().add(0.0D, (double) this.snail.getSpeed() * d1 * 0.1D, 0.0D));
-            } else {
-                this.snail.setSpeed(0.0F);
-            }
-        }
-    }
-
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT;
+        return isInWater() ? SoundEvents.BUBBLE_COLUMN_UPWARDS_AMBIENT : SoundEvents.EMPTY;
     }
+
     protected SoundEvent getDeathSound() {
         return SoundEvents.COD_DEATH;
     }

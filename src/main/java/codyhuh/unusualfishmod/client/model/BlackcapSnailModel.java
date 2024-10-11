@@ -62,7 +62,7 @@ public class BlackcapSnailModel<T extends BlackCapSnail> extends EntityModel<T> 
 		this.Eye1.xRot = -f * 0.10F * Mth.sin(0.1F * ageInTicks);
 		this.Eye2.xRot = f * 0.10F * Mth.sin(0.1F * ageInTicks);
 		this.Mouth.yRot = f * 0.20F * Mth.sin(0.1F * ageInTicks);
-		this.Shell.xRot = -f * 0.20F * Mth.sin(0.01F * ageInTicks);
+		this.Shell.xRot = -0.15F;
 	}
 
 	@Override
