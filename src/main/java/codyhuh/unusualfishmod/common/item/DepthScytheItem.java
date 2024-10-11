@@ -69,11 +69,6 @@ public class DepthScytheItem extends Item {
     }
 
     @Override
-    public boolean isFoil(ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public int getEnchantmentValue(ItemStack stack) {
         return 1;
     }
