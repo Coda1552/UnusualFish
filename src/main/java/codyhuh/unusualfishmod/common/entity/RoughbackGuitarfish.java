@@ -1,6 +1,5 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
