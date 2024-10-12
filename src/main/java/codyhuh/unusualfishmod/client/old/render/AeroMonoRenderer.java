@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class AeroMonoRenderer extends MobRenderer<AeroMono, AeroMonoModel<AeroMono>> {
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/aeromono.png");
+    protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/aero_mono.png");
 
     public AeroMonoRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new AeroMonoModel<>(renderManagerIn.bakeLayer(UFModelLayers.AERO_MONO)), 0.2F);

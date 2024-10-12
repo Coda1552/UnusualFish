@@ -69,8 +69,6 @@ public final class ClientEvents {
 			return render;
 		});
 
-
-		//e.registerEntityRenderer(UFEntities.DUALITY_DAMSELFISH.get(), DualityDamselfishRenderer::new);
 		e.registerEntityRenderer(UFEntities.MOSSTHORN.get(), MossthornRenderer::new);
 		e.registerEntityRenderer(UFEntities.RIPPER.get(), RipperRenderer::new);
 		e.registerEntityRenderer(UFEntities.SPINDLEFISH.get(), SpindlefishRenderer::new);
@@ -79,7 +77,6 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.SAILOR_BARB.get(), SailorBarbRenderer::new);
 		e.registerEntityRenderer(UFEntities.SEA_SPIDER.get(), SeaSpiderRenderer::new);
 		e.registerEntityRenderer(UFEntities.TRIPLE_TWIRL_PLECO.get(), TripleTwirlPlecoRenderer::new);
-		e.registerEntityRenderer(UFEntities.AERO_MONO.get(), AeroMonoRenderer::new);
 		e.registerEntityRenderer(UFEntities.CLOWNTHORN_SHARK.get(), ClownthornSharkRenderer::new);
 		e.registerEntityRenderer(UFEntities.ROUGHBACK.get(), RoughbackGuitarfishRenderer::new);
 		e.registerEntityRenderer(UFEntities.PINKFIN.get(), PinkfinIdolRenderer::new);
