@@ -3,32 +3,6 @@
 	"textures": {
 		"layer0": "unusualfishmod:item/ripsaw"
 	},
-	"overrides": [
-		{
-			"predicate": {
-				"sawing": 0.2
-			},
-			"model": "unusualfishmod:item/ripsaw_sawing_1"
-		},
-		{
-			"predicate": {
-				"sawing": 0.4
-			},
-			"model": "unusualfishmod:item/ripsaw_sawing_2"
-		},
-		{
-			"predicate": {
-				"sawing": 0.6
-			},
-			"model": "unusualfishmod:item/ripsaw_sawing_1"
-		},
-		{
-			"predicate": {
-				"sawing": 0.8
-			},
-			"model": "unusualfishmod:item/ripsaw_sawing_2"
-		}
-	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [30, 90, 0],

@@ -9,11 +9,14 @@ import codyhuh.unusualfishmod.core.registry.UFTiers;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,18 +24,21 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Adapted from Alex's Caves (licensed under GNU GPLv3)
+// Tree chopping code adapted from Alex's Caves (licensed under GNU GPLv3)
 public class RipsawItem extends AxeItem implements Vanishable {
 
     public RipsawItem(Properties p_41383_) {
@@ -41,16 +47,34 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
     @Override
     public UseAnim getUseAnimation(ItemStack p_41452_) {
-        return UseAnim.BOW;
+        return UseAnim.BRUSH;
     }
 
     @Override
-    public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos blockPos, LivingEntity player) {
+    public InteractionResult useOn(UseOnContext cntxt) {
+        Player player = cntxt.getPlayer();
+        Level level = cntxt.getLevel();
+        BlockPos blockPos = cntxt.getClickedPos();
+        BlockState state = cntxt.getLevel().getBlockState(blockPos);
+        ItemStack stack = cntxt.getPlayer().getItemInHand(cntxt.getHand());
+        Direction face = cntxt.getClickedFace();
+
         if (state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
             List<BlockPos> gathered = new ArrayList<>();
             gatherAttachedBlocks(player, blockPos, blockPos, gathered);
 
             if (!gathered.isEmpty()) {
+                Vec3 basePos = blockPos.getCenter();
+                double x = basePos.x() + (face.getStepX() * 0.75D);
+                double y = basePos.y();
+                double z = basePos.z() + (face.getStepZ() * 0.75D);
+
+                for (int i = 0; i < 100; i++) {
+                    int negative = level.random.nextBoolean() ? -1 : 1;
+
+                    level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), x, y, z, face.getStepZ() * level.random.nextFloat() * negative, 0.0F, face.getStepX() * level.random.nextFloat() * negative);
+                }
+
                 List<MovingBlockData> allData = new ArrayList<>();
                 for (BlockPos pos : gathered) {
                     BlockState moveState = player.level().getBlockState(pos);
@@ -77,9 +101,9 @@ public class RipsawItem extends AxeItem implements Vanishable {
                     p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
                 });
             }
-            return false;
+            return InteractionResult.SUCCESS;
         }
-        return super.mineBlock(stack, level, state, blockPos, player);
+        return super.useOn(cntxt);
     }
 
     public void gatherAttachedBlocks(LivingEntity player, BlockPos origin, BlockPos pos, List<BlockPos> list) {
@@ -112,22 +136,28 @@ public class RipsawItem extends AxeItem implements Vanishable {
     }
 
     @Override
-    public void onUseTick(Level level, LivingEntity user, ItemStack stack, int count) {
+    public void onUseTick(Level level, LivingEntity user, ItemStack stack, int remainingUseDuration) {
         if (user instanceof Player player) {
-            EntityHitResult result = getLookAtEntity(player, player.level(), player.getEntityReach() + 1.0D);
-            CompoundTag tag = stack.getOrCreateTag();
+            HitResult hitResult = calculateHitResult(player);
 
-            float i = count % 10;
-            float progress = i / 10;
+            if (hitResult instanceof BlockHitResult blockHitResult && hitResult.getType() == HitResult.Type.BLOCK) {
+                int i = this.getUseDuration(stack) - remainingUseDuration + 1;
+                boolean flag = i % 10 == 5;
 
-            tag.putFloat("SawingProgress", progress);
+                BlockState state = level.getBlockState(blockHitResult.getBlockPos());
+                BlockPos pos = blockHitResult.getBlockPos();
 
-            if (count % 15 == 0) {
+                state.getDestroyProgress();
+            }
+
+            float i = remainingUseDuration % 10;
+
+            if (remainingUseDuration % 15 == 0) {
                 player.playSound(UFSounds.SAWING.get());
             }
 
-            if (result != null && result.getEntity() instanceof LivingEntity living) {
-
+            EntityHitResult entityResult = getLookAtEntity(player, player.level(), player.getEntityReach() + 1.0D);
+            if (entityResult != null && entityResult.getEntity() instanceof LivingEntity living) {
                 if (living.hurt(player.damageSources().playerAttack(player), getAttackDamage())) {
                     stack.hurtAndBreak(1, player, (p_40665_) -> {
                         p_40665_.broadcastBreakEvent(living.getUsedItemHand());
@@ -138,11 +168,9 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
     }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level p_41405_, Entity p_41406_, int p_41407_, boolean held) {
-        if (!held) {
-            stack.getOrCreateTag().putFloat("SawingProgress", 0.0F);
-        }
+    private HitResult calculateHitResult(Player pPlayer) {
+        return ProjectileUtil.getHitResultOnViewVector(pPlayer, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), pPlayer.getBlockReach()
+        );
     }
 
     @Override
