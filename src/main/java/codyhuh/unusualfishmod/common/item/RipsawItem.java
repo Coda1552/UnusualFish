@@ -26,6 +26,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -56,62 +57,20 @@ public class RipsawItem extends AxeItem implements Vanishable {
         Level level = cntxt.getLevel();
         BlockPos blockPos = cntxt.getClickedPos();
         BlockState state = cntxt.getLevel().getBlockState(blockPos);
-        ItemStack stack = cntxt.getPlayer().getItemInHand(cntxt.getHand());
-        Direction face = cntxt.getClickedFace();
 
         if (state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
-            List<BlockPos> gathered = new ArrayList<>();
-            gatherAttachedBlocks(player, blockPos, blockPos, gathered);
-
-            if (!gathered.isEmpty()) {
-                Vec3 basePos = blockPos.getCenter();
-                double x = basePos.x() + (face.getStepX() * 0.75D);
-                double y = basePos.y();
-                double z = basePos.z() + (face.getStepZ() * 0.75D);
-
-                for (int i = 0; i < 100; i++) {
-                    int negative = level.random.nextBoolean() ? -1 : 1;
-
-                    level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), x, y, z, face.getStepZ() * level.random.nextFloat() * negative, 0.0F, face.getStepX() * level.random.nextFloat() * negative);
-                }
-
-                List<MovingBlockData> allData = new ArrayList<>();
-                for (BlockPos pos : gathered) {
-                    BlockState moveState = player.level().getBlockState(pos);
-                    BlockEntity te = player.level().getBlockEntity(pos);
-                    BlockPos offset = pos.subtract(blockPos);
-                    MovingBlockData data = new MovingBlockData(moveState, moveState.getShape(player.level(), pos), offset, te == null ? null : te.saveWithoutMetadata());
-                    player.level().removeBlockEntity(pos);
-                    allData.add(data);
-                }
-                for (BlockPos pos : gathered) {
-                    player.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                }
-
-                FallingTreeBlockEntity fallingTree = UFEntities.FALLING_TREE.get().create(player.level());
-                fallingTree.moveTo(Vec3.atCenterOf(blockPos));
-                fallingTree.setAllBlockData(FallingTreeBlockEntity.createTagFromData(allData));
-                fallingTree.setPlacementCooldown(1);
-                Vec3 vec3 = Vec3.atCenterOf(blockPos).subtract(player.position());
-                float f = -((float) Mth.atan2(vec3.x, vec3.z)) * 180.0F / (float) Math.PI;
-                fallingTree.setFallDirection(Direction.fromYRot(f));
-                player.level().addFreshEntity(fallingTree);
-
-                stack.hurtAndBreak(gathered.size(), player, (p_40992_) -> {
-                    p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-                });
-            }
+            player.startUsingItem(cntxt.getHand());
             return InteractionResult.SUCCESS;
         }
         return super.useOn(cntxt);
     }
 
     public void gatherAttachedBlocks(LivingEntity player, BlockPos origin, BlockPos pos, List<BlockPos> list) {
-        if (list.size() < 500) {
+        if (list.size() < 300) {
             if (!list.contains(pos)) {
                 list.add(pos);
                 for (BlockPos blockpos1 : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-                    if (!blockpos1.equals(pos) && pos.distToCenterSqr(origin.getX(), pos.getY(), origin.getZ()) < 16) {
+                    if (!blockpos1.equals(pos) && pos.distToCenterSqr(origin.getX(), pos.getY(), origin.getZ()) < 10) {
                         if (isTreePart(player, blockpos1)) {
                             gatherAttachedBlocks(player, origin, blockpos1.immutable(), list);
                         }
@@ -141,16 +100,60 @@ public class RipsawItem extends AxeItem implements Vanishable {
             HitResult hitResult = calculateHitResult(player);
 
             if (hitResult instanceof BlockHitResult blockHitResult && hitResult.getType() == HitResult.Type.BLOCK) {
-                int i = this.getUseDuration(stack) - remainingUseDuration + 1;
-                boolean flag = i % 10 == 5;
-
                 BlockState state = level.getBlockState(blockHitResult.getBlockPos());
-                BlockPos pos = blockHitResult.getBlockPos();
+                BlockPos blockPos = blockHitResult.getBlockPos();
+                Direction face = blockHitResult.getDirection();
+                int i = this.getUseDuration(stack) - remainingUseDuration + 1;
 
-                state.getDestroyProgress();
+                if (state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
+                    List<BlockPos> gathered = new ArrayList<>();
+                    gatherAttachedBlocks(player, blockPos, blockPos, gathered);
+
+                    level.destroyBlockProgress(user.getId(), blockPos, i);
+
+                    if (i >= getDestroySpeed(stack, state) * 1.65F && !gathered.isEmpty()) {
+                        Vec3 basePos = blockPos.getCenter();
+                        double x = basePos.x() + (face.getStepX() * 0.75D);
+                        double y = basePos.y();
+                        double z = basePos.z() + (face.getStepZ() * 0.75D);
+
+                        level.destroyBlockProgress(user.getId(), blockPos, -1);
+
+                        for (int j = 0; j < 20; j++) {
+                            int negative = level.random.nextBoolean() ? -1 : 1;
+
+                            level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), x, y, z, face.getStepZ() * level.random.nextFloat() * negative, 0.0F, face.getStepX() * level.random.nextFloat() * negative);
+                        }
+
+                        List<MovingBlockData> allData = new ArrayList<>();
+                        for (BlockPos pos : gathered) {
+                            BlockState moveState = player.level().getBlockState(pos);
+                            BlockEntity te = player.level().getBlockEntity(pos);
+                            BlockPos offset = pos.subtract(blockPos);
+                            MovingBlockData data = new MovingBlockData(moveState, moveState.getShape(player.level(), pos), offset, te == null ? null : te.saveWithoutMetadata());
+                            player.level().removeBlockEntity(pos);
+                            allData.add(data);
+                        }
+                        for (BlockPos pos : gathered) {
+                            player.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                        }
+
+                        FallingTreeBlockEntity fallingTree = UFEntities.FALLING_TREE.get().create(player.level());
+                        fallingTree.moveTo(Vec3.atCenterOf(blockPos));
+                        fallingTree.setAllBlockData(FallingTreeBlockEntity.createTagFromData(allData));
+                        fallingTree.setPlacementCooldown(1);
+                        Vec3 vec3 = Vec3.atCenterOf(blockPos).subtract(player.position());
+                        float f = -((float) Mth.atan2(vec3.x, vec3.z)) * 180.0F / (float) Math.PI;
+                        fallingTree.setFallDirection(Direction.fromYRot(f));
+                        player.level().addFreshEntity(fallingTree);
+
+                        stack.hurtAndBreak(gathered.size(), player, (p_40992_) -> {
+                            p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
+                        });
+                    }
+                }
+
             }
-
-            float i = remainingUseDuration % 10;
 
             if (remainingUseDuration % 15 == 0) {
                 player.playSound(UFSounds.SAWING.get());
