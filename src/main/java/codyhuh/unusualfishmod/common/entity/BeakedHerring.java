@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
-import codyhuh.unusualfishmod.common.entity.util.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;

@@ -1,16 +1,25 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.BucketableSchoolingWaterAnimal;
-import codyhuh.unusualfishmod.common.entity.util.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.misc.IFlopper;
+import codyhuh.unusualfishmod.common.entity.util.misc.IVariant;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -23,8 +32,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.ServerLevelAccessor;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DualityDamselfish extends BucketableSchoolingWaterAnimal {
+import javax.annotation.Nullable;
+
+public class DualityDamselfish extends BucketableSchoolingWaterAnimal implements IFlopper, GeoEntity, IVariant {
+	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(DualityDamselfish.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
 
 	public DualityDamselfish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
@@ -102,5 +122,85 @@ public class DualityDamselfish extends BucketableSchoolingWaterAnimal {
 
 	public static boolean canSpawn(EntityType<DualityDamselfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
+	@Override
+	public void saveToBucketTag(ItemStack bucket) {
+		CompoundTag tag = bucket.getOrCreateTag();
+		tag.putInt("Variant", this.getVariant());
+		super.saveToBucketTag(bucket);
+	}
+
+	@Override
+	public void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(VARIANT, 0);
+	}
+
+	@Override
+	public boolean hasVariant() {
+		return true;
+	}
+
+	@Override
+	public int getVariantN() {
+		return getVariant();
+	}
+
+	public int getVariant() {
+		return this.entityData.get(VARIANT);
+	}
+
+	private void setVariant(int variant) {
+		this.entityData.set(VARIANT, variant);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		super.addAdditionalSaveData(compound);
+		compound.putInt("Variant", getVariant());
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		super.readAdditionalSaveData(compound);
+		setVariant(compound.getInt("Variant"));
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		if (dataTag == null) {
+			setVariant(random.nextInt(2));
+		} else {
+			if (dataTag.contains("Variant", 3)){
+				this.setVariant(dataTag.getInt("Variant"));
+			}
+		}
+		return spawnDataIn;
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (event.isMoving()) {
+		//	event.setAnimation(UFAnimations.SWIM);
+		}
+		else {
+		//	event.setAnimation(UFAnimations.IDLE);
+		}
+
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

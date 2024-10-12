@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.item;
 
-import codyhuh.unusualfishmod.common.entity.util.MovingBlockData;
+import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

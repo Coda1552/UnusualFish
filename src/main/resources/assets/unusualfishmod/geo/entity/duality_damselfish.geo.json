@@ -1,0 +1,70 @@
+	{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.DualityDamsel",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 4, -2],
+					"cubes": [
+						{"origin": [-1.5, 0, -4], "size": [3, 8, 8], "uv": [0, 0]},
+						{"origin": [0, 8, -2], "size": [0, 3, 6], "uv": [0, 10]},
+						{"origin": [0, -2, 1], "size": [0, 2, 4], "uv": [14, 1]}
+					]
+				},
+				{
+					"name": "Fin1",
+					"parent": "root",
+					"pivot": [1.5, 4, -1],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [1.525, 3, -1], "size": [0, 2, 3], "pivot": [1.5, 4, -1], "rotation": [0, 35, 0], "uv": [14, 0]}
+					]
+				},
+				{
+					"name": "Fin2",
+					"parent": "root",
+					"pivot": [-1.5, 4, -1],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [-1.525, 3, -1], "size": [0, 2, 3], "pivot": [-1.5, 4, -1], "rotation": [0, -35, 0], "uv": [14, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "LowerFin1",
+					"parent": "root",
+					"pivot": [1, 0, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [1, -4, -2], "size": [0, 4, 4], "pivot": [1, 0, -1], "rotation": [15, 0, -15], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "LowerFin2",
+					"parent": "root",
+					"pivot": [-1, 0, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [-1, -4, -2], "size": [0, 4, 4], "pivot": [-1, 0, -1], "rotation": [15, 0, 15], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Tail",
+					"parent": "root",
+					"pivot": [0, 4.5, 4],
+					"cubes": [
+						{"origin": [0, 3, 4], "size": [0, 3, 4], "uv": [12, 12]}
+					]
+				}
+			]
+		}
+	]
+}

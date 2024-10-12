@@ -75,7 +75,7 @@ public class CommonEvents {
         e.register(UFEntities.CRIMSONSHELL_SQUID.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.VOLT_ANGLER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.TRIBBLE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.WORLD_SURFACE, Tribble::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
-        e.register(UFEntities.CORAL_SKRIMP.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, CoralSkrimp::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
+        e.register(UFEntities.CORAL_SKRIMP.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Skrimp::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.SQUODDLE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Squoddle::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.GNASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, Gnasher::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
         e.register(UFEntities.HATCHET_FISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.OCEAN_FLOOR, HatchetFish::canSpawn, SpawnPlacementRegisterEvent.Operation.REPLACE);
@@ -140,7 +140,7 @@ public class CommonEvents {
         event.put(UFEntities.SEA_MOSQUITO.get(), SeaMosquito.createAttributes().build());
         event.put(UFEntities.FORKFISH.get(), Forkfish.createAttributes().build());
         event.put(UFEntities.SPOON_SHARK.get(), SpoonShark.createAttributes().build());
-        event.put(UFEntities.CORAL_SKRIMP.get(), CoralSkrimp.createAttributes().build());
+        event.put(UFEntities.CORAL_SKRIMP.get(), Skrimp.createAttributes().build());
         event.put(UFEntities.CIRCUS_FISH.get(), CircusFish.createAttributes().build());
         event.put(UFEntities.BLIZZARDFIN_TUNA.get(), BlizzardfinTuna.createAttributes().build());
         event.put(UFEntities.EYELASH.get(), EyelashFish.createAttributes().build());

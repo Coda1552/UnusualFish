@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.item;
 
 import codyhuh.unusualfishmod.common.entity.item.FallingTreeBlockEntity;
-import codyhuh.unusualfishmod.common.entity.util.MovingBlockData;
+import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.core.registry.UFTags;

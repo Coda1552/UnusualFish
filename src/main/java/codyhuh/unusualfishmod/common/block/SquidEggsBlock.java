@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.block;
 
-import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.base.BreedableWaterAnimal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

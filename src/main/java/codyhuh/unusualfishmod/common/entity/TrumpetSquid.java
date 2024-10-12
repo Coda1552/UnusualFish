@@ -1,8 +1,9 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimal;
-import codyhuh.unusualfishmod.common.entity.util.BreedableWaterAnimalBreedGoal;
-import codyhuh.unusualfishmod.common.entity.util.SquidLayEggsGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.BreedableWaterAnimalBreedGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.base.BreedableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.goal.SquidLayEggsGoal;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFTags;

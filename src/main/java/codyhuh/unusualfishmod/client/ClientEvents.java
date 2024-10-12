@@ -1,21 +1,32 @@
 package codyhuh.unusualfishmod.client;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.client.model.*;
-import codyhuh.unusualfishmod.client.model.item.PrismarineSpearModel;
-import codyhuh.unusualfishmod.client.render.*;
-import codyhuh.unusualfishmod.client.render.item.FallingTreeBlockRenderer;
-import codyhuh.unusualfishmod.client.render.item.SeaSpikeRenderer;
-import codyhuh.unusualfishmod.client.render.item.ThrownPrismarineSpearRenderer;
+import codyhuh.unusualfishmod.client.geo.GenericGeoModel;
+import codyhuh.unusualfishmod.client.geo.GenericGeoRenderer;
+import codyhuh.unusualfishmod.client.geo.TextureVariantModel;
+import codyhuh.unusualfishmod.client.old.UFModelLayers;
+import codyhuh.unusualfishmod.client.old.model.*;
+import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
+import codyhuh.unusualfishmod.client.old.render.*;
+import codyhuh.unusualfishmod.client.old.render.item.FallingTreeBlockRenderer;
+import codyhuh.unusualfishmod.client.old.render.item.SeaSpikeRenderer;
+import codyhuh.unusualfishmod.client.old.render.item.ThrownPrismarineSpearRenderer;
+import codyhuh.unusualfishmod.common.entity.DualityDamselfish;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import software.bernie.geckolib.model.DefaultedEntityGeoModel;
+
+import java.util.ArrayList;
 
 @Mod.EventBusSubscriber(modid = UnusualFishMod.MOD_ID, bus = Bus.MOD)
 public final class ClientEvents {
@@ -32,9 +43,34 @@ public final class ClientEvents {
 		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
 	}
 
+	private static void make(EntityType type, String name){
+		EntityRenderers.register(type, (ctx) -> new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>(name)));
+	}
+
 	@SubscribeEvent
 	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {
-		e.registerEntityRenderer(UFEntities.DUALITY_DAMSELFISH.get(), DualityDamselfishRenderer::new);
+		EntityType<?>[] simpleEntities = new EntityType[]{
+				UFEntities.AERO_MONO.get(),
+		};
+		for (EntityType<?> type : simpleEntities) {
+			make(type, type.getDescriptionId().substring("entity.unusualfishmod.".length()));
+		}
+
+		EntityRenderers.register(UFEntities.DUALITY_DAMSELFISH.get(), (ctx) -> {
+			GenericGeoRenderer<DualityDamselfish> render = new GenericGeoRenderer<>(ctx, () -> {
+				TextureVariantModel<DualityDamselfish> model = new TextureVariantModel<>("duality_damselfish");
+				ArrayList<ResourceLocation> textures = new ArrayList<>();
+				for (int i = 1; i <= 2; i++){
+					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/duality_damselfish/duality_damselfish_" + i + ".png"));
+				}
+				model.setTextures(DualityDamselfish::getVariant, textures);
+				return model;
+			});
+			return render;
+		});
+
+
+		//e.registerEntityRenderer(UFEntities.DUALITY_DAMSELFISH.get(), DualityDamselfishRenderer::new);
 		e.registerEntityRenderer(UFEntities.MOSSTHORN.get(), MossthornRenderer::new);
 		e.registerEntityRenderer(UFEntities.RIPPER.get(), RipperRenderer::new);
 		e.registerEntityRenderer(UFEntities.SPINDLEFISH.get(), SpindlefishRenderer::new);

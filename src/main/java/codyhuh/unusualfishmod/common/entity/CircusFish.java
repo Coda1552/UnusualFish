@@ -1,18 +1,11 @@
 package codyhuh.unusualfishmod.common.entity;
 
-
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableWaterAnimal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
-import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -26,15 +19,13 @@ import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.world.entity.ai.goal.TryFindWaterGoal;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 
-public class CircusFish extends WaterAnimal implements Bucketable {
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(CircusFish.class, EntityDataSerializers.BOOLEAN);
+public class CircusFish extends BucketableWaterAnimal {
 
 	public CircusFish(EntityType<? extends WaterAnimal> entityType, Level level) {
 		super(entityType, level);
@@ -80,59 +71,7 @@ public class CircusFish extends WaterAnimal implements Bucketable {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(FROM_BUCKET, false);
-	}
-
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putBoolean("FromBucket", this.fromBucket());
-	}
-
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setFromBucket(compound.getBoolean("FromBucket"));
-	}
-
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
-	}
-
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || this.fromBucket();
-	}
-
-	public boolean removeWhenFarAway(double p_213397_1_) {
-		return !this.fromBucket() && !this.hasCustomName();
-	}
-
-	public boolean fromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public void setFromBucket(boolean p_203706_1_) {
-		this.entityData.set(FROM_BUCKET, p_203706_1_);
-	}
-
-	@Override
-	public void loadFromBucketTag(CompoundTag p_148832_) {
-		p_148832_.getFloat("Health");
-	}
-
-	@Override
-	public SoundEvent getPickupSound() {
-		return SoundEvents.BUCKET_EMPTY_FISH;
-	}
-
-	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-	}
-
-	@Override
-	public ItemStack getBucketItemStack() {
+	public ItemStack getBucketStack() {
 		return new ItemStack(UFItems.CIRCUS_FISH_BUCKET.get());
 	}
 

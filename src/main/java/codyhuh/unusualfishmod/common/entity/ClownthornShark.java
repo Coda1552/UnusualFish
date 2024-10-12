@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.BottomStrollGoal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.core.registry.UFItems;
-import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -48,22 +48,22 @@ public class ClownthornShark extends WaterAnimal implements Bucketable {
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
 		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
 			@Override
 			public boolean canUse() {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && isInWater();
+			}
+		});
+		this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 	}
 
 	//Squid Games
