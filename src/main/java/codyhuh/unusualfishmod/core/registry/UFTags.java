@@ -17,6 +17,7 @@ public class UFTags {
     public static final TagKey<Item> RAW_UNUSUAL_FISH = itemTag("raw_unusual_fish");
     public static final TagKey<Item> UNUSUAL_CATCH_ITEMS = itemTag("unusual_catch");
     public static final TagKey<Block> SQUID_EGGS = blockTag("squid_eggs");
+    public static final TagKey<Block> UNCHOPPABLE = blockTag("unchoppable");
 
     private static TagKey<EntityType<?>> entityTag(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation(UnusualFishMod.MOD_ID, path));

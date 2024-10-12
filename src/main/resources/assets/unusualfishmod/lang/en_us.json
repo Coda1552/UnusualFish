@@ -254,6 +254,7 @@
 	"entity.unusualfishmod.sea_spike":"Sea Spike",
 
 	"tooltip.scythe": "Hits mobs in a wide sweep",
+	"tooltip.ripsaw": "Can fell entire trees in one swoop",
 
 	"enchantment.unusualfishmod.unusual_catch": "Unusual Catch",
 	"enchantment.unusualfishmod.unusual_catch.desc": "Allows you to catch unusual fish.",

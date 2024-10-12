@@ -3,6 +3,7 @@ package codyhuh.unusualfishmod.core.registry;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
+import codyhuh.unusualfishmod.common.entity.item.FallingTreeBlockEntity;
 import codyhuh.unusualfishmod.common.entity.item.SeaSpike;
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import net.minecraft.resources.ResourceLocation;
@@ -75,6 +76,7 @@ public class UFEntities {
 	public static final RegistryObject<EntityType<AbyssalBlast>> ABYSSAL_BLAST = ENTITIES.register("abyssal_blast", () -> EntityType.Builder.<AbyssalBlast>of(AbyssalBlast::new, MobCategory.MISC).sized(2.0F, 0.2F).setCustomClientFactory(AbyssalBlast::new).fireImmune().build("abyssal_blast"));
 	public static final RegistryObject<EntityType<ThrownPrismarineSpear>> PRISMARINE_SPEAR = ENTITIES.register("prismarine_spear", () -> EntityType.Builder.<ThrownPrismarineSpear>of(ThrownPrismarineSpear::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(4).updateInterval(20).build("prismarine_spear"));
 	public static final RegistryObject<EntityType<SeaSpike>> SEA_SPIKE = ENTITIES.register("sea_spike", () -> EntityType.Builder.<SeaSpike>of(SeaSpike::new, MobCategory.MISC).sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(20).build("sea_spike"));
+	public static final RegistryObject<EntityType<FallingTreeBlockEntity>> FALLING_TREE = ENTITIES.register("falling_tree", () -> EntityType.Builder.<FallingTreeBlockEntity>of(FallingTreeBlockEntity::new, MobCategory.MISC).sized(0.99F, 0.99F).setCustomClientFactory(FallingTreeBlockEntity::new).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true).updateInterval(10).clientTrackingRange(20).build("falling_tree"));
 }
 
 

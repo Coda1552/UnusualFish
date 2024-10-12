@@ -3,9 +3,10 @@ package codyhuh.unusualfishmod.client;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.model.*;
 import codyhuh.unusualfishmod.client.model.item.PrismarineSpearModel;
-import codyhuh.unusualfishmod.client.renderer.*;
-import codyhuh.unusualfishmod.client.renderer.item.SeaSpikeRenderer;
-import codyhuh.unusualfishmod.client.renderer.item.ThrownPrismarineSpearRenderer;
+import codyhuh.unusualfishmod.client.render.*;
+import codyhuh.unusualfishmod.client.render.item.FallingTreeBlockRenderer;
+import codyhuh.unusualfishmod.client.render.item.SeaSpikeRenderer;
+import codyhuh.unusualfishmod.client.render.item.ThrownPrismarineSpearRenderer;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -90,6 +91,7 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.TRIBBLE.get(), TribbleRenderer::new);
 		e.registerEntityRenderer(UFEntities.PRISMARINE_SPEAR.get(), ThrownPrismarineSpearRenderer::new);
 		e.registerEntityRenderer(UFEntities.SEA_SPIKE.get(), SeaSpikeRenderer::new);
+		e.registerEntityRenderer(UFEntities.FALLING_TREE.get(), FallingTreeBlockRenderer::new);
 	}
 
 	@SubscribeEvent

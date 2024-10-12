@@ -7,7 +7,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum UFTiers implements Tier {
-    RIPPER_SAW(1, 550, 6.0F, -3.0F, 20, () -> Ingredient.of(UFItems.RIPPER_TOOTH.get()));
+    RIPPER_SAW(1, 850, 6.0F, -3.0F, 20, () -> Ingredient.of(UFItems.RIPPER_TOOTH.get()));
 
     private final int level;
     private final int uses;
