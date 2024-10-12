@@ -50,8 +50,6 @@ public class RipsawItem extends AxeItem implements Vanishable {
             List<BlockPos> gathered = new ArrayList<>();
             gatherAttachedBlocks(player, blockPos, blockPos, gathered);
 
-            speed = getTier().getSpeed() * (gathered.size());
-
             if (!gathered.isEmpty()) {
                 List<MovingBlockData> allData = new ArrayList<>();
                 for (BlockPos pos : gathered) {
