@@ -2,7 +2,6 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
-import codyhuh.unusualfishmod.common.entity.util.misc.IFlopper;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -32,7 +31,7 @@ import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class AeroMono extends BucketableSchoolingWaterAnimal implements IFlopper, GeoEntity {
+public class AeroMono extends BucketableSchoolingWaterAnimal implements GeoEntity {
 
 	public AeroMono(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);

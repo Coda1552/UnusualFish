@@ -2,8 +2,6 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
-import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
-import codyhuh.unusualfishmod.common.entity.util.misc.IFlopper;
 import codyhuh.unusualfishmod.common.entity.util.misc.IVariant;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
@@ -43,7 +41,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class DualityDamselfish extends BucketableSchoolingWaterAnimal implements IFlopper, GeoEntity, IVariant {
+public class DualityDamselfish extends BucketableSchoolingWaterAnimal implements GeoEntity, IVariant {
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(DualityDamselfish.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
 
