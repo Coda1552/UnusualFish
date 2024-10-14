@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -69,7 +70,7 @@ public class AeroMono extends BucketableSchoolingWaterAnimal implements GeoEntit
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -111,13 +112,16 @@ public class AeroMono extends BucketableSchoolingWaterAnimal implements GeoEntit
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (event.isMoving()) {
-			//	event.setAnimation(UFAnimations.SWIM);
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
 		}
 		else {
-			//	event.setAnimation(UFAnimations.IDLE);
+			event.setAnimation(UFAnimations.FLOP);
 		}
-
 		return PlayState.CONTINUE;
 	}
 
