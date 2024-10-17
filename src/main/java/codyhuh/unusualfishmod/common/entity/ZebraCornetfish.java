@@ -1,11 +1,10 @@
 package codyhuh.unusualfishmod.common.entity;
 
 
-import codyhuh.unusualfishmod.core.registry.UFSounds;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -24,9 +23,15 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ZebraCornetfish extends WaterAnimal {
+public class ZebraCornetfish extends WaterAnimal implements GeoEntity {
 
     public ZebraCornetfish(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
@@ -60,17 +65,6 @@ public class ZebraCornetfish extends WaterAnimal {
         });
     }
 
-    public void tick() {
-        super.tick();
-
-        if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-            Vec3 vec3 = this.getViewVector(0.0F);
-            float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-            float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-        }
-
-    }
-
     public void aiStep() {
         if (!this.isInWater() && this.onGround() && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -100,5 +94,31 @@ public class ZebraCornetfish extends WaterAnimal {
 
     public static boolean canSpawn(EntityType<ZebraCornetfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
         return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
+
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        }
+        else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

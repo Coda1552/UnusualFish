@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -23,8 +24,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class Mossthorn extends BucketableSchoolingWaterAnimal {
+public class Mossthorn extends BucketableSchoolingWaterAnimal implements GeoEntity {
 	private boolean isSchool = true;
 
 	public Mossthorn(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
@@ -43,10 +51,7 @@ public class Mossthorn extends BucketableSchoolingWaterAnimal {
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
 			@Override
 			public boolean canUse() {
@@ -59,6 +64,9 @@ public class Mossthorn extends BucketableSchoolingWaterAnimal {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 	}
 
 	public void aiStep() {
@@ -71,7 +79,6 @@ public class Mossthorn extends BucketableSchoolingWaterAnimal {
 
 		super.aiStep();
 	}
-
 
 	protected PathNavigation createNavigation(Level p_27480_) {
 		return new WaterBoundPathNavigation(this, p_27480_);
@@ -103,5 +110,31 @@ public class Mossthorn extends BucketableSchoolingWaterAnimal {
 
 	public static boolean canSpawn(EntityType<Mossthorn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 40;
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

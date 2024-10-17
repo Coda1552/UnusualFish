@@ -1,6 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -22,8 +23,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class BlizzardfinTuna extends BucketableSchoolingWaterAnimal {
+public class BlizzardfinTuna extends BucketableSchoolingWaterAnimal implements GeoEntity {
 	private boolean isSchool = true;
 
 	public BlizzardfinTuna(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
@@ -92,5 +100,31 @@ public class BlizzardfinTuna extends BucketableSchoolingWaterAnimal {
 
 	public static boolean canSpawn(EntityType<BlizzardfinTuna> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

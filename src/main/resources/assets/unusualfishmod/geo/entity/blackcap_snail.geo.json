@@ -1,0 +1,65 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.BlackcapSnail",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 1, -1]
+				},
+				{
+					"name": "Shell",
+					"parent": "root",
+					"pivot": [0, 2, -1],
+					"rotation": [-7.5, 0, 0],
+					"cubes": [
+						{"origin": [-2, 2, -2], "size": [4, 2, 6], "uv": [0, 0]},
+						{"origin": [-1.5, 4, -2], "size": [3, 7, 3], "uv": [0, 8]}
+					]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 1, -1],
+					"cubes": [
+						{"origin": [-1.5, 0, -2], "size": [3, 2, 3], "uv": [12, 8]}
+					]
+				},
+				{
+					"name": "Eye1",
+					"parent": "body",
+					"pivot": [1.5, 2, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [1.5, 2, -4], "size": [0, 1, 2], "pivot": [1.5, 2, -2], "rotation": [0, -35, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Eye2",
+					"parent": "body",
+					"pivot": [-1.5, 2, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [-1.5, 2, -4], "size": [0, 1, 2], "pivot": [-1.5, 2, -2], "rotation": [0, 35, 0], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Mouth",
+					"parent": "body",
+					"pivot": [0, 1, -2],
+					"cubes": [
+						{"origin": [-2.5, 1, -4], "size": [5, 0, 2], "pivot": [0, 1, -2], "rotation": [35, 0, 0], "uv": [12, 0]}
+					]
+				}
+			]
+		}
+	]
+}

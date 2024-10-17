@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -30,10 +31,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class CopperflameAnthias extends BucketableSchoolingWaterAnimal {
+public class CopperflameAnthias extends BucketableSchoolingWaterAnimal implements GeoEntity {
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(CopperflameAnthias.class, EntityDataSerializers.INT);
 	private boolean isSchool = true;
 
@@ -53,27 +61,27 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal {
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
 		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
 			@Override
 			public boolean canUse() {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+			@Override
+			public boolean canUse() {
+				return super.canUse() && isInWater();
+			}
+		});
+		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
+		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
 	}
 
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
@@ -130,12 +138,9 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal {
 
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
+		super.saveToBucketTag(bucket);
 		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
 		compoundnbt.putInt("Variant", this.getVariant());
-		if (this.hasCustomName()) {
-			bucket.setHoverName(this.getCustomName());
-		}
 	}
 
 	public int getVariant() {
@@ -162,5 +167,31 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal {
 
 	public static boolean canSpawn(EntityType<CopperflameAnthias> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

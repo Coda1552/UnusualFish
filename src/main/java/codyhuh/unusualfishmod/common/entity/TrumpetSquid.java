@@ -4,6 +4,8 @@ import codyhuh.unusualfishmod.common.entity.util.goal.BreedableWaterAnimalBreedG
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BreedableWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.goal.SquidLayEggsGoal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
+import codyhuh.unusualfishmod.common.entity.util.movement.SquidMoveControl;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFTags;
@@ -46,14 +48,21 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
+public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, GeoEntity {
 	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(TrumpetSquid.class, EntityDataSerializers.BOOLEAN);
 	public float squidRotation;
 
 	public TrumpetSquid(EntityType<? extends TrumpetSquid> entityType, Level level) {
 		super(entityType, level);
-		this.moveControl = new TrumpetSquid.MoveHelperController(this);
+		this.moveControl = new SquidMoveControl(this);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
 	}
@@ -246,40 +255,29 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable {
 		return new ItemStack(UFItems.TRUMPET_SQUID_BUCKET.get());
 	}
 
-	static class MoveHelperController extends MoveControl {
-		private final TrumpetSquid fish;
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
 
-		MoveHelperController(TrumpetSquid fish) {
-			super(fish);
-			this.fish = fish;
-		}
-
-		public void tick() {
-			if (this.fish.isEyeInFluid(FluidTags.WATER)) {
-				this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
-			}
-
-			if (this.operation == Operation.MOVE_TO && !this.fish.getNavigation().isDone()) {
-				float f = (float) (this.speedModifier * this.fish.getAttributeValue(Attributes.MOVEMENT_SPEED));
-				this.fish.setSpeed(Mth.lerp(0.125F, this.fish.getSpeed(), f));
-				double d0 = this.wantedX - this.fish.getX();
-				double d1 = this.wantedY - this.fish.getY();
-				double d2 = this.wantedZ - this.fish.getZ();
-				if (d1 != 0.0D) {
-					double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
-					this.fish.setDeltaMovement(this.fish.getDeltaMovement().add(0.0D, (double) this.fish.getSpeed() * (d1 / d3) * 0.1D, 0.0D));
-				}
-
-				if (d0 != 0.0D || d2 != 0.0D) {
-					float f1 = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-					this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
-					this.fish.yBodyRot = this.fish.yRot;
-				}
-
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
 			} else {
-				this.fish.setSpeed(0.0F);
+				event.setAnimation(UFAnimations.IDLE);
 			}
 		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
 
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

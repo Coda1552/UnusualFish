@@ -1,6 +1,8 @@
 package codyhuh.unusualfishmod.common.entity;
 
 
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
@@ -38,11 +40,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 
-public class Skrimp extends WaterAnimal implements Bucketable {
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Skrimp.class, EntityDataSerializers.BOOLEAN);
+public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Skrimp.class, EntityDataSerializers.INT);
 
 	public Skrimp(EntityType<? extends Skrimp> type, Level world) {
@@ -54,7 +62,6 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F);
 	}
-
 
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.5F));
@@ -79,6 +86,7 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.CRAB_CHATTER.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -95,17 +103,12 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	public void saveToBucketTag(ItemStack bucket) {
 		CompoundTag compoundnbt = bucket.getOrCreateTag();
 		compoundnbt.putInt("Variant", this.getVariant());
-		if (this.hasCustomName()) {
-			bucket.setHoverName(this.getCustomName());
-		}
-		compoundnbt.putFloat("Health", this.getHealth());
 	}
 
 	@Override
 	public void defineSynchedData() {
 		super.defineSynchedData();
 		this.entityData.define(VARIANT, 0);
-		this.entityData.define(FROM_BUCKET, false);
 	}
 
 	public int getVariant() {
@@ -119,8 +122,6 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		compound.putBoolean("FromBucket", this.isFromBucket());
-		compound.putBoolean("Bucketed", this.fromBucket());
 		compound.putInt("Variant", getVariant());
 	}
 
@@ -128,8 +129,6 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		setVariant(compound.getInt("Variant"));
-		this.setFromBucket(compound.getBoolean("FromBucket"));
-		this.setFromBucket(compound.getBoolean("Bucketed"));
 	}
 
 	@Nullable
@@ -147,53 +146,49 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 	}
 
 	@Override
-	public boolean fromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || this.fromBucket();
-	}
-
-	public boolean removeWhenFarAway(double p_213397_1_) {
-		return !this.fromBucket() && !this.hasCustomName();
-	}
-
-	private boolean isFromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public void setFromBucket(boolean p_203706_1_) {
-		this.entityData.set(FROM_BUCKET, p_203706_1_);
-	}
-
-	@Override
-	public void loadFromBucketTag(CompoundTag p_148832_) {
-
-	}
-
-	@Override
-	public SoundEvent getPickupSound() {
-		return SoundEvents.BUCKET_EMPTY_FISH;
-	}
-
-	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-	}
-
-	@Override
-	public ItemStack getBucketItemStack() {
+	public ItemStack getBucketStack() {
 		return new ItemStack(UFItems.CORAL_SKRIMP_BUCKET.get());
 	}
 
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
+	}
+
+	public static boolean canSpawn(EntityType<Skrimp> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
 	static class MoveHelperController extends MoveControl {
+
 		private final Mob spider;
 
 		MoveHelperController(Mob spider) {
 			super(spider);
 			this.spider = spider;
 		}
-
 		public void tick() {
 			if (this.spider.isEyeInFluid(FluidTags.WATER)) {
 				this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, 0.0D, 0.0D));
@@ -215,10 +210,6 @@ public class Skrimp extends WaterAnimal implements Bucketable {
 				this.spider.setSpeed(0.0F);
 			}
 		}
-	}
-
-	public static boolean canSpawn(EntityType<Skrimp> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 }
 

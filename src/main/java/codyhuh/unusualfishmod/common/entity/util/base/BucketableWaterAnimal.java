@@ -47,6 +47,9 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
         compoundnbt.putFloat("Health", this.getHealth());
+        if (this.hasCustomName()) {
+            bucket.setHoverName(this.getCustomName());
+        }
     }
 
     public boolean requiresCustomPersistence() {

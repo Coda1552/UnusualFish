@@ -1,10 +1,9 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.core.registry.UFSounds;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
@@ -26,10 +25,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.WaterFluid;
-import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class CelestialFish extends WaterAnimal {
+public class CelestialFish extends WaterAnimal implements GeoEntity {
     protected int attackCooldown = 0;
 
     public CelestialFish(EntityType<? extends WaterAnimal> entityType, Level level) {
@@ -109,5 +113,31 @@ public class CelestialFish extends WaterAnimal {
         float time = iServerWorld.getTimeOfDay(1.0F);
         int light = iServerWorld.getMaxLocalRawBrightness(pos);
         return light <= 4 && time > 0.27F && time <= 0.8F;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
+
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        }
+        else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }

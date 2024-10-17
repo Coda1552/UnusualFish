@@ -1,6 +1,8 @@
 package codyhuh.unusualfishmod.common.entity;
 
 
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
@@ -32,10 +34,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-//REMOVE TILT FROM
-public class Forkfish extends WaterAnimal implements Bucketable {
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(Forkfish.class, EntityDataSerializers.BOOLEAN);
+public class Forkfish extends BucketableWaterAnimal implements GeoEntity {
 
 	public Forkfish(EntityType<? extends WaterAnimal> entityType, Level level) {
 		super(entityType, level);
@@ -65,21 +72,6 @@ public class Forkfish extends WaterAnimal implements Bucketable {
 		});
 	}
 
-	//Squid Games
-
-
-	public void tick() {
-		super.tick();
-
-		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-		}
-
-	}
-
-
 	public void aiStep() {
 		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
@@ -108,71 +100,37 @@ public class Forkfish extends WaterAnimal implements Bucketable {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(FROM_BUCKET, false);
-	}
-
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putBoolean("FromBucket", this.isFromBucket());
-		compound.putBoolean("Bucketed", this.fromBucket());
-	}
-
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setFromBucket(compound.getBoolean("FromBucket"));
-		this.setFromBucket(compound.getBoolean("Bucketed"));
-	}
-
-	@Override
-	public boolean fromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
-
-	}
-
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || this.fromBucket();
-	}
-
-	public boolean removeWhenFarAway(double p_213397_1_) {
-		return !this.fromBucket() && !this.hasCustomName();
-	}
-
-	private boolean isFromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public void setFromBucket(boolean p_203706_1_) {
-		this.entityData.set(FROM_BUCKET, p_203706_1_);
-	}
-
-	@Override
-	public void loadFromBucketTag(CompoundTag p_148832_) {
-
-	}
-
-	@Override
-	public SoundEvent getPickupSound() {
-		return SoundEvents.BUCKET_EMPTY_FISH;
-	}
-
-	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-	}
-
-	@Override
-	public ItemStack getBucketItemStack() {
+	public ItemStack getBucketStack() {
 		return new ItemStack(UFItems.FORKFISH_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<Forkfish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 }

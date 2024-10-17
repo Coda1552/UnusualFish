@@ -1,5 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.base.BucketableWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
@@ -32,9 +34,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class DeepCrawler extends WaterAnimal implements Bucketable{
-	private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(DeepCrawler.class, EntityDataSerializers.BOOLEAN);
+public class DeepCrawler extends BucketableWaterAnimal implements GeoEntity {
 
 	public DeepCrawler(EntityType<? extends DeepCrawler> type, Level world) {
 		super(type, world);
@@ -79,73 +87,38 @@ public class DeepCrawler extends WaterAnimal implements Bucketable{
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(FROM_BUCKET, false);
-	}
-
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putBoolean("FromBucket", this.isFromBucket());
-		compound.putBoolean("Bucketed", this.fromBucket());
-	}
-
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setFromBucket(compound.getBoolean("FromBucket"));
-		this.setFromBucket(compound.getBoolean("Bucketed"));
-	}
-
-	@Override
-	public boolean fromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
-
-	}
-
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || this.fromBucket();
-	}
-
-	public boolean removeWhenFarAway(double p_213397_1_) {
-		return !this.fromBucket() && !this.hasCustomName();
-	}
-
-	private boolean isFromBucket() {
-		return this.entityData.get(FROM_BUCKET);
-	}
-
-	public void setFromBucket(boolean p_203706_1_) {
-		this.entityData.set(FROM_BUCKET, p_203706_1_);
-	}
-
-
-	@Override
-	public void loadFromBucketTag(CompoundTag p_148832_) {
-
-	}
-
-	@Override
-	public SoundEvent getPickupSound() {
-		return SoundEvents.BUCKET_EMPTY_FISH;
-	}
-
-	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-		return Bucketable.bucketMobPickup(p_27477_, p_27478_, this).orElse(super.mobInteract(p_27477_, p_27478_));
-	}
-
-	@Override
-	public ItemStack getBucketItemStack() {
+	public ItemStack getBucketStack() {
 		return new ItemStack(UFItems.DEEP_CRAWLER_BUCKET.get());
 	}
 
 	public static boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
+	}
+
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.WALK);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
 	}
 
 	static class MoveHelperController extends MoveControl {

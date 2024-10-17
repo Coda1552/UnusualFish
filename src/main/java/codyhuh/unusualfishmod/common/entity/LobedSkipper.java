@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
@@ -33,10 +34,17 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
 
-public class LobedSkipper extends PathfinderMob implements Bucketable {
+public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(LobedSkipper.class, EntityDataSerializers.BOOLEAN);
 
     public LobedSkipper(EntityType<? extends PathfinderMob> entityType, Level level) {
@@ -255,13 +263,11 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("FromBucket", this.isFromBucket());
         compound.putBoolean("Bucketed", this.fromBucket());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
-        this.setFromBucket(compound.getBoolean("FromBucket"));
         this.setFromBucket(compound.getBoolean("Bucketed"));
     }
 
@@ -284,14 +290,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
         return !this.fromBucket() && !this.hasCustomName();
     }
 
-    private boolean isFromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
-    public void setFromBucket(boolean p_203706_1_) {
-        this.entityData.set(FROM_BUCKET, p_203706_1_);
-    }
-
     @Override
     public void loadFromBucketTag(CompoundTag p_148832_) {
     }
@@ -312,6 +310,32 @@ public class LobedSkipper extends PathfinderMob implements Bucketable {
 
     public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
         return worldIn.getBlockState(pos.below()).canOcclude();
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
+
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        }
+        else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     public class SkipperMoveController extends MoveControl {

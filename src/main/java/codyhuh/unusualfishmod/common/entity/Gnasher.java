@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
-
 import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -28,8 +28,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class Gnasher extends WaterAnimal implements RangedAttackMob {
+public class Gnasher extends WaterAnimal implements RangedAttackMob, GeoEntity {
 	protected int attackCooldown = 0;
 	private int attackAnimationTick;
 
@@ -46,12 +53,8 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.6F));
 		this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.5D, 20, 10.0F));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Animal.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Squid.class, true));
+		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.6F));
 		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
 			@Override
 			public boolean canUse() {
@@ -64,6 +67,10 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 				return !this.mob.isInWater() && super.canUse();
 			}
 		});
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Animal.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Squid.class, true));
 	}
 
 	@Override
@@ -79,7 +86,6 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		this.level().addFreshEntity(glass);
 	}
 
-
 	@Override
 	public boolean doHurtTarget(Entity entityIn) {
 		this.attackAnimationTick = 10;
@@ -94,22 +100,12 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		return flag;
 	}
 
-
-
 	public void tick() {
 		super.tick();
 
 		if (this.attackCooldown > 0) {
 			this.attackCooldown--;
 		}
-
-		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-
-		}
-
 	}
 
 
@@ -131,7 +127,6 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		return new WaterBoundPathNavigation(this, p_27480_);
 	}
 
-
 	private float getAttackDamage() {
 		return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
 	}
@@ -150,6 +145,7 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 	protected SoundEvent getAmbientSound() {
 		return UFSounds.GNASHER_IDLE.get();
 	}
+
 	protected SoundEvent getDeathSound() {
 		return SoundEvents.COD_DEATH;
 	}
@@ -172,4 +168,29 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob {
 		return light <= 4 && time > 0.27F && time <= 0.8F;
 	}
 
+	@Override
+	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+	}
+
+	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (isInWater()) {
+			if (event.isMoving()) {
+				event.setAnimation(UFAnimations.SWIM);
+			} else {
+				event.setAnimation(UFAnimations.IDLE);
+			}
+		}
+		else {
+			event.setAnimation(UFAnimations.FLOP);
+		}
+		return PlayState.CONTINUE;
+	}
+
+	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+	@Override
+	public AnimatableInstanceCache getAnimatableInstanceCache() {
+		return cache;
+	}
 }

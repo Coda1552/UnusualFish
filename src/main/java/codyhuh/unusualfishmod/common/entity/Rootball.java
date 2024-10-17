@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.CustomSwellGoal;
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -28,11 +29,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public class Rootball extends Monster {
+public class Rootball extends Monster implements GeoEntity {
     private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
     private int oldSwell;
@@ -59,7 +67,7 @@ public class Rootball extends Monster {
 
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.4D)
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 
@@ -219,4 +227,29 @@ public class Rootball extends Monster {
         return light <= 4;
     }
 
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
+
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.WALK);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        }
+        else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }
