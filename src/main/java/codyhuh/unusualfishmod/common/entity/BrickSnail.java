@@ -55,7 +55,7 @@ public class BrickSnail extends BucketableWaterAnimal implements GeoEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.3F));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.6F));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.3F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
     }

@@ -51,11 +51,11 @@ public class MuddytopSnail extends BucketableWaterAnimal implements GeoEntity {
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ARMOR, (double) 8.0F);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.ARMOR, 8.0D);
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.3F));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.6F));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.3F));
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
