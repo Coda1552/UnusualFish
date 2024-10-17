@@ -17,7 +17,7 @@ public class PicklefishRenderer extends MobRenderer<Picklefish, PicklefishModel<
 
     public PicklefishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new PicklefishModel<>(renderManagerIn.bakeLayer(UFModelLayers.PICKLEFISH)), 0.2F);
-        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/picklefish.png")));
+        //addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/picklefish.png")));
     }
 
     @Override

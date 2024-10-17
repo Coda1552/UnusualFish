@@ -1,0 +1,87 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.SeaPancakeModel",
+				"texture_width": 256,
+				"texture_height": 256,
+				"visible_bounds_width": 6,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 2, 0],
+					"cubes": [
+						{"origin": [-22.5, 0, -23], "size": [45, 4, 45], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Topfin",
+					"parent": "Body",
+					"pivot": [-0.5, 3, 23],
+					"cubes": [
+						{"origin": [-0.5, 3, 22], "size": [0, 5, 6], "uv": [0, 18]}
+					]
+				},
+				{
+					"name": "Tail_main",
+					"parent": "Body",
+					"pivot": [-0.5, 1.5, 21],
+					"cubes": [
+						{"origin": [-8, 0, 22], "size": [16, 3, 7], "uv": [0, 49]}
+					]
+				},
+				{
+					"name": "BackFin2",
+					"parent": "Tail_main",
+					"pivot": [-8, 1.5, 23],
+					"rotation": [0, 0, -12.5],
+					"cubes": [
+						{"origin": [-14, 1.5, 23], "size": [6, 0, 11], "uv": [5, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "BackFin1",
+					"parent": "Tail_main",
+					"pivot": [8, 1.5, 23],
+					"rotation": [0, 0, 12.5],
+					"cubes": [
+						{"origin": [8, 1.5, 23], "size": [6, 0, 11], "uv": [5, 0]}
+					]
+				},
+				{
+					"name": "Tail",
+					"parent": "Tail_main",
+					"pivot": [-0.5, 2, 29],
+					"cubes": [
+						{"origin": [-0.5, -5, 29], "size": [0, 13, 10], "uv": [0, 1]}
+					]
+				},
+				{
+					"name": "Eye1",
+					"parent": "Body",
+					"pivot": [5.5, 4, -8],
+					"cubes": [
+						{"origin": [5.5, 4, -10], "size": [4, 1, 4], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Eye2",
+					"parent": "Body",
+					"pivot": [-5.5, 4, -8],
+					"cubes": [
+						{"origin": [-9.5, 4, -10], "size": [4, 1, 4], "uv": [0, 0], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

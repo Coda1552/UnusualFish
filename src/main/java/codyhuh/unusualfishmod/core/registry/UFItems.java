@@ -191,5 +191,5 @@ public final class UFItems {
 	public static final RegistryObject<ForgeSpawnEggItem> TIGER_JUNGLE_SHARK_SPAWN_EGG = ITEMS.register("tiger_jungle_shark_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.TIGER_JUNGLE_SHARK, 0x272530, 0xa5a8c6, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> CRIMSONSHELL_SQUID_SPAWN_EGG = ITEMS.register("crimsonshell_squid_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.CRIMSONSHELL_SQUID, 0xab101c, 0x432c39, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> VOLT_ANGLER_SPAWN_EGG = ITEMS.register("volt_angler_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.VOLT_ANGLER, 0x2d4035, 0x509033, new Item.Properties()));
-	public static final RegistryObject<ForgeSpawnEggItem> TRIBBLE_SPAWN_EGG = ITEMS.register("tribble_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.TRIBBLE, 0x622814, 0x46491a, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> TRIBBLE_SPAWN_EGG = ITEMS.register("tribble_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.TRIBBLE, 0x656f26, 0x46491a, new Item.Properties()));
 }

@@ -23,6 +23,7 @@ public class GenericGeoRenderer<T extends LivingEntity & GeoEntity> extends GeoE
 	public GenericGeoRenderer(EntityRendererProvider.Context renderManager, Supplier<GeoModel<T>> model, boolean glow) {
 		super(renderManager, model.get());
 		this.shadowRadius = 0.3F;
+		this.glow = glow;
 	}
 
 	public GenericGeoRenderer(EntityRendererProvider.Context renderManager, Supplier<GeoModel<T>> model, float scale) {
@@ -32,6 +33,7 @@ public class GenericGeoRenderer<T extends LivingEntity & GeoEntity> extends GeoE
 	
 	public GenericGeoRenderer(EntityRendererProvider.Context mgr, GeoModel<T> modelProvider, boolean glow) {
 		super(mgr, modelProvider);
+		this.glow = glow;
 	}
 
 	public GenericGeoRenderer(EntityRendererProvider.Context mgr, GeoModel<T> modelProvider, float scale) {

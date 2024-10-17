@@ -6,17 +6,11 @@ import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -26,7 +20,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.monster.Silverfish;
 import net.minecraft.world.entity.player.Player;
@@ -132,15 +125,10 @@ public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.WALK);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
+		if (event.isMoving()) {
+			event.setAnimation(UFAnimations.WALK);
+		} else {
+			event.setAnimation(UFAnimations.IDLE);
 		}
 		return PlayState.CONTINUE;
 	}

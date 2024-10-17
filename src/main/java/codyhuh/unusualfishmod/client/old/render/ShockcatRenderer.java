@@ -17,7 +17,7 @@ public class ShockcatRenderer extends MobRenderer<Shockcat, ShockcatModel<Shockc
 
     public ShockcatRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new ShockcatModel<>(renderManagerIn.bakeLayer(UFModelLayers.SHOCKCAT)), 0.2F);
-        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/shockcat.png")));
+        //addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/shockcat.png")));
     }
 
     @Override

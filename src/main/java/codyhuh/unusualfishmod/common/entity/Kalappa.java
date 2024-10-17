@@ -39,7 +39,7 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.25D));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.25F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, true) {
@@ -80,15 +80,10 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (isInWater()) {
-            if (event.isMoving()) {
-                event.setAnimation(UFAnimations.WALK);
-            } else {
-                event.setAnimation(UFAnimations.IDLE);
-            }
-        }
-        else {
-            event.setAnimation(UFAnimations.FLOP);
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.WALK);
+        } else {
+            event.setAnimation(UFAnimations.IDLE);
         }
         return PlayState.CONTINUE;
     }

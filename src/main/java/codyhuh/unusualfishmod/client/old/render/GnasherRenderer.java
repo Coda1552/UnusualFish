@@ -17,7 +17,7 @@ public class GnasherRenderer extends MobRenderer<Gnasher, GnasherModel<Gnasher>>
 
 	public GnasherRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new GnasherModel<>(renderManagerIn.bakeLayer(UFModelLayers.GNASHER)), 0.2F);
-		addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/gnasher.png")));
+		//addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/gnasher.png")));
 	}
 
 	@Override

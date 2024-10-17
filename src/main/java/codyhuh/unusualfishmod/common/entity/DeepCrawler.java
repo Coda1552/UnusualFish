@@ -5,17 +5,11 @@ import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -26,8 +20,6 @@ import net.minecraft.world.entity.ai.control.MoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -101,15 +93,10 @@ public class DeepCrawler extends BucketableWaterAnimal implements GeoEntity {
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.WALK);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
+		if (event.isMoving()) {
+			event.setAnimation(UFAnimations.WALK);
+		} else {
+			event.setAnimation(UFAnimations.IDLE);
 		}
 		return PlayState.CONTINUE;
 	}

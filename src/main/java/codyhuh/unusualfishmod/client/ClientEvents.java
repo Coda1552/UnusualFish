@@ -104,7 +104,7 @@ public final class ClientEvents {
 				model.setTextures(DemonHerring::getVariant, textures);
 				return model;
 			}, false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_" + render.getAnimatable().getVariant() + ".png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_" + "1" + ".png")));
 			return render;
 		});
 

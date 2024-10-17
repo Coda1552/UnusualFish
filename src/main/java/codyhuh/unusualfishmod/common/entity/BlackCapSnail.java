@@ -158,15 +158,10 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (isInWater()) {
-            if (event.isMoving()) {
-                event.setAnimation(UFAnimations.WALK);
-            } else {
-                event.setAnimation(UFAnimations.IDLE);
-            }
-        }
-        else {
-            event.setAnimation(UFAnimations.FLOP);
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.WALK);
+        } else {
+            event.setAnimation(UFAnimations.IDLE);
         }
         return PlayState.CONTINUE;
     }

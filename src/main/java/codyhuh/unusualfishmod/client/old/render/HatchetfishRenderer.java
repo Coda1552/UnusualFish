@@ -17,7 +17,7 @@ public class HatchetfishRenderer extends MobRenderer<HatchetFish, HatchetFishMod
 
     public HatchetfishRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new HatchetFishModel<>(renderManagerIn.bakeLayer(UFModelLayers.HATCHET_FISH)), 0.2F);
-        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/hatchetfish.png")));
+        //addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/hatchetfish.png")));
     }
 
     @Override

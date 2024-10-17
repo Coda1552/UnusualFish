@@ -55,7 +55,7 @@ public class Tribble extends BucketableWaterAnimal implements GeoEntity {
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.6F));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0F));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.6F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
     }
@@ -132,15 +132,10 @@ public class Tribble extends BucketableWaterAnimal implements GeoEntity {
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (isInWater()) {
-            if (event.isMoving()) {
-                event.setAnimation(UFAnimations.SWIM);
-            } else {
-                event.setAnimation(UFAnimations.IDLE);
-            }
-        }
-        else {
-            event.setAnimation(UFAnimations.FLOP);
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.WALK);
+        } else {
+            event.setAnimation(UFAnimations.IDLE);
         }
         return PlayState.CONTINUE;
     }

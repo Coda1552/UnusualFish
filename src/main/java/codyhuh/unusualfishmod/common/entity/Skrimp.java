@@ -60,11 +60,11 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
 	}
 
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.5F));
+		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0F));
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.5F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
@@ -157,15 +157,10 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
+		if (event.isMoving()) {
+			event.setAnimation(UFAnimations.WALK);
+		} else {
+			event.setAnimation(UFAnimations.IDLE);
 		}
 		return PlayState.CONTINUE;
 	}

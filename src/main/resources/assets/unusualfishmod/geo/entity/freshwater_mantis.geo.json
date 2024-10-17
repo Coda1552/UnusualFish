@@ -1,0 +1,146 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.FreshwaterMantis",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Leg1",
+					"parent": "root",
+					"pivot": [0.75, 7, 0],
+					"rotation": [0, 12.5, 0],
+					"cubes": [
+						{"origin": [0.75, 0, 0], "size": [15, 11, 0], "inflate": 0.001, "uv": [20, 0]}
+					]
+				},
+				{
+					"name": "Leg2",
+					"parent": "root",
+					"pivot": [0.75, 7, 1],
+					"rotation": [0, -35, 0],
+					"cubes": [
+						{"origin": [0.75, 0, 1], "size": [15, 11, 0], "inflate": 0.001, "uv": [20, 0]}
+					]
+				},
+				{
+					"name": "Leg3",
+					"parent": "root",
+					"pivot": [-0.75, 7, 1],
+					"rotation": [0, 35, 0],
+					"cubes": [
+						{"origin": [-15.75, 0, 1], "size": [15, 11, 0], "inflate": 0.001, "uv": [20, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Leg4",
+					"parent": "root",
+					"pivot": [-0.75, 7, 0],
+					"rotation": [0, -12.5, 0],
+					"cubes": [
+						{"origin": [-15.75, 0, 0], "size": [15, 11, 0], "inflate": 0.001, "uv": [20, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 7, 1],
+					"cubes": [
+						{"origin": [-1.5, 6, 0], "size": [3, 3, 7], "uv": [13, 14]},
+						{"origin": [-1.5, 6, -2], "size": [3, 9, 2], "uv": [14, 24]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Body",
+					"pivot": [0, 14, -2],
+					"cubes": [
+						{"origin": [-2.5, 13, -5], "size": [5, 2, 3], "uv": [0, 21]}
+					]
+				},
+				{
+					"name": "Feeler1",
+					"parent": "Head",
+					"pivot": [0.5, 15, -2.5],
+					"rotation": [0, 0, 35],
+					"cubes": [
+						{"origin": [0.5, 15, -5], "size": [0, 4, 3], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Feeler2",
+					"parent": "Head",
+					"pivot": [-0.5, 15, -2.5],
+					"rotation": [0, 0, -35],
+					"cubes": [
+						{"origin": [-0.5, 15, -5], "size": [0, 4, 3], "inflate": 0.001, "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "MouthPart1",
+					"parent": "Head",
+					"pivot": [1, 13, -4],
+					"rotation": [15, 0, 0],
+					"cubes": [
+						{"origin": [0.5, 12, -4], "size": [1, 1, 1], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "MouthPart2",
+					"parent": "Head",
+					"pivot": [-1, 13, -4],
+					"rotation": [15, 0, 0],
+					"cubes": [
+						{"origin": [-1.5, 12, -4], "size": [1, 1, 1], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Thegmina1",
+					"parent": "Body",
+					"pivot": [0, 9, 0],
+					"rotation": [10, 7.5, 0],
+					"cubes": [
+						{"origin": [0, 9.025, 0], "size": [5, 0, 10], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Thegmina2",
+					"parent": "Body",
+					"pivot": [0, 9, 0],
+					"rotation": [10, -7.5, 0],
+					"cubes": [
+						{"origin": [-5, 9.025, 0], "size": [5, 0, 10], "inflate": 0.001, "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Arm1",
+					"parent": "Body",
+					"pivot": [1, 9, -1],
+					"rotation": [-10, -30, 0],
+					"cubes": [
+						{"origin": [1, 0, -11], "size": [0, 11, 10], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Arm2",
+					"parent": "Body",
+					"pivot": [-1, 9, -1],
+					"rotation": [-10, 30, 0],
+					"cubes": [
+						{"origin": [-1, 0, -11], "size": [0, 11, 10], "inflate": 0.001, "uv": [0, 0], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

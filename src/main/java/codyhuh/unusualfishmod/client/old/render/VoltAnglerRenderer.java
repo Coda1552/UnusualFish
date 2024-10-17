@@ -17,7 +17,7 @@ public class VoltAnglerRenderer extends MobRenderer<VoltAngler, VoltAnglerModel<
 
     public VoltAnglerRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn, new VoltAnglerModel<>(renderManagerIn.bakeLayer(UFModelLayers.VOLT_ANGLER)), 0.2F);
-        addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/voltangler.png")));
+        //addLayer(new UFGlowRenderLayer<>(this, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/voltangler.png")));
     }
 
     @Override
