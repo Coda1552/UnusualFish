@@ -276,6 +276,10 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
         return this.entityData.get(FROM_BUCKET);
     }
 
+    public void setFromBucket(boolean p_203706_1_) {
+        this.entityData.set(FROM_BUCKET, p_203706_1_);
+    }
+
     @Override
     public void saveToBucketTag(ItemStack bucket) {
         CompoundTag compoundnbt = bucket.getOrCreateTag();
