@@ -18,8 +18,8 @@ import java.util.Map;
 
 public class CopperflameAnthiasRenderer extends MobRenderer<CopperflameAnthias, CopperflameAnthiasModel<CopperflameAnthias>> {
     public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (hashMap) -> {
-        hashMap.put(0, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_0.png"));
-        hashMap.put(1, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_1.png"));
+        hashMap.put(0, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_1.png"));
+        hashMap.put(1, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_2.png"));
     });
 
     public CopperflameAnthiasRenderer(EntityRendererProvider.Context renderManagerIn) {

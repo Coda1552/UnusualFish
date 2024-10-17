@@ -4,27 +4,27 @@ import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.geo.GenericGeoModel;
 import codyhuh.unusualfishmod.client.geo.GenericGeoRenderer;
 import codyhuh.unusualfishmod.client.geo.TextureVariantModel;
+import codyhuh.unusualfishmod.client.misc.render.AbyssalBlastRenderer;
 import codyhuh.unusualfishmod.client.old.UFModelLayers;
 import codyhuh.unusualfishmod.client.old.model.*;
 import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
 import codyhuh.unusualfishmod.client.old.render.*;
-import codyhuh.unusualfishmod.client.old.render.item.FallingTreeBlockRenderer;
-import codyhuh.unusualfishmod.client.old.render.item.SeaSpikeRenderer;
-import codyhuh.unusualfishmod.client.old.render.item.ThrownPrismarineSpearRenderer;
-import codyhuh.unusualfishmod.common.entity.DualityDamselfish;
+import codyhuh.unusualfishmod.client.misc.render.FallingTreeBlockRenderer;
+import codyhuh.unusualfishmod.client.misc.render.SeaSpikeRenderer;
+import codyhuh.unusualfishmod.client.misc.render.ThrownPrismarineSpearRenderer;
+import codyhuh.unusualfishmod.client.old.render.layers.UFGlowRenderLayer;
+import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 
 import java.util.ArrayList;
 
@@ -44,84 +44,129 @@ public final class ClientEvents {
 	}
 
 	private static void make(EntityType type, String name){
-		EntityRenderers.register(type, (ctx) -> new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>(name)));
+		EntityRenderers.register(type, (ctx) -> new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>(name), false));
 	}
 
 	@SubscribeEvent
 	public static void registerRenderers(EntityRenderersEvent.RegisterRenderers e) {
 		EntityType<?>[] simpleEntities = new EntityType[]{
-				UFEntities.AERO_MONO.get(),
+				UFEntities.AERO_MONO.get(), UFEntities.AMBER_GOBY.get(), UFEntities.BARK_ANGELFISH.get(), UFEntities.BEAKED_HERRING.get(),
+				UFEntities.BLACKCAP_SNAIL.get(), UFEntities.BLIND_SAILFIN.get(), UFEntities.BLIZZARDFIN_TUNA.get(), UFEntities.BRICK_SNAIL.get(),
+				UFEntities.CIRCUS_FISH.get(), UFEntities.CLOWNTHORN_SHARK.get(), UFEntities.CRIMSONSHELL_SQUID.get(), UFEntities.DEEP_CRAWLER.get(),
+				UFEntities.DROOPING_GOURAMI.get(), UFEntities.FORKFISH.get(), UFEntities.FRESHWATER_MANTIS.get(), UFEntities.KALAPPA.get(),
+				UFEntities.LOBED_SKIPPER.get(), UFEntities.MOSSTHORN.get(), UFEntities.MUDDYTOP_SNAIL.get(), UFEntities.PINKFIN.get(),
+				UFEntities.PORCUPINE_LOBSTA.get(), UFEntities.PRAWN.get(), UFEntities.RHINO_TETRA.get(), UFEntities.RIPPER.get(),
+				UFEntities.ROOTBALL.get(), UFEntities.ROUGHBACK.get(), UFEntities.SAILOR_BARB.get(), UFEntities.SEA_MOSQUITO.get(),
+				UFEntities.SEA_PANCAKE.get(), UFEntities.SEA_SPIDER.get(), UFEntities.SNEEPSNORP.get(), UFEntities.SNOWFLAKE.get(),
+				UFEntities.SPINDLEFISH.get(), UFEntities.SPOON_SHARK.get(), UFEntities.SQUODDLE.get(), UFEntities.STOUT_BICHIR.get(),
+				UFEntities.TIGER_JUNGLE_SHARK.get(), UFEntities.TIGER_PUFFER.get(), UFEntities.TRIBBLE.get(), UFEntities.TRUMPET_SQUID.get(),
+				UFEntities.ZEBRA_CORNETFISH.get(), UFEntities.TRIPLE_TWIRL_PLECO.get(), // todo - triple twirl pleco variants
 		};
 		for (EntityType<?> type : simpleEntities) {
 			make(type, type.getDescriptionId().substring("entity.unusualfishmod.".length()));
 		}
 
-		EntityRenderers.register(UFEntities.DUALITY_DAMSELFISH.get(), (ctx) -> {
+		e.registerEntityRenderer(UFEntities.DUALITY_DAMSELFISH.get(), (ctx) -> {
 			GenericGeoRenderer<DualityDamselfish> render = new GenericGeoRenderer<>(ctx, () -> {
 				TextureVariantModel<DualityDamselfish> model = new TextureVariantModel<>("duality_damselfish");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
-				for (int i = 1; i <= 2; i++){
+				for (int i = 1; i <= 2; i++) {
 					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/duality_damselfish/duality_damselfish_" + i + ".png"));
 				}
 				model.setTextures(DualityDamselfish::getVariant, textures);
 				return model;
-			});
+			}, false);
 			return render;
 		});
 
-		e.registerEntityRenderer(UFEntities.MOSSTHORN.get(), MossthornRenderer::new);
-		e.registerEntityRenderer(UFEntities.RIPPER.get(), RipperRenderer::new);
-		e.registerEntityRenderer(UFEntities.SPINDLEFISH.get(), SpindlefishRenderer::new);
-		e.registerEntityRenderer(UFEntities.RHINO_TETRA.get(), RhinoTetraRenderer::new);
-		e.registerEntityRenderer(UFEntities.DROOPING_GOURAMI.get(), DroopingGouramiRenderer::new);
-		e.registerEntityRenderer(UFEntities.SAILOR_BARB.get(), SailorBarbRenderer::new);
-		e.registerEntityRenderer(UFEntities.SEA_SPIDER.get(), SeaSpiderRenderer::new);
-		e.registerEntityRenderer(UFEntities.TRIPLE_TWIRL_PLECO.get(), TripleTwirlPlecoRenderer::new);
-		e.registerEntityRenderer(UFEntities.CLOWNTHORN_SHARK.get(), ClownthornSharkRenderer::new);
-		e.registerEntityRenderer(UFEntities.ROUGHBACK.get(), RoughbackGuitarfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.PINKFIN.get(), PinkfinIdolRenderer::new);
-		e.registerEntityRenderer(UFEntities.SEA_PANCAKE.get(), SeaPancakeRenderer::new);
-		e.registerEntityRenderer(UFEntities.BRICK_SNAIL.get(), BrickSnailRenderer::new);
-		e.registerEntityRenderer(UFEntities.ZEBRA_CORNETFISH.get(), ZebraCornetfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.TIGER_PUFFER.get(), TigerPufferRenderer::new);
-		e.registerEntityRenderer(UFEntities.BLACKCAP_SNAIL.get(), BlackcapSnailRenderer::new);
-		e.registerEntityRenderer(UFEntities.SNEEPSNORP.get(), SneepSnorpRenderer::new);
-		e.registerEntityRenderer(UFEntities.DEEP_CRAWLER.get(), DeepCrawlerRenderer::new);
-		e.registerEntityRenderer(UFEntities.WIZARD_JELLY.get(), ManaJellyfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.PORCUPINE_LOBSTA.get(), PorcupineLobsterRenderer::new);
-		e.registerEntityRenderer(UFEntities.TRUMPET_SQUID.get(), TrumpetSquidRenderer::new);
-		e.registerEntityRenderer(UFEntities.FRESHWATER_MANTIS.get(), FreshwaterMantisRenderer::new);
-		e.registerEntityRenderer(UFEntities.BARK_ANGELFISH.get(), BarkAngelfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.SHOCKCAT.get(), ShockcatRenderer::new);
-		e.registerEntityRenderer(UFEntities.MUDDYTOP_SNAIL.get(), MuddytopSnailRenderer::new);
-		e.registerEntityRenderer(UFEntities.KALAPPA.get(), KalappaRenderer::new);
-		e.registerEntityRenderer(UFEntities.LOBED_SKIPPER.get(), LobedSkipperRenderer::new);
-		e.registerEntityRenderer(UFEntities.STOUT_BICHIR.get(), StoutBichirRenderer::new);
-		e.registerEntityRenderer(UFEntities.BEAKED_HERRING.get(), BeakedHerringRenderer::new);
-		e.registerEntityRenderer(UFEntities.PICKLEFISH.get(), PicklefishRenderer::new);
-		e.registerEntityRenderer(UFEntities.BLIND_SAILFIN.get(), BlindSailfinRenderer::new);
-		e.registerEntityRenderer(UFEntities.DEMON_HERRING.get(), DemonHerringRenderer::new);
-		e.registerEntityRenderer(UFEntities.AMBER_GOBY.get(), AmberGobyRenderer::new);
-		e.registerEntityRenderer(UFEntities.HATCHET_FISH.get(), HatchetfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.COPPERFLAME.get(), CopperflameAnthiasRenderer::new);
-		e.registerEntityRenderer(UFEntities.ROOTBALL.get(), RootballRenderer::new);
-		e.registerEntityRenderer(UFEntities.CELESTIAL_FISH.get(), CelestialFishRenderer::new);
-		e.registerEntityRenderer(UFEntities.GNASHER.get(), GnasherRenderer::new);
-		e.registerEntityRenderer(UFEntities.PRAWN.get(), PrawnRenderer::new);
-		e.registerEntityRenderer(UFEntities.SQUODDLE.get(), SquoddleRenderer::new);
-		e.registerEntityRenderer(UFEntities.SEA_MOSQUITO.get(), SeaMosquitoRenderer::new);
-		e.registerEntityRenderer(UFEntities.FORKFISH.get(), ForkfishRenderer::new);
-		e.registerEntityRenderer(UFEntities.SPOON_SHARK.get(), SpoonSharkRenderer::new);
-		e.registerEntityRenderer(UFEntities.CORAL_SKRIMP.get(), CoralSkrimpRenderer::new);
-		e.registerEntityRenderer(UFEntities.CIRCUS_FISH.get(), CircusFishRenderer::new);
-		e.registerEntityRenderer(UFEntities.BLIZZARDFIN_TUNA.get(), BlizzardfinTunaRenderer::new);
+		e.registerEntityRenderer(UFEntities.CELESTIAL_FISH.get(), (ctx) -> new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("celestial_fish"), true));
+
+		e.registerEntityRenderer(UFEntities.COPPERFLAME.get(), (ctx) -> {
+			GenericGeoRenderer<CopperflameAnthias> render = new GenericGeoRenderer<>(ctx, () -> {
+				TextureVariantModel<CopperflameAnthias> model = new TextureVariantModel<>("copperflame_anthias");
+				ArrayList<ResourceLocation> textures = new ArrayList<>();
+				for (int i = 1; i <= 2; i++) {
+					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_anthias/copperflame_" + i + ".png"));
+				}
+				model.setTextures(CopperflameAnthias::getVariant, textures);
+				return model;
+			}, true);
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.DEMON_HERRING.get(), (ctx) -> {
+			GenericGeoRenderer<DemonHerring> render = new GenericGeoRenderer<>(ctx, () -> {
+				TextureVariantModel<DemonHerring> model = new TextureVariantModel<>("demon_herring");
+				ArrayList<ResourceLocation> textures = new ArrayList<>();
+				for (int i = 1; i <= 3; i++) {
+					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring/demon_herring_" + i + ".png"));
+				}
+				model.setTextures(DemonHerring::getVariant, textures);
+				return model;
+			}, false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_" + render.getAnimatable().getVariant() + ".png")));
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.GNASHER.get(), (ctx) -> {
+			GenericGeoRenderer<Gnasher> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("gnasher"), false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/gnasher.png")));
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.EYELASH.get(), (ctx) -> {
+			GenericGeoRenderer<EyelashFish> render = new GenericGeoRenderer<>(ctx, () -> {
+				TextureVariantModel<EyelashFish> model = new TextureVariantModel<>("eyelash_fish");
+				ArrayList<ResourceLocation> textures = new ArrayList<>();
+				for (int i = 1; i <= 15; i++) {
+					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelash_fish/eyelash_fish_" + i + ".png"));
+				}
+				model.setTextures(EyelashFish::getVariant, textures);
+				return model;
+			}, false);
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.HATCHET_FISH.get(), (ctx) -> {
+			GenericGeoRenderer<HatchetFish> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("hatchet_fish"), false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/hatchet_fish.png")));
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.WIZARD_JELLY.get(), (ctx) -> new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("mana_jellyfish"), true));
+
+		e.registerEntityRenderer(UFEntities.PICKLEFISH.get(), (ctx) -> {
+			GenericGeoRenderer<Picklefish> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("picklefish"), false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/picklefish.png")));
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.CORAL_SKRIMP.get(), (ctx) -> {
+			GenericGeoRenderer<Skrimp> render = new GenericGeoRenderer<>(ctx, () -> {
+				TextureVariantModel<Skrimp> model = new TextureVariantModel<>("skrimp");
+				ArrayList<ResourceLocation> textures = new ArrayList<>();
+				for (int i = 1; i <= 15; i++) {
+					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/skrimp/skrimp_" + i + ".png"));
+				}
+				model.setTextures(Skrimp::getVariant, textures);
+				return model;
+			}, false);
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.SHOCKCAT.get(), (ctx) -> {
+			GenericGeoRenderer<Shockcat> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("shockcat"), false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/shockcat.png")));
+			return render;
+		});
+
+		e.registerEntityRenderer(UFEntities.VOLT_ANGLER.get(), (ctx) -> {
+			GenericGeoRenderer<VoltAngler> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("volt_angler"), false);
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/volt_angler.png")));
+			return render;
+		});
+
 		e.registerEntityRenderer(UFEntities.ABYSSAL_BLAST.get(), AbyssalBlastRenderer::new);
-		e.registerEntityRenderer(UFEntities.EYELASH.get(), EyelashFishRenderer::new);
-		e.registerEntityRenderer(UFEntities.SNOWFLAKE.get(), SnowflakeTailFishRenderer::new);
-		e.registerEntityRenderer(UFEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleSharkRenderer::new);
-		e.registerEntityRenderer(UFEntities.CRIMSONSHELL_SQUID.get(), CrimsonshellSquidRenderer::new);
-		e.registerEntityRenderer(UFEntities.VOLT_ANGLER.get(), VoltAnglerRenderer::new);
-		e.registerEntityRenderer(UFEntities.TRIBBLE.get(), TribbleRenderer::new);
 		e.registerEntityRenderer(UFEntities.PRISMARINE_SPEAR.get(), ThrownPrismarineSpearRenderer::new);
 		e.registerEntityRenderer(UFEntities.SEA_SPIKE.get(), SeaSpikeRenderer::new);
 		e.registerEntityRenderer(UFEntities.FALLING_TREE.get(), FallingTreeBlockRenderer::new);

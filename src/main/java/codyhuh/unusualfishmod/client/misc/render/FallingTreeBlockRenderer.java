@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.client.old.render.item;
+package codyhuh.unusualfishmod.client.misc.render;
 
 import codyhuh.unusualfishmod.common.entity.item.FallingTreeBlockEntity;
 import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;

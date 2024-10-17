@@ -22,7 +22,7 @@ public class DemonHerringGlowRenderLayer<T extends DemonHerring, M extends Entit
     public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (hashMap) -> {
         hashMap.put(0, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_0.png"));
         hashMap.put(1, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_1.png"));
-        hashMap.put(2, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_2.png"));
+        hashMap.put(2, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_3.png"));
     });
 
     public DemonHerringGlowRenderLayer(RenderLayerParent<T, M> layer) {
