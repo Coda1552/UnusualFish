@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.client.old.render.layers;
+package codyhuh.unusualfishmod.client.geo;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

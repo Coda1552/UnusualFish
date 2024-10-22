@@ -30,7 +30,7 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
-        compound.putBoolean("FromBucket", this.isFromBucket());
+        compound.putBoolean("FromBucket", this.fromBucket());
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
@@ -60,16 +60,12 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
         return !this.fromBucket() && !this.hasCustomName();
     }
 
-    private boolean isFromBucket() {
-        return this.entityData.get(FROM_BUCKET);
-    }
-
     public void setFromBucket(boolean p_203706_1_) {
         this.entityData.set(FROM_BUCKET, p_203706_1_);
     }
 
     @Override
-    public void loadFromBucketTag(CompoundTag p_148832_) {
+    public void loadFromBucketTag(CompoundTag tag) {
     }
 
     @Override

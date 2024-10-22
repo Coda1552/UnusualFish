@@ -3,7 +3,6 @@ package codyhuh.unusualfishmod.client.old.render;
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.old.UFModelLayers;
 import codyhuh.unusualfishmod.client.old.model.PicklefishModel;
-import codyhuh.unusualfishmod.client.old.render.layers.UFGlowRenderLayer;
 import codyhuh.unusualfishmod.common.entity.Picklefish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

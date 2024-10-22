@@ -1,6 +1,6 @@
 {
   "type": "forge:remove_spawns",
-  "biomes": "minecraft:deep_dark",
+  "biomes": "#unusualfishmod:no_spawns",
   "entity_types": [
     "unusualfishmod:deep_crawler",
     "unusualfishmod:shockcat",

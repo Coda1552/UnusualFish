@@ -5,14 +5,12 @@ import codyhuh.unusualfishmod.client.geo.GenericGeoModel;
 import codyhuh.unusualfishmod.client.geo.GenericGeoRenderer;
 import codyhuh.unusualfishmod.client.geo.TextureVariantModel;
 import codyhuh.unusualfishmod.client.misc.render.AbyssalBlastRenderer;
-import codyhuh.unusualfishmod.client.old.UFModelLayers;
-import codyhuh.unusualfishmod.client.old.model.*;
-import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
-import codyhuh.unusualfishmod.client.old.render.*;
 import codyhuh.unusualfishmod.client.misc.render.FallingTreeBlockRenderer;
 import codyhuh.unusualfishmod.client.misc.render.SeaSpikeRenderer;
 import codyhuh.unusualfishmod.client.misc.render.ThrownPrismarineSpearRenderer;
-import codyhuh.unusualfishmod.client.old.render.layers.UFGlowRenderLayer;
+import codyhuh.unusualfishmod.client.geo.UFGlowRenderLayer;
+import codyhuh.unusualfishmod.client.old.UFModelLayers;
+import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
 import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
@@ -170,6 +168,11 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.PRISMARINE_SPEAR.get(), ThrownPrismarineSpearRenderer::new);
 		e.registerEntityRenderer(UFEntities.SEA_SPIKE.get(), SeaSpikeRenderer::new);
 		e.registerEntityRenderer(UFEntities.FALLING_TREE.get(), FallingTreeBlockRenderer::new);
+	}
+
+	@SubscribeEvent
+	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions e) {
+		e.registerLayerDefinition(UFModelLayers.PRISMARINE_SPEAR, PrismarineSpearModel::createBodyLayer);
 	}
 
 }
