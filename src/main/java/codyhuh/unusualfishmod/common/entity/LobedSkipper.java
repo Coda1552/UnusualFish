@@ -329,9 +329,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
                 event.setAnimation(UFAnimations.IDLE);
             }
         }
-        else {
-            event.setAnimation(UFAnimations.FLOP);
-        }
         return PlayState.CONTINUE;
     }
 

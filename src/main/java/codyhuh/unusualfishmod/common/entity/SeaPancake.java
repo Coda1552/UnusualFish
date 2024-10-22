@@ -166,9 +166,6 @@ public class SeaPancake extends WaterAnimal implements GeoEntity {
 				event.setAnimation(UFAnimations.IDLE);
 			}
 		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
 		return PlayState.CONTINUE;
 	}
 

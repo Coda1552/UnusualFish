@@ -1,0 +1,80 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.tiger_jungleshark",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 7, -4],
+					"cubes": [
+						{"origin": [-4, 0, -4], "size": [8, 12, 15], "uv": [0, 0]},
+						{"origin": [-0.5, 12, 4], "size": [1, 7, 5], "pivot": [0, 12, 4], "rotation": [-15, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 8, -4],
+					"cubes": [
+						{"origin": [-3, 8, -12], "size": [6, 4, 8], "uv": [26, 27]},
+						{"origin": [-1, 6, -10], "size": [2.5, 2, 6], "uv": [16, 27]}
+					]
+				},
+				{
+					"name": "jaw",
+					"parent": "head",
+					"pivot": [0, 8, -4],
+					"cubes": [
+						{"origin": [-2, 5, -11], "size": [4, 3, 7], "uv": [19, 39]},
+						{"origin": [-2, 8, -10], "size": [4, 2, 6], "uv": [31, 6]}
+					]
+				},
+				{
+					"name": "l_fin",
+					"parent": "body",
+					"pivot": [4, 0.5, 0],
+					"cubes": [
+						{"origin": [4, 0, -3], "size": [8, 1, 5], "pivot": [4, 0.5, -2], "rotation": [0, -35, 15], "uv": [31, 0]}
+					]
+				},
+				{
+					"name": "r_fin",
+					"parent": "body",
+					"pivot": [-4, 0.5, 0],
+					"cubes": [
+						{"origin": [-12, 0, -3], "size": [8, 1, 5], "pivot": [-4, 0.5, -2], "rotation": [0, 35, -15], "uv": [31, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "body",
+					"pivot": [0, 8, 11],
+					"cubes": [
+						{"origin": [-1.5, 5, 11], "size": [3, 6, 10], "uv": [0, 27]}
+					]
+				},
+				{
+					"name": "fin",
+					"parent": "tail",
+					"pivot": [0, 8, 20],
+					"cubes": [
+						{"origin": [-0.5, 1, 19], "size": [1, 16, 4], "uv": [41, 39]}
+					]
+				}
+			]
+		}
+	]
+}

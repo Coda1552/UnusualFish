@@ -6,7 +6,7 @@
 				"identifier": "geometry.AeroMono",
 				"texture_width": 32,
 				"texture_height": 32,
-				"visible_bounds_width": 2,
+				"visible_bounds_width": 3,
 				"visible_bounds_height": 2.5,
 				"visible_bounds_offset": [0, 0.75, 0]
 			},
@@ -29,7 +29,7 @@
 					"parent": "Body",
 					"pivot": [0, 6, 0],
 					"cubes": [
-						{"origin": [0, 5, 0], "size": [0, 7, 6], "uv": [0, 0]}
+						{"origin": [0, 5, 0], "size": [0, 7, 6], "inflate": 0.001, "uv": [0, 0]}
 					]
 				},
 				{
@@ -37,7 +37,7 @@
 					"parent": "Body",
 					"pivot": [0, 1, 0],
 					"cubes": [
-						{"origin": [0, -6, 0], "size": [0, 7, 6], "uv": [0, 11]}
+						{"origin": [0, -6, 0], "size": [0, 7, 6], "inflate": 0.001, "uv": [0, 11]}
 					]
 				},
 				{
@@ -45,7 +45,7 @@
 					"parent": "Body",
 					"pivot": [0, 0, 1],
 					"cubes": [
-						{"origin": [0, -4, 0], "size": [0, 4, 2], "pivot": [0, 0, 1], "rotation": [25, 0, -35], "uv": [8, 0]}
+						{"origin": [0, -4, 0], "size": [0, 4, 2], "inflate": 0.001, "pivot": [0, 0, 1], "rotation": [25, 0, -35], "uv": [8, 0]}
 					]
 				},
 				{
@@ -53,7 +53,7 @@
 					"parent": "Body",
 					"pivot": [0, 0, 1],
 					"cubes": [
-						{"origin": [0, -4, 0], "size": [0, 4, 2], "pivot": [0, 0, 1], "rotation": [25, 0, 35], "uv": [8, 0], "mirror": true}
+						{"origin": [0, -4, 0], "size": [0, 4, 2], "inflate": 0.001, "pivot": [0, 0, 1], "rotation": [25, 0, 35], "uv": [8, 0], "mirror": true}
 					]
 				},
 				{
@@ -61,7 +61,7 @@
 					"parent": "Body",
 					"pivot": [0, 3, 4],
 					"cubes": [
-						{"origin": [0, 1, 4], "size": [0, 4, 4], "uv": [12, 6]}
+						{"origin": [0, 1, 4], "size": [0, 4, 4], "inflate": 0.001, "uv": [12, 6]}
 					]
 				},
 				{
@@ -70,7 +70,7 @@
 					"pivot": [1, 2, 1],
 					"rotation": [35, 35, 0],
 					"cubes": [
-						{"origin": [1, 0, 1], "size": [0, 2, 2], "uv": [12, 0]}
+						{"origin": [1, 0, 1], "size": [0, 2, 2], "inflate": 0.001, "uv": [12, 0]}
 					]
 				},
 				{
@@ -79,7 +79,7 @@
 					"pivot": [-1, 2, 1],
 					"rotation": [35, -35, 0],
 					"cubes": [
-						{"origin": [-1, 0, 1], "size": [0, 2, 2], "uv": [12, 0], "mirror": true}
+						{"origin": [-1, 0, 1], "size": [0, 2, 2], "inflate": 0.001, "uv": [12, 0], "mirror": true}
 					]
 				}
 			]

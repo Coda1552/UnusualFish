@@ -81,7 +81,7 @@ public final class ClientEvents {
 
 		e.registerEntityRenderer(UFEntities.COPPERFLAME.get(), (ctx) -> {
 			GenericGeoRenderer<CopperflameAnthias> render = new GenericGeoRenderer<>(ctx, () -> {
-				TextureVariantModel<CopperflameAnthias> model = new TextureVariantModel<>("copperflame_anthias");
+				TextureVariantModel<CopperflameAnthias> model = new TextureVariantModel<>("copperflame");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 2; i++) {
 					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_anthias/copperflame_" + i + ".png"));

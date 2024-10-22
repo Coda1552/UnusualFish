@@ -22,7 +22,7 @@
 					"cubes": [
 						{"origin": [-3.5, 3, -6], "size": [7, 7, 9], "uv": [0, 0]},
 						{"origin": [2, 10, -8], "size": [0, 3, 3], "inflate": 0.001, "uv": [0, 2]},
-						{"origin": [-2, 10, -8], "size": [0, 3, 3], "uv": [0, 2], "mirror": true}
+						{"origin": [-2, 10, -8], "size": [0, 3, 3], "inflate": 0.001, "uv": [0, 2], "mirror": true}
 					]
 				},
 				{
@@ -49,7 +49,16 @@
 					"pivot": [2.5, 5.77164, 5.35195],
 					"rotation": [0, 0, 30],
 					"cubes": [
-						{"origin": [2.5, 5.77164, 1.85195], "size": [1, 0, 6], "uv": [1, 0]}
+						{"origin": [2.5, 5.77164, 1.85195], "size": [1, 0, 6], "inflate": 0.001, "uv": [1, 0]}
+					]
+				},
+				{
+					"name": "Thingies3",
+					"parent": "BackBody",
+					"pivot": [-2.5, 5.77164, 5.35195],
+					"rotation": [0, 0, -30],
+					"cubes": [
+						{"origin": [-3.5, 5.77164, 1.85195], "size": [1, 0, 6], "inflate": 0.001, "uv": [1, 0], "mirror": true}
 					]
 				},
 				{
@@ -216,7 +225,7 @@
 					"pivot": [-2, 3.5, -3],
 					"rotation": [7.5, 25, 20],
 					"cubes": [
-						{"origin": [-12.5, -2.5, -3], "size": [10, 8, 0], "uv": [0, 33], "mirror": true}
+						{"origin": [-12.5, -2.5, -3], "size": [10, 8, 0], "inflate": 0.001, "uv": [0, 33], "mirror": true}
 					]
 				},
 				{

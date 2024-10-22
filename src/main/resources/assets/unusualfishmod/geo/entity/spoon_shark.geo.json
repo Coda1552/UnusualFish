@@ -1,0 +1,91 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.SpoonShark",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 0, -5],
+					"cubes": [
+						{"origin": [-3, 0, -7], "size": [6, 6, 12], "uv": [22, 12]},
+						{"origin": [0, 6, 0], "size": [0, 4, 3], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Body",
+					"pivot": [0, 2, -7],
+					"cubes": [
+						{"origin": [-3, 0, -10], "size": [6, 4, 3], "uv": [0, 29]},
+						{"origin": [-7.5, 0, -17], "size": [15, 3, 9], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Fin1",
+					"parent": "Body",
+					"pivot": [3, 1.5, -5],
+					"rotation": [0, 0, 17.5],
+					"cubes": [
+						{"origin": [3, 1.5, -5], "size": [5, 0, 5], "inflate": 0.001, "uv": [1, 24]}
+					]
+				},
+				{
+					"name": "Fin2",
+					"parent": "Body",
+					"pivot": [-3, 1.5, -5],
+					"rotation": [0, 0, -17.5],
+					"cubes": [
+						{"origin": [-8, 1.5, -5], "size": [5, 0, 5], "inflate": 0.001, "uv": [1, 24], "mirror": true}
+					]
+				},
+				{
+					"name": "Tail1",
+					"parent": "Body",
+					"pivot": [0, 2, 5],
+					"cubes": [
+						{"origin": [0, -1, 5], "size": [0, 7, 7], "inflate": 0.001, "uv": [20, 10]}
+					]
+				},
+				{
+					"name": "BackFin1",
+					"parent": "Tail1",
+					"pivot": [0, 1, 7],
+					"rotation": [0, 0, 15],
+					"cubes": [
+						{"origin": [0, 1, 7], "size": [3, 0, 3], "inflate": 0.001, "uv": [-1, 0]}
+					]
+				},
+				{
+					"name": "BackFin2",
+					"parent": "Tail1",
+					"pivot": [0, 1, 7],
+					"rotation": [0, 0, -15],
+					"cubes": [
+						{"origin": [-3, 1, 7], "size": [3, 0, 3], "inflate": 0.001, "uv": [-1, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Tail2",
+					"parent": "Tail1",
+					"pivot": [0, 2, 11],
+					"cubes": [
+						{"origin": [0, -1, 11], "size": [0, 7, 10], "inflate": 0.001, "uv": [0, 7]}
+					]
+				}
+			]
+		}
+	]
+}

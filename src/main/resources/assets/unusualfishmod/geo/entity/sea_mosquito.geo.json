@@ -1,0 +1,113 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.SeaMosquito",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 1, 0],
+					"cubes": [
+						{"origin": [-3, 0, -4], "size": [6, 3, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Mouth",
+					"parent": "Body",
+					"pivot": [0, 2, -4],
+					"rotation": [27.5, 0, 0],
+					"cubes": [
+						{"origin": [-1, 0, -8], "size": [2, 2, 4], "uv": [0, 14]},
+						{"origin": [-1, -2, -8], "size": [2, 2, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Tail",
+					"parent": "Body",
+					"pivot": [0, 1.5, 4],
+					"cubes": [
+						{"origin": [-3, 1.5, 4], "size": [6, 0, 3], "inflate": 0.001, "uv": [0, 11]}
+					]
+				},
+				{
+					"name": "Eye1",
+					"parent": "Body",
+					"pivot": [2.5, 1.5, -4],
+					"rotation": [7.58967, -16.32995, 7.58967],
+					"cubes": [
+						{"origin": [2, 0.5, -6], "size": [2, 2, 2], "uv": [0, 4]}
+					]
+				},
+				{
+					"name": "Eye2",
+					"parent": "Body",
+					"pivot": [-2.5, 1.5, -4],
+					"rotation": [7.58967, 16.32995, -7.58967],
+					"cubes": [
+						{"origin": [-4, 0.5, -6], "size": [2, 2, 2], "uv": [0, 4], "mirror": true}
+					]
+				},
+				{
+					"name": "LargeFin1",
+					"parent": "Body",
+					"pivot": [3, 1.5, -1.5],
+					"cubes": [
+						{"origin": [3, 1.5, -3], "size": [6, 0, 3], "inflate": 0.001, "uv": [12, 11]}
+					]
+				},
+				{
+					"name": "LargeFin2",
+					"parent": "Body",
+					"pivot": [-3, 1.5, -1.5],
+					"cubes": [
+						{"origin": [-9, 1.5, -3], "size": [6, 0, 3], "inflate": 0.001, "uv": [12, 11], "mirror": true}
+					]
+				},
+				{
+					"name": "MidFin1",
+					"parent": "Body",
+					"pivot": [3, 1.5, 1],
+					"cubes": [
+						{"origin": [3, 1.5, 0], "size": [5, 0, 2], "inflate": 0.001, "uv": [6, 14]}
+					]
+				},
+				{
+					"name": "MidFin2",
+					"parent": "Body",
+					"pivot": [-3, 1.5, 1],
+					"cubes": [
+						{"origin": [-8, 1.5, 0], "size": [5, 0, 2], "inflate": 0.001, "uv": [6, 14], "mirror": true}
+					]
+				},
+				{
+					"name": "BackFin1",
+					"parent": "Body",
+					"pivot": [3, 1.5, 3],
+					"cubes": [
+						{"origin": [3, 1.5, 2], "size": [4, 0, 2], "inflate": 0.001, "uv": [6, 16]}
+					]
+				},
+				{
+					"name": "BackFin2",
+					"parent": "Body",
+					"pivot": [-3, 1.5, 3],
+					"cubes": [
+						{"origin": [-7, 1.5, 2], "size": [4, 0, 2], "inflate": 0.001, "uv": [6, 16], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

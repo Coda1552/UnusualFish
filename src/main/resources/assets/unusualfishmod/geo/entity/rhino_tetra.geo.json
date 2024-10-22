@@ -1,0 +1,86 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.RhinoTetra",
+				"texture_width": 128,
+				"texture_height": 128,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 6, -8],
+					"cubes": [
+						{"origin": [-4, 0, -8], "size": [8, 15, 9], "inflate": 0.45, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Body",
+					"pivot": [0, 4, -8],
+					"cubes": [
+						{"origin": [-1, 9, -14], "size": [2, 6, 3], "uv": [56, 47]},
+						{"origin": [-3, 0, -14], "size": [6, 9, 6], "uv": [56, 31]}
+					]
+				},
+				{
+					"name": "LeftFin",
+					"parent": "Body",
+					"pivot": [4, 0, -5],
+					"cubes": [
+						{"origin": [4, 0, -8], "size": [6, 0, 9], "inflate": 0.001, "uv": [0, 48]}
+					]
+				},
+				{
+					"name": "RightFin",
+					"parent": "Body",
+					"pivot": [-4, 0, -5],
+					"cubes": [
+						{"origin": [-10, 0, -8], "size": [6, 0, 9], "inflate": 0.001, "uv": [0, 48], "mirror": true}
+					]
+				},
+				{
+					"name": "Tail1",
+					"parent": "Body",
+					"pivot": [0, 6, 1],
+					"cubes": [
+						{"origin": [-4, 0, 1], "size": [8, 13, 9], "uv": [0, 25]}
+					]
+				},
+				{
+					"name": "BigFin1",
+					"parent": "Tail1",
+					"pivot": [0, 13, 1],
+					"cubes": [
+						{"origin": [0, 13, 1], "size": [0, 5, 9], "inflate": 0.001, "uv": [35, 31]}
+					]
+				},
+				{
+					"name": "BigFin2",
+					"parent": "Tail1",
+					"pivot": [0, 0, 1],
+					"cubes": [
+						{"origin": [0, -5, 1], "size": [0, 5, 9], "inflate": 0.001, "uv": [35, 49]}
+					]
+				},
+				{
+					"name": "Tail2",
+					"parent": "Tail1",
+					"pivot": [0, 6, 10],
+					"cubes": [
+						{"origin": [0, -2, 10], "size": [0, 19, 11], "inflate": 0.001, "uv": [35, 0]}
+					]
+				}
+			]
+		}
+	]
+}

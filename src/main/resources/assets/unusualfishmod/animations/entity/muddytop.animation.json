@@ -1,0 +1,59 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"walk": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"Eye1": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Eye2": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Shell": {
+					"rotation": ["math.sin(query.anim_time*90-30)*2", 0, "math.sin(query.anim_time*90-90)*1.25"]
+				},
+				"Mouth": {
+					"rotation": ["math.sin(query.anim_time*90-60)*1.25", "math.sin(query.anim_time*90-120)*1.25", 0]
+				},
+				"Body": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"1.0": [1, 1, 1.1],
+						"2.0": [1, 1, 1],
+						"3.0": [1, 1, 1.1],
+						"4.0": [1, 1, 1],
+						"5.0": [1, 1, 1.1],
+						"6.0": [1, 1, 1],
+						"7.0": [1, 1, 1.1],
+						"8.0": [1, 1, 1]
+					}
+				}
+			}
+		},
+		"idle": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"Eye1": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Eye2": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Shell": {
+					"rotation": {
+						"0.0": {
+							"post": ["math.sin(query.anim_time*90-30)*1", 0, "math.sin(query.anim_time*90-90)*1.25"],
+							"lerp_mode": "catmullrom"
+						}
+					}
+				},
+				"Mouth": {
+					"rotation": ["math.sin(query.anim_time*90-60)*1.25", "math.sin(query.anim_time*90-120)*1.25", 0]
+				}
+			}
+		}
+	}
+}

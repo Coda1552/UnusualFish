@@ -7,8 +7,8 @@
 				"texture_width": 256,
 				"texture_height": 256,
 				"visible_bounds_width": 6,
-				"visible_bounds_height": 1.5,
-				"visible_bounds_offset": [0, 0.25, 0]
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
 			},
 			"bones": [
 				{
@@ -28,7 +28,7 @@
 					"parent": "Body",
 					"pivot": [-0.5, 3, 23],
 					"cubes": [
-						{"origin": [-0.5, 3, 22], "size": [0, 5, 6], "uv": [0, 18]}
+						{"origin": [-0.5, 3, 22], "size": [0, 5, 6], "inflate": 0.001, "uv": [0, 18]}
 					]
 				},
 				{
@@ -45,7 +45,7 @@
 					"pivot": [-8, 1.5, 23],
 					"rotation": [0, 0, -12.5],
 					"cubes": [
-						{"origin": [-14, 1.5, 23], "size": [6, 0, 11], "uv": [5, 0], "mirror": true}
+						{"origin": [-14, 1.5, 23], "size": [6, 0, 11], "inflate": 0.001, "uv": [5, 0], "mirror": true}
 					]
 				},
 				{
@@ -54,7 +54,7 @@
 					"pivot": [8, 1.5, 23],
 					"rotation": [0, 0, 12.5],
 					"cubes": [
-						{"origin": [8, 1.5, 23], "size": [6, 0, 11], "uv": [5, 0]}
+						{"origin": [8, 1.5, 23], "size": [6, 0, 11], "inflate": 0.001, "uv": [5, 0]}
 					]
 				},
 				{
@@ -62,7 +62,7 @@
 					"parent": "Tail_main",
 					"pivot": [-0.5, 2, 29],
 					"cubes": [
-						{"origin": [-0.5, -5, 29], "size": [0, 13, 10], "uv": [0, 1]}
+						{"origin": [-0.5, -5, 29], "size": [0, 13, 10], "inflate": 0.001, "uv": [0, 1]}
 					]
 				},
 				{

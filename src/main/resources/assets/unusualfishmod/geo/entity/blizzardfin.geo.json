@@ -1,0 +1,105 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.BlizardfinTuna",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 5,
+				"visible_bounds_height": 2.5,
+				"visible_bounds_offset": [0, 0.75, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 5, -8],
+					"cubes": [
+						{"origin": [-4, 0, -8], "size": [8, 11, 17], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Head",
+					"parent": "Body",
+					"pivot": [0, 5, -8],
+					"cubes": [
+						{"origin": [-3, 2, -14], "size": [6, 7, 6], "uv": [33, 0]}
+					]
+				},
+				{
+					"name": "Fin1",
+					"parent": "Body",
+					"pivot": [4, 3, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [4, -3, -3], "size": [0, 8, 16], "inflate": 0.001, "pivot": [4, 4, -2], "rotation": [15, 20, 0], "uv": [0, 30]}
+					]
+				},
+				{
+					"name": "Fin2",
+					"parent": "Body",
+					"pivot": [-4, 3, -2],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [-4, -3, -3], "size": [0, 8, 16], "inflate": 0.001, "pivot": [-4, 4, -2], "rotation": [15, -20, 0], "uv": [0, 30], "mirror": true}
+					]
+				},
+				{
+					"name": "TopFin",
+					"parent": "Body",
+					"pivot": [0, 11, -3],
+					"cubes": [
+						{"origin": [0, 11, -3], "size": [0, 5, 7], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "BigFin1",
+					"parent": "Body",
+					"pivot": [0, 11, 6],
+					"cubes": [
+						{"origin": [0, 9, 6], "size": [0, 6, 17], "inflate": 0.001, "uv": [0, 11]}
+					]
+				},
+				{
+					"name": "BigFin2",
+					"parent": "Body",
+					"pivot": [0, 0, 6],
+					"cubes": [
+						{"origin": [0, -3, 6], "size": [0, 5, 11], "inflate": 0.001, "uv": [6, 30]}
+					]
+				},
+				{
+					"name": "LowerFins",
+					"parent": "Body",
+					"pivot": [0, 0, -4],
+					"rotation": [5, 0, 0],
+					"cubes": [
+						{"origin": [-2, -4, -4], "size": [4, 4, 4], "uv": [32, 47]}
+					]
+				},
+				{
+					"name": "Tail1",
+					"parent": "Body",
+					"pivot": [0, 5, 9],
+					"cubes": [
+						{"origin": [0, 1, 11], "size": [0, 8, 5], "inflate": 0.001, "uv": [48, 42]},
+						{"origin": [-2, 3, 9], "size": [4, 4, 7], "uv": [34, 36]}
+					]
+				},
+				{
+					"name": "Tail2",
+					"parent": "Tail1",
+					"pivot": [0, 5, 16],
+					"cubes": [
+						{"origin": [0, 1, 16], "size": [0, 8, 11], "inflate": 0.001, "uv": [34, 17]}
+					]
+				}
+			]
+		}
+	]
+}

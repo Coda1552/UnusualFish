@@ -1,0 +1,96 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.SneepSnorp",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 3,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Body",
+					"parent": "root",
+					"pivot": [0, 2, 0],
+					"cubes": [
+						{"origin": [-1, 0, 0], "size": [2, 4, 4], "uv": [10, 10]}
+					]
+				},
+				{
+					"name": "Snorp",
+					"parent": "Body",
+					"pivot": [0, 2, 0],
+					"cubes": [
+						{"origin": [-1, 1, -8], "size": [2, 2, 8], "uv": [0, 0]},
+						{"origin": [-1, 1, -8], "size": [2, 2, 8], "inflate": 0.1, "uv": [12, 22]}
+					]
+				},
+				{
+					"name": "BigFin1",
+					"parent": "Body",
+					"pivot": [0, 4, 1],
+					"cubes": [
+						{"origin": [0, 4, 1], "size": [0, 3, 5], "inflate": 0.001, "uv": [0, 5]}
+					]
+				},
+				{
+					"name": "BigFin2",
+					"parent": "Body",
+					"pivot": [0, 0, 1],
+					"cubes": [
+						{"origin": [0, -2, 1], "size": [0, 2, 5], "inflate": 0.001, "uv": [0, 12]}
+					]
+				},
+				{
+					"name": "Fin1",
+					"parent": "Body",
+					"pivot": [1, 0.5, 2],
+					"rotation": [0, 37.5, 0],
+					"cubes": [
+						{"origin": [1, -1, 2], "size": [0, 3, 4], "inflate": 0.001, "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Fin2",
+					"parent": "Body",
+					"pivot": [-1, 0.5, 2],
+					"rotation": [0, -37.5, 0],
+					"cubes": [
+						{"origin": [-1, -1, 2], "size": [0, 3, 4], "inflate": 0.001, "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "Tail",
+					"parent": "Body",
+					"pivot": [0, 2, 4],
+					"cubes": [
+						{"origin": [0, 0, 4], "size": [0, 4, 5], "inflate": 0.001, "uv": [0, 14]}
+					]
+				},
+				{
+					"name": "RightBottomFin",
+					"parent": "Body",
+					"pivot": [0, 0, 2],
+					"cubes": [
+						{"origin": [0, -4, 1], "size": [0, 4, 5], "inflate": 0.001, "pivot": [0, 0, 2], "rotation": [0, 0, -25], "uv": [10, 13]}
+					]
+				},
+				{
+					"name": "LeftBottomFin",
+					"parent": "Body",
+					"pivot": [0, 0, 2],
+					"cubes": [
+						{"origin": [0, -4, 1], "size": [0, 4, 5], "inflate": 0.001, "pivot": [0, 0, 2], "rotation": [0, 0, 25], "uv": [10, 13], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}
