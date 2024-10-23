@@ -10,7 +10,9 @@ import codyhuh.unusualfishmod.client.misc.render.SeaSpikeRenderer;
 import codyhuh.unusualfishmod.client.misc.render.ThrownPrismarineSpearRenderer;
 import codyhuh.unusualfishmod.client.geo.UFGlowRenderLayer;
 import codyhuh.unusualfishmod.client.old.UFModelLayers;
+import codyhuh.unusualfishmod.client.old.model.RootballModel;
 import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
+import codyhuh.unusualfishmod.client.old.render.RootballRenderer;
 import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
@@ -55,7 +57,7 @@ public final class ClientEvents {
 				UFEntities.DROOPING_GOURAMI.get(), UFEntities.FORKFISH.get(), UFEntities.FRESHWATER_MANTIS.get(), UFEntities.KALAPPA.get(),
 				UFEntities.LOBED_SKIPPER.get(), UFEntities.MOSSTHORN.get(), UFEntities.MUDDYTOP_SNAIL.get(), UFEntities.PINKFIN.get(),
 				UFEntities.PORCUPINE_LOBSTA.get(), UFEntities.PRAWN.get(), UFEntities.RHINO_TETRA.get(), UFEntities.RIPPER.get(),
-				UFEntities.ROOTBALL.get(), UFEntities.ROUGHBACK.get(), UFEntities.SAILOR_BARB.get(), UFEntities.SEA_MOSQUITO.get(),
+				UFEntities.ROUGHBACK.get(), UFEntities.SAILOR_BARB.get(), UFEntities.SEA_MOSQUITO.get(),
 				UFEntities.SEA_PANCAKE.get(), UFEntities.SEA_SPIDER.get(), UFEntities.SNEEPSNORP.get(), UFEntities.SNOWFLAKE.get(),
 				UFEntities.SPINDLEFISH.get(), UFEntities.SPOON_SHARK.get(), UFEntities.SQUODDLE.get(), UFEntities.STOUT_BICHIR.get(),
 				UFEntities.TIGER_JUNGLE_SHARK.get(), UFEntities.TIGER_PUFFER.get(), UFEntities.TRIBBLE.get(), UFEntities.TRUMPET_SQUID.get(),
@@ -169,11 +171,13 @@ public final class ClientEvents {
 		e.registerEntityRenderer(UFEntities.PRISMARINE_SPEAR.get(), ThrownPrismarineSpearRenderer::new);
 		e.registerEntityRenderer(UFEntities.SEA_SPIKE.get(), SeaSpikeRenderer::new);
 		e.registerEntityRenderer(UFEntities.FALLING_TREE.get(), FallingTreeBlockRenderer::new);
+		e.registerEntityRenderer(UFEntities.ROOTBALL.get(), RootballRenderer::new);
 	}
 
 	@SubscribeEvent
 	public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions e) {
 		e.registerLayerDefinition(UFModelLayers.PRISMARINE_SPEAR, PrismarineSpearModel::createBodyLayer);
+		e.registerLayerDefinition(UFModelLayers.ROOTBALL, RootballModel::createBodyLayer);
 	}
 
 }
