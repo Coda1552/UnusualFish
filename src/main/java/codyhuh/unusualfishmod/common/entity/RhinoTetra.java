@@ -13,6 +13,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -25,6 +27,7 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -53,7 +56,11 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 
 	@Override
 	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.RHINO_TETRA_BUCKET.get());
+		return ItemStack.EMPTY;
+	}
+
+	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
+		return InteractionResult.PASS;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

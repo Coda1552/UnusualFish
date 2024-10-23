@@ -1,0 +1,71 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.BrickSnail",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 1.5,
+				"visible_bounds_offset": [0, 0.25, 0]
+			},
+			"bones": [
+				{
+					"name": "root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "Shell",
+					"parent": "root",
+					"pivot": [0, 2, 0],
+					"cubes": [
+						{"origin": [-2.5, 2, -2], "size": [5, 5, 8], "pivot": [0, 2, -1], "rotation": [-5, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "body",
+					"parent": "root",
+					"pivot": [0, 1, -0.5],
+					"cubes": [
+						{"origin": [-1.5, 0, -3], "size": [3, 2, 5], "uv": [0, 13]}
+					]
+				},
+				{
+					"name": "Eye1",
+					"parent": "body",
+					"pivot": [1, 2, -2.5],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [1, 2, -3], "size": [0, 2, 1], "inflate": 0.001, "pivot": [1, 2, -2.5], "rotation": [0, 0, 35], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "Eye2",
+					"parent": "body",
+					"pivot": [-1, 2, -2.5],
+					"rotation": [0, 0, 0],
+					"cubes": [
+						{"origin": [-1, 2, -3], "size": [0, 2, 1], "inflate": 0.001, "pivot": [-1, 2, -2.5], "rotation": [0, 0, -35], "uv": [0, 0], "mirror": true}
+					]
+				},
+				{
+					"name": "MouthBit1",
+					"parent": "body",
+					"pivot": [0.5, 0.5, -3],
+					"cubes": [
+						{"origin": [0.5, 0, -4], "size": [0, 1, 1], "inflate": 0.001, "uv": [0, 2]}
+					]
+				},
+				{
+					"name": "MouthBit2",
+					"parent": "body",
+					"pivot": [-0.5, 0.5, -3],
+					"cubes": [
+						{"origin": [-0.5, 0, -4], "size": [0, 1, 1], "inflate": 0.001, "uv": [0, 2], "mirror": true}
+					]
+				}
+			]
+		}
+	]
+}

@@ -52,7 +52,6 @@ public final class UFItems {
 	public static final RegistryObject<Item> RAW_AERO_MONO_STICK = ITEMS.register("raw_aero_mono_stick", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AERO_MONO_STICK)));
 	public static final RegistryObject<Item> COOKED_AERO_MONO_STICK = ITEMS.register("cooked_aero_mono_stick", () -> new Item(new Item.Properties().food(UFFoodProperties.COOKED_AERO_MONO_STICK)));
 	//public static final RegistryObject<Item> RAW_BUMPFACE = ITEMS.register("raw_bumpface", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BUMPFACE)));
-	public static final RegistryObject<Item> RAW_RHINO_TETRA = ITEMS.register("raw_rhino_tetra", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_RHINO_TETRA)));
 	public static final RegistryObject<Item> RAW_SAILOR_BARB = ITEMS.register("raw_sailor_barb", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SAILOR_BARB)));
 	public static final RegistryObject<Item> RAW_BARK_ANGELFISH = ITEMS.register("raw_bark_angelfish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BARK_ANGELFISH)));
 	public static final RegistryObject<Item> RAW_BLIZZARD_TUNA = ITEMS.register("raw_blizzard_tuna", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_BLIZZARD_TUNA)));
@@ -93,7 +92,7 @@ public final class UFItems {
 
 	// Buckets
 	public static final RegistryObject<Item> AERO_MONO_BUCKET = ITEMS.register("aero_mono_bucket", () -> new UFFishBucketItem(UFEntities.AERO_MONO, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
-	public static final RegistryObject<Item> RHINO_TETRA_BUCKET = ITEMS.register("rhino_tetra_bucket", () -> new UFFishBucketItem(UFEntities.RHINO_TETRA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
+	//public static final RegistryObject<Item> RHINO_TETRA_BUCKET = ITEMS.register("rhino_tetra_bucket", () -> new UFFishBucketItem(UFEntities.RHINO_TETRA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item> DUALITY_DAMSELFISH_BUCKET = ITEMS.register("duality_damselfish_bucket", () -> new UFFishBucketItem(UFEntities.DUALITY_DAMSELFISH, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item> DROOPING_GOURAMI_BUCKET = ITEMS.register("drooping_gourami_bucket", () -> new UFFishBucketItem(UFEntities.DROOPING_GOURAMI, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item> MOSSTHORN_BUCKET = ITEMS.register("mossthorn_bucket", () -> new UFFishBucketItem(UFEntities.MOSSTHORN, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
@@ -146,7 +145,7 @@ public final class UFItems {
 	public static final RegistryObject<ForgeSpawnEggItem> DUALITY_SPAWN_EGG = ITEMS.register("duality_damselfish_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.DUALITY_DAMSELFISH, 0x8a94a1, 0x2c3338, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> DROOPING_GOURAMI_SPAWN_EGG = ITEMS.register("drooping_gourami_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.DROOPING_GOURAMI, 0x54434d, 0x363243, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> MOSSTHORN_SPAWN_EGG = ITEMS.register("mossthorn_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.MOSSTHORN, 0x26a529, 0x034223, new Item.Properties()));
-	public static final RegistryObject<ForgeSpawnEggItem> RHINO_TETRA_SPAWN_EGG = ITEMS.register("rhino_tetra_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.RHINO_TETRA, 0x50b9ad, 0x216687, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> RHINO_TETRA_SPAWN_EGG = ITEMS.register("rhino_tetra_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.RHINO_TETRA, 0x919187, 0x7b2726, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> RIPPER_SPAWN_EGG = ITEMS.register("ripper_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.RIPPER, 0x565950, 0x8f9386, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> SAILOR_BARB_PAWN_EGG = ITEMS.register("sailor_barb_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.SAILOR_BARB, 0x5e6a25, 0xa1a68c, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> SEA_PANCAKE_SPAWN_EGG = ITEMS.register("sea_pancake_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.SEA_PANCAKE, 0xbda877, 0xdfcbb7, new Item.Properties()));

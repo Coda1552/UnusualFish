@@ -1,0 +1,68 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"idle": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"Mouth": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", "math.sin(query.anim_time*90-120)*2.5", 0]
+				},
+				"Shell": {
+					"rotation": ["math.sin(query.anim_time*90-30)*2", 0, "math.sin(query.anim_time*90-90)*2.5"]
+				},
+				"Eye1": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Eye2": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				}
+			}
+		},
+		"walk": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"Mouth": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", "math.sin(query.anim_time*90-120)*2.5", 0]
+				},
+				"Shell": {
+					"rotation": ["math.sin(query.anim_time*180-30)*2", 0, "math.sin(query.anim_time*180-90)*2.5"]
+				},
+				"Eye1": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"Eye2": {
+					"rotation": ["math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"]
+				},
+				"body": {
+					"scale": ["1.1+math.sin(query.anim_time*180)*0.1", 1, "1.1+math.sin(query.anim_time*180-90)*0.1"]
+				}
+			}
+		},
+		"action": {
+			"loop": true,
+			"animation_length": 8,
+			"bones": {
+				"Mouth": {
+					"rotation": ["math.sin(query.anim_time*90-60)*1.25", "math.sin(query.anim_time*90-120)*1.25", 0]
+				},
+				"Shell": {
+					"rotation": ["math.sin(query.anim_time*90-30)*1", 0, "math.sin(query.anim_time*90-90)*1.25"],
+					"position": [0, -1.5, -1]
+				},
+				"Eye1": {
+					"rotation": ["90+math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"],
+					"position": [0, -1, -1]
+				},
+				"Eye2": {
+					"rotation": ["90+math.sin(query.anim_time*90-60)*2.5", 0, "math.sin(query.anim_time*90-120)*-2.5"],
+					"position": [0, -1, -1]
+				},
+				"body": {
+					"scale": [1, 1, 0.7]
+				}
+			}
+		}
+	}
+}

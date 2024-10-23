@@ -19,7 +19,7 @@ public class UFTabs {
     public static final RegistryObject<CreativeModeTab> UF_TAB = CREATIVE_TABS.register("unusual_fish_tab",
             () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.unusual_fish_mod"))
-                    .icon(UFItems.RAW_RHINO_TETRA.get()::getDefaultInstance)
+                    .icon(UFItems.RAW_CIRCUS_FISH.get()::getDefaultInstance)
                     .displayItems((displayParams, output) -> {
                         for (var item : UFItems.ITEMS.getEntries()) {
                             output.accept(item.get());
