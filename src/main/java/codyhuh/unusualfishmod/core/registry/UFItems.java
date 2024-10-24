@@ -175,7 +175,7 @@ public final class UFItems {
 	public static final RegistryObject<ForgeSpawnEggItem> AMBER_GOBY_SPAWN_EGG = ITEMS.register("amber_goby_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.AMBER_GOBY, 0xfb912e, 0xae5e2c, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> HATCHET_FISH_SPAWN_EGG = ITEMS.register("hatchet_fish_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.HATCHET_FISH, 0x0b0b26, 0x7d3283, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> COPPERFLAME_SPAWN_EGG = ITEMS.register("copperflame_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.COPPERFLAME, 0x4fab90, 0x7fcf90, new Item.Properties()));
-	//public static final RegistryObject<ForgeSpawnEggItem> ROOTBALL_SPAWN_EGG = ITEMS.register("root_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.ROOTBALL, 0x647233, 0xad7d65, new Item.Properties()));
+	public static final RegistryObject<ForgeSpawnEggItem> ROOTBALL_SPAWN_EGG = ITEMS.register("root_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.ROOTBALL, 0x647233, 0xad7d65, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> CELESTIAL_FISH_SPAWN_EGG = ITEMS.register("celestial_fish_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.CELESTIAL_FISH, 0x6876a2, 0xe2e4c5, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> GNASHER_SPAWN_EGG = ITEMS.register("gnasher_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.GNASHER, 0x323232, 0x465bb2, new Item.Properties()));
 	public static final RegistryObject<ForgeSpawnEggItem> PRAWN_SPAWN_EGG = ITEMS.register("prawn_spawn_egg", () -> new ForgeSpawnEggItem(UFEntities.PRAWN, 0x5a579e, 0x4694d1, new Item.Properties()));

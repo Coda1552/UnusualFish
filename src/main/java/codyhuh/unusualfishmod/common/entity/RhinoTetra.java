@@ -64,7 +64,7 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D);
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
 	}
 
 	protected void registerGoals() {
