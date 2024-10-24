@@ -7,7 +7,7 @@
   {
     "type": "unusualfishmod:rhino_tetra",
     "weight": 10,
-    "minCount": 3,
-    "maxCount": 5
+    "minCount": 1,
+    "maxCount": 3
   }
 }
