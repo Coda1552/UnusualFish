@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.client.old.model;
+package codyhuh.unusualfishmod.client.misc.render.model;
 
 import codyhuh.unusualfishmod.common.entity.Rootball;
 import com.mojang.blaze3d.vertex.PoseStack;

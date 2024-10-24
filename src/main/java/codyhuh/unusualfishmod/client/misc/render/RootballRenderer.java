@@ -1,8 +1,8 @@
-package codyhuh.unusualfishmod.client.old.render;
+package codyhuh.unusualfishmod.client.misc.render;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.client.old.UFModelLayers;
-import codyhuh.unusualfishmod.client.old.model.RootballModel;
+import codyhuh.unusualfishmod.client.UFModelLayers;
+import codyhuh.unusualfishmod.client.misc.render.model.RootballModel;
 import codyhuh.unusualfishmod.common.entity.Rootball;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

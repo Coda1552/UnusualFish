@@ -1,4 +1,4 @@
-package codyhuh.unusualfishmod.client.old.model.item;
+package codyhuh.unusualfishmod.client.misc.render.model;
 
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import com.mojang.blaze3d.vertex.PoseStack;

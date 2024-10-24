@@ -1,8 +1,8 @@
 package codyhuh.unusualfishmod.client.misc.render;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.client.old.UFModelLayers;
-import codyhuh.unusualfishmod.client.old.model.item.PrismarineSpearModel;
+import codyhuh.unusualfishmod.client.UFModelLayers;
+import codyhuh.unusualfishmod.client.misc.render.model.PrismarineSpearModel;
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
