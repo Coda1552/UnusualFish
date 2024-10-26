@@ -3,6 +3,7 @@ package codyhuh.unusualfishmod.common.entity;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
 import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.misc.IVariant;
+import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -186,10 +187,10 @@ public class DualityDamselfish extends BucketableSchoolingWaterAnimal implements
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
 		if (event.isMoving()) {
-		//	event.setAnimation(UFAnimations.SWIM);
+			event.setAnimation(UFAnimations.SWIM);
 		}
 		else {
-		//	event.setAnimation(UFAnimations.IDLE);
+			event.setAnimation(UFAnimations.IDLE);
 		}
 
 		return PlayState.CONTINUE;
