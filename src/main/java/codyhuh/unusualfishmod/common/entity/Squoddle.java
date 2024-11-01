@@ -63,7 +63,7 @@ public class Squoddle extends BucketableWaterAnimal implements GeoEntity {
 
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.4F));
+		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0F));
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.4F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
 		this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)));
