@@ -39,16 +39,16 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.65D));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.25F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, true) {
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 0.65D, true) {
             @Override
             protected double getAttackReachSqr(LivingEntity p_25556_) {
                 return (this.mob.getBbWidth() * 1.0D * this.mob.getBbWidth() * 1.0D + p_25556_.getBbWidth());
             }
         });
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.25D));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.65D));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_28879_) -> {
             return p_28879_ instanceof Enemy && !(p_28879_ instanceof Creeper);

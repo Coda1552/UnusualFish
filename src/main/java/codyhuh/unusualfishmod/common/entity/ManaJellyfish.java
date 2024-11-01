@@ -51,7 +51,7 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal implements Geo
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, (double)0.3F).add(Attributes.ATTACK_DAMAGE, 2.0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.3F).add(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 
     protected void registerGoals() {
@@ -59,16 +59,10 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal implements Geo
         this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
             @Override
             public boolean canUse() {
                 return super.canUse() && isInWater();
-            }
-        });
-        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-            @Override
-            public boolean canUse() {
-                return !this.mob.isInWater() && super.canUse();
             }
         });
     }
@@ -115,7 +109,7 @@ public class ManaJellyfish extends BucketableSchoolingWaterAnimal implements Geo
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 20, this::predicate));
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
