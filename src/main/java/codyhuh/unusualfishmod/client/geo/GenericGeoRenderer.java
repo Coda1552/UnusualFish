@@ -55,11 +55,6 @@ public class GenericGeoRenderer<T extends LivingEntity & GeoEntity> extends GeoE
 	}
 
 	@Override
-	public void preRender(PoseStack poseStack, T animatable, BakedGeoModel bakedGeoModel, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		super.preRender(poseStack, animatable, bakedGeoModel, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-	}
-
-	@Override
 	protected int getBlockLightLevel(T p_114496_, BlockPos p_114497_) {
 		return glow ? 15 : super.getBlockLightLevel(p_114496_, p_114497_);
 	}
