@@ -56,7 +56,7 @@ public class BlizzardfinTuna extends BucketableSchoolingWaterAnimal implements G
 		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
 		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1));
+		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.5D, 1));
 	}
 
 	public void aiStep() {
