@@ -7,6 +7,7 @@ import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.core.registry.UFTags;
 import codyhuh.unusualfishmod.core.registry.UFTiers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -31,6 +32,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ToolAction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -55,7 +57,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
         BlockPos blockPos = cntxt.getClickedPos();
         BlockState state = cntxt.getLevel().getBlockState(blockPos);
 
-        if (state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
+        if (!player.isShiftKeyDown() && state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
             player.startUsingItem(cntxt.getHand());
             return InteractionResult.SUCCESS;
         }
@@ -144,7 +146,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
                         fallingTree.setFallDirection(Direction.fromYRot(f));
                         player.level().addFreshEntity(fallingTree);
 
-                        stack.hurtAndBreak(gathered.size(), player, (p_40992_) -> {
+                        stack.hurtAndBreak(allData.stream().filter(e -> e.getState().is(BlockTags.LOGS)).toList().size(), player, (p_40992_) -> {
                             p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
                         });
                     }
@@ -168,9 +170,16 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
     }
 
+    @Override
+    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
+        if (Minecraft.getInstance().player.isShiftKeyDown()) {
+            return super.canPerformAction(stack, toolAction);
+        }
+        return false;
+    }
+
     private HitResult calculateHitResult(Player pPlayer) {
-        return ProjectileUtil.getHitResultOnViewVector(pPlayer, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), pPlayer.getBlockReach()
-        );
+        return ProjectileUtil.getHitResultOnViewVector(pPlayer, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), pPlayer.getBlockReach());
     }
 
     @Override
