@@ -1,11 +1,12 @@
 package codyhuh.unusualfishmod.common.block_entity;
 
 import codyhuh.unusualfishmod.common.block.VoltDetectorBlock;
-import codyhuh.unusualfishmod.common.entity.VoltAngler;
 import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
 import codyhuh.unusualfishmod.core.registry.UFBlocks;
+import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoltDetectorBlockEntity extends BlockEntity {
-    private static List<VoltAngler> anglersList = new ArrayList<>(5);
-    private static List<VoltAngler> currentList = new ArrayList<>(5);
+    private static List<LivingEntity> anglersList = new ArrayList<>(5);
+    private static List<LivingEntity> currentList = new ArrayList<>(5);
 
     public VoltDetectorBlockEntity(BlockPos pos, BlockState state) {
         super(UFBlockEntities.VOLT_DETECTOR.get(), pos, state);
     }
 
-    public final List<VoltAngler> getAnglerList() {
+    public final List<LivingEntity> getAnglerList() {
         return currentList;
     }
 
-    public void addAnglerToList(VoltAngler obj) {
+    public void addAnglerToList(LivingEntity obj) {
         currentList.add(obj);
     }
 
@@ -55,7 +56,9 @@ public class VoltDetectorBlockEntity extends BlockEntity {
 
     private static void nearDetector(Level level, BlockPos pos, double radius) {
         AABB aabb = new AABB(pos);
-        currentList = level.getEntitiesOfClass(VoltAngler.class, aabb.inflate(radius));
+        currentList = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(radius), e -> {
+            return !e.getType().is(UFTags.VOLT_UNDETECTED) && !e.isCrouching();
+        });
 
         BlockPos blockpos = new BlockPos((int) (aabb.minX - radius), (int) (aabb.minY - radius), (int) (aabb.minZ - radius));
         BlockPos blockpos1 = new BlockPos((int) (aabb.maxX + radius), (int) (aabb.maxY + radius), (int) (aabb.maxZ + radius));
@@ -71,7 +74,7 @@ public class VoltDetectorBlockEntity extends BlockEntity {
                         int anglers = currentList.size();
 
                         if (anglers < 5) {
-                            for (VoltAngler angler : currentList) {
+                            for (LivingEntity angler : currentList) {
                                 if (!currentList.contains(angler)) {
                                     voltDetector.addAnglerToList(angler);
                                 }
