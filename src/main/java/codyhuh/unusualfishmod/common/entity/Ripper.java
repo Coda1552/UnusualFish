@@ -88,7 +88,7 @@ public class Ripper extends BucketableSchoolingWaterAnimal implements GeoEntity 
 			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
 			this.doEnchantDamageEffects(this, entityIn);
 
-			if (random.nextFloat() > 0.8F) {
+			if (random.nextFloat() > 0.9F) {
 				ItemEntity item = EntityType.ITEM.create(level());
 
 				item.moveTo(position());
