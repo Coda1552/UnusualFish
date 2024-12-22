@@ -80,6 +80,6 @@ public class VoltDetectorBlock extends BaseEntityBlock {
     public int getSignal(BlockState state, BlockGetter level, BlockPos pos, Direction dir) {
         BlockEntity tile = level.getBlockEntity(pos);
 
-        return tile instanceof VoltDetectorBlockEntity detector ? detector.getAnglerList().size() * 3 : 0;
+        return tile instanceof VoltDetectorBlockEntity detector ? detector.getAnglerList().size() * 5 : 0;
     }
 }
