@@ -30,7 +30,7 @@ public class SeaSpike extends AbstractArrow {
 
         LivingEntity target = level().getNearestEntity(LivingEntity.class, TargetingConditions.forCombat().selector(e -> !hostileOnly || e instanceof Monster), null, getX(), getY(), getZ(), getBoundingBox().inflate(5.0D));
 
-        if (target != null) {
+        if (target != null && isInWater()) {
             Vec3 t = target.position();
             Vec3 s = position();
 
