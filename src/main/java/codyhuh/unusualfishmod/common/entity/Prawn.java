@@ -91,6 +91,10 @@ public class Prawn extends Monster implements GeoEntity {
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (!isAddedToWorld()) {
+            return PlayState.STOP;
+        }
+
         if (event.isMoving()) {
             event.setAnimation(UFAnimations.WALK);
         } else {

@@ -114,6 +114,10 @@ public class Forkfish extends BucketableWaterAnimal implements GeoEntity {
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+		if (!isAddedToWorld()) {
+			return PlayState.STOP;
+		}
+
 		if (isInWater()) {
 			if (event.isMoving()) {
 				event.setAnimation(UFAnimations.SWIM);
