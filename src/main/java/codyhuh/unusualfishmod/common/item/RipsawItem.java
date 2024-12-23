@@ -172,9 +172,6 @@ public class RipsawItem extends AxeItem implements Vanishable {
 
     @Override
     public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        if (Minecraft.getInstance().player.isShiftKeyDown()) {
-            return super.canPerformAction(stack, toolAction);
-        }
         return false;
     }
 
