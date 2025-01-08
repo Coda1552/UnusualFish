@@ -1,14 +1,11 @@
 package codyhuh.unusualfishmod.client;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
-import codyhuh.unusualfishmod.client.geo.GenericGeoModel;
-import codyhuh.unusualfishmod.client.geo.GenericGeoRenderer;
-import codyhuh.unusualfishmod.client.geo.TextureVariantModel;
+import codyhuh.unusualfishmod.client.geo.*;
 import codyhuh.unusualfishmod.client.misc.render.AbyssalBlastRenderer;
 import codyhuh.unusualfishmod.client.misc.render.FallingTreeBlockRenderer;
 import codyhuh.unusualfishmod.client.misc.render.SeaSpikeRenderer;
 import codyhuh.unusualfishmod.client.misc.render.ThrownPrismarineSpearRenderer;
-import codyhuh.unusualfishmod.client.geo.UFGlowRenderLayer;
 import codyhuh.unusualfishmod.client.misc.render.model.RootballModel;
 import codyhuh.unusualfishmod.client.misc.render.model.PrismarineSpearModel;
 import codyhuh.unusualfishmod.client.misc.render.RootballRenderer;
@@ -104,7 +101,7 @@ public final class ClientEvents {
 				model.setTextures(DemonHerring::getVariant, textures);
 				return model;
 			}, false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_" + "1" + ".png")));
+			render.addRenderLayer(new DemonHerringGlowRenderLayer<>(render));
 			return render;
 		});
 
