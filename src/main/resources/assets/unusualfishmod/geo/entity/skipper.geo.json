@@ -149,7 +149,7 @@
 					"parent": "Tail1",
 					"pivot": [0, 1.5, 9],
 					"cubes": [
-						{"origin": [0, -1, 9], "size": [0, 6, 5], "inflate": 0.001, "uv": [12, 11]}
+						{"origin": [0, -2, 9], "size": [0, 7, 5], "inflate": 0.001, "uv": [24, 12]}
 					]
 				}
 			]
