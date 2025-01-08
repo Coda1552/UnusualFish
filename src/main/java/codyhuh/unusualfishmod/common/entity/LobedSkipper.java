@@ -60,11 +60,11 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     }
 
     protected void registerGoals() {
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.5D));
-        this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new PanicGoal(this, 1.25D));
         this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.5F));
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.5D));
     }
 
     @Nonnull
@@ -322,12 +322,11 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (isInWater()) {
-            if (event.isMoving()) {
-                event.setAnimation(UFAnimations.SWIM);
-            } else {
-                event.setAnimation(UFAnimations.IDLE);
-            }
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.SWIM);
+        }
+        else {
+            event.setAnimation(UFAnimations.IDLE);
         }
         return PlayState.CONTINUE;
     }
