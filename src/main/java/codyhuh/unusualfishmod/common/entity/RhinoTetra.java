@@ -142,29 +142,29 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 		p_33361_.hurtMarked = true;
 	}
 
+	private void stunEffect() {
+		Vec3 pos = getYawVec(yBodyRot, 0.0D, 0.0D, 0.85D).add(0.0D, 0.85D, 0.0D);
+
+		this.level().addParticle(ParticleTypes.CRIT, pos.x + getRandomX(0.5D), pos.y + position().y, pos.z + getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
+	}
+
 	@Override
 	public void tick() {
 		super.tick();
 
 		if (isInWater() && getTarget() != null && isAggressive() && level() instanceof ServerLevel serverLevel && stunnedTick <= 0) {
-			Vec3 pos = getYawVec(yHeadRot, 0.0D, -1.25D).add(position());
+			Vec3 pos = getYawVec(yHeadRot, 0.0D, 0.0D, 0.0D).add(position());
 
 			setDeltaMovement(calculateViewVector(this.getXRot(), this.getYRot()).scale(0.5D));
 
 			for (int i = 0; i < 5; i++) {
-				serverLevel.sendParticles(ParticleTypes.BUBBLE, pos.x(), pos.y() + 0.4F, pos.z(), 0, 0.0D, 0.0D, 0.0D, 0.0D);
+				serverLevel.sendParticles(ParticleTypes.BUBBLE, pos.x(), pos.y() + (i * 0.1F) + 0.25F, pos.z(), 0, 0.0D, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
-	private void stunEffect() {
-		Vec3 pos = getYawVec(yBodyRot, 0.0D, 0.85D).add(0.0D, 0.85D, 0.0D);
-
-		this.level().addParticle(ParticleTypes.CRIT, pos.x + getRandomX(0.5D), pos.y + position().y, pos.z + getRandomZ(0.5D), 0.0D, 0.0D, 0.0D);
-	}
-
-	private static Vec3 getYawVec(float yaw, double xOffset, double zOffset) {
-		return new Vec3(xOffset, 0, zOffset).yRot(-yaw * ((float) Math.PI / 180f));
+	private static Vec3 getYawVec(float yaw, double xOffset, double yOffset, double zOffset) {
+		return new Vec3(xOffset, yOffset, zOffset).yRot(-yaw * ((float) Math.PI / 180f));
 	}
 
 	public void handleEntityEvent(byte p_33335_) {
