@@ -11,15 +11,15 @@ public class UFFoodProperties {
     public static final FoodProperties RAW_AERO_MONO = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 0), 1.0F).build();
     public static final FoodProperties RAW_AERO_MONO_STICK = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 0), 1.0F).build();
     public static final FoodProperties RAW_BUMPFACE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
-    public static final FoodProperties RAW_RHINO_TETRA = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().build();
-    public static final FoodProperties RAW_SAILOR_BARB = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().build();
-    public static final FoodProperties RAW_BARK_ANGELFISH = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).fast().build();
+    public static final FoodProperties RAW_RHINO_TETRA = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_SAILOR_BARB = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
+    public static final FoodProperties RAW_BARK_ANGELFISH = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).build();
     public static final FoodProperties RAW_BLIZZARD_TUNA = new FoodProperties.Builder().nutrition(3).saturationMod(0.1F).build();
     public static final FoodProperties RAW_SPINDLEFISH = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 1), 1.0F).effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 150, 1), 1.0F).build();
     public static final FoodProperties RAW_SHOCKCAT = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
     public static final FoodProperties RAW_MOSSTHORN = new FoodProperties.Builder().nutrition(1).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 1), 1.0F).build();
     public static final FoodProperties RAW_LOBSTER = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
-    public static final FoodProperties RAW_SNOWFLAKE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 1), 1.0F).build();
+    public static final FoodProperties RAW_SNOWFLAKE = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 1), 1.0F).build();
     public static final FoodProperties RAW_EYELASH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
     public static final FoodProperties UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(3).saturationMod(0.15F).build();
     public static final FoodProperties RAW_PICKLEFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.1F).build();
@@ -39,7 +39,7 @@ public class UFFoodProperties {
     // Cooked
     public static final FoodProperties COOKED_AERO_MONO_STICK = new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).fast().effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 150, 1), 1.0F).build();
     public static final FoodProperties COOKED_BLIZZARD_TUNA = new FoodProperties.Builder().nutrition(8).saturationMod(0.5F).build();
-    public static final FoodProperties COOKED_MOSSTHORN = new FoodProperties.Builder().nutrition(7).saturationMod(0.3F).fast().build();
+    public static final FoodProperties COOKED_MOSSTHORN = new FoodProperties.Builder().nutrition(7).saturationMod(0.3F).build();
     public static final FoodProperties COOKED_SHOCKCAT = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
     public static final FoodProperties COOKED_LOBSTER = new FoodProperties.Builder().nutrition(7).saturationMod(0.4F).build();
     public static final FoodProperties COOKED_UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(6).saturationMod(0.4F).build();
