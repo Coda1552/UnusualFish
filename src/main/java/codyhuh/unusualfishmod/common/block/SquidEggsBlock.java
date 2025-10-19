@@ -4,12 +4,16 @@ import codyhuh.unusualfishmod.common.entity.util.base.BreedableWaterAnimal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FrogspawnBlock;
@@ -36,7 +40,6 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     protected static final VoxelShape NORTH_AABB = Block.box(0, 0, 10, 16, 16, 16);
     protected static final VoxelShape EAST_AABB = Block.box(0, 0, 0, 6, 16, 16);
     protected static final VoxelShape WEST_AABB = Block.box(10, 0, 0, 16, 16, 16);
-
 
     public SquidEggsBlock(Supplier<EntityType<? extends BreedableWaterAnimal>> tadpole, Properties p_221177_) {
         super(p_221177_);
@@ -78,6 +81,25 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.relative(state.getValue(FACING).getOpposite())).isCollisionShapeFullBlock(level, pos) && level.getFluidState(pos).is(FluidTags.WATER);
+    }
+
+    public void tick(BlockState p_221194_, ServerLevel p_221195_, BlockPos p_221196_, RandomSource p_221197_) {
+        if (!this.canSurvive(p_221194_, p_221195_, p_221196_)) {
+            this.destroyBlock(p_221195_, p_221196_);
+        } else {
+            this.hatchFrogspawn(p_221195_, p_221196_, p_221197_);
+        }
+
+    }
+
+    private void hatchFrogspawn(ServerLevel p_221182_, BlockPos p_221183_, RandomSource p_221184_) {
+        this.destroyBlock(p_221182_, p_221183_);
+        p_221182_.playSound((Player)null, p_221183_, SoundEvents.FROGSPAWN_HATCH, SoundSource.BLOCKS, 1.0F, 1.0F);
+        this.spawnTadpoles(p_221182_, p_221183_, p_221184_);
+    }
+
+    private void destroyBlock(Level p_221191_, BlockPos p_221192_) {
+        p_221191_.destroyBlock(p_221192_, false);
     }
 
     public void spawnTadpoles(ServerLevel p_221221_, BlockPos p_221222_, RandomSource p_221223_) {
