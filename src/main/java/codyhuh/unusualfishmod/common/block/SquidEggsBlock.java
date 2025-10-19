@@ -93,9 +93,9 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     }
 
     private void hatchFrogspawn(ServerLevel p_221182_, BlockPos p_221183_, RandomSource p_221184_) {
-        this.destroyBlock(p_221182_, p_221183_);
-        p_221182_.playSound((Player)null, p_221183_, SoundEvents.FROGSPAWN_HATCH, SoundSource.BLOCKS, 1.0F, 1.0F);
+        p_221182_.playSound(null, p_221183_, SoundEvents.FROGSPAWN_HATCH, SoundSource.BLOCKS, 1.0F, 1.0F);
         this.spawnTadpoles(p_221182_, p_221183_, p_221184_);
+        this.destroyBlock(p_221182_, p_221183_);
     }
 
     private void destroyBlock(Level p_221191_, BlockPos p_221192_) {
@@ -110,14 +110,16 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
             double d0 = (double)p_221222_.getX() + this.getRandomTadpolePositionOffset(p_221223_);
             double d1 = (double)p_221222_.getZ() + this.getRandomTadpolePositionOffset(p_221223_);
             int k = p_221223_.nextInt(1, 361);
-            squid.moveTo(d0, (double)p_221222_.getY() - 0.5D, d1, (float)k, 0.0F);
+            double facing = p_221221_.getBlockState(p_221222_).getValue(FACING).get3DDataValue() * 0.5D;
+            squid.moveTo(d0 + facing, (double)p_221222_.getY() + facing, d1 + facing, (float)k, 0.0F);
             squid.setPersistenceRequired();
+            squid.setAge(-24000);
             p_221221_.addFreshEntity(squid);
         }
     }
 
     private double getRandomTadpolePositionOffset(RandomSource p_221225_) {
         double d0 = 0.125D;
-        return Mth.clamp(p_221225_.nextDouble(), d0, 1.0D - d0);
+        return Mth.clamp(p_221225_.nextDouble(), d0, 0.5D - d0);
     }
 }

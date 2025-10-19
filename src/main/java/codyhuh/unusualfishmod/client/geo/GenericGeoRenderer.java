@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.client.geo;
 
+import codyhuh.unusualfishmod.common.entity.util.base.BreedableWaterAnimal;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -47,7 +48,7 @@ public class GenericGeoRenderer<T extends LivingEntity & GeoEntity> extends GeoE
 			stack.scale(scale, scale, scale);
 		}
 
-		if (entity instanceof AgeableMob mob && mob.isBaby()) {
+		if ((entity instanceof AgeableMob mob && mob.isBaby()) || entity instanceof BreedableWaterAnimal bwa && bwa.isBaby()) {
 			stack.scale(0.5F, 0.5F, 0.5F);
 		}
 
