@@ -11,6 +11,6 @@ import java.util.function.Supplier;
 public class UFFishBucketItem extends MobBucketItem {
 
 	public UFFishBucketItem(Supplier<? extends EntityType<?>> entityType, Supplier<? extends Fluid> fluid, Item item, boolean hasTooltip, Properties builder) {
-		super(entityType, fluid, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
+		super(entityType.get(), fluid.get(), SoundEvents.BUCKET_EMPTY_FISH, builder);
 	}
 }

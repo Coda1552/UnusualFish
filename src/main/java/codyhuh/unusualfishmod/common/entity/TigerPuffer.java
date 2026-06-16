@@ -28,11 +28,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
@@ -57,14 +57,11 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         super.registerGoals();
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true) {
             @Override
-            protected void checkAndPerformAttack(LivingEntity p_25557_, double p_25558_) {
-                double d0 = this.getAttackReachSqr(p_25557_);
-
-                if (p_25558_ <= d0 && this.getTicksUntilNextAttack() <= 0) {
-                    this.resetAttackCooldown();
+            protected void checkAndPerformAttack(LivingEntity target) {
+                if (this.mob.isWithinMeleeAttackRange(target)  && this.isTimeToAttack()) {
                     this.mob.swing(InteractionHand.MAIN_HAND);
-                    this.mob.doHurtTarget(p_25557_);
-                    this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK);
+                    this.mob.doHurtTarget(target);
+                    this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, 1.0F);
                 }
             }
         });
@@ -83,7 +80,8 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
                 return !this.mob.isInWater() && super.canUse();
             }
         });
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false, e -> e.getType().is(UFTags.TIGER_PUFFER_PREY)));
+        // TODO: Tag fix
+//        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false, e -> e.getType().is(UFTags.TIGER_PUFFER_PREY)));
     }
 
     public void aiStep() {

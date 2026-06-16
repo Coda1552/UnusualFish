@@ -605,7 +605,7 @@
 					"rotation": [0, "math.sin(query.anim_time*360-150)*-10", "math.clamp(math.sin(query.anim_time*360-60)*20,-20,0)"]
 				},
 				"Leg3": {
-					"rotation": [0, "math.sin(query.anim_time*180-150)*-20", "math.clamp(math.sin(query.anim_time*180-60)*0,0,20)2"]
+					"rotation": [0, "math.sin(query.anim_time*180-150)*-20", "math.clamp(math.sin(query.anim_time*180-60)*0,0,20)"]
 				},
 				"Leg4": {
 					"rotation": [0, "math.sin(query.anim_time*360-90)*-10", "math.clamp(math.sin(query.anim_time*360)*20,0,20)"]

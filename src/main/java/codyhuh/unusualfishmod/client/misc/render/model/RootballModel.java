@@ -46,9 +46,9 @@ public class RootballModel<T extends Rootball> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		Body.render(poseStack, buffer, packedLight, packedOverlay);
-		Leg1.render(poseStack, buffer, packedLight, packedOverlay);
-		Leg2.render(poseStack, buffer, packedLight, packedOverlay);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		Body.render(poseStack, buffer, packedLight, packedOverlay, color);
+		Leg1.render(poseStack, buffer, packedLight, packedOverlay, color);
+		Leg2.render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
 }

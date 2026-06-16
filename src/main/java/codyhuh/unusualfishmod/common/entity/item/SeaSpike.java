@@ -49,6 +49,11 @@ public class SeaSpike extends AbstractArrow {
     }
 
     @Override
+    protected ItemStack getDefaultPickupItem() {
+        return ItemStack.EMPTY;
+    }
+
+    @Override
     protected void onHit(HitResult p_37260_) {
         super.onHit(p_37260_);
         //discard();

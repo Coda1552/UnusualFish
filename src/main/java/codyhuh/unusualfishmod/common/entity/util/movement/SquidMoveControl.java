@@ -32,8 +32,8 @@ public class SquidMoveControl extends MoveControl {
 
             if (d0 != 0.0D || d2 != 0.0D) {
                 float f1 = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-                this.fish.yRot = this.rotlerp(this.fish.yRot, f1, 90.0F);
-                this.fish.yBodyRot = this.fish.yRot;
+                this.fish.setYRot(this.rotlerp(this.fish.getYRot(), f1, 90.0F));
+                this.fish.yBodyRot = this.fish.getYRot();
             }
 
         } else {

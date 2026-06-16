@@ -1,6 +1,5 @@
 package codyhuh.unusualfishmod.client.misc.render;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.misc.render.model.RootballModel;
 import codyhuh.unusualfishmod.common.entity.Rootball;
@@ -10,8 +9,10 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+
 public class RootballRenderer extends MobRenderer<Rootball, RootballModel<Rootball>> {
-	protected static final ResourceLocation TEXTURE = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/rootball.png");
+	protected static final ResourceLocation TEXTURE = loc("textures/entity/rootball.png");
 
 	public RootballRenderer(EntityRendererProvider.Context renderManagerIn) {
 		super(renderManagerIn, new RootballModel<>(renderManagerIn.bakeLayer(UFModelLayers.ROOTBALL)), 0.2F);

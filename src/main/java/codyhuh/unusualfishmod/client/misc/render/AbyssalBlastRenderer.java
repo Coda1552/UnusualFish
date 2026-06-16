@@ -1,6 +1,5 @@
 package codyhuh.unusualfishmod.client.misc.render;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -12,14 +11,15 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+
 public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
-    private static final ResourceLocation TEXTURE_0 = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/abyssalblast/abyssal_blast_0.png");
-    private static final ResourceLocation TEXTURE_1 = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/abyssalblast/abyssal_blast_1.png");
-    private static final ResourceLocation TEXTURE_2 = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/abyssalblast/abyssal_blast_2.png");
-    private static final ResourceLocation TEXTURE_3 = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/abyssalblast/abyssal_blast_3.png");
+    private static final ResourceLocation TEXTURE_0 = loc("textures/entity/abyssalblast/abyssal_blast_0.png");
+    private static final ResourceLocation TEXTURE_1 = loc("textures/entity/abyssalblast/abyssal_blast_1.png");
+    private static final ResourceLocation TEXTURE_2 = loc("textures/entity/abyssalblast/abyssal_blast_2.png");
+    private static final ResourceLocation TEXTURE_3 = loc("textures/entity/abyssalblast/abyssal_blast_3.png");
 
     public AbyssalBlastRenderer(EntityRendererProvider.Context renderManagerIn) {
         super(renderManagerIn);
@@ -54,13 +54,12 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
             res = getEntityTexture(age);
         }
         VertexConsumer ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(res));
-        PoseStack.Pose lvt_19_1_ = matrixStackIn.last();
-        Matrix4f lvt_20_1_ = lvt_19_1_.pose();
-        Matrix3f lvt_21_1_ = lvt_19_1_.normal();
-        this.drawVertex(lvt_20_1_, lvt_21_1_, ivertexbuilder, -1, 0, -1, 0, 0, 1, 0, 1, 240);
-        this.drawVertex(lvt_20_1_, lvt_21_1_, ivertexbuilder, -1, 0, 1, 0, 1, 1, 0, 1, 240);
-        this.drawVertex(lvt_20_1_, lvt_21_1_, ivertexbuilder, 1, 0, 1, 1, 1, 1, 0, 1, 240);
-        this.drawVertex(lvt_20_1_, lvt_21_1_, ivertexbuilder, 1, 0, -1, 1, 0, 1, 0, 1, 240);
+        PoseStack.Pose pose = matrixStackIn.last();
+        Matrix4f matrix4f = pose.pose();
+        this.drawVertex(matrix4f, pose, ivertexbuilder, -1, 0, -1, 0, 0, 1, 0, 1, 240);
+        this.drawVertex(matrix4f, pose, ivertexbuilder, -1, 0, 1, 0, 1, 1, 0, 1, 240);
+        this.drawVertex(matrix4f, pose, ivertexbuilder, 1, 0, 1, 1, 1, 1, 0, 1, 240);
+        this.drawVertex(matrix4f, pose, ivertexbuilder, 1, 0, -1, 1, 0, 1, 0, 1, 240);
         matrixStackIn.popPose();
     }
 
@@ -69,8 +68,9 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
         return TEXTURE_0;
     }
 
-    public void drawVertex(Matrix4f p_229039_1_, Matrix3f p_229039_2_, VertexConsumer p_229039_3_, int p_229039_4_, int p_229039_5_, int p_229039_6_, float p_229039_7_, float p_229039_8_, int p_229039_9_, int p_229039_10_, int p_229039_11_, int p_229039_12_) {
-        p_229039_3_.vertex(p_229039_1_, (float) p_229039_4_, (float) p_229039_5_, (float) p_229039_6_).color(255, 255, 255, 255).uv(p_229039_7_, p_229039_8_).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(p_229039_12_).normal(p_229039_2_, (float) p_229039_9_, (float) p_229039_11_, (float) p_229039_10_).endVertex();
+    // TODO: Chakyl test
+    public void drawVertex(Matrix4f matrixPos, PoseStack.Pose pose, VertexConsumer buffer, int x, int y, int z, float u, float v, int normalX, int normalY, int normalZ, int packedLight) {
+        buffer.addVertex(matrixPos, (float) x, (float) y, (float) z).setColor(255, 255, 255, 255).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(pose, (float) normalX, (float) normalY, (float) normalZ);
     }
 
     public ResourceLocation getEntityTexture(int age) {

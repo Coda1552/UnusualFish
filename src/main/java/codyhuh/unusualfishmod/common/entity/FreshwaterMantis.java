@@ -28,11 +28,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity {
@@ -40,7 +40,7 @@ public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity
 	public FreshwaterMantis(EntityType<? extends FreshwaterMantis> type, Level world) {
 		super(type, world);
 		this.moveControl = new FreshwaterMantis.MoveHelperController(this);
-		this.setMaxUpStep(1.1F);
+		this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.1F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -53,7 +53,8 @@ public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity
 		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 1.0F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, e -> e.getType().is(UFTags.SNAILS)));
+		// TODO: Tag fix
+//		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, e -> e.getType().is(UFTags.SNAILS)));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AeroMono.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SneepSnorp.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, RhinoTetra.class, true));
@@ -160,8 +161,8 @@ public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity
 				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 				d1 = d1 / d3;
 				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.mantis.yRot = this.rotlerp(this.mantis.yRot, f, 90.0F);
-				this.mantis.yBodyRot = this.mantis.yRot;
+				this.mantis.setYRot(this.rotlerp(this.mantis.getYRot(), f, 90.0F));
+				this.mantis.yBodyRot = this.mantis.getYRot();
 				float f1 = (float) (this.speedModifier * this.mantis.getAttributeValue(Attributes.MOVEMENT_SPEED));
 				this.mantis.setSpeed(Mth.lerp(0.125F, this.mantis.getSpeed(), f1));
 				this.mantis.setDeltaMovement(this.mantis.getDeltaMovement().add(0.0D, (double) this.mantis.getSpeed() * d1 * 0.1D, 0.0D));

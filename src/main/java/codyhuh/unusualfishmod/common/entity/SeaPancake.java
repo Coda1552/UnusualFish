@@ -7,6 +7,8 @@ import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -38,17 +40,19 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+
 public class SeaPancake extends WaterAnimal implements GeoEntity {
-	public static final ResourceLocation FEED_REWARD = new ResourceLocation(UnusualFishMod.MOD_ID, "gameplay/sea_pancake_search");
+	public static final ResourceLocation FEED_REWARD = loc("gameplay/sea_pancake_search");
 	protected int attackCooldown = 0;
 
 	public SeaPancake(EntityType<? extends WaterAnimal> entityType, Level level) {
@@ -89,7 +93,7 @@ public class SeaPancake extends WaterAnimal implements GeoEntity {
 		ItemStack stack = player.getItemInHand(hand);
 
 		if (stack.is(UFItems.RAW_LOBSTER.get()) && level() instanceof ServerLevel serverlevel) {
-			LootTable loottable = serverlevel.getServer().getLootData().getLootTable(FEED_REWARD);
+			LootTable loottable = serverlevel.registryAccess().lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, FEED_REWARD)).value();
 			List<ItemStack> list = loottable.getRandomItems(new LootParams.Builder(serverlevel).withParameter(LootContextParams.ORIGIN, position()).withParameter(LootContextParams.THIS_ENTITY, this).withLuck(random.nextFloat()).create(LootContextParamSets.PIGLIN_BARTER));
 
 			if (!list.isEmpty() && random.nextBoolean()) {

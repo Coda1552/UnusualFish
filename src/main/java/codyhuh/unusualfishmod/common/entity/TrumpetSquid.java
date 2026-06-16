@@ -10,6 +10,7 @@ import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -42,18 +43,19 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, GeoEntity {
@@ -106,7 +108,9 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, Ge
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return stack.is(UFTags.RAW_UNUSUAL_FISH);
+		// todo: tag
+//		return stack.is(UFTags.RAW_UNUSUAL_FISH);
+		return true;
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
@@ -190,11 +194,10 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, Ge
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 
-
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(FROM_BUCKET, false);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(FROM_BUCKET, false);
 	}
 
 	@Override
@@ -216,8 +219,10 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, Ge
 
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putFloat("Health", this.getHealth());
+		});
 	}
 
 	public boolean requiresCustomPersistence() {

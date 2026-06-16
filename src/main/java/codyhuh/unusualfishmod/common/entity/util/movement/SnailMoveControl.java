@@ -26,8 +26,8 @@ public class SnailMoveControl extends MoveControl {
             double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
             d1 = d1 / d3;
             float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-            this.snail.yRot = this.rotlerp(this.snail.yRot, f, 90.0F);
-            this.snail.yBodyRot = this.snail.yRot;
+            this.snail.setYRot(this.rotlerp(this.snail.getYRot(), f, 90.0F));
+            this.snail.yBodyRot = this.snail.getYRot();
             float f1 = (float) (this.speedModifier * this.snail.getAttributeValue(Attributes.MOVEMENT_SPEED));
             this.snail.setSpeed(Mth.lerp(0.125F, this.snail.getSpeed(), f1));
             this.snail.setDeltaMovement(this.snail.getDeltaMovement().add(0.0D, (double) this.snail.getSpeed() * d1 * 0.1D, 0.0D));

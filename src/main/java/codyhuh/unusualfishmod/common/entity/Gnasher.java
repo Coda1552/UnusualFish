@@ -4,6 +4,7 @@ import codyhuh.unusualfishmod.common.entity.item.AbyssalBlast;
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -24,16 +25,16 @@ import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Gnasher extends WaterAnimal implements RangedAttackMob, GeoEntity {
@@ -92,10 +93,10 @@ public class Gnasher extends WaterAnimal implements RangedAttackMob, GeoEntity {
 		this.level().broadcastEntityEvent(this, (byte)4);
 		float f = this.getAttackDamage();
 		float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-		boolean flag = entityIn.hurt(damageSources().mobAttack(this), f1);
+		boolean flag = this.level() instanceof ServerLevel && entityIn.hurt(damageSources().mobAttack(this), f1);
 		if (flag) {
 			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, (double)0.4F, 0.0D));
-			this.doEnchantDamageEffects(this, entityIn);
+			EnchantmentHelper.doPostAttackEffects((ServerLevel) this.level(), entityIn, this.damageSources().mobAttack(this));
 		}
 		return flag;
 	}

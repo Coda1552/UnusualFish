@@ -3,6 +3,7 @@ package codyhuh.unusualfishmod.common.entity.item;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -32,9 +33,9 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         super(p_37561_, p_37562_);
     }
 
-    public ThrownPrismarineSpear(Level p_37569_, LivingEntity p_37570_, ItemStack p_37571_) {
-        super(UFEntities.PRISMARINE_SPEAR.get(), p_37570_, p_37569_);
-        this.spearItem = p_37571_.copy();
+    public ThrownPrismarineSpear(Level level, LivingEntity livingEntity, ItemStack itemStack) {
+        super(UFEntities.PRISMARINE_SPEAR.get(), livingEntity, level, itemStack, ItemStack.EMPTY);
+        this.spearItem = itemStack.copy();
     }
 
     public void tick() {
@@ -49,6 +50,11 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         return this.spearItem.copy();
     }
 
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return this.spearItem.copy();
+    }
+
     @Nullable
     protected EntityHitResult findHitEntity(Vec3 p_37575_, Vec3 p_37576_) {
         return this.dealtDamage ? null : super.findHitEntity(p_37575_, p_37576_);
@@ -57,8 +63,10 @@ public class ThrownPrismarineSpear extends AbstractArrow {
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
         float f = 5.0F;
-        if (entity instanceof LivingEntity livingentity) {
-            f += EnchantmentHelper.getDamageBonus(this.spearItem, livingentity.getMobType());
+        if (entity instanceof LivingEntity livingentity && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+            // Todo: Chakyl check for crash with dispenser?
+            DamageSource damageSource = this.damageSources().mobAttack((LivingEntity) this.getOwner());
+            f = EnchantmentHelper.modifyDamage(serverLevel, this.spearItem, livingentity, damageSource, (float) this.getBaseDamage());
         }
 
         Entity entity1 = this.getOwner();
@@ -70,12 +78,10 @@ public class ThrownPrismarineSpear extends AbstractArrow {
                 return;
             }
 
-            if (entity instanceof LivingEntity livingentity1) {
-                if (entity1 instanceof LivingEntity) {
-                    EnchantmentHelper.doPostHurtEffects(livingentity1, entity1);
-                    EnchantmentHelper.doPostDamageEffects((LivingEntity)entity1, livingentity1);
+            if (entity instanceof LivingEntity livingentity1 && entity1 instanceof LivingEntity livingentityAttacker) {
+                if (this.level() instanceof ServerLevel serverLevel) {
+                    EnchantmentHelper.doPostAttackEffects(serverLevel, livingentity1, this.damageSources().mobAttack(livingentityAttacker));
                 }
-
                 this.doPostHurtEffects(livingentity1);
             }
         }
@@ -100,19 +106,18 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         }
     }
 
-    public void readAdditionalSaveData(CompoundTag p_37578_) {
-        super.readAdditionalSaveData(p_37578_);
-        if (p_37578_.contains("Trident", 10)) {
-            this.spearItem = ItemStack.of(p_37578_.getCompound("Trident"));
+    public void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.contains("Trident", 10)) {
+            this.spearItem = ItemStack.parseOptional(this.level().registryAccess(), tag.getCompound("Trident"));
         }
-
-        this.dealtDamage = p_37578_.getBoolean("DealtDamage");
+        this.dealtDamage = tag.getBoolean("DealtDamage");
     }
 
-    public void addAdditionalSaveData(CompoundTag p_37582_) {
-        super.addAdditionalSaveData(p_37582_);
-        p_37582_.put("Trident", this.spearItem.save(new CompoundTag()));
-        p_37582_.putBoolean("DealtDamage", this.dealtDamage);
+    public void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.put("Trident", this.spearItem.save(this.level().registryAccess()));
+        tag.putBoolean("DealtDamage", this.dealtDamage);
     }
 
     protected float getWaterInertia() {

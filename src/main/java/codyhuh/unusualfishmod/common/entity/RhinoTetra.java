@@ -5,6 +5,7 @@ import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAn
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -34,16 +35,17 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -208,12 +210,12 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 		return SoundEvents.COD_FLOP;
 	}
 
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(REMAINING_ANGER_TIME, 0);
-	}
-
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(REMAINING_ANGER_TIME, 0);
+    }
+	
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.stunnedTick = compound.getInt("StunTick");
@@ -228,11 +230,13 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putFloat("Health", this.getHealth());
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
 		if (this.hasCustomName()) {
-			bucket.setHoverName(this.getCustomName());
+			bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
 		}
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putFloat("Health", this.getHealth());
+		});
 	}
 
 	public static boolean canSpawn(EntityType<RhinoTetra> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {

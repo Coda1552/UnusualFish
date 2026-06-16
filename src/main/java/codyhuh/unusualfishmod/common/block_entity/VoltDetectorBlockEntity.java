@@ -56,9 +56,10 @@ public class VoltDetectorBlockEntity extends BlockEntity {
 
     private static void nearDetector(Level level, BlockPos pos, double radius) {
         AABB aabb = new AABB(pos);
-        currentList = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(radius), e -> {
-            return !e.getType().is(UFTags.VOLT_UNDETECTED) && !e.isCrouching();
-        });
+        // TODO: Tag fix
+//        currentList = level.getEntitiesOfClass(LivingEntity.class, aabb.inflate(radius), e -> {
+//            return !e.getType().is(UFTags.VOLT_UNDETECTED) && !e.isCrouching();
+//        });
 
         BlockPos blockpos = new BlockPos((int) (aabb.minX - radius), (int) (aabb.minY - radius), (int) (aabb.minZ - radius));
         BlockPos blockpos1 = new BlockPos((int) (aabb.maxX + radius), (int) (aabb.maxY + radius), (int) (aabb.maxZ + radius));

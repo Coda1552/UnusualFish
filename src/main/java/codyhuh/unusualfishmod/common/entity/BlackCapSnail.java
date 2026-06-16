@@ -4,6 +4,7 @@ import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.common.entity.util.movement.SnailMoveControl;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -29,14 +30,15 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity {
@@ -45,7 +47,7 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
     public BlackCapSnail(EntityType<? extends BlackCapSnail> type, Level world) {
         super(type, world);
         this.moveControl = new SnailMoveControl(this);
-        this.setMaxUpStep(1.0F);
+        this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.0F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -73,9 +75,9 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FROM_BUCKET, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -97,9 +99,9 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
-
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+            tag.putFloat("Health", this.getHealth());
+        });
     }
 
     public boolean requiresCustomPersistence() {

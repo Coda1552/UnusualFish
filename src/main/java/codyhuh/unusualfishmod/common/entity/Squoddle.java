@@ -41,11 +41,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Squoddle extends BucketableWaterAnimal implements GeoEntity {
@@ -54,7 +54,7 @@ public class Squoddle extends BucketableWaterAnimal implements GeoEntity {
 	public Squoddle(EntityType<? extends Squoddle> type, Level world) {
 		super(type, world);
 		this.moveControl = new Squoddle.MoveHelperController(this);
-		this.setMaxUpStep(1.5F);
+		this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.5F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -162,8 +162,8 @@ public class Squoddle extends BucketableWaterAnimal implements GeoEntity {
 				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 				d1 = d1 / d3;
 				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.squoddle.yRot = this.rotlerp(this.squoddle.yRot, f, 90.0F);
-				this.squoddle.yBodyRot = this.squoddle.yRot;
+				this.squoddle.setYRot(this.rotlerp(this.squoddle.getYRot(), f, 90.0F));
+				this.squoddle.yBodyRot = this.squoddle.getYRot();
 				float f1 = (float) (this.speedModifier * this.squoddle.getAttributeValue(Attributes.MOVEMENT_SPEED));
 				this.squoddle.setSpeed(Mth.lerp(0.125F, this.squoddle.getSpeed(), f1));
 				this.squoddle.setDeltaMovement(this.squoddle.getDeltaMovement().add(0.0D, (double) this.squoddle.getSpeed() * d1 * 0.1D, 0.0D));

@@ -14,6 +14,9 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+import static net.minecraft.util.FastColor.ARGB32.color;
+
 public class DemonHerringGlowRenderLayer<T extends DemonHerring & GeoEntity> extends GeoRenderLayer<T> {
 
     public DemonHerringGlowRenderLayer(GeoRenderer<T> layer) {
@@ -23,10 +26,10 @@ public class DemonHerringGlowRenderLayer<T extends DemonHerring & GeoEntity> ext
     @Override
     public void render(PoseStack poseStack, T animatable, BakedGeoModel bakedModel, RenderType renderType, MultiBufferSource bufferSource, VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
         int i = animatable.getVariant() + 1;
-        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.dragonExplosionAlpha(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/demon_herring_" + i + ".png")));
+        VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.dragonExplosionAlpha(loc("textures/entity/glow/demon_herring_" + i + ".png")));
 
         if (!animatable.isInvisible()) {
-            this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, renderType, vertexconsumer, partialTick, packedLight, LivingEntityRenderer.getOverlayCoords(animatable, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+            this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, renderType, vertexconsumer, partialTick, packedLight, LivingEntityRenderer.getOverlayCoords(animatable, 0.0F), color(255, 255, 255, 255));
         }
     }
 }

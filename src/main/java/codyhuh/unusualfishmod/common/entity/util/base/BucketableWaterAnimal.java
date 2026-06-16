@@ -1,5 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.util.base;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 
 public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucketable {
@@ -23,9 +25,9 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FROM_BUCKET, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -45,11 +47,13 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
-        if (this.hasCustomName()) {
-            bucket.setHoverName(this.getCustomName());
-        }
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		if (this.hasCustomName()) {
+			bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
+		}
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putFloat("Health", this.getHealth());
+		});
     }
 
     public boolean requiresCustomPersistence() {

@@ -31,7 +31,7 @@ public class PrismarineSpearModel<T extends ThrownPrismarineSpear> extends Entit
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		spear.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int color) {
+		spear.render(poseStack, vertexConsumer, packedLight, packedOverlay, color);
 	}
 }

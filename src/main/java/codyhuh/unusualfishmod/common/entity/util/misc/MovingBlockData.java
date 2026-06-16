@@ -31,7 +31,7 @@ public class MovingBlockData {
     }
 
     public MovingBlockData(Level level, CompoundTag tag) {
-        this(NbtUtils.readBlockState(level.holderLookup(Registries.BLOCK), tag.getCompound("BlockState")), getShapeFromTag(tag.getCompound("VoxelShape")), new BlockPos(tag.getInt("OffsetX"), tag.getInt("OffsetY"), tag.getInt("OffsetZ")), tag.contains("BlockData") ? tag.getCompound("BlockData") : null);
+        this(NbtUtils.readBlockState(level.registryAccess().lookupOrThrow(Registries.BLOCK),tag.getCompound("BlockState")), getShapeFromTag(tag.getCompound("VoxelShape")), new BlockPos(tag.getInt("OffsetX"), tag.getInt("OffsetY"), tag.getInt("OffsetZ")), tag.contains("BlockData") ? tag.getCompound("BlockData") : null);
     }
 
     public BlockState getState() {

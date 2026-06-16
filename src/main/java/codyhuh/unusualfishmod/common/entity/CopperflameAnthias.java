@@ -5,6 +5,7 @@ import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAn
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -25,18 +26,20 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -118,11 +121,11 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal implement
 		return SoundEvents.COD_FLOP;
 	}
 
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(VARIANT, 0);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(VARIANT, 0);
+    }
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
@@ -138,9 +141,13 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal implement
 
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
-		super.saveToBucketTag(bucket);
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putInt("Variant", this.getVariant());
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		if (this.hasCustomName()) {
+			bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
+		}
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putInt("Variant", this.getVariant());
+		});
 	}
 
 	public int getVariant() {
@@ -175,7 +182,7 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal implement
 	}
 
 	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (!isAddedToWorld()) {
+		if (this.isRemoved()) {
 			return PlayState.STOP;
 		}
 

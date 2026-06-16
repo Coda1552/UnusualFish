@@ -21,8 +21,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
@@ -32,7 +30,7 @@ public class AbyssalBlast extends Entity  {
     private UUID ownerUUID;
     private int ownerNetworkId;
     private boolean leftOwner;
-
+    // TODO: chakyl test
     public AbyssalBlast(EntityType p_i50162_1_, Level p_i50162_2_) {
         super(p_i50162_1_, p_i50162_2_);
     }
@@ -49,10 +47,6 @@ public class AbyssalBlast extends Entity  {
         float rot = p_i47273_2_.yBodyRot + (right ?  90 : -80);
         this.setFasterAnimation(true);
         this.setPos(p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth()) * 0.5D * (double) Mth.sin(rot * ((float) Math.PI / 290F)), p_i47273_2_.getEyeY() - (double) 0.2F, p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth()) * 0.5D * (double) Mth.cos(rot * ((float) Math.PI / 290F)));
-    }
-
-    public AbyssalBlast(PlayMessages.SpawnEntity spawnEntity, Level world) {
-        this(UFEntities.ABYSSAL_BLAST.get(), world);
     }
 
     public boolean isFasterAnimation() {
@@ -75,10 +69,6 @@ public class AbyssalBlast extends Entity  {
         return Mth.lerp(0.2F, p_234614_0_, p_234614_1_);
     }
 
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
 
     public void tick() {
         double yMot = Mth.sqrt((float)(this.getDeltaMovement().x * this.getDeltaMovement().x + this.getDeltaMovement().z * this.getDeltaMovement().z));
@@ -120,9 +110,10 @@ public class AbyssalBlast extends Entity  {
             this.remove(RemovalReason.DISCARDED);
         }
     }
-
-    protected void defineSynchedData() {
-        this.entityData.define(FASTER_ANIM, false);
+    
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(FASTER_ANIM, false);
     }
 
     public void setShooter(@Nullable Entity entityIn) {

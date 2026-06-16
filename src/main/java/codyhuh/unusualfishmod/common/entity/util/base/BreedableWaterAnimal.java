@@ -51,10 +51,11 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     @Nullable
     public abstract BreedableWaterAnimal getBreedOffspring(ServerLevel p_146743_, BreedableWaterAnimal p_146744_);
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_BABY_ID, false);
-        this.entityData.define(DATA_GRAVID, false);
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_BABY_ID, false);
+        builder.define(DATA_GRAVID, false);
     }
 
     public int getAge() {

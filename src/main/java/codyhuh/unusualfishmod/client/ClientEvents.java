@@ -16,28 +16,29 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import java.util.ArrayList;
 
-@Mod.EventBusSubscriber(modid = UnusualFishMod.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+
+@EventBusSubscriber(modid = UnusualFishMod.MOD_ID, value = Dist.CLIENT)
 public final class ClientEvents {
 
 	@SubscribeEvent
 	public static void clientSetup(FMLClientSetupEvent e) {
-		ItemProperties.register(UFItems.CLEMENT_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
-		ItemProperties.register(UFItems.FLUVIAL_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
-		ItemProperties.register(UFItems.THUNDEROUS_SHELL.get(), new ResourceLocation("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
-		ItemProperties.register(UFItems.PRISMARINE_SPEAR.get(), new ResourceLocation("using"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
+		ItemProperties.register(UFItems.CLEMENT_SHELL.get(), loc("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
+		ItemProperties.register(UFItems.FLUVIAL_SHELL.get(),loc("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
+		ItemProperties.register(UFItems.THUNDEROUS_SHELL.get(), loc("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
+		ItemProperties.register(UFItems.PRISMARINE_SPEAR.get(), loc("using"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		///ItemProperties.register(UFItems.RIPSAW.get(), new ResourceLocation("sawing"), (stack, level, player, i) -> player != null && player.isUsingItem() && stack.hasTag() ? stack.getOrCreateTag().getFloat("SawingProgress") : 0.0F);
-		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
-		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
-		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), new ResourceLocation(UnusualFishMod.MOD_ID, "variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+//		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+//		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+//		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
 	}
 
 	private static void make(EntityType type, String name){
@@ -68,7 +69,7 @@ public final class ClientEvents {
 				TextureVariantModel<DualityDamselfish> model = new TextureVariantModel<>("duality_damselfish");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 2; i++) {
-					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/duality_damselfish/duality_damselfish_" + i + ".png"));
+					textures.add(loc("textures/entity/duality_damselfish/duality_damselfish_" + i + ".png"));
 				}
 				model.setTextures(DualityDamselfish::getVariant, textures);
 				return model;
@@ -83,7 +84,7 @@ public final class ClientEvents {
 				TextureVariantModel<CopperflameAnthias> model = new TextureVariantModel<>("copperflame");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 2; i++) {
-					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/copperflame_anthias/copperflame_" + i + ".png"));
+					textures.add(loc("textures/entity/copperflame_anthias/copperflame_" + i + ".png"));
 				}
 				model.setTextures(CopperflameAnthias::getVariant, textures);
 				return model;
@@ -96,7 +97,7 @@ public final class ClientEvents {
 				TextureVariantModel<DemonHerring> model = new TextureVariantModel<>("demon_herring");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 3; i++) {
-					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/demon_herring/demon_herring_" + i + ".png"));
+					textures.add(loc("textures/entity/demon_herring/demon_herring_" + i + ".png"));
 				}
 				model.setTextures(DemonHerring::getVariant, textures);
 				return model;
@@ -107,7 +108,7 @@ public final class ClientEvents {
 
 		e.registerEntityRenderer(UFEntities.GNASHER.get(), (ctx) -> {
 			GenericGeoRenderer<Gnasher> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("gnasher"), false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/gnasher.png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, loc("textures/entity/glow/gnasher.png")));
 			return render;
 		});
 
@@ -116,7 +117,7 @@ public final class ClientEvents {
 				TextureVariantModel<EyelashFish> model = new TextureVariantModel<>("eyelash_fish");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 15; i++) {
-					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/eyelash_fish/eyelash_fish_" + i + ".png"));
+					textures.add(loc("textures/entity/eyelash_fish/eyelash_fish_" + i + ".png"));
 				}
 				model.setTextures(EyelashFish::getVariant, textures);
 				return model;
@@ -126,7 +127,7 @@ public final class ClientEvents {
 
 		e.registerEntityRenderer(UFEntities.HATCHET_FISH.get(), (ctx) -> {
 			GenericGeoRenderer<HatchetFish> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("hatchet_fish"), false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/hatchet_fish.png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, loc("textures/entity/glow/hatchet_fish.png")));
 			return render;
 		});
 
@@ -134,7 +135,7 @@ public final class ClientEvents {
 
 		e.registerEntityRenderer(UFEntities.PICKLEFISH.get(), (ctx) -> {
 			GenericGeoRenderer<Picklefish> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("picklefish"), false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/picklefish.png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, loc("textures/entity/glow/picklefish.png")));
 			return render;
 		});
 
@@ -143,7 +144,7 @@ public final class ClientEvents {
 				TextureVariantModel<Skrimp> model = new TextureVariantModel<>("skrimp");
 				ArrayList<ResourceLocation> textures = new ArrayList<>();
 				for (int i = 1; i <= 15; i++) {
-					textures.add(new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/skrimp/skrimp_" + i + ".png"));
+					textures.add(loc("textures/entity/skrimp/skrimp_" + i + ".png"));
 				}
 				model.setTextures(Skrimp::getVariant, textures);
 				return model;
@@ -153,13 +154,13 @@ public final class ClientEvents {
 
 		e.registerEntityRenderer(UFEntities.SHOCKCAT.get(), (ctx) -> {
 			GenericGeoRenderer<Shockcat> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("shockcat"), false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/shockcat.png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, loc("textures/entity/glow/shockcat.png")));
 			return render;
 		});
 
 		e.registerEntityRenderer(UFEntities.VOLT_ANGLER.get(), (ctx) -> {
 			GenericGeoRenderer<VoltAngler> render = new GenericGeoRenderer<>(ctx, () -> new GenericGeoModel<>("volt_angler"), false);
-			render.addRenderLayer(new UFGlowRenderLayer<>(render, new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/glow/volt_angler.png")));
+			render.addRenderLayer(new UFGlowRenderLayer<>(render, loc("textures/entity/glow/volt_angler.png")));
 			return render;
 		});
 

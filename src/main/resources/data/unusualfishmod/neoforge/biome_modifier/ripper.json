@@ -1,0 +1,13 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": [
+    "minecraft:river"
+  ],
+  "spawners":
+  {
+    "type": "unusualfishmod:ripper",
+    "weight": 10,
+    "minCount": 1,
+    "maxCount": 2
+  }
+}

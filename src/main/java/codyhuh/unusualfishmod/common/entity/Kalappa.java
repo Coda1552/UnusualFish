@@ -20,11 +20,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Kalappa extends PathfinderMob implements GeoEntity {
@@ -44,10 +44,13 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
         this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 0.65D, true) {
             @Override
-            protected double getAttackReachSqr(LivingEntity p_25556_) {
-                return (this.mob.getBbWidth() * 1.0D * this.mob.getBbWidth() * 1.0D + p_25556_.getBbWidth());
+            protected void checkAndPerformAttack(LivingEntity target) {
+                if (this.mob.isWithinMeleeAttackRange(target)  && this.isTimeToAttack()) {
+                    this.mob.doHurtTarget(target);
+                }
             }
         });
+
         this.goalSelector.addGoal(6, new WaterAvoidingRandomStrollGoal(this, 0.65D));
         this.targetSelector.addGoal(1, (new HurtByTargetGoal(this)));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false, (p_28879_) -> {

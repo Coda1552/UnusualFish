@@ -6,6 +6,7 @@ import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -36,16 +37,17 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -56,7 +58,7 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 	public Skrimp(EntityType<? extends Skrimp> type, Level world) {
 		super(type, world);
 		this.moveControl = new Skrimp.MoveHelperController(this);
-		this.setMaxUpStep(1.5F);
+		this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.5F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -101,15 +103,17 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 
 	@Override
 	public void saveToBucketTag(ItemStack bucket) {
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
-		compoundnbt.putInt("Variant", this.getVariant());
+		Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putInt("Variant", this.getVariant());
+		});
 	}
 
-	@Override
-	public void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(VARIANT, 0);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(VARIANT, 0);
+    }
 
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
@@ -133,18 +137,14 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		if (dataTag == null) {
-			setVariant(random.nextInt(3));
-		} else {
-			if (dataTag.contains("Variant", 3)){
-				this.setVariant(dataTag.getInt("Variant"));
-			}
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
+		if (reason == MobSpawnType.NATURAL || reason == MobSpawnType.SPAWN_EGG || reason == MobSpawnType.STRUCTURE) {
+			this.setVariant(this.random.nextInt(3));
 		}
+
 		return spawnDataIn;
 	}
-
 	@Override
 	public ItemStack getBucketStack() {
 		return new ItemStack(UFItems.CORAL_SKRIMP_BUCKET.get());
@@ -196,8 +196,8 @@ public class Skrimp extends BucketableWaterAnimal implements GeoEntity {
 				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 				d1 = d1 / d3;
 				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.spider.yRot = this.rotlerp(this.spider.yRot, f, 90.0F);
-				this.spider.yBodyRot = this.spider.yRot;
+				this.spider.setYRot(this.rotlerp(this.spider.getYRot(), f, 90.0F));
+				this.spider.yBodyRot = this.spider.getYRot();
 				float f1 = (float) (this.speedModifier * this.spider.getAttributeValue(Attributes.MOVEMENT_SPEED));
 				this.spider.setSpeed(Mth.lerp(0.125F, this.spider.getSpeed(), f1));
 				this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, (double) this.spider.getSpeed() * d1 * 0.1D, 0.0D));

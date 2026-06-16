@@ -10,6 +10,7 @@ import codyhuh.unusualfishmod.core.registry.UFBlocks;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -44,15 +45,16 @@ import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -100,7 +102,9 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return stack.is(UFTags.RAW_UNUSUAL_FISH);
+        return true;
+        // TODO: tag
+//        return stack.is(UFTags.RAW_UNUSUAL_FISH);
     }
 
     @Nullable
@@ -169,9 +173,9 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FROM_BUCKET, false);
     }
 
     public void addAdditionalSaveData(CompoundTag tag) {
@@ -191,8 +195,9 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+            tag.putFloat("Health", this.getHealth());
+        });
     }
 
     public boolean requiresCustomPersistence() {
@@ -262,7 +267,7 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
     }
 
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (!isAddedToWorld()) {
+        if (this.isRemoved()) {
             return PlayState.STOP;
         }
 

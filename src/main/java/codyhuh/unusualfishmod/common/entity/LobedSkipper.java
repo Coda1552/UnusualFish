@@ -4,6 +4,7 @@ import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -27,19 +28,19 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
@@ -52,7 +53,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
         this.jumpControl = new SkipperJumpController();
         this.moveControl = new SkipperMoveController();
         this.setMovementSpeed(0.0D);
-        this.setMaxUpStep(1.1F);
+        this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.1F);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
@@ -82,11 +83,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     @Override
     public boolean causeFallDamage(float distance, float damageMultiplier, DamageSource source) {
         return false;
-    }
-
-    @Override
-    protected float getStandingEyeHeight(@Nonnull Pose pose, EntityDimensions size) {
-        return 0.2f * size.height;
     }
 
     @Override
@@ -177,7 +173,7 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     }
 
     @Override
-    protected void jumpFromGround() {
+    public void jumpFromGround() {
         super.jumpFromGround();
         double d0 = this.moveControl.getSpeedModifier();
 
@@ -221,12 +217,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
         }
     }
 
-    @Nonnull
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
     public class SkipperJumpController extends JumpControl {
         private boolean canJump;
 
@@ -256,9 +246,9 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FROM_BUCKET, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FROM_BUCKET, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
@@ -282,8 +272,10 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-        CompoundTag compoundnbt = bucket.getOrCreateTag();
-        compoundnbt.putFloat("Health", this.getHealth());
+    	Bucketable.saveDefaultDataToBucketTag(this, bucket);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+			tag.putFloat("Health", this.getHealth());
+		});
     }
 
     public boolean requiresCustomPersistence() {
