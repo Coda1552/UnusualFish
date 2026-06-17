@@ -81,10 +81,6 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
         return new ItemStack(UFItems.RHINO_TETRA_BUCKET.get());
     }
 
-    protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {
-        return InteractionResult.PASS;
-    }
-
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 1.0D, true));
