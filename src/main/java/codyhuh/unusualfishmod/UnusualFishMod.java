@@ -18,8 +18,6 @@ public class UnusualFishMod {
 		UFItems.ITEMS.register(bus);
 		UFTabs.CREATIVE_TABS.register(bus);
 		UFLootModifiers.LOOT_MODIFIERS.register(bus);
-// don't need this prob
-//		NeoForge.EVENT_BUS.register(this);
 	}
 
 	public static ResourceLocation loc(String path) {
