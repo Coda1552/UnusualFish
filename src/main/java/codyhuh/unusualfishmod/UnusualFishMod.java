@@ -1,12 +1,10 @@
 package codyhuh.unusualfishmod;
 
 import codyhuh.unusualfishmod.core.registry.*;
-import net.minecraft.core.MappedRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
 
 @Mod(UnusualFishMod.MOD_ID)
 public class UnusualFishMod {
@@ -20,7 +18,7 @@ public class UnusualFishMod {
 		UFItems.ITEMS.register(bus);
 		UFTabs.CREATIVE_TABS.register(bus);
 		UFLootModifiers.LOOT_MODIFIERS.register(bus);
-
+// don't need this prob
 //		NeoForge.EVENT_BUS.register(this);
 	}
 
@@ -28,3 +26,4 @@ public class UnusualFishMod {
 		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }
+

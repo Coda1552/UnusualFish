@@ -67,7 +67,7 @@ public class RhinoTetra extends BucketableSchoolingWaterAnimal implements GeoEnt
 
 	@Override
 	public ItemStack getBucketStack() {
-		return ItemStack.EMPTY;
+		return new ItemStack(UFItems.RHINO_TETRA_BUCKET.get());
 	}
 
 	protected InteractionResult mobInteract(Player p_27477_, InteractionHand p_27478_) {

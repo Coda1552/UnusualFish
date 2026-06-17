@@ -32,10 +32,10 @@ import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class SnowflakeTailFish extends BucketableSchoolingWaterAnimal implements GeoEntity {
+public class FrostyFinFish extends BucketableSchoolingWaterAnimal implements GeoEntity {
 	private boolean isSchool = true;
 
-	public SnowflakeTailFish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
+	public FrostyFinFish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
 		this.lookControl = new SmoothSwimmingLookControl(this, 10);
@@ -43,7 +43,7 @@ public class SnowflakeTailFish extends BucketableSchoolingWaterAnimal implements
 
 	@Override
 	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.SNOWFLAKE_TAIL_FISH_BUCKET.get());
+		return new ItemStack(UFItems.FROSTY_FIN_FISH_BUCKET.get());
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -107,7 +107,7 @@ public class SnowflakeTailFish extends BucketableSchoolingWaterAnimal implements
 		return SoundEvents.COD_FLOP;
 	}
 
-	public static boolean canSpawn(EntityType<SnowflakeTailFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+	public static boolean canSpawn(EntityType<FrostyFinFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
 		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
 	}
 

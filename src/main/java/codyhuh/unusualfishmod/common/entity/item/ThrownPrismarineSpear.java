@@ -79,7 +79,6 @@ public class ThrownPrismarineSpear extends AbstractArrow {
         Entity entity = result.getEntity();
         float f = 5.0F;
         if (entity instanceof LivingEntity livingentity && this.level() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-            // Todo: Chakyl check for crash with dispenser?
             DamageSource damageSource = this.damageSources().mobAttack((LivingEntity) this.getOwner());
             f = EnchantmentHelper.modifyDamage(serverLevel, this.spearItem, livingentity, damageSource, (float) this.getBaseDamage());
         }

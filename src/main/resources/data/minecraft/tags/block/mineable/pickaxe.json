@@ -19,6 +19,8 @@
     "unusualfishmod:relucent_tile_slab",
     "unusualfishmod:relucent_tile_wall",
     "unusualfishmod:nautical_lamp",
-    "unusualfishmod:sea_boom"
+    "unusualfishmod:sea_boom",
+    "unusualfishmod:copper_antenna",
+    "unusualfishmod:volt_detector"
   ]
 }

@@ -150,6 +150,14 @@ public class CopperflameAnthias extends BucketableSchoolingWaterAnimal implement
 		});
 	}
 
+	@Override
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("Variant", 3)) {
+			this.setVariant(tag.getInt("Variant"));
+		}
+	}
+	
 	public int getVariant() {
 		return this.entityData.get(VARIANT);
 	}

@@ -157,6 +157,14 @@ public class DemonHerring extends BucketableSchoolingWaterAnimal implements GeoE
 		});
 	}
 
+	@Override
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("Variant", 3)) {
+			this.setVariant(tag.getInt("Variant"));
+		}
+	}
+	
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {

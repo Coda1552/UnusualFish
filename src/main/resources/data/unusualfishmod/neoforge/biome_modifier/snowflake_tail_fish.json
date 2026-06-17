@@ -5,7 +5,7 @@
   ],
   "spawners":
   {
-    "type": "unusualfishmod:snowflaketail",
+    "type": "unusualfishmod:frostyfin",
     "weight": 20,
     "minCount": 3,
     "maxCount": 5

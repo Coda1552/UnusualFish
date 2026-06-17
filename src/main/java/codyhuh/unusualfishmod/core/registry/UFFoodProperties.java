@@ -21,7 +21,7 @@ public class UFFoodProperties {
     public static final FoodProperties RAW_SHOCKCAT = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build();
     public static final FoodProperties RAW_MOSSTHORN = new FoodProperties.Builder().nutrition(1).saturationModifier(0.1F).effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 1), 1.0F).build();
     public static final FoodProperties RAW_LOBSTER = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build();
-    public static final FoodProperties RAW_SNOWFLAKE = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 1), 1.0F).build();
+    public static final FoodProperties RAW_FROSTY_FIN = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 150, 1), 1.0F).build();
     public static final FoodProperties RAW_EYELASH = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build();
     public static final FoodProperties UNUSUAL_FILLET = new FoodProperties.Builder().nutrition(3).saturationModifier(0.15F).build();
     public static final FoodProperties RAW_PICKLEFISH = new FoodProperties.Builder().nutrition(2).saturationModifier(0.1F).build();

@@ -4,9 +4,7 @@
 	import codyhuh.unusualfishmod.common.item.*;
 	import net.minecraft.ChatFormatting;
 	import net.minecraft.Util;
-	import net.minecraft.core.Holder;
 	import net.minecraft.core.component.DataComponents;
-	import net.minecraft.core.registries.BuiltInRegistries;
 	import net.minecraft.network.chat.Component;
 	import net.minecraft.resources.ResourceLocation;
 	import net.minecraft.world.item.*;
@@ -35,7 +33,7 @@
 		// Foods
 		public static final DeferredItem<Item> RAW_EYELASH = ITEMS.register("raw_eyelash", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_EYELASH)));
 		public static final DeferredItem<Item> RAW_SPINDLEFISH = ITEMS.register("raw_spindlefish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SPINDLEFISH)));
-		public static final DeferredItem<Item> RAW_SNOWFLAKE = ITEMS.register("raw_snowflake", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_SNOWFLAKE)));
+		public static final DeferredItem<Item> RAW_FROSTY_FIN = ITEMS.register("raw_frosty_fin", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_FROSTY_FIN)));
 		public static final DeferredItem<Item> RAW_AERO_MONO = ITEMS.register("raw_aero_mono", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AERO_MONO)));
 		public static final DeferredItem<Item> RAW_PICKLEFSIH = ITEMS.register("raw_picklefish", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_PICKLEFISH)));
 		public static final DeferredItem<Item> RAW_AMBER_GOBY = ITEMS.register("raw_amber_goby", () -> new Item(new Item.Properties().food(UFFoodProperties.RAW_AMBER_GOBY)));
@@ -96,7 +94,7 @@
 
 		// Buckets
 		public static final DeferredItem<Item> AERO_MONO_BUCKET = ITEMS.register("aero_mono_bucket", () -> new UFFishBucketItem(UFEntities.AERO_MONO, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
-		//public static final DeferredItem<Item> RHINO_TETRA_BUCKET = ITEMS.register("rhino_tetra_bucket", () -> new UFFishBucketItem(UFEntities.RHINO_TETRA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
+		public static final DeferredItem<Item> RHINO_TETRA_BUCKET = ITEMS.register("rhino_tetra_bucket", () -> new UFFishBucketItem(UFEntities.RHINO_TETRA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> DUALITY_DAMSELFISH_BUCKET = ITEMS.register("duality_damselfish_bucket", () -> new UFFishBucketItem(UFEntities.DUALITY_DAMSELFISH, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> DROOPING_GOURAMI_BUCKET = ITEMS.register("drooping_gourami_bucket", () -> new UFFishBucketItem(UFEntities.DROOPING_GOURAMI, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> MOSSTHORN_BUCKET = ITEMS.register("mossthorn_bucket", () -> new UFFishBucketItem(UFEntities.MOSSTHORN, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
@@ -129,7 +127,7 @@
 		public static final DeferredItem<Item> CORAL_SKRIMP_BUCKET = ITEMS.register("coral_skrimp_bucket", () -> new UFFishBucketItem(UFEntities.CORAL_SKRIMP, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> CIRCUS_FISH_BUCKET = ITEMS.register("circus_fish_bucket", () -> new UFFishBucketItem(UFEntities.CIRCUS_FISH, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> EYELASH_FISH_BUCKET = ITEMS.register("eyelash_fish_bucket", () -> new UFFishBucketItem(UFEntities.EYELASH, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
-		public static final DeferredItem<Item> SNOWFLAKE_TAIL_FISH_BUCKET = ITEMS.register("snowflake_tail_fish_bucket", () -> new UFFishBucketItem(UFEntities.SNOWFLAKE, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
+		public static final DeferredItem<Item> FROSTY_FIN_FISH_BUCKET = ITEMS.register("frosty_fin_fish_bucket", () -> new UFFishBucketItem(UFEntities.FROSTY_FIN, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> CRIMSONSHELL_SQUID_BUCKET = ITEMS.register("crimsonshell_squid_bucket", () -> new UFFishBucketItem(UFEntities.CRIMSONSHELL_SQUID, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> VOLT_ANGLER_BUCKET = ITEMS.register("volt_angler_bucket", () -> new UFFishBucketItem(UFEntities.VOLT_ANGLER, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
 		public static final DeferredItem<Item> BLIZZARDFIN_BUCKET = ITEMS.register("blizzardfin_bucket", () -> new UFFishBucketItem(UFEntities.BLIZZARDFIN_TUNA, () -> Fluids.WATER, Items.BUCKET, false, new Item.Properties().stacksTo(1)));
@@ -191,7 +189,7 @@
 		public static final DeferredItem<SpawnEggItem> CIRCUS_FISH_SPAWN_EGG = ITEMS.register("circus_fish_spawn_egg", () -> new SpawnEggItem(UFEntities.CIRCUS_FISH.get(), 0xab4b36, 0xc88f62, new Item.Properties()));
 		public static final DeferredItem<SpawnEggItem> BLIZZARDFIN_SPAWN_EGG = ITEMS.register("blizzardfin_spawn_egg", () -> new SpawnEggItem(UFEntities.BLIZZARDFIN_TUNA.get(), 0x9ed7dc, 0x6182a6, new Item.Properties()));
 		public static final DeferredItem<SpawnEggItem> EYELASH_FISH_SPAWN_EGG = ITEMS.register("eyelash_fish_spawn_egg", () -> new SpawnEggItem(UFEntities.EYELASH.get(), 0xb7b7ba, 0xfcfcfa, new Item.Properties()));
-		public static final DeferredItem<SpawnEggItem> SNOWFLAKE_TAIL_FISH_SPAWN_EGG = ITEMS.register("snowflake_tail_fish_spawn_egg", () -> new SpawnEggItem(UFEntities.SNOWFLAKE.get(), 0x649ccc, 0xcbe8e6, new Item.Properties()));
+		public static final DeferredItem<SpawnEggItem> FROSTY_FIN_FISH_SPAWN_EGG = ITEMS.register("frosty_fin_fish_spawn_egg", () -> new SpawnEggItem(UFEntities.FROSTY_FIN.get(), 0x649ccc, 0xcbe8e6, new Item.Properties()));
 		public static final DeferredItem<SpawnEggItem> TIGER_JUNGLE_SHARK_SPAWN_EGG = ITEMS.register("tiger_jungle_shark_spawn_egg", () -> new SpawnEggItem(UFEntities.TIGER_JUNGLE_SHARK.get(), 0x272530, 0xa5a8c6, new Item.Properties()));
 		public static final DeferredItem<SpawnEggItem> CRIMSONSHELL_SQUID_SPAWN_EGG = ITEMS.register("crimsonshell_squid_spawn_egg", () -> new SpawnEggItem(UFEntities.CRIMSONSHELL_SQUID.get(), 0xab101c, 0x432c39, new Item.Properties()));
 		public static final DeferredItem<SpawnEggItem> VOLT_ANGLER_SPAWN_EGG = ITEMS.register("volt_angler_spawn_egg", () -> new SpawnEggItem(UFEntities.VOLT_ANGLER.get(), 0x2d4035, 0x509033, new Item.Properties()));

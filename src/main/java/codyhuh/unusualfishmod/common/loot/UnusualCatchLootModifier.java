@@ -8,55 +8,53 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
+import java.util.List;
 
 public class UnusualCatchLootModifier extends LootModifier {
 
-    public UnusualCatchLootModifier(LootItemCondition[] condition) {
-        super(condition);
+    public static final MapCodec<UnusualCatchLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, UnusualCatchLootModifier::new));
+
+    public UnusualCatchLootModifier(LootItemCondition[] conditions) {
+        super(conditions);
     }
 
-    // TODO: Chakyl test this
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-//        var tagOptional = BuiltInRegistries.ITEM.getOrCreateTag(UFTags.UNUSUAL_CATCH_ITEMS);
-//        var items = tagOptional.stream().map(Holder::value).toList();
-//        int size = items.size();
-//
-//        ObjectArrayList<ItemStack> ret = new ObjectArrayList<>();
-//        ItemStack stack = context.getParamOrNull(LootContextParams.TOOL);
-//
-//        if (stack != null) {
-//            Optional<Holder.Reference<Enchantment>> unusualCatch = context.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(UFEnchantments.UNUSUAL_CATCH);
-//            int i = 0;
-//            if (unusualCatch.isPresent()) {
-//                i = EnchantmentHelper.getItemEnchantmentLevel(unusualCatch.get(), stack);
-//            }
-//            if (stack.is(ItemTags.FISHING_ENCHANTABLE) && i > 0) {
-//                ret.add(new ItemStack(items.get(context.getRandom().nextInt(size))));
-//            }
-//            else {
-//                ret = generatedLoot;
-//            }
-//        }
-        return new ObjectArrayList<>();
-    }
+        List<ItemStack> items = BuiltInRegistries.ITEM.getTag(UFTags.UNUSUAL_CATCH_ITEMS).map(holderSet -> holderSet.stream().map(ItemStack::new).toList()).orElse(List.of());
 
-    public static final MapCodec<UnusualCatchLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, UnusualCatchLootModifier::new));
+        if (items.isEmpty()) {
+            return generatedLoot;
+        }
+        ItemStack stack = context.getParamOrNull(LootContextParams.TOOL);
+        if (stack != null) {
+            Holder.Reference<Enchantment> unusualCatch = context.getLevel().holderLookup(Registries.ENCHANTMENT).get(UFEnchantments.UNUSUAL_CATCH).orElse(null);
+            if (unusualCatch != null) {
+                int enchantmentLevel = EnchantmentHelper.getTagEnchantmentLevel(unusualCatch, stack);
+                if (stack.is(Tags.Items.TOOLS_FISHING_ROD) && enchantmentLevel > 0) {
+                    ObjectArrayList<ItemStack> ret = new ObjectArrayList<>();
+                    ret.add(items.get(context.getRandom().nextInt(items.size())));
+                    return ret;
+                }
+            }
+        }
+
+        return generatedLoot;
+    }
 
     @Override
     public MapCodec<? extends IGlobalLootModifier> codec() {
         return CODEC;
     }
 }
+

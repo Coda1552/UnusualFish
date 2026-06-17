@@ -14,13 +14,18 @@ import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 
@@ -36,9 +41,20 @@ public final class ClientEvents {
 		ItemProperties.register(UFItems.THUNDEROUS_SHELL.get(), loc("blowing"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		ItemProperties.register(UFItems.PRISMARINE_SPEAR.get(), loc("using"), (p_234978_, p_234979_, p_234980_, p_234981_) -> p_234980_ != null && p_234980_.isUsingItem() && p_234980_.getUseItem() == p_234978_ ? 1.0F : 0.0F);
 		///ItemProperties.register(UFItems.RIPSAW.get(), new ResourceLocation("sawing"), (stack, level, player, i) -> player != null && player.isUsingItem() && stack.hasTag() ? stack.getOrCreateTag().getFloat("SawingProgress") : 0.0F);
-//		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
-//		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
-//		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), loc("variant"), (stack, world, player, i) -> stack.hasTag() ? stack.getOrCreateTag().getInt("Variant") : 0);
+		ItemProperties.register(UFItems.CORAL_SKRIMP_BUCKET.get(), loc("variant"), (stack, level, entity, seed) -> getBucketVariant(stack));
+		ItemProperties.register(UFItems.COPPERFLAME_BUCKET.get(), loc("variant"), (stack, level, entity, seed) -> getBucketVariant(stack));
+		ItemProperties.register(UFItems.DEMON_HERRING_BUCKET.get(), loc("variant"), (stack, level, entity, seed) -> getBucketVariant(stack));
+	}
+
+	private static int getBucketVariant(ItemStack stack) {
+		CustomData customData = stack.get(DataComponents.BUCKET_ENTITY_DATA);
+		if (customData != null) {
+			CompoundTag tag = customData.copyTag();
+			if (customData.contains("Variant")) {
+				return tag.getInt("Variant");
+			}
+		}
+		return 0;
 	}
 
 	private static void make(EntityType type, String name){
@@ -55,7 +71,7 @@ public final class ClientEvents {
 				UFEntities.LOBED_SKIPPER.get(), UFEntities.MOSSTHORN.get(), UFEntities.MUDDYTOP_SNAIL.get(), UFEntities.PINKFIN.get(),
 				UFEntities.PORCUPINE_LOBSTA.get(), UFEntities.PRAWN.get(), UFEntities.RHINO_TETRA.get(), UFEntities.RIPPER.get(),
 				UFEntities.ROUGHBACK.get(), UFEntities.SAILOR_BARB.get(), UFEntities.SEA_MOSQUITO.get(),
-				UFEntities.SEA_PANCAKE.get(), UFEntities.SEA_SPIDER.get(), UFEntities.SNEEPSNORP.get(), UFEntities.SNOWFLAKE.get(),
+				UFEntities.SEA_PANCAKE.get(), UFEntities.SEA_SPIDER.get(), UFEntities.SNEEPSNORP.get(), UFEntities.FROSTY_FIN.get(),
 				UFEntities.SPINDLEFISH.get(), UFEntities.SPOON_SHARK.get(), UFEntities.SQUODDLE.get(), UFEntities.STOUT_BICHIR.get(),
 				UFEntities.TIGER_JUNGLE_SHARK.get(), UFEntities.TIGER_PUFFER.get(), UFEntities.TRIBBLE.get(), UFEntities.TRUMPET_SQUID.get(),
 				UFEntities.ZEBRA_CORNETFISH.get(), UFEntities.TRIPLE_TWIRL_PLECO.get(), // todo - triple twirl pleco variants

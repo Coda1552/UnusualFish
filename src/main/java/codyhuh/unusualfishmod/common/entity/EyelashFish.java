@@ -155,6 +155,14 @@ public class EyelashFish extends BucketableSchoolingWaterAnimal implements GeoEn
 	}
 
 	@Override
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("Variant", 3)) {
+			this.setVariant(tag.getInt("Variant"));
+		}
+	}
+	
+	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		super.defineSynchedData(builder);
 		builder.define(VARIANT, 0);

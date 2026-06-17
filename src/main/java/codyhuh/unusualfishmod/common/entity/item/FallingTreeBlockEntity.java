@@ -24,11 +24,6 @@ public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
     public FallingTreeBlockEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
-
-//    public FallingTreeBlockEntity(PlayMessages.SpawnEntity spawnEntity, Level level) {
-//        this(UFEntities.FALLING_TREE.get(), level);
-//        this.setBoundingBox(this.makeBoundingBox());
-//    }
     
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {

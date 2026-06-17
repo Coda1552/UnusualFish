@@ -2,17 +2,10 @@ package codyhuh.unusualfishmod.common;
 
 import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.*;
-import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
-import net.minecraft.core.Position;
-import net.minecraft.core.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -65,7 +58,7 @@ public class CommonEvents {
         e.register(UFEntities.CIRCUS_FISH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, CircusFish::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         e.register(UFEntities.BLIZZARDFIN_TUNA.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, BlizzardfinTuna::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         e.register(UFEntities.TIGER_JUNGLE_SHARK.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, TigerJungleShark::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
-        e.register(UFEntities.SNOWFLAKE.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, SnowflakeTailFish::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
+        e.register(UFEntities.FROSTY_FIN.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, FrostyFinFish::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         e.register(UFEntities.EYELASH.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, EyelashFish::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         e.register(UFEntities.CRIMSONSHELL_SQUID.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, CrimsonshellSquid::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
         e.register(UFEntities.VOLT_ANGLER.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, VoltAngler::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);
@@ -139,7 +132,7 @@ public class CommonEvents {
         event.put(UFEntities.CIRCUS_FISH.get(), CircusFish.createAttributes().build());
         event.put(UFEntities.BLIZZARDFIN_TUNA.get(), BlizzardfinTuna.createAttributes().build());
         event.put(UFEntities.EYELASH.get(), EyelashFish.createAttributes().build());
-        event.put(UFEntities.SNOWFLAKE.get(), SnowflakeTailFish.createAttributes().build());
+        event.put(UFEntities.FROSTY_FIN.get(), FrostyFinFish.createAttributes().build());
         event.put(UFEntities.TIGER_JUNGLE_SHARK.get(), TigerJungleShark.createAttributes().build());
         event.put(UFEntities.CRIMSONSHELL_SQUID.get(), CrimsonshellSquid.createAttributes().build());
         event.put(UFEntities.VOLT_ANGLER.get(), VoltAngler.createAttributes().build());
