@@ -47,13 +47,13 @@ public abstract class BucketableWaterAnimal extends WaterAnimal implements Bucke
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-		Bucketable.saveDefaultDataToBucketTag(this, bucket);
-		if (this.hasCustomName()) {
-			bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
-		}
-		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
-			tag.putFloat("Health", this.getHealth());
-		});
+        Bucketable.saveDefaultDataToBucketTag(this, bucket);
+        if (this.hasCustomName()) {
+            bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
+        }
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+            tag.putFloat("Health", this.getHealth());
+        });
     }
 
     public boolean requiresCustomPersistence() {

@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
@@ -19,7 +19,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.SmoothSwimmingLookControl;
@@ -27,12 +26,10 @@ import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.animal.axolotl.Axolotl;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
@@ -51,194 +48,191 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 
 public class EyelashFish extends BucketableSchoolingWaterAnimal implements GeoEntity {
-	private static final EntityDataAccessor<Boolean> ESCAPING = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.INT);
-	private boolean isSchool = true;
-	private static Path path;
+    private static final EntityDataAccessor<Boolean> ESCAPING = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(EyelashFish.class, EntityDataSerializers.INT);
+    private static Path path;
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final boolean isSchool = true;
 
-	public EyelashFish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true);
-		this.lookControl = new SmoothSwimmingLookControl(this, 10);
-	}
+    public EyelashFish(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.05F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.EYELASH_FISH_BUCKET.get());
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 2.0D);
-	}
+    public static boolean canSpawn(EntityType<EyelashFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
 
-	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-	}
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.EYELASH_FISH_BUCKET.get());
+    }
 
-	@Override
-	public boolean hurt(DamageSource p_21016_, float p_21017_) {
-		if (!isEscaping() && isInWater()) {
-			setEscaping(true);
-			path = getNavigation().createPath(blockPosition().relative(getDirection(), 10), 1);
-		}
-		return super.hurt(p_21016_, p_21017_);
-	}
+    protected void registerGoals() {
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && isInWater();
+            }
+        });
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+    }
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+    @Override
+    public boolean hurt(DamageSource p_21016_, float p_21017_) {
+        if (!isEscaping() && isInWater()) {
+            setEscaping(true);
+            path = getNavigation().createPath(blockPosition().relative(getDirection(), 10), 1);
+        }
+        return super.hurt(p_21016_, p_21017_);
+    }
 
-		if (isEscaping()) {
-			if (getNavigation().moveTo(path, 1.0D)) {
-				setSpeed(5.0F);
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-				if (path.isDone()) {
-					setEscaping(false);
-					setSpeed(1.0F);
-				}
-			}
-		}
+        if (isEscaping()) {
+            if (getNavigation().moveTo(path, 1.0D)) {
+                setSpeed(5.0F);
 
-		super.aiStep();
-	}
+                if (path.isDone()) {
+                    setEscaping(false);
+                    setSpeed(1.0F);
+                }
+            }
+        }
 
-	public int getMaxSpawnClusterSize() {
-		return 8;
-	}
+        super.aiStep();
+    }
 
-	public boolean isMaxGroupSizeReached(int p_30035_) {
-		return !this.isSchool;
-	}
+    public int getMaxSpawnClusterSize() {
+        return 8;
+    }
 
-	public int getMaxSchoolSize() {
-		return 10;
-	}
+    public boolean isMaxGroupSizeReached(int p_30035_) {
+        return !this.isSchool;
+    }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+    public int getMaxSchoolSize() {
+        return 10;
+    }
 
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	protected SoundEvent getHurtSound(DamageSource p_28281_) {
-		return SoundEvents.COD_HURT;
-	}
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	protected SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    protected SoundEvent getHurtSound(DamageSource p_28281_) {
+        return SoundEvents.COD_HURT;
+    }
 
-	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		Bucketable.saveDefaultDataToBucketTag(this, bucket);
-		if (this.hasCustomName()) {
-			bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
-		}
-		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
-			tag.putInt("Variant", this.getVariant());
-			tag.putFloat("Health", this.getHealth());
-		});
-	}
+    protected SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	@Override
-	public void loadFromBucketTag(CompoundTag tag) {
-		super.loadFromBucketTag(tag);
-		if (tag.contains("Variant", 3)) {
-			this.setVariant(tag.getInt("Variant"));
-		}
-	}
-	
-	@Override
-	protected void defineSynchedData(SynchedEntityData.Builder builder) {
-		super.defineSynchedData(builder);
-		builder.define(VARIANT, 0);
-		builder.define(ESCAPING, false);
-	}
+    @Override
+    public void saveToBucketTag(ItemStack bucket) {
+        Bucketable.saveDefaultDataToBucketTag(this, bucket);
+        if (this.hasCustomName()) {
+            bucket.set(DataComponents.CUSTOM_NAME, this.getCustomName());
+        }
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+            tag.putInt("Variant", this.getVariant());
+            tag.putFloat("Health", this.getHealth());
+        });
+    }
 
-	public int getVariant() {
-		return this.entityData.get(VARIANT);
-	}
+    @Override
+    public void loadFromBucketTag(CompoundTag tag) {
+        super.loadFromBucketTag(tag);
+        if (tag.contains("Variant", 3)) {
+            this.setVariant(tag.getInt("Variant"));
+        }
+    }
 
-	private void setVariant(int variant) {
-		this.entityData.set(VARIANT, variant);
-	}
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(VARIANT, 0);
+        builder.define(ESCAPING, false);
+    }
 
-	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("Variant", getVariant());
-	}
+    public int getVariant() {
+        return this.entityData.get(VARIANT);
+    }
 
-	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		setVariant(compound.getInt("Variant"));
-	}
+    private void setVariant(int variant) {
+        this.entityData.set(VARIANT, variant);
+    }
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		if (dataTag == null) {
-			setVariant(random.nextInt(15));
-		}
-		else {
-			if (dataTag.contains("Variant", 3)){
-				this.setVariant(dataTag.getInt("Variant"));
-			}
-		}
-		return spawnDataIn;
-	}
+    @Override
+    public void addAdditionalSaveData(CompoundTag compound) {
+        super.addAdditionalSaveData(compound);
+        compound.putInt("Variant", getVariant());
+    }
 
-	private boolean isEscaping() {
-		return this.entityData.get(ESCAPING);
-	}
+    @Override
+    public void readAdditionalSaveData(CompoundTag compound) {
+        super.readAdditionalSaveData(compound);
+        setVariant(compound.getInt("Variant"));
+    }
 
-	public void setEscaping(boolean escaping) {
-		this.entityData.set(ESCAPING, escaping);
-	}
+    @Nullable
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+        spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        if (dataTag == null) {
+            setVariant(random.nextInt(15));
+        } else {
+            if (dataTag.contains("Variant", 3)) {
+                this.setVariant(dataTag.getInt("Variant"));
+            }
+        }
+        return spawnDataIn;
+    }
 
-	public static boolean canSpawn(EntityType<EyelashFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-	}
+    private boolean isEscaping() {
+        return this.entityData.get(ESCAPING);
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    public void setEscaping(boolean escaping) {
+        this.entityData.set(ESCAPING, escaping);
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
-		return PlayState.CONTINUE;
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        } else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }

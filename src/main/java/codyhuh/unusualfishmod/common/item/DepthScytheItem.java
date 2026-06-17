@@ -1,7 +1,6 @@
 package codyhuh.unusualfishmod.common.item;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,24 +8,21 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.Optional;
 
 public class DepthScytheItem extends SwordItem {
 
     public DepthScytheItem(Tier tier, Properties properties) {
         super(tier, properties);
     }
+
     public float getDestroySpeed(ItemStack stack, BlockState state) {
         if (state.is(Blocks.COBWEB)) {
             return 15.0F;
-        }
-        else {
+        } else {
             return super.getDestroySpeed(stack, state);
         }
     }
@@ -55,7 +51,7 @@ public class DepthScytheItem extends SwordItem {
 
     @Override
     public void onCraftedBy(ItemStack stack, Level level, Player player) {
-        level.holderLookup(Registries.ENCHANTMENT).get(Enchantments.SWEEPING_EDGE) .ifPresent(enchant -> stack.enchant(enchant, 5));
+        level.holderLookup(Registries.ENCHANTMENT).get(Enchantments.SWEEPING_EDGE).ifPresent(enchant -> stack.enchant(enchant, 5));
         super.onCraftedBy(stack, level, player);
     }
 

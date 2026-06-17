@@ -25,8 +25,8 @@ public class BottomStrollGoal extends RandomStrollGoal {
         }
 
         int yDrop = 1 + this.mob.getRandom().nextInt(3);
-        if(vec != null){
-            BlockPos pos = new BlockPos(new Vec3i((int)vec.x, (int)vec.y, (int)vec.z));
+        if (vec != null) {
+            BlockPos pos = new BlockPos(new Vec3i((int) vec.x, (int) vec.y, (int) vec.z));
             while (this.mob.level().getFluidState(pos).is(FluidTags.WATER) && this.mob.level().getBlockState(pos).isPathfindable(PathComputationType.WATER) && pos.getY() > this.mob.level().getMinBuildHeight()) {
                 pos = pos.below();
             }

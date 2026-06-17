@@ -56,7 +56,7 @@ public class ThrownPrismarineSpear extends AbstractArrow {
     }
 
     protected ItemStack getPickupItem() {
-         if (this.spearItem == null) {
+        if (this.spearItem == null) {
             return new ItemStack(UFItems.PRISMARINE_SPEAR.get());
         }
         return this.spearItem.copy();

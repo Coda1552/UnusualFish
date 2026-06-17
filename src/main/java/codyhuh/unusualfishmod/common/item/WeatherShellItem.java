@@ -30,12 +30,10 @@ public class WeatherShellItem extends Item {
                 if (weather.equals("thunder") && !level.getLevelData().isThundering()) {
                     sl.setWeatherParameters(0, 1200, true, true);
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-                }
-                else if (weather.equals("rain") && !level.getLevelData().isRaining()) {
+                } else if (weather.equals("rain") && !level.getLevelData().isRaining()) {
                     sl.setWeatherParameters(0, 1200, true, false);
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
-                }
-                else if (weather.equals("clear") && (level.getLevelData().isRaining() || level.getLevelData().isThundering())) {
+                } else if (weather.equals("clear") && (level.getLevelData().isRaining() || level.getLevelData().isThundering())) {
                     sl.setWeatherParameters(36000, 0, false, false);
                     stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }

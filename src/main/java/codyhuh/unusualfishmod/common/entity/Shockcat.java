@@ -40,125 +40,123 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Shockcat extends BucketableWaterAnimal implements GeoEntity {
-	protected int attackCooldown = 0;
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    protected int attackCooldown = 0;
 
-	public Shockcat(EntityType<? extends WaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-		this.lookControl = new SmoothSwimmingLookControl(this, 10);
-	}
+    public Shockcat(EntityType<? extends WaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.SHOCKCAT_BUCKET.get());
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
-	}
+    public static <T extends Mob> boolean canSpawn(EntityType<Shockcat> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 10 && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && iServerWorld.getLightEmission(pos) < 8;
+    }
 
-	@Override
-	public void registerGoals() {
-		super.registerGoals();
-		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
-	}
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.SHOCKCAT_BUCKET.get());
+    }
 
-	public void tick() {
-		super.tick();
+    @Override
+    public void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractFish.class, false));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && isInWater();
+            }
+        });
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
+            @Override
+            public boolean canUse() {
+                return !this.mob.isInWater() && super.canUse();
+            }
+        });
+    }
 
-		if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
-			Vec3 vec3 = this.getViewVector(0.0F);
-			float f = Mth.cos(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
-			float f1 = Mth.sin(this.getYRot() * ((float)Math.PI / 180F)) * 0.3F;
+    public void tick() {
+        super.tick();
 
-		}
+        if (this.level().isClientSide && this.isInWater() && this.getDeltaMovement().lengthSqr() > 0.03D) {
+            Vec3 vec3 = this.getViewVector(0.0F);
+            float f = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
+            float f1 = Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * 0.3F;
 
-	}
+        }
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+    }
 
-		super.aiStep();
-	}
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+        super.aiStep();
+    }
 
-	public SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	public SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.COD_HURT;
-	}
+    public SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	public SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    public SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundEvents.COD_HURT;
+    }
 
-	@Override
-	public void playerTouch(Player entity) {
-		super.playerTouch(entity);
-		if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
-			entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 3, false, false));
-			entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 200, 2, false, false));
-			this.attackCooldown = 80;
-		}
-	}
+    public SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	public static <T extends Mob> boolean canSpawn(EntityType<Shockcat> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 10 && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && iServerWorld.getLightEmission(pos) < 8;
-	}
+    @Override
+    public void playerTouch(Player entity) {
+        super.playerTouch(entity);
+        if (!entity.isCreative() && this.attackCooldown == 0 && entity.level().getDifficulty() != Difficulty.PEACEFUL) {
+            entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 300, 3, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 200, 2, false, false));
+            this.attackCooldown = 80;
+        }
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (this.isRemoved()) {
-			return PlayState.STOP;
-		}
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (this.isRemoved()) {
+            return PlayState.STOP;
+        }
 
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
-		return PlayState.CONTINUE;
-	}
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        } else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }

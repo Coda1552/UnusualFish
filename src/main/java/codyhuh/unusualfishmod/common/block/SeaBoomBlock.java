@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -37,6 +36,7 @@ public class SeaBoomBlock extends BaseEntityBlock {
         super(p_49795_);
         this.registerDefaultState(this.stateDefinition.any().setValue(LOADED, false).setValue(HOSTILE_ONLY, false));
     }
+
     @Override
     public RenderShape getRenderShape(BlockState p_49232_) {
         return RenderShape.MODEL;
@@ -61,6 +61,7 @@ public class SeaBoomBlock extends BaseEntityBlock {
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
+
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return null;

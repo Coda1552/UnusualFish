@@ -39,19 +39,31 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Tribble extends BucketableWaterAnimal implements GeoEntity {
 
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public Tribble(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new Tribble.MoveHelperController(this);
         this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.0F);
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, 0.4D).add(Attributes.ARMOR, 10.0D);
+    }
+
+    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
+    }
+
+    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
+        float time = iServerWorld.getTimeOfDay(1.0F);
+        int light = iServerWorld.getMaxLocalRawBrightness(pos);
+        return light <= 4 && time > 0.27F && time <= 0.8F;
+    }
+
     @Override
     public ItemStack getBucketStack() {
         return new ItemStack(UFItems.TRIBBLE_BUCKET.get());
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, 0.4D).add(Attributes.ARMOR, 10.0D);
     }
 
     protected void registerGoals() {
@@ -85,14 +97,23 @@ public class Tribble extends BucketableWaterAnimal implements GeoEntity {
         return 0.5F;
     }
 
-    public static boolean canSpawn(EntityType<Tribble> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
     }
 
-    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-        float time = iServerWorld.getTimeOfDay(1.0F);
-        int light = iServerWorld.getMaxLocalRawBrightness(pos);
-        return light <= 4 && time > 0.27F && time <= 0.8F;
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.WALK);
+        } else {
+            event.setAnimation(UFAnimations.IDLE);
+        }
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     static class MoveHelperController extends MoveControl {
@@ -124,26 +145,5 @@ public class Tribble extends BucketableWaterAnimal implements GeoEntity {
                 this.spider.setSpeed(0.0F);
             }
         }
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-    }
-
-    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-        if (event.isMoving()) {
-            event.setAnimation(UFAnimations.WALK);
-        } else {
-            event.setAnimation(UFAnimations.IDLE);
-        }
-        return PlayState.CONTINUE;
-    }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 }

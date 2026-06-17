@@ -33,7 +33,7 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
         int arcs = Mth.clamp(Mth.floor(entityIn.tickCount / 5F), 1, 4);
         matrixStackIn.translate(0.0D, 0.0F, 0.4D);
 
-        for(int i = 0; i < arcs; i++){
+        for (int i = 0; i < arcs; i++) {
             matrixStackIn.pushPose();
             matrixStackIn.translate(0, 0, -0.5F * i);
             renderArc(matrixStackIn, bufferIn, (i + 1) * 5, entityIn.isFasterAnimation());
@@ -49,8 +49,7 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
         ResourceLocation res;
         if (fast) {
             res = getEntityTextureFaster(age);
-        }
-        else {
+        } else {
             res = getEntityTexture(age);
         }
         VertexConsumer ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(res));
@@ -75,14 +74,11 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
     public ResourceLocation getEntityTexture(int age) {
         if (age < 1) {
             return TEXTURE_0;
-        }
-        else if (age < 15) {
+        } else if (age < 15) {
             return TEXTURE_1;
-        }
-        else if (age < 40) {
+        } else if (age < 40) {
             return TEXTURE_2;
-        }
-        else {
+        } else {
             return TEXTURE_3;
         }
     }
@@ -90,14 +86,11 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
     public ResourceLocation getEntityTextureFaster(int age) {
         if (age < 6) {
             return TEXTURE_0;
-        }
-        else if (age < 9) {
+        } else if (age < 9) {
             return TEXTURE_1;
-        }
-        else if (age < 12) {
+        } else if (age < 12) {
             return TEXTURE_2;
-        }
-        else {
+        } else {
             return TEXTURE_3;
         }
     }

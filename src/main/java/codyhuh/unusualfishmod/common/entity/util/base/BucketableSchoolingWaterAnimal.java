@@ -111,8 +111,7 @@ public abstract class BucketableSchoolingWaterAnimal extends BucketableWaterAnim
                 if (this.getVariantN() == p_27536_.getVariantN()) {
                     p_27536_.startFollowing(this);
                 }
-            }
-            else {
+            } else {
                 p_27536_.startFollowing(this);
             }
         });
@@ -124,7 +123,7 @@ public abstract class BucketableSchoolingWaterAnimal extends BucketableWaterAnim
         if (p_27531_ == null) {
             p_27531_ = new BucketableSchoolingWaterAnimal.SchoolSpawnGroupData(this);
         } else {
-            this.startFollowing(((BucketableSchoolingWaterAnimal.SchoolSpawnGroupData)p_27531_).leader);
+            this.startFollowing(((BucketableSchoolingWaterAnimal.SchoolSpawnGroupData) p_27531_).leader);
         }
 
         return p_27531_;

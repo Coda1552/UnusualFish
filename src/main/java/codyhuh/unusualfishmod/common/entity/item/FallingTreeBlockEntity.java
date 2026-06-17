@@ -1,7 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.item;
 
 import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;
-import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +23,7 @@ public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
     public FallingTreeBlockEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
-    
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
@@ -94,12 +93,12 @@ public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
         return this.entityData.get(FALL_PROGRESS);
     }
 
-    public float getFallProgress(float partialTick) {
-        return prevFallProgress + (getFallProgress() - prevFallProgress) * partialTick;
-    }
-
     public void setFallProgress(float f) {
         this.entityData.set(FALL_PROGRESS, f);
+    }
+
+    public float getFallProgress(float partialTick) {
+        return prevFallProgress + (getFallProgress() - prevFallProgress) * partialTick;
     }
 
     public boolean canBePlaced() {

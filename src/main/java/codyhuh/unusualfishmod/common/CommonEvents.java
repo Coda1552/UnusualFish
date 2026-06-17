@@ -5,7 +5,6 @@ import codyhuh.unusualfishmod.common.entity.*;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -23,6 +22,7 @@ public class CommonEvents {
             DispenserBlock.registerProjectileBehavior(UFItems.PRISMARINE_SPEAR.get());
         });
     }
+
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent e) {
         e.register(UFEntities.AERO_MONO.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, AeroMono::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);

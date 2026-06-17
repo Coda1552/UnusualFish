@@ -43,6 +43,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(BlackCapSnail.class, EntityDataSerializers.BOOLEAN);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public BlackCapSnail(EntityType<? extends BlackCapSnail> type, Level world) {
         super(type, world);
@@ -52,6 +53,10 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.ARMOR, 4.0D);
+    }
+
+    public static <T extends Mob> boolean canSpawn(EntityType<BlackCapSnail> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
     }
 
     protected void registerGoals() {
@@ -119,6 +124,7 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
     public void setFromBucket(boolean p_203706_1_) {
         this.entityData.set(FROM_BUCKET, p_203706_1_);
     }
+
     @Override
     public void loadFromBucketTag(CompoundTag p_148832_) {
 
@@ -150,10 +156,6 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
         return SoundEvents.COD_HURT;
     }
 
-    public static <T extends Mob> boolean canSpawn(EntityType<BlackCapSnail> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -167,8 +169,6 @@ public class BlackCapSnail extends WaterAnimal implements Bucketable, GeoEntity 
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

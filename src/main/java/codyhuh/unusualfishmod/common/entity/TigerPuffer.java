@@ -37,19 +37,25 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
 
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public TigerPuffer(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
         this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+    }
+
+    public static boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
+
     @Override
     public ItemStack getBucketStack() {
         return new ItemStack(UFItems.TIGER_PUFFER_BUCKET.get());
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
 
     @Override
@@ -58,7 +64,7 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true) {
             @Override
             protected void checkAndPerformAttack(LivingEntity target) {
-                if (this.mob.isWithinMeleeAttackRange(target)  && this.isTimeToAttack()) {
+                if (this.mob.isWithinMeleeAttackRange(target) && this.isTimeToAttack()) {
                     this.mob.swing(InteractionHand.MAIN_HAND);
                     this.mob.doHurtTarget(target);
                     this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, 1.0F);
@@ -115,10 +121,6 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         return SoundEvents.COD_FLOP;
     }
 
-    public static boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -131,14 +133,11 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
             } else {
                 event.setAnimation(UFAnimations.IDLE);
             }
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.FLOP);
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

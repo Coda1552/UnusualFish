@@ -8,20 +8,21 @@ import net.neoforged.fml.common.Mod;
 
 @Mod(UnusualFishMod.MOD_ID)
 public class UnusualFishMod {
-	public static final String MOD_ID = "unusualfishmod";
-	public UnusualFishMod(IEventBus bus, ModContainer modContainer) {
+    public static final String MOD_ID = "unusualfishmod";
 
-		UFSounds.SOUND_EVENTS.register(bus);
-		UFBlocks.BLOCKS.register(bus);
-		UFBlockEntities.BLOCK_ENTITIES.register(bus);
-		UFEntities.ENTITIES.register(bus);
-		UFItems.ITEMS.register(bus);
-		UFTabs.CREATIVE_TABS.register(bus);
-		UFLootModifiers.LOOT_MODIFIERS.register(bus);
-	}
+    public UnusualFishMod(IEventBus bus, ModContainer modContainer) {
 
-	public static ResourceLocation loc(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-	}
+        UFSounds.SOUND_EVENTS.register(bus);
+        UFBlocks.BLOCKS.register(bus);
+        UFBlockEntities.BLOCK_ENTITIES.register(bus);
+        UFEntities.ENTITIES.register(bus);
+        UFItems.ITEMS.register(bus);
+        UFTabs.CREATIVE_TABS.register(bus);
+        UFLootModifiers.LOOT_MODIFIERS.register(bus);
+    }
+
+    public static ResourceLocation loc(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
 }
 

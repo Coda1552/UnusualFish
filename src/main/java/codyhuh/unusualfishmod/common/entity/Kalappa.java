@@ -29,12 +29,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Kalappa extends PathfinderMob implements GeoEntity {
 
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public Kalappa(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 40.0D).add(Attributes.MOVEMENT_SPEED, 0.25D).add(Attributes.ATTACK_DAMAGE, 8.0D).add(Attributes.ARMOR, 15.0D);
+    }
+
+    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
+        return worldIn.getBlockState(pos.below()).canOcclude();
     }
 
     protected void registerGoals() {
@@ -45,7 +51,7 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 0.65D, true) {
             @Override
             protected void checkAndPerformAttack(LivingEntity target) {
-                if (this.mob.isWithinMeleeAttackRange(target)  && this.isTimeToAttack()) {
+                if (this.mob.isWithinMeleeAttackRange(target) && this.isTimeToAttack()) {
                     this.mob.doHurtTarget(target);
                 }
             }
@@ -73,10 +79,6 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
         this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
-    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
-        return worldIn.getBlockState(pos.below()).canOcclude();
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -90,8 +92,6 @@ public class Kalappa extends PathfinderMob implements GeoEntity {
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

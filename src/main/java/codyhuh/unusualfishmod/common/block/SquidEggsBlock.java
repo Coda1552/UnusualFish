@@ -10,7 +10,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -31,7 +30,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.function.Supplier;
 
 public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedBlock {
-    private final Supplier<EntityType<? extends BreedableWaterAnimal>> entityType;
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     protected static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
@@ -40,6 +38,7 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     protected static final VoxelShape NORTH_AABB = Block.box(0, 0, 10, 16, 16, 16);
     protected static final VoxelShape EAST_AABB = Block.box(0, 0, 0, 6, 16, 16);
     protected static final VoxelShape WEST_AABB = Block.box(10, 0, 0, 16, 16, 16);
+    private final Supplier<EntityType<? extends BreedableWaterAnimal>> entityType;
 
     public SquidEggsBlock(Supplier<EntityType<? extends BreedableWaterAnimal>> tadpole, Properties p_221177_) {
         super(p_221177_);
@@ -105,13 +104,13 @@ public class SquidEggsBlock extends FrogspawnBlock implements SimpleWaterloggedB
     public void spawnTadpoles(ServerLevel p_221221_, BlockPos p_221222_, RandomSource p_221223_) {
         int i = p_221223_.nextInt(2, 6);
 
-        for(int j = 1; j <= i; ++j) {
+        for (int j = 1; j <= i; ++j) {
             BreedableWaterAnimal squid = entityType.get().create(p_221221_);
-            double d0 = (double)p_221222_.getX() + this.getRandomTadpolePositionOffset(p_221223_);
-            double d1 = (double)p_221222_.getZ() + this.getRandomTadpolePositionOffset(p_221223_);
+            double d0 = (double) p_221222_.getX() + this.getRandomTadpolePositionOffset(p_221223_);
+            double d1 = (double) p_221222_.getZ() + this.getRandomTadpolePositionOffset(p_221223_);
             int k = p_221223_.nextInt(1, 361);
             double facing = p_221221_.getBlockState(p_221222_).getValue(FACING).get3DDataValue() * 0.5D;
-            squid.moveTo(d0 + facing, (double)p_221222_.getY() + facing, d1 + facing, (float)k, 0.0F);
+            squid.moveTo(d0 + facing, (double) p_221222_.getY() + facing, d1 + facing, (float) k, 0.0F);
             squid.setPersistenceRequired();
             squid.setAge(-24000);
             p_221221_.addFreshEntity(squid);

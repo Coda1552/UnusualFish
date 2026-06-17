@@ -1,13 +1,10 @@
 package codyhuh.unusualfishmod.common.item;
 
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
-import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Position;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,7 +21,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
@@ -37,8 +37,6 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import java.util.List;
 
-import static codyhuh.unusualfishmod.UnusualFishMod.loc;
-
 public class PrismarineSpearItem extends Item implements ProjectileItem {
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float BASE_DAMAGE = 8.0F;
@@ -49,11 +47,15 @@ public class PrismarineSpearItem extends Item implements ProjectileItem {
     }
 
     public static ItemAttributeModifiers createAttributes() {
-        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double)8.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)-2.9F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
+        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 8.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.9F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
 
     public static Tool createToolProperties() {
         return new Tool(List.of(), 1.0F, 2);
+    }
+
+    private static boolean isTooDamagedToUse(ItemStack stack) {
+        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
     }
 
     public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
@@ -74,7 +76,7 @@ public class PrismarineSpearItem extends Item implements ProjectileItem {
             if (i >= 10) {
                 float f = EnchantmentHelper.getTridentSpinAttackStrength(stack, player);
                 if ((!(f > 0.0F) || player.isInWaterOrRain()) && !isTooDamagedToUse(stack)) {
-                    Holder<SoundEvent> holder = (Holder)EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+                    Holder<SoundEvent> holder = EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
                     if (!level.isClientSide) {
                         stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
                         if (f == 0.0F) {
@@ -85,7 +87,7 @@ public class PrismarineSpearItem extends Item implements ProjectileItem {
                             }
 
                             level.addFreshEntity(thrownSpear);
-                            level.playSound((Player)null, thrownSpear, (SoundEvent)holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            level.playSound(null, thrownSpear, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                             if (!player.hasInfiniteMaterials()) {
                                 player.getInventory().removeItem(stack);
                             }
@@ -96,21 +98,21 @@ public class PrismarineSpearItem extends Item implements ProjectileItem {
                     if (f > 0.0F) {
                         float f7 = player.getYRot();
                         float f1 = player.getXRot();
-                        float f2 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f1 * ((float)Math.PI / 180F));
-                        float f3 = -Mth.sin(f1 * ((float)Math.PI / 180F));
-                        float f4 = Mth.cos(f7 * ((float)Math.PI / 180F)) * Mth.cos(f1 * ((float)Math.PI / 180F));
+                        float f2 = -Mth.sin(f7 * ((float) Math.PI / 180F)) * Mth.cos(f1 * ((float) Math.PI / 180F));
+                        float f3 = -Mth.sin(f1 * ((float) Math.PI / 180F));
+                        float f4 = Mth.cos(f7 * ((float) Math.PI / 180F)) * Mth.cos(f1 * ((float) Math.PI / 180F));
                         float f5 = Mth.sqrt(f2 * f2 + f3 * f3 + f4 * f4);
                         f2 *= f / f5;
                         f3 *= f / f5;
                         f4 *= f / f5;
-                        player.push((double)f2, (double)f3, (double)f4);
+                        player.push(f2, f3, f4);
                         player.startAutoSpinAttack(20, 8.0F, stack);
                         if (player.onGround()) {
                             float f6 = 1.1999999F;
-                            player.move(MoverType.SELF, new Vec3((double)0.0F, (double)1.1999999F, (double)0.0F));
+                            player.move(MoverType.SELF, new Vec3(0.0F, 1.1999999F, 0.0F));
                         }
 
-                        level.playSound((Player)null, player, (SoundEvent)holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                        level.playSound(null, player, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
                 }
             }
@@ -128,10 +130,6 @@ public class PrismarineSpearItem extends Item implements ProjectileItem {
             player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
         }
-    }
-
-    private static boolean isTooDamagedToUse(ItemStack stack) {
-        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
     }
 
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {

@@ -2,13 +2,9 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
-import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -19,7 +15,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.JumpControl;
@@ -47,6 +46,11 @@ import javax.annotation.Nonnull;
 
 public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity {
     private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(LobedSkipper.class, EntityDataSerializers.BOOLEAN);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private int jumpTicks;
+    private int jumpDuration;
+    private boolean wasOnGround;
+    private int currentMoveTypeDuration;
 
     public LobedSkipper(EntityType<? extends PathfinderMob> entityType, Level level) {
         super(entityType, level);
@@ -57,7 +61,11 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 5.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
+    }
+
+    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
+        return worldIn.getBlockState(pos.below()).canOcclude();
     }
 
     protected void registerGoals() {
@@ -105,13 +113,8 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     @Override
     protected float getJumpPower() {
         float motion = super.getJumpPower();
-            return motion;
+        return motion;
     }
-
-    private int jumpTicks;
-    private int jumpDuration;
-    private boolean wasOnGround;
-    private int currentMoveTypeDuration;
 
     @Override
     public void customServerAiStep() {
@@ -217,34 +220,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
         }
     }
 
-    public class SkipperJumpController extends JumpControl {
-        private boolean canJump;
-
-        public SkipperJumpController() {
-            super(LobedSkipper.this);
-        }
-
-        public boolean getIsJumping() {
-            return this.jump;
-        }
-
-        public boolean canJump() {
-            return this.canJump;
-        }
-
-        public void setCanJump(boolean canJumpIn) {
-            this.canJump = canJumpIn;
-        }
-
-        @Override
-        public void tick() {
-            if (this.jump) {
-                startJumping();
-                this.jump = false;
-            }
-        }
-    }
-
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
@@ -272,10 +247,10 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
 
     @Override
     public void saveToBucketTag(ItemStack bucket) {
-    	Bucketable.saveDefaultDataToBucketTag(this, bucket);
-		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
-			tag.putFloat("Health", this.getHealth());
-		});
+        Bucketable.saveDefaultDataToBucketTag(this, bucket);
+        CustomData.update(DataComponents.BUCKET_ENTITY_DATA, bucket, (tag) -> {
+            tag.putFloat("Health", this.getHealth());
+        });
     }
 
     public boolean requiresCustomPersistence() {
@@ -304,10 +279,6 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
         return new ItemStack(UFItems.SKIPPER_BUCKET.get());
     }
 
-    public static boolean canSpawn(EntityType type, LevelAccessor worldIn, MobSpawnType reason, BlockPos pos, RandomSource randomIn) {
-        return worldIn.getBlockState(pos.below()).canOcclude();
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -316,18 +287,43 @@ public class LobedSkipper extends PathfinderMob implements Bucketable, GeoEntity
     private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
         if (event.isMoving()) {
             event.setAnimation(UFAnimations.SWIM);
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.IDLE);
         }
         return PlayState.CONTINUE;
     }
 
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return cache;
+    }
+
+    public class SkipperJumpController extends JumpControl {
+        private boolean canJump;
+
+        public SkipperJumpController() {
+            super(LobedSkipper.this);
+        }
+
+        public boolean getIsJumping() {
+            return this.jump;
+        }
+
+        public boolean canJump() {
+            return this.canJump;
+        }
+
+        public void setCanJump(boolean canJumpIn) {
+            this.canJump = canJumpIn;
+        }
+
+        @Override
+        public void tick() {
+            if (this.jump) {
+                startJumping();
+                this.jump = false;
+            }
+        }
     }
 
     public class SkipperMoveController extends MoveControl {

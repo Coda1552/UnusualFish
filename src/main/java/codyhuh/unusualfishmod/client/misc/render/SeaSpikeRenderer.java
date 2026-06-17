@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import static codyhuh.unusualfishmod.UnusualFishMod.loc;
 
 public class SeaSpikeRenderer extends ArrowRenderer<SeaSpike> {
-   public static final ResourceLocation LOCATION = loc("textures/entity/item/sea_spike.png");
+    public static final ResourceLocation LOCATION = loc("textures/entity/item/sea_spike.png");
 
-   public SeaSpikeRenderer(EntityRendererProvider.Context p_174399_) {
-      super(p_174399_);
-   }
+    public SeaSpikeRenderer(EntityRendererProvider.Context p_174399_) {
+        super(p_174399_);
+    }
 
-   public ResourceLocation getTextureLocation(SeaSpike p_116001_) {
-      return LOCATION;
-   }
+    public ResourceLocation getTextureLocation(SeaSpike p_116001_) {
+        return LOCATION;
+    }
 }

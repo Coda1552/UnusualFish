@@ -1,7 +1,7 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.base.BucketableSchoolingWaterAnimal;
+import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
@@ -33,108 +33,106 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Mossthorn extends BucketableSchoolingWaterAnimal implements GeoEntity {
-	private boolean isSchool = true;
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private final boolean isSchool = true;
 
-	public Mossthorn(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-		this.lookControl = new SmoothSwimmingLookControl(this, 10);
-	}
+    public Mossthorn(EntityType<? extends BucketableSchoolingWaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.MOSSTHORN_BUCKET.get());
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 10.0D);
-	}
+    public static boolean canSpawn(EntityType<Mossthorn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 40;
+    }
 
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
-		this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-	}
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.MOSSTHORN_BUCKET.get());
+    }
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && isInWater();
+            }
+        });
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
+            @Override
+            public boolean canUse() {
+                return !this.mob.isInWater() && super.canUse();
+            }
+        });
+        this.goalSelector.addGoal(4, new FollowSchoolLeaderGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+    }
 
-		super.aiStep();
-	}
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+        super.aiStep();
+    }
 
-	public int getMaxSpawnClusterSize() {
-		return 5;
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	public boolean isMaxGroupSizeReached(int p_30035_) {
-		return !this.isSchool;
-	}
+    public int getMaxSpawnClusterSize() {
+        return 5;
+    }
 
-	public int getMaxSchoolSize() {
-		return 7;
-	}
+    public boolean isMaxGroupSizeReached(int p_30035_) {
+        return !this.isSchool;
+    }
 
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    public int getMaxSchoolSize() {
+        return 7;
+    }
 
-	protected SoundEvent getHurtSound(DamageSource p_28281_) {
-		return SoundEvents.COD_HURT;
-	}
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	protected SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    protected SoundEvent getHurtSound(DamageSource p_28281_) {
+        return SoundEvents.COD_HURT;
+    }
 
-	public static boolean canSpawn(EntityType<Mossthorn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && pos.getY() <= 40;
-	}
+    protected SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
-		return PlayState.CONTINUE;
-	}
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        } else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }

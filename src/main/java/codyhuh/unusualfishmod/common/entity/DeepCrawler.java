@@ -36,109 +36,110 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class DeepCrawler extends BucketableWaterAnimal implements GeoEntity {
 
-	public DeepCrawler(EntityType<? extends DeepCrawler> type, Level world) {
-		super(type, world);
-		this.moveControl = new DeepCrawler.MoveHelperController(this);
-		this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.0F);
-	}
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, (double) 0.5F).add(Attributes.ARMOR, 10.0D);
-	}
+    public DeepCrawler(EntityType<? extends DeepCrawler> type, Level world) {
+        super(type, world);
+        this.moveControl = new DeepCrawler.MoveHelperController(this);
+        this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.0F);
+    }
 
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8F));
-		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.8F));
-		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(4, new AvoidEntityGoal(this, Player.class, 8, 1.3D, 1.0D));
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D).add(Attributes.MOVEMENT_SPEED, 0.5F).add(Attributes.ARMOR, 10.0D);
+    }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new GroundPathNavigation(this, level());
-	}
+    public static boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
+    }
 
-	@Override
-	public void handleAirSupply(int p_209207_1_) {
-	}
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8F));
+        this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.8F));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new AvoidEntityGoal(this, Player.class, 8, 1.3D, 1.0D));
+    }
 
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.CRAB_CHATTER.get();
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new GroundPathNavigation(this, level());
+    }
 
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    @Override
+    public void handleAirSupply(int p_209207_1_) {
+    }
 
-	protected SoundEvent getHurtSound(DamageSource p_28281_) {
-		return SoundEvents.COD_HURT;
-	}
+    protected SoundEvent getAmbientSound() {
+        return UFSounds.CRAB_CHATTER.get();
+    }
 
-	protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
-		this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
-	}
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.DEEP_CRAWLER_BUCKET.get());
-	}
+    protected SoundEvent getHurtSound(DamageSource p_28281_) {
+        return SoundEvents.COD_HURT;
+    }
 
-	public static boolean canSpawn(EntityType<DeepCrawler> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).is(Blocks.WATER) && iServerWorld.getBlockState(pos.above()).is(Blocks.WATER) && pos.getY() <= 20 && iServerWorld.getLightEmission(pos) < 8;
-	}
+    protected void playStepSound(BlockPos p_33804_, BlockState p_33805_) {
+        this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.DEEP_CRAWLER_BUCKET.get());
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (event.isMoving()) {
-			event.setAnimation(UFAnimations.WALK);
-		} else {
-			event.setAnimation(UFAnimations.IDLE);
-		}
-		return PlayState.CONTINUE;
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (event.isMoving()) {
+            event.setAnimation(UFAnimations.WALK);
+        } else {
+            event.setAnimation(UFAnimations.IDLE);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 
-	static class MoveHelperController extends MoveControl {
+    static class MoveHelperController extends MoveControl {
 
-		private final Mob spider;
+        private final Mob spider;
 
-		MoveHelperController(Mob spider) {
-			super(spider);
-			this.spider = spider;
-		}
-		public void tick() {
-			if (this.spider.isEyeInFluid(FluidTags.WATER)) {
-				this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, 0.0D, 0.0D));
-			}
+        MoveHelperController(Mob spider) {
+            super(spider);
+            this.spider = spider;
+        }
 
-			if (this.operation == Operation.MOVE_TO && !this.spider.getNavigation().isDone()) {
-				double d0 = this.wantedX - this.spider.getX();
-				double d1 = this.wantedY - this.spider.getY();
-				double d2 = this.wantedZ - this.spider.getZ();
-				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
-				d1 = d1 / d3;
-				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.spider.setYRot(this.rotlerp(this.spider.getYRot(), f, 90.0F));
-				this.spider.yBodyRot = this.spider.getYRot();
-				float f1 = (float) (this.speedModifier * this.spider.getAttributeValue(Attributes.MOVEMENT_SPEED));
-				this.spider.setSpeed(Mth.lerp(0.125F, this.spider.getSpeed(), f1));
-				this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, (double) this.spider.getSpeed() * d1 * 0.1D, 0.0D));
-			} else {
-				this.spider.setSpeed(0.0F);
-			}
-		}
+        public void tick() {
+            if (this.spider.isEyeInFluid(FluidTags.WATER)) {
+                this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, 0.0D, 0.0D));
+            }
 
-	}
+            if (this.operation == Operation.MOVE_TO && !this.spider.getNavigation().isDone()) {
+                double d0 = this.wantedX - this.spider.getX();
+                double d1 = this.wantedY - this.spider.getY();
+                double d2 = this.wantedZ - this.spider.getZ();
+                double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
+                d1 = d1 / d3;
+                float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
+                this.spider.setYRot(this.rotlerp(this.spider.getYRot(), f, 90.0F));
+                this.spider.yBodyRot = this.spider.getYRot();
+                float f1 = (float) (this.speedModifier * this.spider.getAttributeValue(Attributes.MOVEMENT_SPEED));
+                this.spider.setSpeed(Mth.lerp(0.125F, this.spider.getSpeed(), f1));
+                this.spider.setDeltaMovement(this.spider.getDeltaMovement().add(0.0D, (double) this.spider.getSpeed() * d1 * 0.1D, 0.0D));
+            } else {
+                this.spider.setSpeed(0.0F);
+            }
+        }
+
+    }
 }
 
 

@@ -35,85 +35,84 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class CircusFish extends BucketableWaterAnimal implements GeoEntity {
 
-	public CircusFish(EntityType<? extends WaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
-	}
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
-	}
+    public CircusFish(EntityType<? extends WaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 85, 10, 0.02F, 0.1F, true);
+    }
 
-	protected void registerGoals() {
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1));
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
+    }
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+    public static boolean canSpawn(EntityType<CircusFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
 
-		super.aiStep();
-	}
+    protected void registerGoals() {
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1));
+    }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+        super.aiStep();
+    }
 
-	protected SoundEvent getHurtSound(DamageSource p_28281_) {
-		return SoundEvents.COD_HURT;
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	protected SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	@Override
-	public ItemStack getBucketStack() {
-		return new ItemStack(UFItems.CIRCUS_FISH_BUCKET.get());
-	}
+    protected SoundEvent getHurtSound(DamageSource p_28281_) {
+        return SoundEvents.COD_HURT;
+    }
 
-	public static boolean canSpawn(EntityType<CircusFish> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-	}
+    protected SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    @Override
+    public ItemStack getBucketStack() {
+        return new ItemStack(UFItems.CIRCUS_FISH_BUCKET.get());
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (this.isRemoved()) {
-			return PlayState.STOP;
-		}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
-		return PlayState.CONTINUE;
-	}
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (this.isRemoved()) {
+            return PlayState.STOP;
+        }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        } else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }

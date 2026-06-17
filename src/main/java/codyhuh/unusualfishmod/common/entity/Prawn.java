@@ -33,12 +33,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Prawn extends Monster implements GeoEntity {
 
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
     public Prawn(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 16.0D).add(Attributes.MOVEMENT_SPEED, 0.6F).add(Attributes.ATTACK_DAMAGE, 5.0D);
+    }
+
+    public static boolean canSpawn(EntityType<Prawn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || !iServerWorld.canSeeSky(pos) && pos.getY() <= 20 && checkMonsterSpawnRules(entityType, iServerWorld, reason, pos, random);
     }
 
     protected void registerGoals() {
@@ -85,10 +91,6 @@ public class Prawn extends Monster implements GeoEntity {
         this.playSound(UFSounds.CRAB_SCUTTLING.get(), 0.15F, 1.0F);
     }
 
-    public static boolean canSpawn(EntityType<Prawn> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || !iServerWorld.canSeeSky(pos) && pos.getY() <= 20 && checkMonsterSpawnRules(entityType, iServerWorld, reason, pos, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -106,8 +108,6 @@ public class Prawn extends Monster implements GeoEntity {
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

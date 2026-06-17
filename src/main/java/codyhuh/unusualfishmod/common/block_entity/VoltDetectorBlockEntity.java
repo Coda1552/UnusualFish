@@ -16,19 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VoltDetectorBlockEntity extends BlockEntity {
-    private static List<LivingEntity> anglersList = new ArrayList<>(5);
+    private static final List<LivingEntity> anglersList = new ArrayList<>(5);
     private static List<LivingEntity> currentList = new ArrayList<>(5);
 
     public VoltDetectorBlockEntity(BlockPos pos, BlockState state) {
         super(UFBlockEntities.VOLT_DETECTOR.get(), pos, state);
-    }
-
-    public final List<LivingEntity> getAnglerList() {
-        return currentList;
-    }
-
-    public void addAnglerToList(LivingEntity obj) {
-        currentList.add(obj);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, VoltDetectorBlockEntity voltDetector) {
@@ -50,7 +42,7 @@ public class VoltDetectorBlockEntity extends BlockEntity {
 
         if (level.hasChunksAt(pos, pos) && state.is(UFBlocks.VOLT_DETECTOR.get()) && !level.getBlockState(pos).isAir() && level.getBlockState(pos).getValue(VoltDetectorBlock.ANGLERS) != anglers) {
             level.setBlock(pos, state.setValue(VoltDetectorBlock.ANGLERS, Math.min(anglers, 5)), 3);
-            ((VoltDetectorBlock)state.getBlock()).updateNeighbours(level, pos);
+            ((VoltDetectorBlock) state.getBlock()).updateNeighbours(level, pos);
         }
     }
 
@@ -66,9 +58,9 @@ public class VoltDetectorBlockEntity extends BlockEntity {
         if (level.getBlockEntity(pos) instanceof VoltDetectorBlockEntity voltDetector && level.hasChunksAt(blockpos, blockpos1)) {
             BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-            for(int i = blockpos.getX(); i <= blockpos1.getX(); ++i) {
-                for(int j = blockpos.getY(); j <= blockpos1.getY(); ++j) {
-                    for(int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k) {
+            for (int i = blockpos.getX(); i <= blockpos1.getX(); ++i) {
+                for (int j = blockpos.getY(); j <= blockpos1.getY(); ++j) {
+                    for (int k = blockpos.getZ(); k <= blockpos1.getZ(); ++k) {
                         mutablePos.set(i, j, k);
 
                         int anglers = currentList.size();
@@ -85,5 +77,13 @@ public class VoltDetectorBlockEntity extends BlockEntity {
                 }
             }
         }
+    }
+
+    public final List<LivingEntity> getAnglerList() {
+        return currentList;
+    }
+
+    public void addAnglerToList(LivingEntity obj) {
+        currentList.add(obj);
     }
 }

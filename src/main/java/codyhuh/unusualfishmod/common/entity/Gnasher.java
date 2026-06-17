@@ -38,160 +38,157 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class Gnasher extends WaterAnimal implements RangedAttackMob, GeoEntity {
-	protected int attackCooldown = 0;
-	private int attackAnimationTick;
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    protected int attackCooldown = 0;
+    private int attackAnimationTick;
 
-	public Gnasher(EntityType<? extends WaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 45, 10, 0.02F, 0.1F, true);
-		this.lookControl = new SmoothSwimmingLookControl(this, 10);
-	}
+    public Gnasher(EntityType<? extends WaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 45, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 60.0D).add(Attributes.MOVEMENT_SPEED, (double) 1.0D)
-				.add(Attributes.ATTACK_DAMAGE, 8.0D);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 60.0D).add(Attributes.MOVEMENT_SPEED, 1.0D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D);
+    }
 
-	protected void registerGoals() {
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.5D, 20, 10.0F));
-		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.6F));
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Animal.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Squid.class, true));
-	}
+    public static boolean canSpawn(EntityType<Gnasher> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
+    }
 
-	@Override
-	public void performRangedAttack(LivingEntity target, float distanceFactor) {
-		this.lookAt(target, 100, 100);
-		this.yBodyRot = yBodyRotO;
-		AbyssalBlast glass = new AbyssalBlast(this.level(), this);
-		double xDistance = target.getX() - this.getX();
-		double yDistance = target.getY(0.3333333333333333D) - glass.getY();
-		double zDistance = target.getZ() - this.getZ();
-		double yMath = Mth.sqrt((float) ((xDistance * xDistance) + (zDistance * zDistance)));
-		glass.shoot(xDistance, yDistance + yMath * 0.10000000298023224D, zDistance, 1.6F, 11.0F);
-		this.level().addFreshEntity(glass);
-	}
+    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
+        float time = iServerWorld.getTimeOfDay(1.0F);
+        int light = iServerWorld.getMaxLocalRawBrightness(pos);
+        return light <= 4 && time > 0.27F && time <= 0.8F;
+    }
 
-	@Override
-	public boolean doHurtTarget(Entity entityIn) {
-		this.attackAnimationTick = 10;
-		this.level().broadcastEntityEvent(this, (byte)4);
-		float f = this.getAttackDamage();
-		float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-		boolean flag = this.level() instanceof ServerLevel && entityIn.hurt(damageSources().mobAttack(this), f1);
-		if (flag) {
-			entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, (double)0.4F, 0.0D));
-			EnchantmentHelper.doPostAttackEffects((ServerLevel) this.level(), entityIn, this.damageSources().mobAttack(this));
-		}
-		return flag;
-	}
+    protected void registerGoals() {
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(1, new RangedAttackGoal(this, 0.5D, 20, 10.0F));
+        this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 0.6F));
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 1.0D, 1) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && isInWater();
+            }
+        });
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1.0D, 15) {
+            @Override
+            public boolean canUse() {
+                return !this.mob.isInWater() && super.canUse();
+            }
+        });
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Animal.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Villager.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Squid.class, true));
+    }
 
-	public void tick() {
-		super.tick();
+    @Override
+    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+        this.lookAt(target, 100, 100);
+        this.yBodyRot = yBodyRotO;
+        AbyssalBlast glass = new AbyssalBlast(this.level(), this);
+        double xDistance = target.getX() - this.getX();
+        double yDistance = target.getY(0.3333333333333333D) - glass.getY();
+        double zDistance = target.getZ() - this.getZ();
+        double yMath = Mth.sqrt((float) ((xDistance * xDistance) + (zDistance * zDistance)));
+        glass.shoot(xDistance, yDistance + yMath * 0.10000000298023224D, zDistance, 1.6F, 11.0F);
+        this.level().addFreshEntity(glass);
+    }
 
-		if (this.attackCooldown > 0) {
-			this.attackCooldown--;
-		}
-	}
+    @Override
+    public boolean doHurtTarget(Entity entityIn) {
+        this.attackAnimationTick = 10;
+        this.level().broadcastEntityEvent(this, (byte) 4);
+        float f = this.getAttackDamage();
+        float f1 = (int) f > 0 ? f / 2.0F + (float) this.random.nextInt((int) f) : f;
+        boolean flag = this.level() instanceof ServerLevel && entityIn.hurt(damageSources().mobAttack(this), f1);
+        if (flag) {
+            entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4F, 0.0D));
+            EnchantmentHelper.doPostAttackEffects((ServerLevel) this.level(), entityIn, this.damageSources().mobAttack(this));
+        }
+        return flag;
+    }
 
+    public void tick() {
+        super.tick();
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+        if (this.attackCooldown > 0) {
+            this.attackCooldown--;
+        }
+    }
 
-		super.aiStep();
-		if (this.attackAnimationTick > 0) {
-			--this.attackAnimationTick;
-		}
-	}
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+        super.aiStep();
+        if (this.attackAnimationTick > 0) {
+            --this.attackAnimationTick;
+        }
+    }
 
-	private float getAttackDamage() {
-		return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	public void handleEntityEvent(byte p_28844_) {
-		if (p_28844_ == 4) {
-			this.attackAnimationTick = 10;
-		}
-		super.handleEntityEvent(p_28844_);
-	}
+    private float getAttackDamage() {
+        return (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+    }
 
-	public int getAttackAnimationTick() {
-		return this.attackAnimationTick;
-	}
+    public void handleEntityEvent(byte p_28844_) {
+        if (p_28844_ == 4) {
+            this.attackAnimationTick = 10;
+        }
+        super.handleEntityEvent(p_28844_);
+    }
 
-	protected SoundEvent getAmbientSound() {
-		return UFSounds.GNASHER_IDLE.get();
-	}
+    public int getAttackAnimationTick() {
+        return this.attackAnimationTick;
+    }
 
-	protected SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    protected SoundEvent getAmbientSound() {
+        return UFSounds.GNASHER_IDLE.get();
+    }
 
-	protected SoundEvent getHurtSound(DamageSource p_28281_) {
-		return SoundEvents.COD_HURT;
-	}
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	protected SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    protected SoundEvent getHurtSound(DamageSource p_28281_) {
+        return SoundEvents.COD_HURT;
+    }
 
-	public static boolean canSpawn(EntityType<Gnasher> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-		return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
-	}
+    protected SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-		float time = iServerWorld.getTimeOfDay(1.0F);
-		int light = iServerWorld.getMaxLocalRawBrightness(pos);
-		return light <= 4 && time > 0.27F && time <= 0.8F;
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        } else {
+            event.setAnimation(UFAnimations.FLOP);
+        }
+        return PlayState.CONTINUE;
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		else {
-			event.setAnimation(UFAnimations.FLOP);
-		}
-		return PlayState.CONTINUE;
-	}
-
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }
