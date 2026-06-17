@@ -24,18 +24,27 @@ public class ThrownPrismarineSpear extends AbstractArrow {
     private ItemStack spearItem = new ItemStack(UFItems.PRISMARINE_SPEAR.get());
     private boolean dealtDamage;
 
-    public ThrownPrismarineSpear(EntityType<? extends AbstractArrow> p_36711_, double p_36712_, double p_36713_, double p_36714_, Level p_36715_) {
-        this(p_36711_, p_36715_);
-        this.setPos(p_36712_, p_36713_, p_36714_);
+    public ThrownPrismarineSpear(EntityType<? extends ThrownPrismarineSpear> entityType, Level level) {
+        super(entityType, level);
     }
 
-    public ThrownPrismarineSpear(EntityType<? extends AbstractArrow> p_37561_, Level p_37562_) {
-        super(p_37561_, p_37562_);
+    public ThrownPrismarineSpear(Level level, double x, double y, double z, ItemStack pickupItemStack) {
+        super(UFEntities.PRISMARINE_SPEAR.get(), level);
+        this.setPos(x, y, z);
+        this.spearItem = pickupItemStack.copy();
+    }
+
+    public ThrownPrismarineSpear(EntityType<? extends ThrownPrismarineSpear> entityType, double x, double y, double z, Level level) {
+        this(entityType, level);
+        this.setPos(x, y, z);
+
     }
 
     public ThrownPrismarineSpear(Level level, LivingEntity livingEntity, ItemStack itemStack) {
-        super(UFEntities.PRISMARINE_SPEAR.get(), livingEntity, level, itemStack, ItemStack.EMPTY);
+        super(UFEntities.PRISMARINE_SPEAR.get(), level);
         this.spearItem = itemStack.copy();
+        this.setOwner(livingEntity);
+        this.setPos(livingEntity.getX(), livingEntity.getEyeY(), livingEntity.getZ());
     }
 
     public void tick() {
@@ -47,11 +56,17 @@ public class ThrownPrismarineSpear extends AbstractArrow {
     }
 
     protected ItemStack getPickupItem() {
+         if (this.spearItem == null) {
+            return new ItemStack(UFItems.PRISMARINE_SPEAR.get());
+        }
         return this.spearItem.copy();
     }
 
     @Override
     protected ItemStack getDefaultPickupItem() {
+        if (this.spearItem == null) {
+            return new ItemStack(UFItems.PRISMARINE_SPEAR.get());
+        }
         return this.spearItem.copy();
     }
 

@@ -26,19 +26,10 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent e) {
-        // TODO: chakyl dispense
-//        e.enqueueWork(() -> {
-//            DispenserBlock.registerBehavior(UFItems.PRISMARINE_SPEAR.get(), new ProjectileDispenseBehavior(UFItems.PRISMARINE_SPEAR.get()) {
-//                @Override
-//                protected Projectile getProjectile(Level level, Position pos, ItemStack stack) {
-//                    ThrownPrismarineSpear spear = new ThrownPrismarineSpear(UFEntities.PRISMARINE_SPEAR.get(), pos.x(), pos.y(), pos.z(), level);
-//                    spear.pickup = AbstractArrow.Pickup.ALLOWED;
-//                    return spear;
-//                }
-//            });
-//        });
+        e.enqueueWork(() -> {
+            DispenserBlock.registerProjectileBehavior(UFItems.PRISMARINE_SPEAR.get());
+        });
     }
-
     @SubscribeEvent
     public static void registerSpawnPlacements(RegisterSpawnPlacementsEvent e) {
         e.register(UFEntities.AERO_MONO.get(), SpawnPlacementTypes.IN_WATER, Heightmap.Types.WORLD_SURFACE, AeroMono::canSpawn, RegisterSpawnPlacementsEvent.Operation.REPLACE);

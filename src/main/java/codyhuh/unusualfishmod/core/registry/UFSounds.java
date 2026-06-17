@@ -22,7 +22,9 @@ public class UFSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SMALL_ENEMY = createSoundEvent("small_enemy");
     public static final DeferredHolder<SoundEvent, SoundEvent> SAWING = createSoundEvent("sawing");
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_DISC_SEAFOAM = createSoundEvent("seafoam");
+
     public static final ResourceKey<JukeboxSong> SEAFOAM_SONG = ResourceKey.create( Registries.JUKEBOX_SONG, UnusualFishMod.loc("seafoam"));
+
     private static DeferredHolder<SoundEvent, SoundEvent> createSoundEvent(final String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(loc(name)));
     }

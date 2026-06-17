@@ -80,8 +80,7 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
                 return !this.mob.isInWater() && super.canUse();
             }
         });
-        // TODO: Tag fix
-//        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false, e -> e.getType().is(UFTags.TIGER_PUFFER_PREY)));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, false, e -> e.getType().is(UFTags.TIGER_PUFFER_PREY)));
     }
 
     public void aiStep() {

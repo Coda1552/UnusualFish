@@ -68,7 +68,6 @@ public class AbyssalBlastRenderer extends EntityRenderer<AbyssalBlast> {
         return TEXTURE_0;
     }
 
-    // TODO: Chakyl test
     public void drawVertex(Matrix4f matrixPos, PoseStack.Pose pose, VertexConsumer buffer, int x, int y, int z, float u, float v, int normalX, int normalY, int normalZ, int packedLight) {
         buffer.addVertex(matrixPos, (float) x, (float) y, (float) z).setColor(255, 255, 255, 255).setUv(u, v).setOverlay(OverlayTexture.NO_OVERLAY).setLight(packedLight).setNormal(pose, (float) normalX, (float) normalY, (float) normalZ);
     }

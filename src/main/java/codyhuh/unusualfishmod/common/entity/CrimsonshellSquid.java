@@ -102,9 +102,7 @@ public class CrimsonshellSquid extends BreedableWaterAnimal implements Bucketabl
 
     @Override
     public boolean isFood(ItemStack stack) {
-        return true;
-        // TODO: tag
-//        return stack.is(UFTags.RAW_UNUSUAL_FISH);
+        return stack.is(UFTags.RAW_UNUSUAL_FISH);
     }
 
     @Nullable

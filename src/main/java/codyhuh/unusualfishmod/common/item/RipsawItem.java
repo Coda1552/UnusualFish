@@ -80,13 +80,11 @@ public class RipsawItem extends AxeItem {
 
     public boolean isTreePart(LivingEntity player, BlockPos pos) {
         BlockState state = player.level().getBlockState(pos);
-        // todo: tags
-        return true;
-//        if (state.isAir() || state.is(UFTags.UNCHOPPABLE)) {
-//            return false;
-//        } else {
-//            return state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES);
-//        }
+        if (state.isAir() || state.is(UFTags.UNCHOPPABLE)) {
+            return false;
+        } else {
+            return state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES);
+        }
     }
 
     @Override

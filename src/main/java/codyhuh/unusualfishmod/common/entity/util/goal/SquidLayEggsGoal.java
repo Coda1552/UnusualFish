@@ -54,9 +54,7 @@ public class SquidLayEggsGoal extends MoveToBlockGoal {
 
     @Override
     protected boolean isValidTarget(LevelReader level, BlockPos blockPos) {
-        return false;
-        // todo: tag
-//        return !level.getBlockState(blockPos).is(UFTags.SQUID_EGGS) && level.isWaterAt(blockPos) && level.getBlockState(blockPos.below()).canOcclude();
+        return !level.getBlockState(blockPos).is(UFTags.SQUID_EGGS) && level.isWaterAt(blockPos) && level.getBlockState(blockPos.below()).canOcclude();
     }
 
     @Override

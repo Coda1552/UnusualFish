@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "unusualfishmod:raw_blizzard_tuna"
+  },
+  "result": {
+    "id": "unusualfishmod:cooked_blizzard_tuna"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

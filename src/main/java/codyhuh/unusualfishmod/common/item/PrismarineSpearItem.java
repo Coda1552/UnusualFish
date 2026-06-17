@@ -1,113 +1,158 @@
 package codyhuh.unusualfishmod.common.item;
 
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
+import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Position;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TridentItem;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+
+import java.util.List;
 
 import static codyhuh.unusualfishmod.UnusualFishMod.loc;
 
-public class PrismarineSpearItem extends Item  {
-    public static final ResourceLocation BASE_ATTACK_DAMAGE_ID = loc("base_attack_damage");
-    public static final ResourceLocation BASE_ATTACK_SPEED_ID = loc("base_attack_speed");
+public class PrismarineSpearItem extends Item implements ProjectileItem {
+    public static final int THROW_THRESHOLD_TIME = 10;
+    public static final float BASE_DAMAGE = 8.0F;
+    public static final float SHOOT_POWER = 2.5F;
 
-    public PrismarineSpearItem(Item.Properties p_43381_) {
-        super(p_43381_.component(DataComponents.ATTRIBUTE_MODIFIERS, createAttributes()));
+    public PrismarineSpearItem(Item.Properties properties) {
+        super(properties);
     }
-    // TODO: Chakyl test
+
     public static ItemAttributeModifiers createAttributes() {
-        return ItemAttributeModifiers.builder()
-                .add( Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 5.0D, AttributeModifier.Operation.ADD_VALUE),  EquipmentSlotGroup.MAINHAND)
-                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.9D, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
-    }
-    public boolean canAttackBlock(BlockState p_43409_, Level p_43410_, BlockPos p_43411_, Player p_43412_) {
-        return !p_43412_.isCreative();
+        return ItemAttributeModifiers.builder().add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double)8.0F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)-2.9F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND).build();
     }
 
-    public UseAnim getUseAnimation(ItemStack p_43417_) {
+    public static Tool createToolProperties() {
+        return new Tool(List.of(), 1.0F, 2);
+    }
+
+    public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
+        return !player.isCreative();
+    }
+
+    public UseAnim getUseAnimation(ItemStack stack) {
         return UseAnim.SPEAR;
     }
 
-    public int getUseDuration(ItemStack p_43419_) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 72000;
     }
 
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity living, int time) {
-        if (living instanceof Player player) {
-            int i = this.getUseDuration(stack) - time;
+    public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
+        if (entityLiving instanceof Player player) {
+            int i = this.getUseDuration(stack, entityLiving) - timeLeft;
             if (i >= 10) {
-                if (!level.isClientSide) {
-                    // TODO: Chakyl test
-                    stack.hurtAndBreak(1, player, player.getItemInHand(player.getUsedItemHand()).getEquipmentSlot());
-                    ThrownPrismarineSpear spear = new ThrownPrismarineSpear(level, player, stack);
-                    spear.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
+                float f = EnchantmentHelper.getTridentSpinAttackStrength(stack, player);
+                if ((!(f > 0.0F) || player.isInWaterOrRain()) && !isTooDamagedToUse(stack)) {
+                    Holder<SoundEvent> holder = (Holder)EnchantmentHelper.pickHighestLevel(stack, EnchantmentEffectComponents.TRIDENT_SOUND).orElse(SoundEvents.TRIDENT_THROW);
+                    if (!level.isClientSide) {
+                        stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(entityLiving.getUsedItemHand()));
+                        if (f == 0.0F) {
+                            ThrownPrismarineSpear thrownSpear = new ThrownPrismarineSpear(level, player, stack);
+                            thrownSpear.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
+                            if (player.hasInfiniteMaterials()) {
+                                thrownSpear.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                            }
 
-                    if (player.getAbilities().instabuild) {
-                        spear.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                            level.addFreshEntity(thrownSpear);
+                            level.playSound((Player)null, thrownSpear, (SoundEvent)holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            if (!player.hasInfiniteMaterials()) {
+                                player.getInventory().removeItem(stack);
+                            }
+                        }
                     }
 
-                    level.addFreshEntity(spear);
-                    level.playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    if (!player.getAbilities().instabuild) {
-                        player.getInventory().removeItem(stack);
+                    player.awardStat(Stats.ITEM_USED.get(this));
+                    if (f > 0.0F) {
+                        float f7 = player.getYRot();
+                        float f1 = player.getXRot();
+                        float f2 = -Mth.sin(f7 * ((float)Math.PI / 180F)) * Mth.cos(f1 * ((float)Math.PI / 180F));
+                        float f3 = -Mth.sin(f1 * ((float)Math.PI / 180F));
+                        float f4 = Mth.cos(f7 * ((float)Math.PI / 180F)) * Mth.cos(f1 * ((float)Math.PI / 180F));
+                        float f5 = Mth.sqrt(f2 * f2 + f3 * f3 + f4 * f4);
+                        f2 *= f / f5;
+                        f3 *= f / f5;
+                        f4 *= f / f5;
+                        player.push((double)f2, (double)f3, (double)f4);
+                        player.startAutoSpinAttack(20, 8.0F, stack);
+                        if (player.onGround()) {
+                            float f6 = 1.1999999F;
+                            player.move(MoverType.SELF, new Vec3((double)0.0F, (double)1.1999999F, (double)0.0F));
+                        }
+
+                        level.playSound((Player)null, player, (SoundEvent)holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
                     }
                 }
-
-                player.awardStat(Stats.ITEM_USED.get(this));
             }
         }
+
     }
 
-    public InteractionResultHolder<ItemStack> use(Level p_43405_, Player p_43406_, InteractionHand p_43407_) {
-        ItemStack itemstack = p_43406_.getItemInHand(p_43407_);
-        if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (isTooDamagedToUse(itemstack)) {
             return InteractionResultHolder.fail(itemstack);
-        } else if ( EnchantmentHelper.getTridentSpinAttackStrength(itemstack, p_43406_) > 0 && !p_43406_.isInWaterOrRain()) {
+        } else if (EnchantmentHelper.getTridentSpinAttackStrength(itemstack, player) > 0.0F && !player.isInWaterOrRain()) {
             return InteractionResultHolder.fail(itemstack);
         } else {
-            p_43406_.startUsingItem(p_43407_);
+            player.startUsingItem(hand);
             return InteractionResultHolder.consume(itemstack);
         }
     }
 
-    public boolean hurtEnemy(ItemStack p_43390_, LivingEntity p_43391_, LivingEntity p_43392_) {
-        p_43390_.hurtAndBreak(1, p_43392_, EquipmentSlot.MAINHAND);
+    private static boolean isTooDamagedToUse(ItemStack stack) {
+        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
+    }
+
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         return true;
     }
 
-    public boolean mineBlock(ItemStack p_43399_, Level p_43400_, BlockState p_43401_, BlockPos p_43402_, LivingEntity p_43403_) {
-        if ((double)p_43401_.getDestroySpeed(p_43400_, p_43402_) != 0.0D) {
-
-            p_43399_.hurtAndBreak(2, p_43403_, EquipmentSlot.MAINHAND);
-        }
-
-        return true;
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     public int getEnchantmentValue() {
         return 1;
+    }
+
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        ThrownPrismarineSpear thrownSpear = new ThrownPrismarineSpear(level, pos.x(), pos.y(), pos.z(), stack.copyWithCount(1));
+        thrownSpear.pickup = AbstractArrow.Pickup.ALLOWED;
+        return thrownSpear;
+    }
+
+    public boolean canPerformAction(ItemStack stack, ItemAbility itemAbility) {
+        return ItemAbilities.DEFAULT_TRIDENT_ACTIONS.contains(itemAbility);
     }
 }

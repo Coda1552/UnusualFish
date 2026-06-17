@@ -16,6 +16,7 @@ public class SeaSpike extends AbstractArrow {
     public SeaSpike(EntityType<? extends AbstractArrow> type, Level level) {
         super(type, level);
         hostileOnly = false;
+        this.pickup = AbstractArrow.Pickup.DISALLOWED;
     }
 
     public SeaSpike(EntityType<? extends AbstractArrow> p_36711_, double p_36712_, double p_36713_, double p_36714_, Level p_36715_) {

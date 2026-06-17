@@ -53,8 +53,7 @@ public class FreshwaterMantis extends BucketableWaterAnimal implements GeoEntity
 		this.goalSelector.addGoal(1, new RandomStrollGoal(this, 0.8D));
 		this.goalSelector.addGoal(2, new LookAtPlayerGoal(this, Player.class, 1.0F));
 		this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
-		// TODO: Tag fix
-//		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, e -> e.getType().is(UFTags.SNAILS)));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, LivingEntity.class, true, e -> e.getType().is(UFTags.SNAILS)));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AeroMono.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SneepSnorp.class, true));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, RhinoTetra.class, true));

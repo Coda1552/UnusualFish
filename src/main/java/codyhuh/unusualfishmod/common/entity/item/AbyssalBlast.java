@@ -30,7 +30,7 @@ public class AbyssalBlast extends Entity  {
     private UUID ownerUUID;
     private int ownerNetworkId;
     private boolean leftOwner;
-    // TODO: chakyl test
+
     public AbyssalBlast(EntityType p_i50162_1_, Level p_i50162_2_) {
         super(p_i50162_1_, p_i50162_2_);
     }

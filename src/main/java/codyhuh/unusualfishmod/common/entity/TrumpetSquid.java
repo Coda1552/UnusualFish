@@ -108,9 +108,7 @@ public class TrumpetSquid extends BreedableWaterAnimal implements Bucketable, Ge
 
 	@Override
 	public boolean isFood(ItemStack stack) {
-		// todo: tag
-//		return stack.is(UFTags.RAW_UNUSUAL_FISH);
-		return true;
+		return stack.is(UFTags.RAW_UNUSUAL_FISH);
 	}
 
 	protected PathNavigation createNavigation(Level p_27480_) {
