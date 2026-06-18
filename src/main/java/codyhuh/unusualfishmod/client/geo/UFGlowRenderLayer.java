@@ -12,6 +12,8 @@ import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
+import static net.minecraft.util.FastColor.ARGB32.color;
+
 public class UFGlowRenderLayer<T extends LivingEntity & GeoEntity> extends GeoRenderLayer<T> {
     private final ResourceLocation glowLayer;
 
@@ -25,7 +27,7 @@ public class UFGlowRenderLayer<T extends LivingEntity & GeoEntity> extends GeoRe
         VertexConsumer vertexconsumer = bufferSource.getBuffer(RenderType.dragonExplosionAlpha(glowLayer));
 
         if (!animatable.isInvisible()) {
-            this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, renderType, vertexconsumer, partialTick, packedLight, LivingEntityRenderer.getOverlayCoords(animatable, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+            this.getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, renderType, vertexconsumer, partialTick, packedLight, LivingEntityRenderer.getOverlayCoords(animatable, 0.0F), color(255, 255, 255, 255));
         }
     }
 }

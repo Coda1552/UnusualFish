@@ -2,16 +2,16 @@ package codyhuh.unusualfishmod.common.entity.item;
 
 import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +24,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +39,16 @@ public abstract class AbstractMovingBlockEntity extends Entity {
         super(entityType, level);
     }
 
+    public static CompoundTag createTagFromData(List<MovingBlockData> blocks) {
+        CompoundTag tag = new CompoundTag();
+        ListTag listTag = new ListTag();
+        for (MovingBlockData data : blocks) {
+            listTag.add(data.toTag());
+        }
+        tag.put("BlockData", listTag);
+        return tag;
+    }
+
     public void onSyncedDataUpdated(EntityDataAccessor<?> entityDataAccessor) {
         super.onSyncedDataUpdated(entityDataAccessor);
         if (BLOCK_DATA_TAG.equals(entityDataAccessor)) {
@@ -50,8 +59,8 @@ public abstract class AbstractMovingBlockEntity extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(BLOCK_DATA_TAG, new CompoundTag());
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(BLOCK_DATA_TAG, new CompoundTag());
     }
 
     public void tick() {
@@ -84,12 +93,13 @@ public abstract class AbstractMovingBlockEntity extends Entity {
                         if (dataBlock.blockData != null && dataBlock.getState().hasBlockEntity()) {
                             BlockEntity blockentity = this.level().getBlockEntity(set);
                             if (blockentity != null) {
-                                CompoundTag compoundtag = blockentity.saveWithoutMetadata();
+                                HolderLookup.Provider registryProvider = this.level().registryAccess();
+                                CompoundTag compoundtag = blockentity.saveWithoutMetadata(registryProvider);
                                 for (String s : dataBlock.blockData.getAllKeys()) {
                                     compoundtag.put(s, dataBlock.blockData.get(s).copy());
                                 }
                                 try {
-                                    blockentity.load(compoundtag);
+                                    blockentity.loadWithComponents(compoundtag, registryProvider);
                                 } catch (Exception exception) {
                                 }
                                 blockentity.setChanged();
@@ -119,12 +129,12 @@ public abstract class AbstractMovingBlockEntity extends Entity {
             if (!entity.noPhysics) {
                 double gravity = entity.isNoGravity() ? 0 : 0.08D;
                 if (entity instanceof LivingEntity living) {
-                    AttributeInstance attribute = living.getAttribute(net.minecraftforge.common.ForgeMod.ENTITY_GRAVITY.get());
+                    AttributeInstance attribute = living.getAttribute(Attributes.GRAVITY);
                     gravity = attribute.getValue();
                 }
                 float f2 = 1.0F;
                 entity.move(MoverType.SHULKER, new Vec3((f2 * (float) this.getDeltaMovement().x), (f2 * (float) this.getDeltaMovement().y), (f2 * (float) this.getDeltaMovement().z)));
-                if(this.getDeltaMovement().y >= 0){
+                if (this.getDeltaMovement().y >= 0) {
                     entity.setDeltaMovement(entity.getDeltaMovement().add(0, gravity, 0));
                 }
             }
@@ -132,11 +142,11 @@ public abstract class AbstractMovingBlockEntity extends Entity {
     }
 
     protected void createBlockDropAt(BlockPos crushPos, BlockState state, CompoundTag blockData) {
-        if(this.level() instanceof ServerLevel serverLevel){
+        if (this.level() instanceof ServerLevel serverLevel) {
             LootParams.Builder lootparams$builder = (new LootParams.Builder(serverLevel)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(crushPos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY);
             try {
                 List<ItemStack> drops = state.getDrops(lootparams$builder);
-                for(ItemStack drop : drops){
+                for (ItemStack drop : drops) {
                     Block.popResource(serverLevel, crushPos, drop);
                 }
                 state.spawnAfterBreak(serverLevel, crushPos, ItemStack.EMPTY, true);
@@ -144,7 +154,6 @@ public abstract class AbstractMovingBlockEntity extends Entity {
             }
         }
     }
-
 
     protected Entity.MovementEmission getMovementEmission() {
         return Entity.MovementEmission.NONE;
@@ -172,11 +181,6 @@ public abstract class AbstractMovingBlockEntity extends Entity {
         }
     }
 
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return (Packet<ClientGamePacketListener>) NetworkHooks.getEntitySpawningPacket(this);
-    }
-
     private List<MovingBlockData> buildDataFromTrackerTag() {
         List<MovingBlockData> list = new ArrayList<>();
         CompoundTag data = getAllBlockData();
@@ -189,7 +193,6 @@ public abstract class AbstractMovingBlockEntity extends Entity {
         }
         return list;
     }
-
 
     public void setPlacementCooldown(int cooldown) {
         placementCooldown = cooldown;
@@ -236,16 +239,6 @@ public abstract class AbstractMovingBlockEntity extends Entity {
     @Override
     public Vec3 getLightProbePosition(float f) {
         return this.getPosition(f);
-    }
-
-    public static CompoundTag createTagFromData(List<MovingBlockData> blocks) {
-        CompoundTag tag = new CompoundTag();
-        ListTag listTag = new ListTag();
-        for (MovingBlockData data : blocks) {
-            listTag.add(data.toTag());
-        }
-        tag.put("BlockData", listTag);
-        return tag;
     }
 
     @Override

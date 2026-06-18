@@ -1,6 +1,5 @@
 package codyhuh.unusualfishmod.client.misc.render;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.client.UFModelLayers;
 import codyhuh.unusualfishmod.client.misc.render.model.PrismarineSpearModel;
 import codyhuh.unusualfishmod.common.entity.item.ThrownPrismarineSpear;
@@ -13,8 +12,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+import static net.minecraft.util.FastColor.ARGB32.color;
+
 public class ThrownPrismarineSpearRenderer extends EntityRenderer<ThrownPrismarineSpear> {
-    public static final ResourceLocation LOC = new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/item/prismarine_spear.png");
+    public static final ResourceLocation LOC = loc("textures/entity/item/prismarine_spear.png");
     private final PrismarineSpearModel<ThrownPrismarineSpear> model;
 
     public ThrownPrismarineSpearRenderer(EntityRendererProvider.Context p_174420_) {
@@ -28,7 +30,7 @@ public class ThrownPrismarineSpearRenderer extends EntityRenderer<ThrownPrismari
         stack.mulPose(Axis.YP.rotationDegrees(Mth.lerp(p_116113_, spear.yRotO, spear.getYRot()) - 90.0F));
         stack.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(p_116113_, spear.xRotO, spear.getXRot()) + 90.0F));
 
-        this.model.renderToBuffer(stack, buffer.getBuffer(this.model.renderType(this.getTextureLocation(spear))), p_116116_, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(stack, buffer.getBuffer(this.model.renderType(this.getTextureLocation(spear))), p_116116_, OverlayTexture.NO_OVERLAY, color(255, 255, 255, 255));
 
         stack.popPose();
         super.render(spear, p_116112_, p_116113_, stack, buffer, p_116116_);

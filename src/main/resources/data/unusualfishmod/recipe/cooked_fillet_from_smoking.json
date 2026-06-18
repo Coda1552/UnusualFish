@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "tag": "unusualfishmod:raw_unusual_fish"
+  },
+  "result": {
+    "id": "unusualfishmod:cooked_unusual_fillet"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

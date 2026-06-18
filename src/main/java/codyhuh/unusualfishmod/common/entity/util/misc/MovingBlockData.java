@@ -17,11 +17,11 @@ import javax.annotation.Nullable;
 // Adapted from Alex's Caves (licensed under GNU GPLv3)
 public class MovingBlockData {
 
+    @Nullable
+    public CompoundTag blockData;
     private BlockState state;
     private VoxelShape shape;
     private BlockPos offset;
-    @Nullable
-    public CompoundTag blockData;
 
     public MovingBlockData(BlockState state, VoxelShape shape, BlockPos offset, @Nullable CompoundTag blockData) {
         this.state = state;
@@ -31,7 +31,20 @@ public class MovingBlockData {
     }
 
     public MovingBlockData(Level level, CompoundTag tag) {
-        this(NbtUtils.readBlockState(level.holderLookup(Registries.BLOCK), tag.getCompound("BlockState")), getShapeFromTag(tag.getCompound("VoxelShape")), new BlockPos(tag.getInt("OffsetX"), tag.getInt("OffsetY"), tag.getInt("OffsetZ")), tag.contains("BlockData") ? tag.getCompound("BlockData") : null);
+        this(NbtUtils.readBlockState(level.registryAccess().lookupOrThrow(Registries.BLOCK), tag.getCompound("BlockState")), getShapeFromTag(tag.getCompound("VoxelShape")), new BlockPos(tag.getInt("OffsetX"), tag.getInt("OffsetY"), tag.getInt("OffsetZ")), tag.contains("BlockData") ? tag.getCompound("BlockData") : null);
+    }
+
+    private static VoxelShape getShapeFromTag(CompoundTag data) {
+        VoxelShape shape = Shapes.empty();
+        if (data.contains("AABBs")) {
+            ListTag listtag = data.getList("AABBs", 10);
+            for (int i = 0; i < listtag.size(); ++i) {
+                CompoundTag innerTag = listtag.getCompound(i);
+                AABB aabb = new AABB(innerTag.getDouble("BoxMinX"), innerTag.getDouble("BoxMinY"), innerTag.getDouble("BoxMinZ"), innerTag.getDouble("BoxMaxX"), innerTag.getDouble("BoxMaxY"), innerTag.getDouble("BoxMaxZ"));
+                shape = Shapes.join(shape, Shapes.create(aabb), BooleanOp.OR);
+            }
+        }
+        return shape;
     }
 
     public BlockState getState() {
@@ -95,19 +108,6 @@ public class MovingBlockData {
         }
         data.put("AABBs", listTag);
         return data;
-    }
-
-    private static VoxelShape getShapeFromTag(CompoundTag data) {
-        VoxelShape shape = Shapes.empty();
-        if (data.contains("AABBs")) {
-            ListTag listtag = data.getList("AABBs", 10);
-            for (int i = 0; i < listtag.size(); ++i) {
-                CompoundTag innerTag = listtag.getCompound(i);
-                AABB aabb = new AABB(innerTag.getDouble("BoxMinX"), innerTag.getDouble("BoxMinY"), innerTag.getDouble("BoxMinZ"), innerTag.getDouble("BoxMaxX"), innerTag.getDouble("BoxMaxY"), innerTag.getDouble("BoxMaxZ"));
-                shape = Shapes.join(shape, Shapes.create(aabb), BooleanOp.OR);
-            }
-        }
-        return shape;
     }
 
 }

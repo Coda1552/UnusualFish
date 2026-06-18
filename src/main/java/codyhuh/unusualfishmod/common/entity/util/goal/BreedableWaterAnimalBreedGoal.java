@@ -13,12 +13,12 @@ import java.util.List;
 public class BreedableWaterAnimalBreedGoal extends Goal {
     private static final TargetingConditions PARTNER_TARGETING = TargetingConditions.forNonCombat().range(8.0D).ignoreLineOfSight();
     protected final BreedableWaterAnimal animal;
-    private final Class<? extends BreedableWaterAnimal> partnerClass;
     protected final Level level;
+    private final Class<? extends BreedableWaterAnimal> partnerClass;
+    private final double speedModifier;
     @Nullable
     protected BreedableWaterAnimal partner;
     private int loveTime;
-    private final double speedModifier;
 
     public BreedableWaterAnimalBreedGoal(BreedableWaterAnimal p_25122_, double p_25123_) {
         this(p_25122_, p_25123_, p_25122_.getClass());
@@ -51,7 +51,7 @@ public class BreedableWaterAnimalBreedGoal extends Goal {
     }
 
     public void tick() {
-        this.animal.getLookControl().setLookAt(this.partner, 10.0F, (float)this.animal.getMaxHeadXRot());
+        this.animal.getLookControl().setLookAt(this.partner, 10.0F, (float) this.animal.getMaxHeadXRot());
         this.animal.getNavigation().moveTo(this.partner, this.speedModifier);
         ++this.loveTime;
         if (this.loveTime >= this.adjustedTickDelay(60) && this.animal.distanceToSqr(this.partner) < 9.0D) {
@@ -66,7 +66,7 @@ public class BreedableWaterAnimalBreedGoal extends Goal {
         double d0 = Double.MAX_VALUE;
         BreedableWaterAnimal animal = null;
 
-        for(BreedableWaterAnimal animal1 : list) {
+        for (BreedableWaterAnimal animal1 : list) {
             if (this.animal.canMate(animal1) && this.animal.distanceToSqr(animal1) < d0) {
                 animal = animal1;
                 d0 = this.animal.distanceToSqr(animal1);
@@ -77,6 +77,6 @@ public class BreedableWaterAnimalBreedGoal extends Goal {
     }
 
     protected void breed() {
-        this.animal.spawnChildFromBreeding((ServerLevel)this.level, this.partner);
+        this.animal.spawnChildFromBreeding((ServerLevel) this.level, this.partner);
     }
 }

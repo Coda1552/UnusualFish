@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "unusualfishmod:raw_shockcat"
+  },
+  "result": {
+    "id": "unusualfishmod:cooked_shockcat"
+  },
+  "experience": 0.35,
+  "cookingtime": 100
+}

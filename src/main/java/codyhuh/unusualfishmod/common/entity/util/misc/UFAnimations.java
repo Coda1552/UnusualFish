@@ -1,6 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.util.misc;
 
-import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.animation.RawAnimation;
 
 public class UFAnimations {
     public static final RawAnimation WALK = RawAnimation.begin().thenLoop("walk");

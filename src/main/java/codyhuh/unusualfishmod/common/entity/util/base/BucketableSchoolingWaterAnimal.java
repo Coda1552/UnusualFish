@@ -111,8 +111,7 @@ public abstract class BucketableSchoolingWaterAnimal extends BucketableWaterAnim
                 if (this.getVariantN() == p_27536_.getVariantN()) {
                     p_27536_.startFollowing(this);
                 }
-            }
-            else {
+            } else {
                 p_27536_.startFollowing(this);
             }
         });
@@ -120,11 +119,11 @@ public abstract class BucketableSchoolingWaterAnimal extends BucketableWaterAnim
 
     @Nullable
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_27528_, DifficultyInstance p_27529_, MobSpawnType p_27530_, @Nullable SpawnGroupData p_27531_, @Nullable CompoundTag p_27532_) {
-        super.finalizeSpawn(p_27528_, p_27529_, p_27530_, p_27531_, p_27532_);
+        super.finalizeSpawn(p_27528_, p_27529_, p_27530_, p_27531_);
         if (p_27531_ == null) {
             p_27531_ = new BucketableSchoolingWaterAnimal.SchoolSpawnGroupData(this);
         } else {
-            this.startFollowing(((BucketableSchoolingWaterAnimal.SchoolSpawnGroupData)p_27531_).leader);
+            this.startFollowing(((BucketableSchoolingWaterAnimal.SchoolSpawnGroupData) p_27531_).leader);
         }
 
         return p_27531_;

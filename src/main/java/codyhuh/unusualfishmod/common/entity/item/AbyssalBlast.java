@@ -3,15 +3,11 @@ package codyhuh.unusualfishmod.common.entity.item;
 import codyhuh.unusualfishmod.common.entity.Gnasher;
 import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,13 +17,11 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class AbyssalBlast extends Entity  {
+public class AbyssalBlast extends Entity {
     private static final EntityDataAccessor<Boolean> FASTER_ANIM = SynchedEntityData.defineId(AbyssalBlast.class, EntityDataSerializers.BOOLEAN);
     private UUID ownerUUID;
     private int ownerNetworkId;
@@ -40,27 +34,15 @@ public class AbyssalBlast extends Entity  {
     public AbyssalBlast(Level worldIn, Gnasher p_i47273_2_) {
         this(UFEntities.ABYSSAL_BLAST.get(), worldIn);
         this.setShooter(p_i47273_2_);
-        this.setPos(p_i47273_2_.getX() - (double)(p_i47273_2_.getBbWidth() + 1.0F) * 0.35D * (double) Mth.sin(p_i47273_2_.yBodyRot * ((float)Math.PI / 180F)), p_i47273_2_.getEyeY() + (double)0.2F, p_i47273_2_.getZ() + (double)(p_i47273_2_.getBbWidth() + 1.0F) * 0.35D * (double)Mth.cos(p_i47273_2_.yBodyRot * ((float)Math.PI / 180F)));
+        this.setPos(p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.35D * (double) Mth.sin(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)), p_i47273_2_.getEyeY() + (double) 0.2F, p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth() + 1.0F) * 0.35D * (double) Mth.cos(p_i47273_2_.yBodyRot * ((float) Math.PI / 180F)));
     }
 
     public AbyssalBlast(Level worldIn, LivingEntity p_i47273_2_, boolean right) {
         this(UFEntities.ABYSSAL_BLAST.get(), worldIn);
         this.setShooter(p_i47273_2_);
-        float rot = p_i47273_2_.yBodyRot + (right ?  90 : -80);
+        float rot = p_i47273_2_.yBodyRot + (right ? 90 : -80);
         this.setFasterAnimation(true);
         this.setPos(p_i47273_2_.getX() - (double) (p_i47273_2_.getBbWidth()) * 0.5D * (double) Mth.sin(rot * ((float) Math.PI / 290F)), p_i47273_2_.getEyeY() - (double) 0.2F, p_i47273_2_.getZ() + (double) (p_i47273_2_.getBbWidth()) * 0.5D * (double) Mth.cos(rot * ((float) Math.PI / 290F)));
-    }
-
-    public AbyssalBlast(PlayMessages.SpawnEntity spawnEntity, Level world) {
-        this(UFEntities.ABYSSAL_BLAST.get(), world);
-    }
-
-    public boolean isFasterAnimation() {
-        return this.entityData.get(FASTER_ANIM);
-    }
-
-    public void setFasterAnimation(boolean anim) {
-        this.entityData.set(FASTER_ANIM, anim);
     }
 
     protected static float lerpRotation(float p_234614_0_, float p_234614_1_) {
@@ -75,13 +57,16 @@ public class AbyssalBlast extends Entity  {
         return Mth.lerp(0.2F, p_234614_0_, p_234614_1_);
     }
 
-    @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
+    public boolean isFasterAnimation() {
+        return this.entityData.get(FASTER_ANIM);
+    }
+
+    public void setFasterAnimation(boolean anim) {
+        this.entityData.set(FASTER_ANIM, anim);
     }
 
     public void tick() {
-        double yMot = Mth.sqrt((float)(this.getDeltaMovement().x * this.getDeltaMovement().x + this.getDeltaMovement().z * this.getDeltaMovement().z));
+        double yMot = Mth.sqrt((float) (this.getDeltaMovement().x * this.getDeltaMovement().x + this.getDeltaMovement().z * this.getDeltaMovement().z));
         this.setXRot((float) (Mth.atan2(this.getDeltaMovement().y, yMot) * (double) (180F / (float) Math.PI)));
         if (!this.leftOwner) {
             this.leftOwner = this.checkLeftOwner();
@@ -110,7 +95,7 @@ public class AbyssalBlast extends Entity  {
     protected void onEntityHit(EntityHitResult p_213868_1_) {
         Entity entity = p_213868_1_.getEntity();
         Entity entity1 = this.getOwner();
-        LivingEntity livingentity = entity1 instanceof LivingEntity ? (LivingEntity)entity1 : null;
+        LivingEntity livingentity = entity1 instanceof LivingEntity ? (LivingEntity) entity1 : null;
         entity.hurt(damageSources().mobProjectile(this, livingentity), 5.0F);
     }
 
@@ -121,8 +106,9 @@ public class AbyssalBlast extends Entity  {
         }
     }
 
-    protected void defineSynchedData() {
-        this.entityData.define(FASTER_ANIM, false);
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        builder.define(FASTER_ANIM, false);
     }
 
     public void setShooter(@Nullable Entity entityIn) {
@@ -201,7 +187,7 @@ public class AbyssalBlast extends Entity  {
     public void lerpMotion(double x, double y, double z) {
         this.setDeltaMovement(x, y, z);
         if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-            float f = Mth.sqrt((float)(x * x + z * z));
+            float f = Mth.sqrt((float) (x * x + z * z));
             this.setXRot((float) (Mth.atan2(y, f) * (double) (180F / (float) Math.PI)));
             this.setYRot((float) (Mth.atan2(x, z) * (double) (180F / (float) Math.PI)));
             this.xRotO = this.getXRot();
@@ -222,7 +208,7 @@ public class AbyssalBlast extends Entity  {
 
     protected void updateRotation() {
         Vec3 vector3d = this.getDeltaMovement();
-        float f = Mth.sqrt((float)horizontalMag(vector3d));
+        float f = Mth.sqrt((float) horizontalMag(vector3d));
         this.setXRot(lerpRotation(this.xRotO, (float) (Mth.atan2(vector3d.y, f) * (double) (180F / (float) Math.PI))));
         this.setYRot(lerpRotation(this.yRotO, (float) (Mth.atan2(vector3d.x, vector3d.z) * (double) (180F / (float) Math.PI))));
     }

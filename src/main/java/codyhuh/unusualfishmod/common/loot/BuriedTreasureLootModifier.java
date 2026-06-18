@@ -1,20 +1,20 @@
 package codyhuh.unusualfishmod.common.loot;
 
 import codyhuh.unusualfishmod.core.registry.UFItems;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Supplier;
 
 // some code that could be consolidated between these two loot mods...oh well, im lazy!
 public class BuriedTreasureLootModifier extends LootModifier {
+
+    public static final MapCodec<BuriedTreasureLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, BuriedTreasureLootModifier::new));
 
     public BuriedTreasureLootModifier(LootItemCondition[] condition) {
         super(condition);
@@ -28,11 +28,9 @@ public class BuriedTreasureLootModifier extends LootModifier {
         return generatedLoot;
     }
 
-    public static final Supplier<Codec<BuriedTreasureLootModifier>> CODEC = () -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, BuriedTreasureLootModifier::new));
-
     @Override
-    public Codec<? extends IGlobalLootModifier> codec() {
-        return CODEC.get();
+    public MapCodec<? extends IGlobalLootModifier> codec() {
+        return CODEC;
     }
 
 }

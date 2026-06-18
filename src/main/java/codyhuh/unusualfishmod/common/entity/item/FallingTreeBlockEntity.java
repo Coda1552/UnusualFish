@@ -1,7 +1,6 @@
 package codyhuh.unusualfishmod.common.entity.item;
 
 import codyhuh.unusualfishmod.common.entity.util.misc.MovingBlockData;
-import codyhuh.unusualfishmod.core.registry.UFEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +10,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraftforge.network.PlayMessages;
 
 // Adapted from Alex's Caves (licensed under GNU GPLv3)
 public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
@@ -26,16 +24,11 @@ public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
         super(entityType, level);
     }
 
-    public FallingTreeBlockEntity(PlayMessages.SpawnEntity spawnEntity, Level level) {
-        this(UFEntities.FALLING_TREE.get(), level);
-        this.setBoundingBox(this.makeBoundingBox());
-    }
-
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(FALL_DIRECTION, Direction.NORTH);
-        this.entityData.define(FALL_PROGRESS, 0F);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(FALL_DIRECTION, Direction.NORTH);
+        builder.define(FALL_PROGRESS, 0F);
     }
 
     public void readAdditionalSaveData(CompoundTag compound) {
@@ -100,12 +93,12 @@ public class FallingTreeBlockEntity extends AbstractMovingBlockEntity {
         return this.entityData.get(FALL_PROGRESS);
     }
 
-    public float getFallProgress(float partialTick) {
-        return prevFallProgress + (getFallProgress() - prevFallProgress) * partialTick;
-    }
-
     public void setFallProgress(float f) {
         this.entityData.set(FALL_PROGRESS, f);
+    }
+
+    public float getFallProgress(float partialTick) {
+        return prevFallProgress + (getFallProgress() - prevFallProgress) * partialTick;
     }
 
     public boolean canBePlaced() {

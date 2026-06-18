@@ -26,9 +26,9 @@ public class StargazerItem extends Item {
              */
 
             var time = level.getDayTime() % 24000; // Correct
-            var i = Mth.frac((double)time / 24000.0D - 0.25D); //
+            var i = Mth.frac((double) time / 24000.0D - 0.25D); //
             var i1 = 0.5D - Math.cos(i * Math.PI) / 2.0D;
-            var i2 = (float)(i * 2.0D + i1) / 3.0F;
+            var i2 = (float) (i * 2.0D + i1) / 3.0F;
             System.out.println("time of day: " + level.getTimeOfDay(1.0F));
 
 

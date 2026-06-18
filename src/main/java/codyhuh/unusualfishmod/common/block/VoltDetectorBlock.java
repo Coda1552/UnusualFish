@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.block;
 
 import codyhuh.unusualfishmod.common.block_entity.VoltDetectorBlockEntity;
 import codyhuh.unusualfishmod.core.registry.UFBlockEntities;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,6 +26,11 @@ public class VoltDetectorBlock extends BaseEntityBlock {
     public VoltDetectorBlock(Properties p_49795_) {
         super(p_49795_);
         this.registerDefaultState(this.stateDefinition.any().setValue(ANGLERS, 0));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
     }
 
     @Override
