@@ -37,7 +37,6 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class SeaMosquito extends BucketableWaterAnimal implements GeoEntity {
-    private static final EntityDataAccessor<Boolean> FROM_BUCKET = SynchedEntityData.defineId(SeaMosquito.class, EntityDataSerializers.BOOLEAN);
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public SeaMosquito(EntityType<? extends WaterAnimal> entityType, Level level) {
