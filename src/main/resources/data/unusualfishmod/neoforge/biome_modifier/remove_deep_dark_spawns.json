@@ -1,0 +1,11 @@
+{
+  "type": "neoforge:remove_spawns",
+  "biomes": "#unusualfishmod:no_spawns",
+  "entity_types": [
+    "unusualfishmod:deep_crawler",
+    "unusualfishmod:shockcat",
+    "unusualfishmod:hatchet_fish",
+    "unusualfishmod:prawn",
+    "unusualfishmod:blindsailfin"
+  ]
+}

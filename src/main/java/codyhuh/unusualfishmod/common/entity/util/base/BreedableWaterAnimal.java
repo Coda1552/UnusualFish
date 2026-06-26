@@ -40,6 +40,10 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         super(p_146738_, p_146739_);
     }
 
+    public static int getSpeedUpSecondsWhenFeeding(int p_216968_) {
+        return (int) ((float) (p_216968_ / 20) * 0.1F);
+    }
+
     public boolean isGravid() {
         return this.entityData.get(DATA_GRAVID);
     }
@@ -51,10 +55,11 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     @Nullable
     public abstract BreedableWaterAnimal getBreedOffspring(ServerLevel p_146743_, BreedableWaterAnimal p_146744_);
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_BABY_ID, false);
-        this.entityData.define(DATA_GRAVID, false);
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_BABY_ID, false);
+        builder.define(DATA_GRAVID, false);
     }
 
     public int getAge() {
@@ -65,6 +70,16 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         }
     }
 
+    public void setAge(int p_146763_) {
+        int i = this.getAge();
+        this.age = p_146763_;
+        if (i < 0 && p_146763_ >= 0 || i >= 0 && p_146763_ < 0) {
+            this.entityData.set(DATA_BABY_ID, p_146763_ < 0);
+            this.ageBoundaryReached();
+        }
+
+    }
+
     public void ageUp(int p_146741_, boolean p_146742_) {
         int i = this.getAge();
         i += p_146741_ * 20;
@@ -72,7 +87,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             i = 0;
         }
 
-        int j = i - i;
+        int j = 0;
         this.setAge(i);
         if (p_146742_) {
             this.forcedAge += j;
@@ -89,16 +104,6 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
 
     public void ageUp(int p_146759_) {
         this.ageUp(p_146759_, false);
-    }
-
-    public void setAge(int p_146763_) {
-        int i = this.getAge();
-        this.age = p_146763_;
-        if (i < 0 && p_146763_ >= 0 || i >= 0 && p_146763_ < 0) {
-            this.entityData.set(DATA_BABY_ID, p_146763_ < 0);
-            this.ageBoundaryReached();
-        }
-
     }
 
     protected void customServerAiStep() {
@@ -194,13 +199,9 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         this.setAge(p_146756_ ? -24000 : 0);
     }
 
-    public static int getSpeedUpSecondsWhenFeeding(int p_216968_) {
-        return (int)((float)(p_216968_ / 20) * 0.1F);
-    }
-
     public void handleEntityEvent(byte p_27562_) {
         if (p_27562_ == 18) {
-            for(int i = 0; i < 7; ++i) {
+            for (int i = 0; i < 7; ++i) {
                 double d0 = this.random.nextGaussian() * 0.02D;
                 double d1 = this.random.nextGaussian() * 0.02D;
                 double d2 = this.random.nextGaussian() * 0.02D;
@@ -223,22 +224,13 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         return this.inLove <= 0;
     }
 
-    public void setInLove(@Nullable Player p_27596_) {
-        this.inLove = 600;
-        if (p_27596_ != null) {
-            this.loveCause = p_27596_.getUUID();
-        }
-
-        this.level().broadcastEntityEvent(this, (byte)18);
-    }
-
     @Nullable
     public ServerPlayer getLoveCause() {
         if (this.loveCause == null) {
             return null;
         } else {
             Player player = this.level().getPlayerByUUID(this.loveCause);
-            return player instanceof ServerPlayer ? (ServerPlayer)player : null;
+            return player instanceof ServerPlayer ? (ServerPlayer) player : null;
         }
     }
 
@@ -286,6 +278,15 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
         return this.inLove > 0;
     }
 
+    public void setInLove(@Nullable Player p_27596_) {
+        this.inLove = 600;
+        if (p_27596_ != null) {
+            this.loveCause = p_27596_.getUUID();
+        }
+
+        this.level().broadcastEntityEvent(this, (byte) 18);
+    }
+
     public void resetLove() {
         this.inLove = 0;
     }
@@ -331,7 +332,7 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
             ageable.setBaby(true);
             ageable.moveTo(this.getX(), this.getY(), this.getZ(), 0.0F, 0.0F);
             p_27564_.addFreshEntityWithPassengers(ageable);
-            p_27564_.broadcastEntityEvent(this, (byte)18);
+            p_27564_.broadcastEntityEvent(this, (byte) 18);
             if (p_27564_.getGameRules().getBoolean(GameRules.RULE_DOMOBLOOT)) {
                 p_27564_.addFreshEntity(new ExperienceOrb(p_27564_, this.getX(), this.getY(), this.getZ(), this.getRandom().nextInt(7) + 1));
             }
@@ -340,9 +341,9 @@ public abstract class BreedableWaterAnimal extends WaterAnimal {
     }
 
     public static class AgeableWaterAnimalGroupData implements SpawnGroupData {
-        private int groupSize;
         private final boolean shouldSpawnBaby;
         private final float babySpawnChance;
+        private int groupSize;
 
         private AgeableWaterAnimalGroupData(boolean p_146775_, float p_146776_) {
             this.shouldSpawnBaby = p_146775_;

@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -28,15 +29,13 @@ public class WeatherShellItem extends Item {
             if (level instanceof ServerLevel sl) {
                 if (weather.equals("thunder") && !level.getLevelData().isThundering()) {
                     sl.setWeatherParameters(0, 1200, true, true);
-                    stack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(hand));
-                }
-                else if (weather.equals("rain") && !level.getLevelData().isRaining()) {
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                } else if (weather.equals("rain") && !level.getLevelData().isRaining()) {
                     sl.setWeatherParameters(0, 1200, true, false);
-                    stack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(hand));
-                }
-                else if (weather.equals("clear") && (level.getLevelData().isRaining() || level.getLevelData().isThundering())) {
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
+                } else if (weather.equals("clear") && (level.getLevelData().isRaining() || level.getLevelData().isThundering())) {
                     sl.setWeatherParameters(36000, 0, false, false);
-                    stack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(hand));
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
             }
         }
@@ -48,8 +47,8 @@ public class WeatherShellItem extends Item {
 
         if (!player.isUsingItem() && !player.getCooldowns().isOnCooldown(stack.getItem())) {
             player.startUsingItem(hand);
-            player.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1).get(), 1.0F, 1.0F);
-            player.getCooldowns().addCooldown(this, getUseDuration(stack));
+            player.playSound(SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(1).value(), 1.0F, 1.0F);
+            player.getCooldowns().addCooldown(this, getUseDuration(stack, player));
         }
 
         return InteractionResultHolder.success(stack);
@@ -61,7 +60,7 @@ public class WeatherShellItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack p_41454_) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 40;
     }
 

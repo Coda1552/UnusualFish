@@ -1,10 +1,11 @@
 package codyhuh.unusualfishmod.client.geo;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.model.GeoModel;
+
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
 
 public class GenericGeoModel<E extends LivingEntity & GeoEntity> extends GeoModel<E> {
     private final String model;
@@ -24,16 +25,16 @@ public class GenericGeoModel<E extends LivingEntity & GeoEntity> extends GeoMode
 
     @Override
     public ResourceLocation getModelResource(E object) {
-        return new ResourceLocation(UnusualFishMod.MOD_ID, "geo/entity/" + model + ".geo.json");
+        return loc("geo/entity/" + model + ".geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(E object) {
-        return new ResourceLocation(UnusualFishMod.MOD_ID, "textures/entity/" + texture + ".png");
+        return loc("textures/entity/" + texture + ".png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(E object) {
-        return new ResourceLocation(UnusualFishMod.MOD_ID, "animations/entity/" + anim + ".animation.json");
+        return loc("animations/entity/" + anim + ".animation.json");
     }
 }

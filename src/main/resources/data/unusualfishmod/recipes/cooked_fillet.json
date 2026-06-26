@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "tag": "unusualfishmod:raw_unusual_fish"
-  },
-  "result": "unusualfishmod:cooked_unusual_fillet",
-  "experience": 0.35,
-  "cookingtime": 200
-}

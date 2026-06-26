@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "unusualfishmod:cooked_unusual_fillet"
+    }
+  },
+  "result": {
+    "id": "unusualfishmod:odd_fishsticks",
+    "count": 2
+  }
+}

@@ -78,7 +78,7 @@
 					},
 					"position": {
 						"0.0": ["math.sin(query.anim_time*180)*2.5", "3*query.is_on_ground+math.sin(query.anim_time*360)*5", "math.sin(query.anim_time*180/1)*5"],
-						"1.0": ["math.sin(query.anim_time*180)*2.5", "5+3*query.is_on_ground+math.sin(query.anim_time*360)*5", "+math.sin(query.anim_time*360-90)*5"],
+						"1.0": ["math.sin(query.anim_time*180)*2.5", "5+3*query.is_on_ground+math.sin(query.anim_time*360)*5", "math.sin(query.anim_time*360-90)*5"],
 						"2.0": ["math.sin(query.anim_time*180)*2.5", "3*query.is_on_ground+math.sin(query.anim_time*360)*5", 0]
 					}
 				},

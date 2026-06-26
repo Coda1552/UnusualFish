@@ -29,29 +29,34 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class MuddytopSnail extends BucketableWaterAnimal implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected int attackCooldown = 0;
 
     public MuddytopSnail(EntityType<? extends MuddytopSnail> type, Level world) {
         super(type, world);
         this.moveControl = new SnailMoveControl(this);
-        this.setMaxUpStep(1.0F);
+        this.getAttribute(Attributes.STEP_HEIGHT).setBaseValue(1.0F);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.ARMOR, 8.0D);
+    }
+
+    public static boolean canSpawn(EntityType<MuddytopSnail> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
     }
 
     @Override
     public ItemStack getBucketStack() {
         return new ItemStack(UFItems.MUDDYTOP_SNAIL_BUCKET.get());
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 4.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.ARMOR, 8.0D);
     }
 
     protected void registerGoals() {
@@ -96,10 +101,6 @@ public class MuddytopSnail extends BucketableWaterAnimal implements GeoEntity {
         return SoundEvents.COD_HURT;
     }
 
-    public static boolean canSpawn(EntityType<MuddytopSnail> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -113,8 +114,6 @@ public class MuddytopSnail extends BucketableWaterAnimal implements GeoEntity {
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

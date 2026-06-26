@@ -72,7 +72,7 @@
 					"position": [0, 0, -1]
 				},
 				"BackFin2": {
-					"rotation": ["0math.sin(query.anim_time*720+60)*-10", "math.sin(query.anim_time*720+60)*10", "math.sin(query.anim_time*720-30)*-20"]
+					"rotation": ["math.sin(query.anim_time*720+60)*-10", "math.sin(query.anim_time*720+60)*10", "math.sin(query.anim_time*720-30)*-20"]
 				},
 				"BackFin1": {
 					"rotation": ["math.sin(query.anim_time*720+60)*-10", "math.sin(query.anim_time*720+60)*-10", "math.sin(query.anim_time*720-30)*-20"]

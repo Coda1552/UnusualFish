@@ -2,54 +2,59 @@ package codyhuh.unusualfishmod.common.loot;
 
 import codyhuh.unusualfishmod.core.registry.UFEnchantments;
 import codyhuh.unusualfishmod.core.registry.UFTags;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.loot.IGlobalLootModifier;
-import net.minecraftforge.common.loot.LootModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
+import net.neoforged.neoforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Supplier;
+import java.util.List;
 
 public class UnusualCatchLootModifier extends LootModifier {
 
-    public UnusualCatchLootModifier(LootItemCondition[] condition) {
-        super(condition);
+    public static final MapCodec<UnusualCatchLootModifier> CODEC = RecordCodecBuilder.mapCodec(inst -> codecStart(inst).apply(inst, UnusualCatchLootModifier::new));
+
+    public UnusualCatchLootModifier(LootItemCondition[] conditions) {
+        super(conditions);
     }
 
     @Override
     protected @NotNull ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        var items = ForgeRegistries.ITEMS.tags().getTag(UFTags.UNUSUAL_CATCH_ITEMS).stream().toList();
-        int size = items.size();
+        List<ItemStack> items = BuiltInRegistries.ITEM.getTag(UFTags.UNUSUAL_CATCH_ITEMS).map(holderSet -> holderSet.stream().map(ItemStack::new).toList()).orElse(List.of());
 
-        ObjectArrayList<ItemStack> ret = new ObjectArrayList<>();
+        if (items.isEmpty()) {
+            return generatedLoot;
+        }
         ItemStack stack = context.getParamOrNull(LootContextParams.TOOL);
-
         if (stack != null) {
-            int i = EnchantmentHelper.getTagEnchantmentLevel(UFEnchantments.UNUSUAL_CATCH.get(), stack);
-
-            if (stack.is(Tags.Items.TOOLS_FISHING_RODS) && i > 0) {
-                ret.add(new ItemStack(items.get(context.getRandom().nextInt(size))));
-            }
-            else {
-                ret = generatedLoot;
+            Holder.Reference<Enchantment> unusualCatch = context.getLevel().holderLookup(Registries.ENCHANTMENT).get(UFEnchantments.UNUSUAL_CATCH).orElse(null);
+            if (unusualCatch != null) {
+                int enchantmentLevel = EnchantmentHelper.getTagEnchantmentLevel(unusualCatch, stack);
+                if (stack.is(Tags.Items.TOOLS_FISHING_ROD) && enchantmentLevel > 0) {
+                    ObjectArrayList<ItemStack> ret = new ObjectArrayList<>();
+                    ret.add(items.get(context.getRandom().nextInt(items.size())));
+                    return ret;
+                }
             }
         }
-        return ret;
-    }
 
-    public static final Supplier<Codec<UnusualCatchLootModifier>> CODEC = () -> RecordCodecBuilder.create(inst -> codecStart(inst).apply(inst, UnusualCatchLootModifier::new));
+        return generatedLoot;
+    }
 
     @Override
-    public Codec<? extends IGlobalLootModifier> codec() {
-        return CODEC.get();
+    public MapCodec<? extends IGlobalLootModifier> codec() {
+        return CODEC;
     }
-
 }
+

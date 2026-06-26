@@ -7,7 +7,6 @@ import codyhuh.unusualfishmod.core.registry.UFSounds;
 import codyhuh.unusualfishmod.core.registry.UFTags;
 import codyhuh.unusualfishmod.core.registry.UFTiers;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
@@ -20,6 +19,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.*;
@@ -32,17 +32,23 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.ToolAction;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 // Tree chopping code adapted from Alex's Caves (licensed under GNU GPLv3)
-public class RipsawItem extends AxeItem implements Vanishable {
+public class RipsawItem extends AxeItem {
 
-    public RipsawItem(Properties p_41383_) {
-        super(UFTiers.RIPPER_SAW, 7.0F, -1.0F, p_41383_);
+    public RipsawItem(Properties properties) {
+        super(UFTiers.RIPPER_SAW, properties);
+    }
+
+    public static EntityHitResult getLookAtEntity(Player player, Level level, double range) {
+        Vec3 eyePos = player.getEyePosition(1.0F);
+        Vec3 viewVec = player.getViewVector(1.0F);
+        Vec3 endVec = eyePos.add(viewVec.x * range, viewVec.y * range, viewVec.z * range);
+
+        return ProjectileUtil.getEntityHitResult(level, player, eyePos, endVec, player.getBoundingBox().inflate(range), e -> e instanceof LivingEntity);
     }
 
     @Override
@@ -89,7 +95,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
     }
 
     @Override
-    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> componentList, TooltipFlag p_41424_) {
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> componentList, TooltipFlag flag) {
         componentList.add(Component.translatable("tooltip.ripsaw").withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC));
     }
 
@@ -102,7 +108,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
                 BlockState state = level.getBlockState(blockHitResult.getBlockPos());
                 BlockPos blockPos = blockHitResult.getBlockPos();
                 Direction face = blockHitResult.getDirection();
-                int i = this.getUseDuration(stack) - remainingUseDuration + 1;
+                int i = this.getUseDuration(stack, user) - remainingUseDuration + 1;
 
                 if (state.is(BlockTags.LOGS) && !level.getBlockState(blockPos.below()).is(BlockTags.LOGS)) {
                     List<BlockPos> gathered = new ArrayList<>();
@@ -129,7 +135,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
                             BlockState moveState = player.level().getBlockState(pos);
                             BlockEntity te = player.level().getBlockEntity(pos);
                             BlockPos offset = pos.subtract(blockPos);
-                            MovingBlockData data = new MovingBlockData(moveState, moveState.getShape(player.level(), pos), offset, te == null ? null : te.saveWithoutMetadata());
+                            MovingBlockData data = new MovingBlockData(moveState, moveState.getShape(player.level(), pos), offset, te == null ? null : te.saveWithoutMetadata(player.level().registryAccess()));
                             player.level().removeBlockEntity(pos);
                             allData.add(data);
                         }
@@ -146,9 +152,7 @@ public class RipsawItem extends AxeItem implements Vanishable {
                         fallingTree.setFallDirection(Direction.fromYRot(f));
                         player.level().addFreshEntity(fallingTree);
 
-                        stack.hurtAndBreak(allData.stream().filter(e -> e.getState().is(BlockTags.LOGS)).toList().size(), player, (p_40992_) -> {
-                            p_40992_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-                        });
+                        stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                     }
                 }
 
@@ -157,26 +161,18 @@ public class RipsawItem extends AxeItem implements Vanishable {
             if (remainingUseDuration % 15 == 0) {
                 player.playSound(UFSounds.SAWING.get());
             }
-
-            EntityHitResult entityResult = getLookAtEntity(player, player.level(), player.getEntityReach() + 1.0D);
+            EntityHitResult entityResult = getLookAtEntity(player, player.level(), player.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) + 1.0D);
             if (entityResult != null && entityResult.getEntity() instanceof LivingEntity living) {
-                if (living.hurt(player.damageSources().playerAttack(player), getAttackDamage())) {
-                    stack.hurtAndBreak(1, player, (p_40665_) -> {
-                        p_40665_.broadcastBreakEvent(living.getUsedItemHand());
-                    });
+                if (living.hurt(player.damageSources().playerAttack(player), this.getTier().getAttackDamageBonus())) {
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
             }
         }
 
     }
 
-    @Override
-    public boolean canPerformAction(ItemStack stack, ToolAction toolAction) {
-        return false;
-    }
-
     private HitResult calculateHitResult(Player pPlayer) {
-        return ProjectileUtil.getHitResultOnViewVector(pPlayer, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), pPlayer.getBlockReach());
+        return ProjectileUtil.getHitResultOnViewVector(pPlayer, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), pPlayer.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE));
     }
 
     @Override
@@ -194,16 +190,8 @@ public class RipsawItem extends AxeItem implements Vanishable {
     }
 
     @Override
-    public int getUseDuration(ItemStack p_41454_) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 72000;
-    }
-
-    public static EntityHitResult getLookAtEntity(Player player, Level level, double range) {
-        Vec3 eyePos = player.getEyePosition(1.0F);
-        Vec3 viewVec = player.getViewVector(1.0F);
-        Vec3 endVec = eyePos.add(viewVec.x * range, viewVec.y * range, viewVec.z * range);
-
-        return ProjectileUtil.getEntityHitResult(level, player, eyePos, endVec, player.getBoundingBox().inflate(range), e -> e instanceof LivingEntity);
     }
 
 }

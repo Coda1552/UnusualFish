@@ -26,14 +26,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.material.Fluids;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class CelestialFish extends WaterAnimal implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected int attackCooldown = 0;
 
     public CelestialFish(EntityType<? extends WaterAnimal> entityType, Level level) {
@@ -44,6 +45,16 @@ public class CelestialFish extends WaterAnimal implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 40.0D).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.MOVEMENT_SPEED, 0.5D);
+    }
+
+    public static boolean canSpawn(EntityType<CelestialFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
+    }
+
+    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
+        float time = iServerWorld.getTimeOfDay(1.0F);
+        int light = iServerWorld.getMaxLocalRawBrightness(pos);
+        return light <= 4 && time > 0.27F && time <= 0.8F;
     }
 
     @Override
@@ -105,16 +116,6 @@ public class CelestialFish extends WaterAnimal implements GeoEntity {
         }
     }
 
-    public static boolean canSpawn(EntityType<CelestialFish> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.getBlockState(pos).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && iServerWorld.getBlockState(pos.above()).getFluidState().getFluidType() == Fluids.WATER.getFluidType() && isLightLevelOk(pos, iServerWorld);
-    }
-
-    private static boolean isLightLevelOk(BlockPos pos, ServerLevelAccessor iServerWorld) {
-        float time = iServerWorld.getTimeOfDay(1.0F);
-        int light = iServerWorld.getMaxLocalRawBrightness(pos);
-        return light <= 4 && time > 0.27F && time <= 0.8F;
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -127,14 +128,11 @@ public class CelestialFish extends WaterAnimal implements GeoEntity {
             } else {
                 event.setAnimation(UFAnimations.IDLE);
             }
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.FLOP);
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

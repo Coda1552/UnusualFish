@@ -2,6 +2,7 @@ package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -20,17 +21,19 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TigerJungleShark extends WaterAnimal implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     protected int attackCooldown = 0;
     private int attackAnimationTick;
 
@@ -42,6 +45,10 @@ public class TigerJungleShark extends WaterAnimal implements GeoEntity {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 3.0D);
+    }
+
+    public static boolean canSpawn(EntityType<TigerJungleShark> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
     }
 
     @Override
@@ -75,19 +82,19 @@ public class TigerJungleShark extends WaterAnimal implements GeoEntity {
     @Override
     public boolean doHurtTarget(Entity entityIn) {
         this.attackAnimationTick = 10;
-        this.level().broadcastEntityEvent(this, (byte)4);
+        this.level().broadcastEntityEvent(this, (byte) 4);
         float f = this.getAttackDamage();
-        float f1 = (int)f > 0 ? f / 2.0F + (float)this.random.nextInt((int)f) : f;
-        boolean flag = entityIn.hurt(damageSources().mobAttack(this), f1);
+        float f1 = (int) f > 0 ? f / 2.0F + (float) this.random.nextInt((int) f) : f;
+        boolean flag = this.level() instanceof ServerLevel && entityIn.hurt(damageSources().mobAttack(this), f1);
         if (flag) {
             entityIn.setDeltaMovement(entityIn.getDeltaMovement().add(0.0D, 0.4D, 0.0D));
-            this.doEnchantDamageEffects(this, entityIn);
+            EnchantmentHelper.doPostAttackEffects((ServerLevel) this.level(), entityIn, this.damageSources().mobAttack(this));
         }
         return flag;
     }
 
     private float getAttackDamage() {
-        return (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        return (float) this.getAttributeValue(Attributes.ATTACK_DAMAGE);
     }
 
     public void tick() {
@@ -144,10 +151,6 @@ public class TigerJungleShark extends WaterAnimal implements GeoEntity {
         return SoundEvents.COD_FLOP;
     }
 
-    public static boolean canSpawn(EntityType<TigerJungleShark> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -160,14 +163,11 @@ public class TigerJungleShark extends WaterAnimal implements GeoEntity {
             } else {
                 event.setAnimation(UFAnimations.IDLE);
             }
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.FLOP);
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

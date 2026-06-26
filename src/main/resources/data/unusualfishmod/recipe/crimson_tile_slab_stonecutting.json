@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "unusualfishmod:crimson_bricks"
+    },
+    "result": {
+        "id": "unusualfishmod:crimson_tile_slab",
+        "count": 2
+    }
+}

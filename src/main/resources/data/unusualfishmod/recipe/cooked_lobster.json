@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "unusualfishmod:raw_lobster"
+  },
+  "result": {
+    "id": "unusualfishmod:cooked_lobster"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

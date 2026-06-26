@@ -1,0 +1,10 @@
+{
+    "type": "minecraft:stonecutting",
+    "ingredient": {
+        "item": "unusualfishmod:relucent_bricks"
+    },
+    "result": {
+        "id": "unusualfishmod:chiseled_relucent_bricks",
+        "count": 1
+    }
+}

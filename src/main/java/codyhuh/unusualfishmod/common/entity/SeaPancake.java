@@ -1,12 +1,13 @@
 package codyhuh.unusualfishmod.common.entity;
 
-import codyhuh.unusualfishmod.UnusualFishMod;
 import codyhuh.unusualfishmod.common.entity.util.goal.BottomStrollGoal;
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -38,141 +39,142 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
+import static codyhuh.unusualfishmod.UnusualFishMod.loc;
+
 public class SeaPancake extends WaterAnimal implements GeoEntity {
-	public static final ResourceLocation FEED_REWARD = new ResourceLocation(UnusualFishMod.MOD_ID, "gameplay/sea_pancake_search");
-	protected int attackCooldown = 0;
+    public static final ResourceLocation FEED_REWARD = loc("gameplay/sea_pancake_search");
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    protected int attackCooldown = 0;
 
-	public SeaPancake(EntityType<? extends WaterAnimal> entityType, Level level) {
-		super(entityType, level);
-		this.moveControl = new SmoothSwimmingMoveControl(this, 45, 10, 0.02F, 0.1F, true);
-		this.lookControl = new SmoothSwimmingLookControl(this, 10);
-	}
+    public SeaPancake(EntityType<? extends WaterAnimal> entityType, Level level) {
+        super(entityType, level);
+        this.moveControl = new SmoothSwimmingMoveControl(this, 45, 10, 0.02F, 0.1F, true);
+        this.lookControl = new SmoothSwimmingLookControl(this, 10);
+    }
 
-	public static AttributeSupplier.Builder createAttributes() {
-		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.ATTACK_DAMAGE, 5.0D);
-	}
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 30.0D).add(Attributes.ATTACK_DAMAGE, 5.0D);
+    }
 
-	@Override
-	public void registerGoals() {
-		super.registerGoals();
-		this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
-		this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
-		this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
-			@Override
-			public boolean canUse() {
-				return !this.mob.isInWater() && super.canUse();
-			}
-		});
-		this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
-			@Override
-			public boolean canUse() {
-				return super.canUse() && isInWater();
-			}
-		});
-		this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
-		this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, TropicalFish.class, false));
-	}
+    public static boolean canSpawn(EntityType<SeaPancake> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
 
-	@Override
-	protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-		ItemStack stack = player.getItemInHand(hand);
+    @Override
+    public void registerGoals() {
+        super.registerGoals();
+        this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true));
+        this.goalSelector.addGoal(0, new TryFindWaterGoal(this));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 0.8D, 15) {
+            @Override
+            public boolean canUse() {
+                return !this.mob.isInWater() && super.canUse();
+            }
+        });
+        this.goalSelector.addGoal(2, new RandomSwimmingGoal(this, 0.8D, 1) {
+            @Override
+            public boolean canUse() {
+                return super.canUse() && isInWater();
+            }
+        });
+        this.goalSelector.addGoal(3, new BottomStrollGoal(this, 0.8F, 7));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, TropicalFish.class, false));
+    }
 
-		if (stack.is(UFItems.RAW_LOBSTER.get()) && level() instanceof ServerLevel serverlevel) {
-			LootTable loottable = serverlevel.getServer().getLootData().getLootTable(FEED_REWARD);
-			List<ItemStack> list = loottable.getRandomItems(new LootParams.Builder(serverlevel).withParameter(LootContextParams.ORIGIN, position()).withParameter(LootContextParams.THIS_ENTITY, this).withLuck(random.nextFloat()).create(LootContextParamSets.PIGLIN_BARTER));
+    @Override
+    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
 
-			if (!list.isEmpty() && random.nextBoolean()) {
-				ItemEntity item = EntityType.ITEM.create(level());
+        if (stack.is(UFItems.RAW_LOBSTER.get()) && level() instanceof ServerLevel serverlevel) {
+            LootTable loottable = serverlevel.registryAccess().lookupOrThrow(Registries.LOOT_TABLE).getOrThrow(ResourceKey.create(Registries.LOOT_TABLE, FEED_REWARD)).value();
+            List<ItemStack> list = loottable.getRandomItems(new LootParams.Builder(serverlevel).withParameter(LootContextParams.ORIGIN, position()).withParameter(LootContextParams.THIS_ENTITY, this).withLuck(random.nextFloat()).create(LootContextParamSets.PIGLIN_BARTER));
 
-				item.setItem(list.get(0));
-				item.moveTo(position());
+            if (!list.isEmpty() && random.nextBoolean()) {
+                ItemEntity item = EntityType.ITEM.create(level());
 
-				level().addFreshEntity(item);
+                item.setItem(list.get(0));
+                item.moveTo(position());
 
-				playSound(SoundEvents.ITEM_PICKUP, 1.0F, 1.0F);
-			}
+                level().addFreshEntity(item);
 
-			if (!player.getAbilities().instabuild) {
-				stack.shrink(1);
-			}
+                playSound(SoundEvents.ITEM_PICKUP, 1.0F, 1.0F);
+            }
 
-			serverlevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getRandomX(1.0D), position().y - 0.25D, getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
-			playSound(SoundEvents.DOLPHIN_EAT, 1.0F, 1.0F);
-		}
+            if (!player.getAbilities().instabuild) {
+                stack.shrink(1);
+            }
 
-		return super.mobInteract(player, hand);
-	}
+            serverlevel.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, stack), getRandomX(1.0D), position().y - 0.25D, getRandomZ(1.0D), 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            playSound(SoundEvents.DOLPHIN_EAT, 1.0F, 1.0F);
+        }
 
-	public void tick() {
-		super.tick();
+        return super.mobInteract(player, hand);
+    }
 
-		if (this.attackCooldown > 0) {
-			this.attackCooldown--;
-		}
-	}
+    public void tick() {
+        super.tick();
 
-	public void aiStep() {
-		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
-			this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-			this.setOnGround(false);
-			this.hasImpulse = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
-		}
+        if (this.attackCooldown > 0) {
+            this.attackCooldown--;
+        }
+    }
 
-		super.aiStep();
-	}
+    public void aiStep() {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
+            this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4F, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setOnGround(false);
+            this.hasImpulse = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
+        }
 
-	protected PathNavigation createNavigation(Level p_27480_) {
-		return new WaterBoundPathNavigation(this, p_27480_);
-	}
+        super.aiStep();
+    }
 
-	public SoundEvent getDeathSound() {
-		return SoundEvents.COD_DEATH;
-	}
+    protected PathNavigation createNavigation(Level p_27480_) {
+        return new WaterBoundPathNavigation(this, p_27480_);
+    }
 
-	public SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.COD_HURT;
-	}
+    public SoundEvent getDeathSound() {
+        return SoundEvents.COD_DEATH;
+    }
 
-	public SoundEvent getFlopSound() {
-		return SoundEvents.COD_FLOP;
-	}
+    public SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundEvents.COD_HURT;
+    }
 
-	public static boolean canSpawn(EntityType<SeaPancake> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-		return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-	}
+    public SoundEvent getFlopSound() {
+        return SoundEvents.COD_FLOP;
+    }
 
-	@Override
-	public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
-		controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
-	}
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
+    }
 
-	private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
-		if (isInWater()) {
-			if (event.isMoving()) {
-				event.setAnimation(UFAnimations.SWIM);
-			} else {
-				event.setAnimation(UFAnimations.IDLE);
-			}
-		}
-		return PlayState.CONTINUE;
-	}
+    private <E extends GeoEntity> PlayState predicate(AnimationState<E> event) {
+        if (isInWater()) {
+            if (event.isMoving()) {
+                event.setAnimation(UFAnimations.SWIM);
+            } else {
+                event.setAnimation(UFAnimations.IDLE);
+            }
+        }
+        return PlayState.CONTINUE;
+    }
 
-	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
-
-	@Override
-	public AnimatableInstanceCache getAnimatableInstanceCache() {
-		return cache;
-	}
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }

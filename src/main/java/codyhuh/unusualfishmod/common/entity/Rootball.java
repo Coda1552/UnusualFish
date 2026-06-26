@@ -1,7 +1,6 @@
 package codyhuh.unusualfishmod.common.entity;
 
 import codyhuh.unusualfishmod.common.entity.util.goal.CustomSwellGoal;
-import codyhuh.unusualfishmod.common.entity.util.goal.FollowSchoolLeaderGoal;
 import codyhuh.unusualfishmod.common.entity.util.misc.UFAnimations;
 import codyhuh.unusualfishmod.core.registry.UFSounds;
 import net.minecraft.core.BlockPos;
@@ -30,11 +29,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
@@ -43,6 +42,7 @@ import java.util.Collection;
 public class Rootball extends Monster implements GeoEntity {
     private static final EntityDataAccessor<Integer> DATA_SWELL_DIR = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> DATA_IS_IGNITED = SynchedEntityData.defineId(Rootball.class, EntityDataSerializers.BOOLEAN);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     private int oldSwell;
     private int swell;
     private int maxSwell = 30;
@@ -50,6 +50,24 @@ public class Rootball extends Monster implements GeoEntity {
 
     public Rootball(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+    }
+
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, 0.4D)
+                .add(Attributes.ATTACK_DAMAGE, 2.0D);
+    }
+
+    public static boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
+        return reason == MobSpawnType.SPAWNER || iServerWorld.canSeeSky(pos.above()) && canMonsterSpawnInLight(entityType, iServerWorld, reason, pos, random);
+    }
+
+    public static boolean canMonsterSpawnInLight(EntityType<? extends Rootball> p_223325_0_, ServerLevelAccessor p_223325_1_, MobSpawnType p_223325_2_, BlockPos p_223325_3_, RandomSource p_223325_4_) {
+        return isValidLightLevel(p_223325_1_, p_223325_3_, p_223325_4_) && checkMobSpawnRules(p_223325_0_, p_223325_1_, p_223325_2_, p_223325_3_, p_223325_4_);
+    }
+
+    public static boolean isValidLightLevel(ServerLevelAccessor p_223323_0_, BlockPos p_223323_1_, RandomSource p_223323_2_) {
+        int light = p_223323_0_.getMaxLocalRawBrightness(p_223323_1_);
+        return light <= 4;
     }
 
     protected void registerGoals() {
@@ -65,19 +83,13 @@ public class Rootball extends Monster implements GeoEntity {
         this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
     }
 
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0D).add(Attributes.MOVEMENT_SPEED, 0.4D)
-                .add(Attributes.ATTACK_DAMAGE, 2.0D);
-    }
-
     public int getMaxFallDistance() {
-        return this.getTarget() == null ? 3 : 3 + (int)(this.getHealth() - 1.0F);
+        return this.getTarget() == null ? 3 : 3 + (int) (this.getHealth() - 1.0F);
     }
 
     public boolean causeFallDamage(float p_149687_, float p_149688_, DamageSource p_149689_) {
         boolean flag = super.causeFallDamage(p_149687_, p_149688_, p_149689_);
-        this.swell = (int)((float)this.swell + p_149687_ * 1.5F);
+        this.swell = (int) ((float) this.swell + p_149687_ * 1.5F);
         if (this.swell > this.maxSwell - 5) {
             this.swell = this.maxSwell - 5;
         }
@@ -85,17 +97,18 @@ public class Rootball extends Monster implements GeoEntity {
         return flag;
     }
 
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(DATA_SWELL_DIR, -1);
-        this.entityData.define(DATA_IS_IGNITED, false);
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(DATA_SWELL_DIR, -1);
+        builder.define(DATA_IS_IGNITED, false);
     }
 
     public void addAdditionalSaveData(CompoundTag compound) {
         super.addAdditionalSaveData(compound);
 
-        compound.putShort("Fuse", (short)this.maxSwell);
-        compound.putByte("ExplosionRadius", (byte)this.explosionRadius);
+        compound.putShort("Fuse", (short) this.maxSwell);
+        compound.putByte("ExplosionRadius", (byte) this.explosionRadius);
         compound.putBoolean("ignited", this.isIgnited());
     }
 
@@ -174,7 +187,7 @@ public class Rootball extends Monster implements GeoEntity {
     }
 
     public float getSwelling(float p_32321_) {
-        return Mth.lerp(p_32321_, (float)this.oldSwell, (float)this.swell) / (float)(this.maxSwell - 2);
+        return Mth.lerp(p_32321_, (float) this.oldSwell, (float) this.swell) / (float) (this.maxSwell - 2);
     }
 
     private void explodeCreeper() {
@@ -195,9 +208,9 @@ public class Rootball extends Monster implements GeoEntity {
             areaeffectcloud.setRadiusOnUse(-0.5F);
             areaeffectcloud.setWaitTime(10);
             areaeffectcloud.setDuration(areaeffectcloud.getDuration() / 2);
-            areaeffectcloud.setRadiusPerTick(-areaeffectcloud.getRadius() / (float)areaeffectcloud.getDuration());
+            areaeffectcloud.setRadiusPerTick(-areaeffectcloud.getRadius() / (float) areaeffectcloud.getDuration());
 
-            for(MobEffectInstance mobeffectinstance : collection) {
+            for (MobEffectInstance mobeffectinstance : collection) {
                 areaeffectcloud.addEffect(new MobEffectInstance(mobeffectinstance));
             }
 
@@ -214,19 +227,6 @@ public class Rootball extends Monster implements GeoEntity {
         this.entityData.set(DATA_IS_IGNITED, true);
     }
 
-    public static boolean canSpawn(EntityType<Rootball> entityType, ServerLevelAccessor iServerWorld, MobSpawnType reason, BlockPos pos, RandomSource random) {
-        return reason == MobSpawnType.SPAWNER || iServerWorld.canSeeSky(pos.above()) && canMonsterSpawnInLight(entityType, iServerWorld, reason, pos, random);
-    }
-
-    public static boolean canMonsterSpawnInLight(EntityType<? extends Rootball> p_223325_0_, ServerLevelAccessor p_223325_1_, MobSpawnType p_223325_2_, BlockPos p_223325_3_, RandomSource p_223325_4_) {
-        return isValidLightLevel(p_223325_1_, p_223325_3_, p_223325_4_) && checkMobSpawnRules(p_223325_0_, p_223325_1_, p_223325_2_, p_223325_3_, p_223325_4_);
-    }
-
-    public static boolean isValidLightLevel(ServerLevelAccessor p_223323_0_, BlockPos p_223323_1_, RandomSource p_223323_2_) {
-        int light = p_223323_0_.getMaxLocalRawBrightness(p_223323_1_);
-        return light <= 4;
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -239,14 +239,11 @@ public class Rootball extends Monster implements GeoEntity {
             } else {
                 event.setAnimation(UFAnimations.IDLE);
             }
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.FLOP);
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {

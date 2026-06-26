@@ -1,8 +1,0 @@
-{
-    "type": "minecraft:stonecutting",
-    "ingredient": {
-        "item": "unusualfishmod:crimson_bricks"
-    },
-    "result": "unusualfishmod:chiseled_crimson_bricks",
-    "count": 1
-}

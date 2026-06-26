@@ -15,7 +15,7 @@ public class TextureVariantModel<E extends LivingEntity & GeoEntity> extends Gen
         super(name);
     }
 
-    public TextureVariantModel<E> setTextures(Function<E, Integer> whichTexture, List<ResourceLocation> textures){
+    public TextureVariantModel<E> setTextures(Function<E, Integer> whichTexture, List<ResourceLocation> textures) {
         this.whichTexture = whichTexture;
         this.textures = textures;
         return this;

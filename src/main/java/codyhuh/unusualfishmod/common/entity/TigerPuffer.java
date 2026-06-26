@@ -28,14 +28,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public TigerPuffer(EntityType<? extends WaterAnimal> entityType, Level level) {
         super(entityType, level);
@@ -43,13 +45,17 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         this.lookControl = new SmoothSwimmingLookControl(this, 10);
     }
 
+    public static AttributeSupplier.Builder createAttributes() {
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
+    }
+
+    public static boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
+        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
+    }
+
     @Override
     public ItemStack getBucketStack() {
         return new ItemStack(UFItems.TIGER_PUFFER_BUCKET.get());
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ATTACK_DAMAGE, 4.0D);
     }
 
     @Override
@@ -57,14 +63,11 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         super.registerGoals();
         this.goalSelector.addGoal(0, new MeleeAttackGoal(this, 3.0D, true) {
             @Override
-            protected void checkAndPerformAttack(LivingEntity p_25557_, double p_25558_) {
-                double d0 = this.getAttackReachSqr(p_25557_);
-
-                if (p_25558_ <= d0 && this.getTicksUntilNextAttack() <= 0) {
-                    this.resetAttackCooldown();
+            protected void checkAndPerformAttack(LivingEntity target) {
+                if (this.mob.isWithinMeleeAttackRange(target) && this.isTimeToAttack()) {
                     this.mob.swing(InteractionHand.MAIN_HAND);
-                    this.mob.doHurtTarget(p_25557_);
-                    this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK);
+                    this.mob.doHurtTarget(target);
+                    this.mob.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, 1.0F);
                 }
             }
         });
@@ -118,10 +121,6 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
         return SoundEvents.COD_FLOP;
     }
 
-    public static boolean canSpawn(EntityType<TigerPuffer> p_223364_0_, LevelAccessor p_223364_1_, MobSpawnType reason, BlockPos p_223364_3_, RandomSource random) {
-        return WaterAnimal.checkSurfaceWaterAnimalSpawnRules(p_223364_0_, p_223364_1_, reason, p_223364_3_, random);
-    }
-
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<GeoEntity>(this, "controller", 2, this::predicate));
@@ -134,14 +133,11 @@ public class TigerPuffer extends BucketableWaterAnimal implements GeoEntity {
             } else {
                 event.setAnimation(UFAnimations.IDLE);
             }
-        }
-        else {
+        } else {
             event.setAnimation(UFAnimations.FLOP);
         }
         return PlayState.CONTINUE;
     }
-
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
